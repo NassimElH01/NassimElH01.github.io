@@ -7,6 +7,7 @@ import WeatherSection from "@/components/WeatherSection";
 import NewsSection from "@/components/NewsSection";
 import GamesSection from "@/components/GamesSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import SCTDemo from "@/components/SCTDemo";
 
 import PrintCVDocument from "@/components/PrintCVDocument";
 import { Language, translations } from "@/lib/translations";
@@ -21,6 +22,7 @@ const Index = () => {
     return savedLanguage === "en" ? "en" : "da";
   });
   const t = translations[language];
+  const isSCTDemo = new URLSearchParams(window.location.search).get("demo") === "sct";
 
   useEffect(() => {
     window.localStorage.setItem("profile-language", language);
@@ -57,6 +59,10 @@ const Index = () => {
       window.print();
     }, 100);
   };
+
+  if (isSCTDemo) {
+    return <SCTDemo language={language} onLanguageChange={setLanguage} />;
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground print:bg-white print:min-h-0 transition-colors duration-300">
