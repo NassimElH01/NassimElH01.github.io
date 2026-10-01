@@ -15,16 +15,46 @@ export interface ProjectItem {
   highlightsEn?: string[];
   actionTextEn?: string;
   actionText?: string;
-  demoId?: "debt-simulator" | "process-visualizer" | "compliance-inspector";
+  demoId?: "debt-simulator" | "process-visualizer" | "compliance-inspector" | "sct-demo";
   gameId?: string;
   href?: string;
   downloadUrl?: string;
   githubUrl?: string;
-  iconName: "TrendingDown" | "Workflow" | "Scale" | "Sparkles" | "Eye" | "Box" | "FileSpreadsheet" | "Gamepad2";
+  iconName: "TrendingDown" | "Workflow" | "Scale" | "Sparkles" | "Eye" | "Box" | "FileSpreadsheet" | "Gamepad2" | "Activity";
   iconColor: string;
 }
 
 export const projectsData: ProjectItem[] = [
+  {
+    id: "strength-conditioning-tracking",
+    title: "Strength & Conditioning Tracking",
+    shortTitle: "SCT · Træning & performance",
+    titleEn: "Strength & Conditioning Tracking",
+    shortTitleEn: "SCT · Training & performance",
+    category: "Full Stack & Web App",
+    categoryEn: "Full Stack & Web App",
+    description: "En samlet platform til at planlægge træning, følge restitution, skabe overblik over ernæring og se sin udvikling over tid. Prøv en læsebaseret demo med opdigtede eksempeldata.",
+    descriptionEn: "An all-in-one platform for planning training, tracking recovery, understanding nutrition, and reviewing progress over time. Explore a read-only demo with fictional sample data.",
+    tags: ["Træning", "Restitution", "Ernæring", "TypeScript", "React"],
+    tagsEn: ["Training", "Recovery", "Nutrition", "TypeScript", "React"],
+    highlights: [
+      "Træningspas og øvelser med sæt, gentagelser og volumen",
+      "Readiness-overblik med søvn, energi og restitution",
+      "Demoen er skrivebeskyttet og bruger kun syntetiske data"
+    ],
+    highlightsEn: [
+      "Training sessions and exercises with sets, reps, and volume",
+      "Readiness overview combining sleep, energy, and recovery",
+      "The demo is read-only and uses synthetic data only"
+    ],
+    actionText: "Prøv SCT-demo",
+    actionTextEn: "Try the SCT demo",
+    demoId: "sct-demo",
+    href: "/?demo=sct",
+    githubUrl: "https://github.com/NassimElH01/Strength-Conditioning-Tracking-SCT-",
+    iconName: "Activity",
+    iconColor: "text-lime-600"
+  },
   {
     id: "24support-julekalender",
     title: "24Support Julekalender 2026",

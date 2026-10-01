@@ -17,6 +17,7 @@ import {
   Scale,
   Play,
   SlidersHorizontal,
+  Activity,
 } from "lucide-react";
 
 import { projectsData, ProjectItem } from "@/data/projectsData";
@@ -35,6 +36,7 @@ const iconMap = {
   TrendingDown,
   Workflow,
   Scale,
+  Activity,
 };
 
 interface ProjectsSectionProps {
@@ -172,7 +174,14 @@ export default function ProjectsSection({ language = "da", onNavigateToGame }: P
                 {/* Actions */}
                 <div className="pt-2 flex flex-wrap gap-2">
                   {project.demoId ? (
-                    <Button
+                    project.demoId === "sct-demo" ? (
+                      <Button asChild size="sm" className="gap-1.5 w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm">
+                        <a href="/?demo=sct">
+                          <Play className="w-3.5 h-3.5 fill-current" />
+                          {actionText || t.openDemo}
+                        </a>
+                      </Button>
+                    ) : <Button
                       size="sm"
                       onClick={() => setActiveProjectDemo(project)}
                       className="gap-1.5 w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm"
