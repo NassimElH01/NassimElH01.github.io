@@ -13,7 +13,8 @@
     "lint": "eslint .",
     "content:todos": "node scripts/content-todos.mjs",
     "test:e2e": "playwright test",
-    "brand:assets": "node scripts/make-brand-assets.mjs"
+    "brand:assets": "node scripts/make-brand-assets.mjs",
+    "verify:no-todo": "node scripts/verify-no-todo.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
