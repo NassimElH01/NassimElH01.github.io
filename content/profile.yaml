@@ -1,0 +1,29 @@
+# Profile facts. Source: the owner's brief (CLAUDE.md) unless marked otherwise.
+# "TODO: confirm — <text>" = taken from the old site, waiting for the owner to confirm.
+- id: nassim
+  name: Nassim Hassani
+  headline:
+    en: "TODO: owner approve — one sharp line: the bridge between business, data and technology"
+    da: "TODO: owner approve — én skarp linje: brobyggeren mellem forretning, data og teknologi"
+  summary:
+    en: "TODO: owner approve — short personal summary (Business & IT → Digital Transformation, PMO experience, martial arts and volunteer coaching)"
+    da: "TODO: owner approve — kort personligt resumé (Økonomi & IT → Digital Transformation, PMO-erfaring, kampsport og frivillig træner)"
+  availability:
+    en: "TODO: confirm — Open to student jobs, part-time roles, or freelance work"
+    da: "TODO: confirm — Søger studiejob, deltidsjob eller freelanceopgaver"
+  location:
+    en: "TODO: confirm — Copenhagen"
+    da: "TODO: confirm — København"
+  links:
+    linkedin: https://www.linkedin.com/in/nassim-hassani-63835a220
+    github: https://github.com/NassimElH01
+  contact:
+    email: "TODO: owner decides which email address to show"
+    phone: "TODO: owner decides whether to publish a phone number"
+  interests:
+    en:
+      - Trains martial arts
+      - Volunteer coach
+    da:
+      - Træner kampsport
+      - Frivillig træner

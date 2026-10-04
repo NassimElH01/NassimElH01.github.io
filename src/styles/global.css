@@ -109,6 +109,18 @@
     transform: none;
     outline-color: var(--signal);
   }
+
+  /* Dev-only marker for content that still waits for the owner. */
+  .todo-badge {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    border: 1px dashed var(--signal-text);
+    color: var(--signal-text);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-style: normal;
+    letter-spacing: 0;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

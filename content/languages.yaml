@@ -1,0 +1,24 @@
+# Languages from the brief: Danish, English, Arabic, German (intermediate).
+# Only the German level is stated in the brief; the others come from the old site.
+- id: danish
+  order: 1
+  name: { en: Danish, da: Dansk }
+  level:
+    en: "TODO: confirm — Native"
+    da: "TODO: confirm — Modersmål"
+- id: english
+  order: 2
+  name: { en: English, da: Engelsk }
+  level:
+    en: "TODO: confirm — Fluent"
+    da: "TODO: confirm — Flydende"
+- id: arabic
+  order: 3
+  name: { en: Arabic, da: Arabisk }
+  level:
+    en: "TODO: confirm — Fluent"
+    da: "TODO: confirm — Flydende"
+- id: german
+  order: 4
+  name: { en: German, da: Tysk }
+  level: { en: Intermediate, da: Mellem }
