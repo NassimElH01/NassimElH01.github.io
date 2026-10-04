@@ -1,0 +1,42 @@
+---
+import type { Lang } from "@/i18n/config";
+import { localeUrl, t } from "@/i18n/utils";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+
+interface Props {
+  lang: Lang;
+  sections: { id: string; label: string }[];
+  path?: string;
+}
+
+const { lang, sections, path = "" } = Astro.props;
+const tr = t(lang);
+---
+
+<a class="skip-link" href="#main">{tr("nav.skip")}</a>
+<header class="sticky top-0 z-50 border-b border-rule bg-paper">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 px-4 sm:px-6">
+    <a href={localeUrl(lang)} class="font-display inline-flex min-h-14 items-center text-xl">Nassim Hassani</a>
+    <div class="ml-auto flex items-center md:order-last md:ml-0">
+      <LanguageSwitcher lang={lang} path={path} />
+      <ThemeToggle lang={lang} />
+    </div>
+    <nav aria-label={tr("nav.primary")} class="-mx-4 w-[calc(100%+2rem)] overflow-x-auto md:mx-0 md:ml-auto md:w-auto">
+      <ul class="flex gap-1 px-2 md:px-0">
+        {
+          sections.map((section) => (
+            <li>
+              <a
+                href={`#${section.id}`}
+                class="inline-flex min-h-11 items-center whitespace-nowrap px-3 text-sm underline-offset-4 hover:underline"
+              >
+                {section.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

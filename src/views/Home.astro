@@ -1,7 +1,13 @@
 ---
+// Home page skeleton. Every section is a placeholder until it is built,
+// one at a time, in later steps (see docs/design-direction.md).
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import SectionPlaceholder from "@/components/SectionPlaceholder.astro";
 import type { Lang } from "@/i18n/config";
 import { t } from "@/i18n/utils";
+import { getProfile } from "@/lib/content";
 
 interface Props {
   lang: Lang;
@@ -9,11 +15,26 @@ interface Props {
 
 const { lang } = Astro.props;
 const tr = t(lang);
+const profile = await getProfile();
+
+const sections = [
+  { id: "about", label: tr("section.about") },
+  { id: "skills", label: tr("section.skills") },
+  { id: "projects", label: tr("section.projects") },
+  { id: "experience", label: tr("section.experience") },
+  { id: "playground", label: tr("section.playground") },
+  { id: "contact", label: tr("section.contact") },
+];
 ---
 
 <BaseLayout lang={lang} title={tr("meta.title")} description={tr("meta.description")}>
-  <main id="main" tabindex="-1" class="mx-auto max-w-5xl px-4 py-16">
-    <h1 class="font-display text-6xl">Nassim Hassani</h1>
-    <p class="mt-4 font-mono text-sm text-steel-text">{tr("hero.placeholder")}</p>
+  <Header lang={lang} sections={sections} />
+  <main id="main" tabindex="-1">
+    <section id="top" aria-labelledby="hero-title" class="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
+      <h1 id="hero-title" class="font-display text-6xl leading-none sm:text-8xl">{profile.name}</h1>
+      <p class="todo-badge mt-8" data-todo>{tr("hero.placeholder")}</p>
+    </section>
+    {sections.map((section) => <SectionPlaceholder id={section.id} label={section.label} />)}
   </main>
+  <Footer lang={lang} />
 </BaseLayout>

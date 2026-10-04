@@ -38,6 +38,7 @@ const xDefault = links.find((link) => link.lang === "en")!.href;
     -->
     <script is:inline>
       (() => {
+        document.documentElement.classList.add("js");
         let stored;
         try {
           stored = localStorage.getItem("theme");

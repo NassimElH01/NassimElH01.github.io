@@ -103,11 +103,43 @@
     color: var(--paper);
     font-weight: 600;
     transform: translateY(-200%);
+    transition: transform 150ms ease-out;
   }
 
   .skip-link:focus-visible {
     transform: none;
     outline-color: var(--signal);
+  }
+
+  /* Theme toggle: reserves its space but stays invisible without JS. */
+  .theme-toggle {
+    visibility: hidden;
+  }
+
+  .js .theme-toggle {
+    visibility: visible;
+  }
+
+  .theme-icon-sun {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .theme-icon-sun {
+    display: block;
+  }
+
+  :root[data-theme="dark"] .theme-icon-moon {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .theme-icon-sun {
+      display: block;
+    }
+
+    :root:not([data-theme]) .theme-icon-moon {
+      display: none;
+    }
   }
 
   /* Dev-only marker for content that still waits for the owner. */
