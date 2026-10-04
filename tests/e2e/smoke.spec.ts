@@ -1,0 +1,149 @@
+import { expect, test, type Page } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
+
+const PAGES = [
+  { path: "/", lang: "en" },
+  { path: "/da/", lang: "da" },
+] as const;
+
+const WCAG = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
+
+async function axe(page: Page) {
+  const results = await new AxeBuilder({ page }).withTags(WCAG).analyze();
+  return results.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`);
+}
+
+for (const { path, lang } of PAGES) {
+  test.describe(`page ${path}`, () => {
+    for (const colorScheme of ["light", "dark"] as const) {
+      test(`has no axe violations (${colorScheme})`, async ({ browser }) => {
+        const context = await browser.newContext({ colorScheme });
+        const page = await context.newPage();
+        await page.goto(path);
+        expect(await axe(page)).toEqual([]);
+        await context.close();
+      });
+    }
+
+    test("declares its language and alternates", async ({ page }) => {
+      await page.goto(path);
+      await expect(page.locator("html")).toHaveAttribute("lang", lang);
+      await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(3);
+      const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
+      expect(canonical).toMatch(/\/$/);
+    });
+
+    test("has one h1 and one main landmark", async ({ page }) => {
+      await page.goto(path);
+      await expect(page.locator("h1")).toHaveCount(1);
+      await expect(page.locator("main")).toHaveCount(1);
+    });
+
+    test("loads only same-origin resources, fonts from /_astro/fonts/", async ({ page, baseURL }) => {
+      const urls: string[] = [];
+      page.on("request", (request) => urls.push(request.url()));
+      await page.goto(path, { waitUntil: "networkidle" });
+      const origin = new URL(baseURL!).origin;
+      expect(urls.filter((url) => !url.startsWith(origin) && !url.startsWith("data:"))).toEqual([]);
+      const fonts = urls.filter((url) => /\.(woff2?|ttf|otf)(\?|$)/.test(url));
+      expect(fonts.every((url) => new URL(url).pathname.startsWith("/_astro/fonts/"))).toBe(true);
+    });
+
+    for (const width of [320, 375]) {
+      test(`has no horizontal scroll at ${width}px`, async ({ browser }) => {
+        const context = await browser.newContext({ viewport: { width, height: 800 } });
+        const page = await context.newPage();
+        await page.goto(path);
+        const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+        expect(overflow).toBeLessThanOrEqual(0);
+        await context.close();
+      });
+    }
+  });
+}
+
+test("the first Tab reaches the skip link, which moves focus to main", async ({ page }) => {
+  await page.goto("/");
+  await page.keyboard.press("Tab");
+  await expect(page.locator(".skip-link")).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("main#main")).toBeFocused();
+});
+
+test("the language link points at the same page in the other language", async ({ page }) => {
+  await page.goto("/");
+  const link = page.locator('header a[hreflang="da"]');
+  await expect(link).toHaveAttribute("href", "/da/");
+  await expect(link).toHaveText("Dansk");
+});
+
+test.describe("theme", () => {
+  test("toggles with the keyboard, persists, and clears storage when back on system", async ({ browser }) => {
+    const context = await browser.newContext({ colorScheme: "light" });
+    const page = await context.newPage();
+    await page.goto("/");
+    const toggle = page.locator("[data-theme-toggle]");
+    await expect(toggle).toHaveAttribute("aria-pressed", "false");
+
+    await toggle.focus();
+    await page.keyboard.press("Space");
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+    await expect(toggle).toHaveAttribute("aria-pressed", "true");
+    expect(await page.evaluate(() => localStorage.getItem("theme"))).toBe("dark");
+
+    await page.reload();
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+
+    await page.locator("[data-theme-toggle]").focus();
+    await page.keyboard.press("Enter");
+    await expect(page.locator("html")).not.toHaveAttribute("data-theme", /.+/);
+    expect(await page.evaluate(() => localStorage.getItem("theme"))).toBeNull();
+    await context.close();
+  });
+
+  test("drops unknown stored values such as next-themes' 'system'", async ({ browser }) => {
+    const context = await browser.newContext({ colorScheme: "dark" });
+    await context.addInitScript(() => localStorage.setItem("theme", "system"));
+    const page = await context.newPage();
+    await page.goto("/");
+    await expect(page.locator("html")).not.toHaveAttribute("data-theme", /.+/);
+    const background = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+    expect(background).toBe("rgb(14, 14, 14)");
+    await context.close();
+  });
+
+  test("follows a dark system preference without JavaScript", async ({ browser }) => {
+    const context = await browser.newContext({ colorScheme: "dark", javaScriptEnabled: false });
+    const page = await context.newPage();
+    await page.goto("/");
+    const background = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+    expect(background).toBe("rgb(14, 14, 14)");
+    await context.close();
+  });
+});
+
+test("without a reduced-motion preference, transitions run and scrolling is smooth", async ({ browser }) => {
+  const context = await browser.newContext({ reducedMotion: "no-preference" });
+  const page = await context.newPage();
+  await page.goto("/");
+  const styles = await page.evaluate(() => ({
+    transition: getComputedStyle(document.querySelector(".skip-link")!).transitionDuration,
+    scroll: getComputedStyle(document.documentElement).scrollBehavior,
+  }));
+  expect(parseFloat(styles.transition)).toBeGreaterThan(0.1);
+  expect(styles.scroll).toBe("smooth");
+  await context.close();
+});
+
+test("reduced motion turns transitions and smooth scrolling off", async ({ browser }) => {
+  const context = await browser.newContext({ reducedMotion: "reduce" });
+  const page = await context.newPage();
+  await page.goto("/");
+  const styles = await page.evaluate(() => ({
+    transition: getComputedStyle(document.querySelector(".skip-link")!).transitionDuration,
+    scroll: getComputedStyle(document.documentElement).scrollBehavior,
+  }));
+  expect(parseFloat(styles.transition)).toBeLessThanOrEqual(0.001);
+  expect(styles.scroll).toBe("auto");
+  await context.close();
+});
