@@ -147,3 +147,49 @@ test("reduced motion turns transitions and smooth scrolling off", async ({ brows
   expect(styles.scroll).toBe("auto");
   await context.close();
 });
+
+test.describe("404 page", () => {
+  test("is served with status 404, noindex, in both languages", async ({ page }) => {
+    const response = await page.goto("/this-page-does-not-exist/");
+    expect(response?.status()).toBe(404);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex");
+    await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+    await expect(page.locator("h1")).toHaveText("Page not found");
+    await expect(page.locator('section[lang="da"] h2')).toHaveText("Siden findes ikke");
+  });
+
+  for (const colorScheme of ["light", "dark"] as const) {
+    test(`has no axe violations (${colorScheme})`, async ({ browser }) => {
+      const context = await browser.newContext({ colorScheme });
+      const page = await context.newPage();
+      await page.goto("/this-page-does-not-exist/");
+      expect(await axe(page)).toEqual([]);
+      await context.close();
+    });
+  }
+});
+
+test("old /cv/<id> URLs redirect to the matching section", async ({ page }) => {
+  await page.goto("/cv/royal-unibrew-pmo/");
+  await page.waitForURL(/\/#experience$/);
+  await page.goto("/cv/royal-unibrew-bachelor-project/");
+  await page.waitForURL(/\/#projects$/);
+});
+
+test("sitemaps list both languages and skip redirect stubs", async ({ request }) => {
+  const index = await request.get("/sitemap-index.xml");
+  expect(index.ok()).toBe(true);
+  const urls = await (await request.get("/sitemap-0.xml")).text();
+  expect(urls).toContain("<loc>https://nassimelh01.github.io/</loc>");
+  expect(urls).toContain("<loc>https://nassimelh01.github.io/da/</loc>");
+  expect(urls).not.toContain("/cv/");
+  const alias = await request.get("/sitemap.xml");
+  expect(await alias.text()).toContain("sitemap-0.xml");
+  const robots = await (await request.get("/robots.txt")).text();
+  expect(robots).toContain("Sitemap: https://nassimelh01.github.io/sitemap-index.xml");
+});
+
+test("the freelance demo in public/ is still served unchanged", async ({ request }) => {
+  const response = await request.get("/freelance/24support-julekalender/index.html");
+  expect(response.ok()).toBe(true);
+});

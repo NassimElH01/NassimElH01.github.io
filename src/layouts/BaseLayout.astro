@@ -14,13 +14,24 @@ interface Props {
   preloadMono?: boolean;
   /** Also drops canonical and hreflang, which a noindex page should not have. */
   noindex?: boolean;
+  /** Root-relative path of the 1200×630 share image. */
+  ogImage?: string;
 }
 
-const { lang, title, description, path = "", preloadMono = false, noindex = false } = Astro.props;
+const {
+  lang,
+  title,
+  description,
+  path = "",
+  preloadMono = false,
+  noindex = false,
+  ogImage = "/og/default.png",
+} = Astro.props;
 
 const links = alternates(path);
 const canonical = links.find((link) => link.lang === lang)!.href;
 const xDefault = links.find((link) => link.lang === "en")!.href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
 ---
 
 <!doctype html>
@@ -75,8 +86,21 @@ const xDefault = links.find((link) => link.lang === "en")!.href;
         </>
       )
     }
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nassim Hassani" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {!noindex && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nassim Hassani" />
     <meta property="og:locale" content={OG_LOCALE[lang]} />
     <meta property="og:locale:alternate" content={OG_LOCALE[otherLang(lang)]} />
+    <meta name="twitter:card" content="summary_large_image" />
     <slot name="head" />
   </head>
   <body>

@@ -17,6 +17,15 @@ const { lang } = Astro.props;
 const tr = t(lang);
 const profile = await getProfile();
 
+// Structured data: only facts that are certain (no skills, no schools yet).
+const person = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  url: Astro.site?.href,
+  sameAs: [profile.links.linkedin, profile.links.github],
+};
+
 const sections = [
   { id: "about", label: tr("section.about") },
   { id: "skills", label: tr("section.skills") },
@@ -28,6 +37,7 @@ const sections = [
 ---
 
 <BaseLayout lang={lang} title={tr("meta.title")} description={tr("meta.description")}>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(person)} />
   <Header lang={lang} sections={sections} />
   <main id="main" tabindex="-1">
     <section id="top" aria-labelledby="hero-title" class="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">

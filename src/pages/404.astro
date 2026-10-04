@@ -1,0 +1,30 @@
+---
+// One bilingual 404 page (GitHub Pages serves a single 404.html for every path).
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ThemeToggle from "@/components/ThemeToggle.astro";
+import { t } from "@/i18n/utils";
+
+const en = t("en");
+const da = t("da");
+---
+
+<BaseLayout lang="en" title={`${en("notFound.title")} · Nassim Hassani`} description={en("notFound.body")} noindex>
+  <a class="skip-link" href="#main">{en("nav.skip")}</a>
+  <header class="border-b border-rule">
+    <div class="mx-auto flex max-w-6xl items-center px-4 sm:px-6">
+      <a href="/" class="font-display inline-flex min-h-14 items-center text-xl">Nassim Hassani</a>
+      <div class="ml-auto"><ThemeToggle lang="en" /></div>
+    </div>
+  </header>
+  <main id="main" tabindex="-1" class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <p class="font-mono text-sm text-steel-text">404</p>
+    <h1 class="font-display mt-2 text-5xl sm:text-7xl">{en("notFound.title")}</h1>
+    <p class="mt-6 max-w-prose">{en("notFound.body")}</p>
+    <p class="mt-4"><a href="/" class="inline-flex min-h-11 items-center underline underline-offset-4">{en("notFound.home")}</a></p>
+    <section lang="da" aria-labelledby="not-found-da" class="mt-16 border-t border-rule pt-10">
+      <h2 id="not-found-da" class="font-display text-4xl sm:text-5xl">{da("notFound.title")}</h2>
+      <p class="mt-6 max-w-prose">{da("notFound.body")}</p>
+      <p class="mt-4"><a href="/da/" class="inline-flex min-h-11 items-center underline underline-offset-4">{da("notFound.home")}</a></p>
+    </section>
+  </main>
+</BaseLayout>

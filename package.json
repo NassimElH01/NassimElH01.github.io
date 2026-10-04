@@ -12,9 +12,11 @@
     "check": "astro check",
     "lint": "eslint .",
     "content:todos": "node scripts/content-todos.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "brand:assets": "node scripts/make-brand-assets.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/geist": "^5.3.0",
     "@fontsource-variable/geist-mono": "^5.3.0",
     "@fontsource/instrument-serif": "^5.3.0",
