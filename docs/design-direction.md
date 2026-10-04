@@ -74,6 +74,29 @@ Source: owner-supplied screenshots, desktop, dark theme. We borrow patterns only
 - A contact form. It needs a backend or a third party, and the site must have no backend. We use a clear mailto, LinkedIn and CV download CTA.
 - A nav that overlaps headings. Sections get `scroll-margin-top`, and the nav gets a solid background.
 
+### What the todua.dk source repository shows (github.com/Todua992/portofolio)
+Only the profile, `package.json` and file names were read, not the source. Patterns only.
+
+**Stack and components**
+- Next.js 14, Tailwind 3, framer-motion
+- tsParticles and two animated canvas backgrounds
+- a react-slick carousel
+- a contact form backed by its own Express server and a reCAPTCHA API route
+- Vercel Analytics
+- No tests and no i18n.
+- UI built from Aceternity-style components: typewriter, tracing beam (a line that fills as you scroll), timeline, a noise/decode hover card, hero parallax, link previews, and MP4 project previews.
+
+**What we take, in our own form**
+- **Tracing beam:** becomes the bridge line through the timeline, built with CSS scroll-driven animation (`animation-timeline: scroll()`) and no JS. It stays static where unsupported and under reduced motion.
+- **Decode idea:** used once, in the intro.
+- **Project videos:** shown as a poster image first and loaded on click. Never autoplay.
+
+**What we skip**
+- Particles and canvas backgrounds: heavy JS that hurts Lighthouse and distracts.
+- The carousel and the typewriter.
+- A backend contact form.
+- Third-party analytics.
+
 ## Current site (before the rebuild), summary of findings
 - Template look: a centred `max-w-4xl` column, an "NH" avatar and buzzword headline. Desktop is mostly empty margins, and mobile shows no content above the fold.
 - Content hides behind tabs (CV, Projects, Games, Weather, News). Weather and News do not sell competencies.
