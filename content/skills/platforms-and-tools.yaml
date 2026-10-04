@@ -1,0 +1,53 @@
+# Skill group "Platforme & værktøjer" from the owner's brief (CLAUDE.md).
+# Power BI and Azure DevOps: brief (PMO-praktik at Royal Unibrew) and Nassim's own
+# cvData bullets. The notes leave out the internal tool name "ProjectFlow" until the
+# owner confirms it may be named publicly (see content/timeline/royal-unibrew-pmo.md).
+group:
+  en: "Platforms & tools"
+  da: "Platforme & værktøjer"
+order: 4
+items:
+  - id: power-bi
+    name:
+      en: "Power BI"
+      da: "Power BI"
+    usedIn:
+      # Old cvData bullet (NassimElH01): "Created Power BI dashboards and project
+      # reporting from ProjectFlow to improve transparency and business follow-up."
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Power BI dashboards and project reporting"
+          da: "Power BI-dashboards og projektrapportering"
+
+  - id: azure-devops
+    name:
+      en: "Azure DevOps"
+      da: "Azure DevOps"
+    usedIn:
+      # Old cvData bullet (NassimElH01): "Worked with Azure DevOps governance,
+      # project tracking, and process improvement for digital initiatives."
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Governance and project tracking"
+          da: "Governance og projektopfølgning"
+
+  - id: github
+    name:
+      en: "GitHub"
+      da: "GitHub"
+    # Nassim's old text links a GitHub repository for SCT, but also says SCT's source
+    # code is in a private repository, and SCT's context (personal project) is not decided yet.
+    usedIn: "TODO: where used — owner to confirm context (e.g. SCT repository (private?), this portfolio)"
+
+  # [BEKRÆFT] in the brief: hidden until the owner lists the tools.
+  # Candidates from Nassim's own old text, all unconfirmed for this list:
+  # Microsoft 365 (Zealand IT), Git, TypeScript, React, Tailwind CSS (old skills list),
+  # Next.js and Supabase (SCT tags), Excel (old skills list "Excel Modelling").
+  - id: other-tools
+    name:
+      en: "TODO: other tools"
+      da: "TODO: øvrige værktøjer"
+    confirm: true
+    usedIn: "TODO: where used — owner to list the tools and where each was used"

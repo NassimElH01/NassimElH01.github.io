@@ -1,0 +1,59 @@
+# Skill group "Projekt & forretning" from the owner's brief (CLAUDE.md).
+# Certifications are from the brief. Nassim's old text never says PRINCE2 or agile
+# methods were applied anywhere, so their usedIn stays TODO.
+group:
+  en: "Projects & business"
+  da: "Projekt & forretning"
+order: 3
+items:
+  - id: prince2
+    name:
+      en: "PRINCE2"
+      da: "PRINCE2"
+    certifications:
+      - prince2-foundation
+      - prince2-practitioner
+    usedIn: "TODO: where applied (Royal Unibrew PMO? study projects?) — owner to confirm"
+
+  - id: agile-methods
+    name:
+      en: "Agile methods"
+      da: "Agile metoder"
+    # Owner: the brief lists this certification and this skill separately. Confirm the
+    # Agile Project Management certification belongs with this skill.
+    certifications:
+      - agile-project-management
+    usedIn: "TODO: where applied (Royal Unibrew PMO? study projects?) — owner to confirm"
+
+  - id: stakeholder-risk-communication-plans
+    name:
+      en: "Stakeholder, risk and communication plans"
+      da: "Interessent-, risiko- og kommunikationsplaner"
+    # Old cvData bullet (NassimElH01): "Coordinated project reporting, meeting
+    # structure, and stakeholder communication across technology and operations teams."
+    # It mentions no plans and nothing about risk, so where this was used stays TODO.
+    usedIn: "TODO: where used — Royal Unibrew PMO internship? (old text says 'stakeholder communication and meeting structure', not formal stakeholder/risk/communication plans); owner to confirm"
+
+  - id: business-strategy-and-models
+    name:
+      en: "Business strategy and business models"
+      da: "Forretningsstrategi og forretningsmodeller"
+    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+
+  - id: financial-management-and-financial-statement-analysis
+    name:
+      en: "Financial management and financial statement analysis"
+      da: "Økonomistyring og regnskabsanalyse"
+    usedIn: "TODO: where used — likely Zealand PBA (Økonomi & IT) coursework; owner to confirm"
+
+  - id: supply-chain
+    name:
+      en: "Supply chain"
+      da: "Supply chain"
+    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+
+  - id: change-management
+    name:
+      en: "Change management"
+      da: "Forandringsledelse"
+    usedIn: "TODO: where used — RUC MSc (focus on organizational change)? Royal Unibrew? Owner to confirm"

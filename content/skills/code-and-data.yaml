@@ -1,0 +1,58 @@
+# Skill group "Kode & data" from the owner's brief (CLAUDE.md).
+# usedIn only cites Nassim's own text in the old site (git blame: NassimElH01).
+# Python and SQL are also in his old SkillsSection list, but it never said where
+# they were used, so those stay TODO. p5.js only appears in demos committed by
+# the template author (Can Kurt), which are not evidence of Nassim's skills.
+group:
+  en: "Code & data"
+  da: "Kode & data"
+order: 1
+items:
+  - id: python
+    name:
+      en: "Python"
+      da: "Python"
+    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+
+  - id: sql-relational-databases
+    name:
+      en: "SQL and relational databases (normalization, data modeling)"
+      da: "SQL og relationelle databaser (normalisering, datamodellering)"
+    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+
+  - id: html-css-javascript
+    name:
+      en: "HTML/CSS/JavaScript"
+      da: "HTML/CSS/JavaScript"
+    usedIn:
+      # Old projectsData tags (NassimElH01): "HTML", "CSS", "JavaScript".
+      - context: freelance
+        project: 24support-christmas-calendar
+      # Old projectsData tags (NassimElH01): "HTML/CSS" only, no JavaScript.
+      - context: freelance
+        project: ss-rengoringsservice-website
+        note:
+          en: "HTML and CSS"
+          da: "HTML og CSS"
+
+  - id: p5js
+    name:
+      en: "p5.js"
+      da: "p5.js"
+    usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
+
+  - id: client-server-apps-and-guis
+    name:
+      en: "Client-server applications and graphical user interfaces"
+      da: "Client-server-applikationer og grafiske brugergrænseflader"
+    # The 24Support production setup has a separate Node.js server and admin tool,
+    # but whether Nassim built them is unconfirmed (see that project's role TODO).
+    usedIn: "TODO: where used — study course? 24Support server (unconfirmed who built it); owner to confirm"
+
+  # [BEKRÆFT] in the brief: hidden until the owner confirms the language.
+  - id: c-sharp-java
+    name:
+      en: "TODO: confirm — C#/Java/other language from the Software Construction course"
+      da: "TODO: bekræft — C#/Java/andet sprog fra faget Softwarekonstruktion"
+    confirm: true
+    usedIn: "TODO: where used — Softwarekonstruktion course (which programme?); owner to confirm"

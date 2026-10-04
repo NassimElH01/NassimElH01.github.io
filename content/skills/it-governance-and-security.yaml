@@ -1,0 +1,53 @@
+# Skill group "IT-governance & sikkerhed" from the owner's brief (CLAUDE.md).
+# Evidence: brief (PMO-praktik at Royal Unibrew with IT/OT and cybersecurity
+# projects; IBM Cybersecurity certification) and Nassim's own cvData/projectsData text.
+group:
+  en: "IT governance & security"
+  da: "IT-governance & sikkerhed"
+order: 5
+items:
+  - id: it-governance
+    name:
+      en: "IT governance"
+      da: "IT-governance"
+    usedIn:
+      # Old cvData (NassimElH01): "Worked with Azure DevOps governance, project tracking ..."
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Azure DevOps governance"
+          da: "Governance i Azure DevOps"
+      # Old cvData (NassimElH01): "Examined cyber risk and governance in operational
+      # technology environments alongside digital transformation initiatives."
+      - context: study
+        project: royal-unibrew-ot-security-bachelor-project
+        note:
+          en: "Cyber risk and governance in OT environments"
+          da: "Cyberrisiko og governance i OT-miljøer"
+
+  - id: networks-and-computer-architecture
+    name:
+      en: "Networks and computer architecture"
+      da: "Netværk og computerarkitektur"
+    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+
+  - id: cybersecurity
+    name:
+      en: "Cybersecurity (IBM Cybersecurity)"
+      da: "Cybersikkerhed (IBM Cybersecurity)"
+    certifications:
+      - ibm-cybersecurity
+    usedIn:
+      # Brief + old cvData (NassimElH01): "Supported cross-functional IT/OT and
+      # cybersecurity projects with governance, stakeholder coordination, reporting ..."
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Supported cross-functional IT/OT and cybersecurity projects"
+          da: "Understøttede tværfaglige IT/OT- og cybersikkerhedsprojekter"
+      # Old cvData/projectsData (NassimElH01): bachelor project on OT cybersecurity.
+      - context: study
+        project: royal-unibrew-ot-security-bachelor-project
+        note:
+          en: "OT cybersecurity in a production-focused industrial setting"
+          da: "OT-cybersikkerhed i et produktionsorienteret industrimiljø"

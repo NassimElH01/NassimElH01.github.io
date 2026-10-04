@@ -1,0 +1,32 @@
+# Skill group "Bæredygtig digital transformation" from the owner's brief (CLAUDE.md).
+# Nassim's old text never says where any of these were used. His RUC MSc
+# description mentions technology strategy, but the programme started in 2026,
+# so nothing is cited as usage until the owner confirms.
+group:
+  en: "Sustainable digital transformation"
+  da: "Bæredygtig digital transformation"
+order: 6
+items:
+  - id: enterprise-architecture
+    name:
+      en: "Enterprise architecture"
+      da: "Enterprise-arkitektur"
+    usedIn: "TODO: where used — Zealand PBA or RUC MSc coursework? Owner to confirm"
+
+  - id: digitalization-strategy
+    name:
+      en: "Digitalization strategy"
+      da: "Digitaliseringsstrategi"
+    usedIn: "TODO: where used — RUC MSc (technology strategy focus)? Zealand PBA? Owner to confirm"
+
+  - id: sustainable-business-models
+    name:
+      en: "Sustainable business models"
+      da: "Bæredygtige forretningsmodeller"
+    usedIn: "TODO: where used — Zealand PBA or RUC MSc coursework? Owner to confirm"
+
+  - id: sdgs-and-csr
+    name:
+      en: "SDGs and CSR"
+      da: "SDG'er og CSR"
+    usedIn: "TODO: where used — Zealand PBA or RUC MSc coursework? Owner to confirm"

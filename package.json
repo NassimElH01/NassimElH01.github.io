@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "content:todos": "node scripts/content-todos.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
