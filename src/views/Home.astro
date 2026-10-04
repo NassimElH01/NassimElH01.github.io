@@ -1,0 +1,19 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { Lang } from "@/i18n/config";
+import { t } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const tr = t(lang);
+---
+
+<BaseLayout lang={lang} title={tr("meta.title")} description={tr("meta.description")}>
+  <main id="main" tabindex="-1" class="mx-auto max-w-5xl px-4 py-16">
+    <h1 class="font-display text-6xl">Nassim Hassani</h1>
+    <p class="mt-4 font-mono text-sm text-steel-text">{tr("hero.placeholder")}</p>
+  </main>
+</BaseLayout>

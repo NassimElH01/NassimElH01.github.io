@@ -1,17 +1,26 @@
 ---
 import { Font } from "astro:assets";
+import { OG_LOCALE, type Lang } from "@/i18n/config";
+import { alternates, otherLang } from "@/i18n/utils";
 import "../styles/global.css";
 
 interface Props {
-  lang: "en" | "da";
+  lang: Lang;
   title: string;
   description: string;
+  /** Locale-neutral path of this page ("" for home), used for canonical and hreflang. */
+  path?: string;
   /** The hero turns this on once it renders mono text above the fold. */
   preloadMono?: boolean;
+  /** Also drops canonical and hreflang, which a noindex page should not have. */
   noindex?: boolean;
 }
 
-const { lang, title, description, preloadMono = false, noindex = false } = Astro.props;
+const { lang, title, description, path = "", preloadMono = false, noindex = false } = Astro.props;
+
+const links = alternates(path);
+const canonical = links.find((link) => link.lang === lang)!.href;
+const xDefault = links.find((link) => link.lang === "en")!.href;
 ---
 
 <!doctype html>
@@ -54,6 +63,19 @@ const { lang, title, description, preloadMono = false, noindex = false } = Astro
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
+    {
+      !noindex && (
+        <>
+          <link rel="canonical" href={canonical} />
+          {links.map((link) => (
+            <link rel="alternate" hreflang={link.lang} href={link.href} />
+          ))}
+          <link rel="alternate" hreflang="x-default" href={xDefault} />
+        </>
+      )
+    }
+    <meta property="og:locale" content={OG_LOCALE[lang]} />
+    <meta property="og:locale:alternate" content={OG_LOCALE[otherLang(lang)]} />
     <slot name="head" />
   </head>
   <body>
