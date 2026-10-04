@@ -20,6 +20,8 @@ const legacyCvIds = [
 const legacyRedirects = {
   ...Object.fromEntries(legacyCvIds.map((id) => [`/cv/${id}`, "/#experience"])),
   "/cv/royal-unibrew-bachelor-project": "/#projects",
+  // Old link into the removed games tab (Ascension Cards was not Nassim's work).
+  "/ascensioncards": "/",
 };
 
 // Self-hosted Fontsource files (OFL-1.1), read from node_modules at build time.
@@ -45,7 +47,10 @@ export default defineConfig({
         locales: { en: "en", da: "da" },
       },
       // Redirect stubs are not pages.
-      filter: (page) => !new URL(page).pathname.startsWith("/cv/"),
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        return !path.startsWith("/cv/") && !path.startsWith("/ascensioncards/");
+      },
       namespaces: { news: false, image: false, video: false, xhtml: true },
     }),
   ],

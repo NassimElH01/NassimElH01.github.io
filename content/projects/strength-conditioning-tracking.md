@@ -6,7 +6,7 @@ title:
   en: "Strength & Conditioning Tracking (SCT)"
   da: "Strength & Conditioning Tracking (SCT)"
 year: "TODO: year — owner to confirm (added to the old portfolio in 2026-10; build year unknown)"
-context: "TODO: personal project — owner to decide context"
+context: "TODO: confirm — personal (the schema now allows study, work, freelance or personal)"
 problem:
   en: "TODO: which need or user problem motivated SCT — owner to confirm"
   da: "TODO: hvilket behov eller brugerproblem førte til SCT — ejer bekræfter"

@@ -174,6 +174,49 @@ test("old /cv/<id> URLs redirect to the matching section", async ({ page }) => {
   await page.waitForURL(/\/#experience$/);
   await page.goto("/cv/royal-unibrew-bachelor-project/");
   await page.waitForURL(/\/#projects$/);
+  await page.goto("/ascensioncards/");
+  await page.waitForURL(/:\d+\/$/);
+  await expect(page.locator("h1")).toHaveText("Nassim Hassani");
+});
+
+test("header tab order follows the visual order on desktop", async ({ browser }) => {
+  const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const page = await context.newPage();
+  await page.goto("/");
+  const order: string[] = [];
+  for (let i = 0; i < 10; i++) {
+    await page.keyboard.press("Tab");
+    order.push(await page.evaluate(() => document.activeElement?.textContent?.trim() ?? ""));
+  }
+  expect(order).toEqual([
+    "Skip to content",
+    "Nassim Hassani",
+    "About",
+    "Skills",
+    "Projects",
+    "Experience & education",
+    "Playground",
+    "Contact",
+    "Dansk",
+    "Dark theme",
+  ]);
+  await context.close();
+});
+
+test("focused nav links keep their whole focus ring inside the scroll container", async ({ browser }) => {
+  for (const width of [375, 1280]) {
+    const context = await browser.newContext({ viewport: { width, height: 800 } });
+    const page = await context.newPage();
+    await page.goto("/");
+    const fits = await page.evaluate(() => {
+      const nav = document.querySelector("header nav")!.getBoundingClientRect();
+      const first = document.querySelector("header nav a")!.getBoundingClientRect();
+      const ring = 4; // 2px outline + 2px offset
+      return first.top - ring >= nav.top && first.bottom + ring <= nav.bottom && first.left - ring >= nav.left;
+    });
+    expect(fits).toBe(true);
+    await context.close();
+  }
 });
 
 test("sitemaps list both languages and skip redirect stubs", async ({ request }) => {

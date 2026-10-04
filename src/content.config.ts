@@ -101,7 +101,7 @@ const projects = defineCollection({
   schema: z.object({
     title: localized,
     year: orTodo(year),
-    context: orTodo(z.enum(["study", "work", "freelance"])),
+    context: orTodo(z.enum(["study", "work", "freelance", "personal"])),
     problem: localized,
     role: localized,
     method: localized,
@@ -130,7 +130,7 @@ const projects = defineCollection({
 
 const usage = z
   .object({
-    context: z.enum(["study", "internship", "work", "freelance"]),
+    context: z.enum(["study", "internship", "work", "freelance", "personal"]),
     timeline: reference("timeline").optional(),
     project: reference("projects").optional(),
     note: localized.optional(),

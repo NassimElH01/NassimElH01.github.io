@@ -108,7 +108,6 @@
 
   .skip-link:focus-visible {
     transform: none;
-    outline-color: var(--signal);
   }
 
   /* Theme toggle: reserves its space but stays invisible without JS. */

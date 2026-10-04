@@ -6,8 +6,9 @@
 import { chromium } from "@playwright/test";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = new URL("..", import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const out = (path) => join(ROOT, "public", path);
 
 const font = async (path) => (await readFile(join(ROOT, "node_modules", path))).toString("base64");

@@ -4,7 +4,7 @@
 export const en = {
   "meta.title": "Nassim Hassani",
   "meta.description":
-    "TODO: owner approve — Nassim Hassani bridges business and technology: MSc student in Digital Transformation at RUC, PMO intern at Royal Unibrew, PRINCE2 certified.",
+    "TODO: owner approve — Nassim Hassani bridges business and technology: MSc student in Digital Transformation at RUC, with PMO experience from Royal Unibrew and PRINCE2 certification.",
   "nav.skip": "Skip to content",
   "nav.primary": "Main navigation",
   "section.about": "About",
@@ -27,7 +27,7 @@ export type UiKey = keyof typeof en;
 export const da: Record<UiKey, string> = {
   "meta.title": "Nassim Hassani",
   "meta.description":
-    "TODO: owner approve — Nassim Hassani er brobygger mellem forretning og teknologi: cand.it.-studerende i Digital Transformation på RUC, PMO-praktikant hos Royal Unibrew, PRINCE2-certificeret.",
+    "TODO: owner approve — Nassim Hassani er brobygger mellem forretning og teknologi: cand.it.-studerende i Digital Transformation på RUC med PMO-erfaring fra Royal Unibrew og PRINCE2-certificering.",
   "nav.skip": "Spring til indhold",
   "nav.primary": "Hovednavigation",
   "section.about": "Om mig",

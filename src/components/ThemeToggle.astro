@@ -59,11 +59,31 @@ const { lang } = Astro.props;
     sync();
   };
 
+  // Re-reads storage the same way the head bootstrap does. Used when the page
+  // comes back from the back/forward cache or another tab changes the theme.
+  const apply = () => {
+    let stored: string | null;
+    try {
+      stored = localStorage.getItem(KEY);
+    } catch {
+      stored = null;
+    }
+    if (stored === "light" || stored === "dark") root.setAttribute("data-theme", stored);
+    else root.removeAttribute("data-theme");
+    sync();
+  };
+
   for (const button of buttons) {
     button.addEventListener("click", () => choose(current() === "dark" ? "light" : "dark"));
   }
   system.addEventListener("change", () => {
     if (!root.hasAttribute("data-theme")) sync();
+  });
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) apply();
+  });
+  window.addEventListener("storage", (event) => {
+    if (event.key === KEY || event.key === null) apply();
   });
   sync();
 </script>

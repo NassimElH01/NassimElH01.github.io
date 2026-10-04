@@ -13,6 +13,7 @@ Restore anything with `git mv`.
 | `public/games/web-shooter/` | p5.js camera demo that uses Marvel character names | Must be renamed to original powers before any reuse |
 | `public/budget-skabelon.xlsx` | Excel budget template | Authorship to be confirmed |
 | `public/cards/` | Card art used by the legacy Vanekort game | Licence and authorship unknown |
+| `public/ascensioncards/` | Old redirect page into the SPA games tab; `/ascensioncards/` now redirects to `/` | Kept for reference only |
 
 Git history shows most of the demos here were committed by another author.
 None of them are presented as the owner's projects until the owner confirms.

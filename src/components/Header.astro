@@ -16,14 +16,20 @@ const tr = t(lang);
 
 <a class="skip-link" href="#main">{tr("nav.skip")}</a>
 <header class="sticky top-0 z-50 border-b border-rule bg-paper">
-  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 px-4 sm:px-6">
-    <a href={localeUrl(lang)} class="font-display inline-flex min-h-14 items-center text-xl">Nassim Hassani</a>
-    <div class="ml-auto flex items-center md:order-last md:ml-0">
-      <LanguageSwitcher lang={lang} path={path} />
-      <ThemeToggle lang={lang} />
-    </div>
-    <nav aria-label={tr("nav.primary")} class="-mx-4 w-[calc(100%+2rem)] overflow-x-auto md:mx-0 md:ml-auto md:w-auto">
-      <ul class="flex gap-1 px-2 md:px-0">
+  <!--
+    DOM order = desktop visual order (name, nav, controls), so Tab follows what
+    is on screen. Below lg the nav drops to its own scrollable row.
+  -->
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 px-4 sm:px-6 lg:flex-nowrap">
+    <a href={localeUrl(lang)} class="font-display mr-auto inline-flex min-h-14 shrink-0 items-center text-xl lg:mr-0">
+      Nassim Hassani
+    </a>
+    <nav
+      aria-label={tr("nav.primary")}
+      class="order-last -mx-1 w-[calc(100%+0.5rem)] overflow-x-auto p-1 lg:order-none lg:mx-0 lg:ml-auto lg:w-auto"
+    >
+      <!-- p-1 on the scroll container leaves room for the 2px + 2px focus ring. -->
+      <ul class="flex gap-1">
         {
           sections.map((section) => (
             <li>
@@ -38,5 +44,9 @@ const tr = t(lang);
         }
       </ul>
     </nav>
+    <div class="flex shrink-0 items-center">
+      <LanguageSwitcher lang={lang} path={path} />
+      <ThemeToggle lang={lang} />
+    </div>
   </div>
 </header>

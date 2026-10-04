@@ -4,8 +4,9 @@
 // Files copied unchanged from public/ (for example the freelance demo) are skipped.
 import { access, readdir, readFile } from "node:fs/promises";
 import { join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = new URL("..", import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const DIST = join(ROOT, "dist");
 const PUBLIC = join(ROOT, "public");
 const report = process.argv.includes("--report");
