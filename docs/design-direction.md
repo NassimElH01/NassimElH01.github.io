@@ -19,6 +19,14 @@ The site is a translation layer.
 
 Focus ring: 2px outline plus 2px offset, ink in light mode and `#EDEAE2` in dark mode. Never orange on paper.
 
+Measured contrast:
+- ink on paper: 16.6:1
+- steel-text: 4.63:1 (dark theme 5.87:1)
+- signal-text: 4.55:1 (dark theme 6.76:1)
+- signal on paper: 2.89:1
+
+Any interactive orange control, such as the bridge handle, needs an ink outline, because WCAG 1.4.11 requires 3:1.
+
 ## Type
 - Instrument Serif: display, the "business" voice
 - Geist: body and UI

@@ -1,1 +1,129 @@
+/* Scan src/ only, so legacy/ never leaks classes into the build. */
 @import "tailwindcss" source("..");
+
+/* Explicit theme choice; the no-JS system fallback uses the media query below. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* "The Translator" tokens: see docs/design-direction.md */
+:root {
+  --paper: #f3f0e8;
+  --ink: #111111;
+  --signal: #ff4f00; /* large shapes and graphics only: 2.89:1 on paper */
+  --signal-text: #c2410c; /* orange text that must pass AA */
+  --steel: #6b6f76;
+  --steel-text: #686c73;
+  --rule: color-mix(in srgb, var(--ink) 14%, transparent);
+  --focus: #111111;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --paper: #0e0e0e;
+  --ink: #edeae2;
+  --signal: #ff6a2b;
+  --signal-text: #ff6a2b;
+  --steel: #8a8e95;
+  --steel-text: #8a8e95;
+  --focus: #edeae2;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --paper: #0e0e0e;
+    --ink: #edeae2;
+    --signal: #ff6a2b;
+    --signal-text: #ff6a2b;
+    --steel: #8a8e95;
+    --steel-text: #8a8e95;
+    --focus: #edeae2;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-signal: var(--signal);
+  --color-signal-text: var(--signal-text);
+  --color-steel: var(--steel);
+  --color-steel-text: var(--steel-text);
+  --color-rule: var(--rule);
+
+  /* Each <Font> variable already carries its metric-matched fallback stack. */
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-instrument-serif);
+}
+
+@layer base {
+  html {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--paper);
+    color: var(--ink);
+  }
+
+  /* Instrument Serif has a single weight: never fake bold or italic. */
+  .font-display {
+    font-synthesis: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* The skip link focuses <main tabindex="-1">; don't ring the whole page. */
+  main:focus {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--signal);
+    color: #111111;
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: absolute;
+    inset-inline-start: 1rem;
+    top: 1rem;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    background-color: var(--ink);
+    color: var(--paper);
+    font-weight: 600;
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus-visible {
+    transform: none;
+    outline-color: var(--signal);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

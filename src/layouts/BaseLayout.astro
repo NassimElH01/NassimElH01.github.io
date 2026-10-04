@@ -1,0 +1,62 @@
+---
+import { Font } from "astro:assets";
+import "../styles/global.css";
+
+interface Props {
+  lang: "en" | "da";
+  title: string;
+  description: string;
+  /** The hero turns this on once it renders mono text above the fold. */
+  preloadMono?: boolean;
+  noindex?: boolean;
+}
+
+const { lang, title, description, preloadMono = false, noindex = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f3f0e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e0e0e" media="(prefers-color-scheme: dark)" />
+    <!--
+      Theme bootstrap: runs before CSS so the page never flashes the wrong theme.
+      Storage key "theme" holds only "light" or "dark"; anything else (for example
+      next-themes' "system" from the old site) is removed and the system wins.
+    -->
+    <script is:inline>
+      (() => {
+        let stored;
+        try {
+          stored = localStorage.getItem("theme");
+          if (stored !== "light" && stored !== "dark") {
+            if (stored !== null) localStorage.removeItem("theme");
+            stored = null;
+          }
+        } catch {
+          stored = null;
+        }
+        if (stored) {
+          document.documentElement.setAttribute("data-theme", stored);
+          const color = stored === "dark" ? "#0e0e0e" : "#f3f0e8";
+          for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+            meta.setAttribute("content", color);
+          }
+        }
+      })();
+    </script>
+    <Font cssVariable="--font-geist" preload={[{ style: "normal" }]} />
+    <Font cssVariable="--font-instrument-serif" preload={[{ style: "normal" }]} />
+    <Font cssVariable="--font-geist-mono" preload={preloadMono ? [{ style: "normal" }] : false} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
