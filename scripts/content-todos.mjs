@@ -1,6 +1,8 @@
 // Lists every "TODO:" left in content/ so the owner sees what is missing.
 //   npm run content:todos              report only (always exits 0)
 //   npm run content:todos -- --strict  exits 1 if published content has a TODO
+// An object with `approved: false` (drafted copy the owner has not approved yet)
+// counts as one TODO, so it blocks deploys too.
 // Values are read by parsing YAML (and Markdown frontmatter), so comments never
 // count. Not published, so reported but never blocking:
 //   - files whose name starts with "_"            (skipped entirely)
@@ -24,7 +26,7 @@ async function* walk(dir) {
   }
 }
 
-/** Collects every string value containing "TODO:" with its key path. */
+/** Collects every string value containing "TODO:", and every `approved: false`, with its key path. */
 function collect(node, path, hidden, out) {
   if (typeof node === "string") {
     if (node.includes("TODO:")) out.push({ path, value: node, hidden });
@@ -34,6 +36,9 @@ function collect(node, path, hidden, out) {
       collect(item, `${path}[${index}]`, hidden || confirmItem, out);
     });
   } else if (node !== null && typeof node === "object") {
+    if (node.approved === false) {
+      out.push({ path: path ? `${path}.approved` : "approved", value: "draft texts awaiting owner approval", hidden });
+    }
     for (const [key, value] of Object.entries(node)) collect(value, path ? `${path}.${key}` : key, hidden, out);
   }
 }

@@ -1,10 +1,11 @@
 ---
-// Home page skeleton. Every section is a placeholder until it is built,
-// one at a time, in later steps (see docs/design-direction.md).
+// Home page. The hero is built; every other section is a placeholder until it
+// is built, one at a time, in later steps (see docs/design-direction.md).
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import SectionPlaceholder from "@/components/SectionPlaceholder.astro";
+import Hero from "@/components/hero/Hero.astro";
 import type { Lang } from "@/i18n/config";
 import { t } from "@/i18n/utils";
 import { getProfile } from "@/lib/content";
@@ -39,14 +40,11 @@ const sections = [
 ];
 ---
 
-<BaseLayout lang={lang} title={tr("meta.title")} description={tr("meta.description")}>
+<BaseLayout lang={lang} title={tr("meta.title")} description={tr("meta.description")} preloadMono>
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(person)} />
   <Header lang={lang} sections={sections} />
   <main id="main" tabindex="-1">
-    <section id="top" aria-labelledby="hero-title" class="mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
-      <h1 id="hero-title" class="font-display text-6xl leading-none sm:text-8xl">{profile.name}</h1>
-      <p class="todo-badge mt-8" data-todo>{tr("hero.placeholder")}</p>
-    </section>
+    <Hero lang={lang} />
     {sections.map((section) => <SectionPlaceholder id={section.id} label={section.label} />)}
   </main>
   <Footer lang={lang} />

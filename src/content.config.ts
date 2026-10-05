@@ -36,8 +36,16 @@ const profile = defineCollection({
   loader: file("./content/profile.yaml"),
   schema: z.object({
     name: text,
+    /** The hero's statement in business language (serif, left of the bridge). */
     headline: localized,
+    /** The same statement as code (mono, right of the bridge). Line breaks are kept. */
+    headlineTech: localized,
+    /** One line under the bridge. */
+    tagline: localized,
     summary: localized,
+    // The texts above are drafts until the owner sets this to true. Shown on the site,
+    // but `content:todos --strict` (the deploy gate on main) fails while it is false.
+    approved: z.boolean().default(false),
     availability: localized.optional(),
     location: localized,
     links: z.object({

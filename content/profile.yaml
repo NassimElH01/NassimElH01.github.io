@@ -2,12 +2,38 @@
 # "TODO: confirm — <text>" = taken from the old site, waiting for the owner to confirm.
 - id: nassim
   name: Nassim Hassani
+  # Drafts by Claude from the owner's own words, waiting for his approval (see `approved`).
+  # headline: the brief, Trin 2 Struktur ("ét skarpt udsagn om hvem jeg er: brobyggeren mellem
+  # forretning, data og teknologi"). headlineTech: the same statement written as code.
   headline:
-    en: "TODO: owner approve — one sharp line: the bridge between business, data and technology"
-    da: "TODO: owner approve — én skarp linje: brobyggeren mellem forretning, data og teknologi"
+    en: "Bridging business, data and technology."
+    da: "Brobyggeren mellem forretning, data og teknologi."
+  headlineTech:
+    en: |-
+      nassim.bridge(
+        business,
+        data,
+        technology,
+      );
+    da: |-
+      nassim.bridge(
+        business,
+        data,
+        technology,
+      );
+  # Source: CLAUDE.md, Hvem er Nassim ("brobygger mellem forretning og teknologi, som både kan kode,
+  # styre projekter og forstå økonomien").
+  tagline:
+    en: "I can code, run projects and understand the economics behind them."
+    da: "Jeg kan både kode, styre projekter og forstå økonomien."
+  # Source: the brief, Om mig (Økonomi & IT → Digital Transformation, PMO experience, martial arts,
+  # volunteer coach); content/timeline (Zealand PBA, RUC MSc, Royal Unibrew: ProjectFlow 365 →
+  # Power BI dashboards for management reporting and portfolio overview, CV-2 and REPORT p.6, 15, 17).
   summary:
-    en: "TODO: owner approve — short personal summary (Business & IT → Digital Transformation, PMO experience, martial arts and volunteer coaching)"
-    da: "TODO: owner approve — kort personligt resumé (Økonomi & IT → Digital Transformation, PMO-erfaring, kampsport og frivillig træner)"
+    en: "I started in Business Economics & IT at Zealand and am now taking an MSc in Digital Transformation at Roskilde University. During my PMO internship at Royal Unibrew I connected ProjectFlow 365 to Power BI so management could follow the project portfolio. Outside work I train martial arts and coach as a volunteer."
+    da: "Jeg startede på Økonomi & IT på Zealand og læser nu cand.it. i Digital Transformation på RUC. I min PMO-praktik hos Royal Unibrew koblede jeg ProjectFlow 365 sammen med Power BI, så ledelsen kunne følge projektporteføljen. Ved siden af træner jeg kampsport og er frivillig træner."
+  # Set to true when the owner has approved headline, headlineTech, tagline and summary.
+  approved: false
   availability:
     en: "TODO: confirm — Open to student jobs, part-time roles, or freelance work"
     da: "TODO: confirm — Søger studiejob, deltidsjob eller freelanceopgaver"
