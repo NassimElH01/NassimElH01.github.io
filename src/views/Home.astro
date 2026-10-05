@@ -8,6 +8,7 @@ import SectionPlaceholder from "@/components/SectionPlaceholder.astro";
 import type { Lang } from "@/i18n/config";
 import { t } from "@/i18n/utils";
 import { getProfile } from "@/lib/content";
+import { isTodo } from "@/lib/todo";
 
 interface Props {
   lang: Lang;
@@ -24,6 +25,8 @@ const person = {
   name: profile.name,
   url: Astro.site?.href,
   sameAs: [profile.links.linkedin, profile.links.github],
+  ...(isTodo(profile.contact.email) ? {} : { email: `mailto:${profile.contact.email}` }),
+  ...(!profile.contact.phone || isTodo(profile.contact.phone) ? {} : { telephone: profile.contact.phone }),
 };
 
 const sections = [

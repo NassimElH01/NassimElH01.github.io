@@ -70,6 +70,12 @@ test("the first Tab reaches the skip link, which moves focus to main", async ({ 
   await expect(page.locator("main#main")).toBeFocused();
 });
 
+test("the footer offers the confirmed email and phone", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator('footer a[href="mailto:naselh01@gmail.com"]')).toHaveText("naselh01@gmail.com");
+  await expect(page.locator('footer a[href="tel:+4524770784"]')).toHaveText("+45 24 77 07 84");
+});
+
 test("the language link points at the same page in the other language", async ({ page }) => {
   await page.goto("/");
   const link = page.locator('header a[hreflang="da"]');

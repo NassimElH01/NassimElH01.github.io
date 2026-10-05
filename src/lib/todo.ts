@@ -3,6 +3,6 @@
 
 export const TODO_PREFIX = "TODO:";
 
-export function isTodo(value: unknown): value is string {
+export function isTodo(value: unknown): boolean {
   return typeof value === "string" && value.trimStart().startsWith(TODO_PREFIX);
 }

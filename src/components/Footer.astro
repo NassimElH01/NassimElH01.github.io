@@ -11,8 +11,9 @@ interface Props {
 const { lang } = Astro.props;
 const tr = t(lang);
 const profile = await getProfile();
-// The email stays hidden until the owner picks an address.
+// Contact details only show once they are real values, never while TODO.
 const email = isTodo(profile.contact.email) ? null : profile.contact.email;
+const phone = !profile.contact.phone || isTodo(profile.contact.phone) ? null : profile.contact.phone;
 const year = new Date().getFullYear();
 ---
 
@@ -25,6 +26,9 @@ const year = new Date().getFullYear();
         <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={profile.links.github} rel="me noopener">GitHub</a></li>
         {email && (
           <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={`mailto:${email}`}>{email}</a></li>
+        )}
+        {phone && (
+          <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={`tel:${phone.replace(/\s+/g, "")}`}>{phone}</a></li>
         )}
       </ul>
     </nav>

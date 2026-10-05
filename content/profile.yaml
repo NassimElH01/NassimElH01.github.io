@@ -18,8 +18,9 @@
     linkedin: https://www.linkedin.com/in/nassim-hassani-63835a220
     github: https://github.com/NassimElH01
   contact:
-    email: "TODO: owner decides which email address to show"
-    phone: "TODO: owner decides whether to publish a phone number"
+    # Source: owner's answer (2026-10-04) and the CV header.
+    email: naselh01@gmail.com
+    phone: "+45 24 77 07 84"
   interests:
     en:
       - Trains martial arts
