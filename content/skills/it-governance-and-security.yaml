@@ -1,7 +1,9 @@
 # Skill group "IT-governance & sikkerhed" from the owner's brief (CLAUDE.md).
 # Evidence: brief (PMO-praktik at Royal Unibrew with IT/OT and cybersecurity
-# projects; IBM Cybersecurity certification), the owner's CVs (CV-2, CV-CBS) and
-# the Royal Unibrew internship report (REPORT).
+# projects; IBM Cybersecurity certification), the owner's CVs (CV-2, CV-CBS), the
+# Royal Unibrew internship report (REPORT), the owner's LinkedIn certificates
+# (PwC Security Awareness, PwC HackSchool; shared 2026-10-05) and the elective exam
+# synopsis "Data og teknologi integration – Enhanced security" (EXAM-DTI).
 #
 # Conflict on the bachelor project: the old site (cvData) described it as OT
 # cybersecurity and "cyber risk and governance in OT environments". CV-2 (which
@@ -50,8 +52,8 @@ items:
 
   - id: cybersecurity
     name:
-      en: "Cybersecurity (IBM Cybersecurity)"
-      da: "Cybersikkerhed (IBM Cybersecurity)"
+      en: "Cybersecurity"
+      da: "Cybersikkerhed"
     # Source: LinkedIn certificates (2026-10-05): PwC Security Awareness diploma; PwC Hackschool 2024
     # certificate (teaching in cybersecurity, data protection law and technical implementation of security)
     certifications:
@@ -71,5 +73,5 @@ items:
       - context: study
         project: enhanced-security-synopsis
         note:
-          en: "Elective synopsis on encryption, access control (RBAC, MFA) and GDPR in data integration"
+          en: "Elective exam paper on encryption, access control (RBAC, MFA) and GDPR in data integration"
           da: "Valgfagssynopsis om kryptering, adgangskontrol (RBAC, MFA) og GDPR i dataintegration"
