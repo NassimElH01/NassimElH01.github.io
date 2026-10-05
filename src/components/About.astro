@@ -1,0 +1,131 @@
+---
+// About: who Nassim is (the owner-approved summary) beside three short lists
+// read from content/: education, courses & certifications, and languages.
+// Unknown values (e.g. a certification year still "TODO:") are left out.
+import { getCollection } from "astro:content";
+import type { Lang } from "@/i18n/config";
+import { pick, t } from "@/i18n/utils";
+import { getProfile, getPublished } from "@/lib/content";
+import { isTodo } from "@/lib/todo";
+import LocalizedText from "@/components/LocalizedText.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const tr = t(lang);
+const profile = await getProfile();
+
+const summary = pick(profile.summary, lang);
+const paragraphs = summary.isTodo ? [] : summary.value.split(/\n\s*\n/).map((part) => part.trim());
+
+const known = (value: unknown) => (value === undefined || isTodo(value) ? undefined : String(value));
+
+const education = (await getPublished("timeline"))
+  .filter((entry) => entry.data.kind === "education")
+  .sort((a, b) => Number(known(b.data.start) ?? 0) - Number(known(a.data.start) ?? 0))
+  .map(({ data }) => {
+    const start = known(data.start);
+    const end = data.end === "present" ? undefined : known(data.end);
+    const period =
+      start && end ? (data.expected ? `${start} – ${tr("about.expected")} ${end}` : `${start}–${end}`) : (start ?? "");
+    return { title: pick(data.title, lang).value, organization: data.organization, period };
+  });
+
+const certifications = (await getCollection("certifications"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(({ data }) => ({
+    name: data.name,
+    detail: [known(data.issuer), known(data.year)].filter(Boolean).join(" · "),
+  }));
+
+const languages = (await getCollection("languages"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(({ data }) => ({ name: pick(data.name, lang).value, level: pick(data.level, lang).value }));
+---
+
+<section id="about" aria-labelledby="about-title" class="scroll-mt-28 border-t border-rule py-20 sm:py-28">
+  <div class="mx-auto grid max-w-6xl gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-7">
+      <h2 id="about-title" class="font-display text-4xl sm:text-5xl">{tr("section.about")}</h2>
+      {
+        paragraphs.length > 0 ? (
+          <div class="mt-8 max-w-[62ch]" lang={summary.isFallback ? summary.lang : undefined}>
+            {paragraphs.map((paragraph, index) =>
+              index === 0 ? (
+                <p class="font-display text-[1.625rem] leading-snug sm:text-[2rem]">{paragraph}</p>
+              ) : (
+                <p class="mt-6 text-lg leading-relaxed">{paragraph}</p>
+              ),
+            )}
+          </div>
+        ) : (
+          <LocalizedText field={profile.summary} lang={lang} as="p" class="mt-8" />
+        )
+      }
+    </div>
+
+    <div class="grid content-start gap-10 lg:col-span-5 lg:pt-3">
+      {
+        education.length > 0 && (
+          <div>
+            <h3 class="about-label">{tr("about.education")}</h3>
+            <ul class="mt-3 divide-y divide-rule border-y border-rule">
+              {education.map((item) => (
+                <li class="py-4">
+                  <p class="font-display text-[1.375rem] leading-tight">{item.title}</p>
+                  <p class="mt-1 text-sm text-steel-text">
+                    {[item.organization, item.period].filter(Boolean).join(" · ")}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      {
+        certifications.length > 0 && (
+          <div>
+            <h3 class="about-label">{tr("about.certifications")}</h3>
+            <ul class="mt-3 grid gap-2.5">
+              {certifications.map((item) => (
+                <li class="leading-snug">
+                  <span class="font-medium">{item.name}</span>
+                  {item.detail && <span class="text-sm text-steel-text"> · {item.detail}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      {
+        languages.length > 0 && (
+          <div>
+            <h3 class="about-label">{tr("about.languages")}</h3>
+            <dl class="mt-3 grid grid-cols-2 gap-x-6 gap-y-4">
+              {languages.map((item) => (
+                <div>
+                  <dt class="font-display text-[1.375rem] leading-tight">{item.name}</dt>
+                  <dd class="mt-0.5 text-sm text-steel-text">{item.level}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--steel-text);
+  }
+</style>
