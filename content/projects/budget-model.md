@@ -14,7 +14,8 @@
 title:
   en: "Financial Budget & Liquidity Model"
   da: "Finansiel budget- og likviditetsmodel"
-year: "TODO: year — owner to confirm (the template's only sheet is named 'Privatøkonomi 2025')"
+# Source: the owner's answer (2026-10-05: 2026). The template's sheet is named "Privatøkonomi 2025".
+year: 2026
 # Source: the owner's answers (2026-10-05): the four confirmed projects are personal projects.
 context: "personal"
 problem:

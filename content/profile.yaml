@@ -54,9 +54,9 @@
   availability:
     en: "I'm looking for a student job alongside my MSc at RUC. Let's talk."
     da: "Jeg søger studiejob ved siden af kandidaten på RUC. Lad os tage en snak."
-  # Set to true when the owner has approved headline, headlineTech, tagline, summary, availability
-  # and the meta description in src/i18n/ui.ts.
-  approved: false
+  # Approved by the owner on 2026-10-05 ("ja"): headline, headlineTech, tagline, summary, availability
+  # and the meta description in src/i18n/ui.ts. Set back to false while new drafts await approval.
+  approved: true
   location:
     en: "TODO: confirm — Copenhagen"
     da: "TODO: confirm — København"

@@ -3,7 +3,7 @@
 
 export const en = {
   "meta.title": "Nassim Hassani",
-  // Draft awaiting the owner's approval with the profile texts (content/profile.yaml `approved`).
+  // Approved by the owner with the profile texts on 2026-10-05.
   "meta.description":
     "Nassim Hassani: MSc student in Digital Transformation at RUC with PRINCE2, Power BI and junior project manager experience. Looking for a student job.",
   "nav.skip": "Skip to content",
