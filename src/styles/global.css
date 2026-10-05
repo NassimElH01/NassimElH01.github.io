@@ -56,13 +56,28 @@
   --font-display: var(--font-instrument-serif);
 }
 
+/* Typed so the hero bridge can ease between positions (components/hero/Hero.astro). */
+@property --split {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 50;
+}
+
 @layer base {
   html {
+    /* Focused or linked targets never land under the sticky header (WCAG 2.2 SC 2.4.11). */
+    scroll-padding-top: 7.5rem;
     background-color: var(--paper);
     color: var(--ink);
     font-family: var(--font-sans);
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      scroll-padding-top: 4.5rem;
+    }
   }
 
   body {

@@ -1,9 +1,10 @@
 ---
 // Hero: the name, the "bridge" statement (business ⇄ tech) and verified facts.
 // Signature (docs/design-direction.md): the name decodes from mono glyphs into
-// serif once per session, then the orange bridge line draws across. The intro
-// never blocks content: everything is rendered from the start, and it does not
-// run under reduced motion, without JS, on deep links or after a scroll.
+// serif once per session, then the orange line draws across and drops into the
+// bridge. The intro never blocks content: everything is rendered from the
+// start, and it does not run under reduced motion, without JS, on deep links
+// or after a scroll.
 import { getCollection, getEntry } from "astro:content";
 import type { Lang } from "@/i18n/config";
 import { pick, t } from "@/i18n/utils";
@@ -13,6 +14,14 @@ import LocalizedText from "@/components/LocalizedText.astro";
 
 interface Props {
   lang: Lang;
+}
+
+interface Fact {
+  label: string;
+  value: string;
+  detail?: string;
+  /** Marks the current entry with the orange dot. */
+  live?: boolean;
 }
 
 const { lang } = Astro.props;
@@ -26,20 +35,27 @@ const prince2 = await getEntry("certifications", "prince2-practitioner");
 const languages = (await getCollection("languages")).sort((a, b) => a.data.order - b.data.order);
 
 const period = (start?: string, end?: string) => [start, end].filter((v) => v && !isTodo(v)).join("–");
+const line = (...parts: (string | undefined)[]) => parts.filter(Boolean).join(" · ");
 
-const facts = [
+const candidates: (Fact | false | undefined)[] = [
+  now && {
+    label: tr("hero.now"),
+    value: pick(now.data.title, lang).value,
+    detail: line(now.data.organization, period(now.data.start, now.data.end)),
+    live: true,
+  },
   internship && {
     label: tr("hero.facts.experience"),
-    value: [pick(internship.data.title, lang).value, internship.data.organization, period(internship.data.start)]
-      .filter(Boolean)
-      .join(" · "),
+    value: internship.data.organization,
+    detail: line(pick(internship.data.title, lang).value, period(internship.data.start)),
   },
   prince2 && { label: tr("hero.facts.certified"), value: prince2.data.name },
   languages.length > 0 && {
     label: tr("hero.facts.languages"),
     value: languages.map((language) => pick(language.data.name, lang).value).join(" · "),
   },
-].filter((fact): fact is { label: string; value: string } => Boolean(fact));
+];
+const facts = candidates.filter((fact): fact is Fact => Boolean(fact));
 
 const email = isTodo(profile.contact.email) ? undefined : profile.contact.email;
 const valueText = tr("hero.bridge.value");
@@ -48,28 +64,12 @@ const valueText = tr("hero.bridge.value");
 <section
   id="top"
   aria-labelledby="hero-title"
-  class="hero relative mx-auto max-w-6xl overflow-x-clip px-4 pb-16 pt-10 sm:px-6 sm:pt-16 lg:pb-24"
+  class="hero relative mx-auto max-w-6xl overflow-x-clip px-4 pb-16 pt-12 sm:px-6 sm:pt-16 lg:pb-24"
   data-skip-label={tr("intro.skip")}
 >
-  {
-    now && (
-      <p class="font-mono inline-flex flex-wrap items-center gap-x-2 text-[0.8125rem] text-steel-text">
-        <span class="inline-flex items-center gap-2 text-ink">
-          <span class="size-2 rounded-full bg-signal" aria-hidden="true" />
-          {tr("hero.now")}
-        </span>
-        <span aria-hidden="true">—</span>
-        <span>
-          {pick(now.data.title, lang).value}, {now.data.organization}
-          {period(now.data.start, now.data.end) && ` (${period(now.data.start, now.data.end)})`}
-        </span>
-      </p>
-    )
-  }
-
   <h1
     id="hero-title"
-    class="font-display mt-4 text-[clamp(3.25rem,13vw,10rem)] leading-[0.9] tracking-[-0.01em]"
+    class="font-display text-[clamp(3.25rem,17vw,10rem)] leading-[0.9] tracking-[-0.01em]"
     data-decode
   >
     {profile.name}
@@ -88,22 +88,20 @@ const valueText = tr("hero.bridge.value");
       }
       const calm = !matchMedia("(prefers-reduced-motion: no-preference)").matches;
       if (!name || !hero || seen || calm || location.hash || window.scrollY > 0) return;
-      try {
-        sessionStorage.setItem("intro", "seen");
-      } catch {
-        // Private mode: the intro may then run again on the next visit.
-      }
 
       const text = name.textContent.trim();
-      const glyphs = "<>/{}[]=+*#_01";
+      // Code punctuation, coprime stride: neighbours always differ and every glyph appears.
+      const glyphs = "<>/{}[]();=01";
+      const glyphAt = (i, ms) => glyphs[(i * 5 + Math.floor((ms + i * 23) / 70)) % glyphs.length];
       const letters = [];
-      const START = 120;
-      const STEP = 55;
-      const END = 1550;
+      const START = 80;
+      const STEP = 45;
+      const END = 1560;
       let frame = 0;
       let timer = 0;
       let skip = null;
       let done = false;
+      let restored = false;
 
       const finish = () => {
         if (done) return;
@@ -111,61 +109,95 @@ const valueText = tr("hero.bridge.value");
         cancelAnimationFrame(frame);
         clearTimeout(timer);
         name.textContent = text;
-        root.classList.remove("intro", "intro-bridge");
-        document.removeEventListener("keydown", onKey);
+        root.classList.remove("intro", "intro-bridge", "intro-nudge");
+        document.removeEventListener("keydown", finish);
+        document.removeEventListener("pointerdown", finish);
         document.removeEventListener("visibilitychange", finish);
         if (skip) {
-          const hadFocus = document.activeElement === skip;
-          skip.remove();
-          if (hadFocus) document.getElementById("main")?.focus({ preventScroll: true });
+          const leaving = skip;
+          if (document.activeElement === leaving) document.getElementById("main")?.focus({ preventScroll: true });
+          leaving.classList.add("is-leaving");
+          leaving.tabIndex = -1;
+          setTimeout(() => leaving.remove(), 160);
         }
       };
-      const onKey = (event) => {
-        if (event.key === "Escape") finish();
-      };
 
-      try {
-        name.textContent = "";
-        for (const ch of text) {
-          if (ch === " ") {
-            name.append(" ");
-            continue;
+      const start = () => {
+        if (window.scrollY > 0) return;
+        try {
+          sessionStorage.setItem("intro", "seen");
+        } catch {
+          // Private mode: the intro may then run again on the next visit.
+        }
+        try {
+          // Screen readers get the plain name; the letters are decoration.
+          const label = document.createElement("span");
+          label.className = "sr-only";
+          label.textContent = text;
+          const shown = document.createElement("span");
+          shown.setAttribute("aria-hidden", "true");
+          for (const ch of text) {
+            if (ch === " ") {
+              shown.append(" ");
+              continue;
+            }
+            const span = document.createElement("span");
+            span.className = "decode-ch";
+            span.textContent = ch;
+            span.dataset.g = glyphAt(letters.length, 0);
+            shown.append(span);
+            letters.push(span);
           }
-          const span = document.createElement("span");
-          span.className = "decode-ch";
-          span.textContent = ch;
-          span.dataset.g = glyphs[letters.length % glyphs.length];
-          name.append(span);
-          letters.push(span);
+          name.replaceChildren(label, shown);
+          root.classList.add("intro");
+
+          skip = document.createElement("button");
+          skip.type = "button";
+          skip.className = "intro-skip";
+          skip.textContent = hero.dataset.skipLabel || "Skip intro";
+          skip.addEventListener("click", finish);
+          name.before(skip);
+          // Any key or press ends it, so the bridge is never animated under a user's hand.
+          document.addEventListener("keydown", finish);
+          document.addEventListener("pointerdown", finish);
+          document.addEventListener("visibilitychange", finish);
+          timer = setTimeout(finish, END + 500);
+
+          const t0 = performance.now();
+          const tick = (time) => {
+            const elapsed = Math.max(0, time - t0);
+            if (!restored) {
+              if (elapsed >= START + letters.length * STEP + 140) {
+                // Restore kerning while the line is drawing, not after the eye has settled.
+                name.textContent = text;
+                restored = true;
+              } else {
+                letters.forEach((span, i) => {
+                  if (elapsed >= START + i * STEP) delete span.dataset.g;
+                  else {
+                    const g = glyphAt(i, elapsed);
+                    if (span.dataset.g !== g) span.dataset.g = g;
+                  }
+                });
+              }
+            }
+            if (elapsed >= START + (letters.length - 2) * STEP && !root.classList.contains("intro-bridge")) {
+              root.classList.add("intro-bridge");
+              // The nudge eases a typed custom property; without @property it would jump.
+              if (window.CSS && "registerProperty" in CSS) root.classList.add("intro-nudge");
+            }
+            if (elapsed >= END) finish();
+            else frame = requestAnimationFrame(tick);
+          };
+          frame = requestAnimationFrame(tick);
+        } catch {
+          finish();
         }
-        root.classList.add("intro");
+      };
 
-        skip = document.createElement("button");
-        skip.type = "button";
-        skip.className = "intro-skip";
-        skip.textContent = hero.dataset.skipLabel || "Skip intro";
-        skip.addEventListener("click", finish);
-        hero.append(skip);
-        document.addEventListener("keydown", onKey);
-        document.addEventListener("visibilitychange", finish);
-        timer = setTimeout(finish, END + 500);
-
-        const t0 = performance.now();
-        const tick = (time) => {
-          const elapsed = time - t0;
-          const shuffle = Math.floor(elapsed / 60);
-          letters.forEach((span, i) => {
-            if (elapsed >= START + i * STEP) delete span.dataset.g;
-            else span.dataset.g = glyphs[(i * 7 + shuffle) % glyphs.length];
-          });
-          if (elapsed >= START + letters.length * STEP + 120) root.classList.add("intro-bridge");
-          if (elapsed >= END) finish();
-          else frame = requestAnimationFrame(tick);
-        };
-        frame = requestAnimationFrame(tick);
-      } catch {
-        finish();
-      }
+      // Opened in a background tab (e.g. from LinkedIn): decode when it is first seen.
+      if (document.hidden) document.addEventListener("visibilitychange", start, { once: true });
+      else start();
     })();
   </script>
 
@@ -215,12 +247,34 @@ const valueText = tr("hero.bridge.value");
     ← {tr("hero.bridge.hint")} →
   </p>
 
-  <div class="mt-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-    <LocalizedText field={profile.tagline} lang={lang} as="p" class="max-w-xl text-lg leading-snug sm:text-xl" />
-    <ul class="flex flex-wrap gap-3" aria-label={tr("hero.cta.label")}>
+  {
+    facts.length > 0 && (
+      <dl class="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-rule pt-5 lg:grid-cols-4">
+        {facts.map((fact) => (
+          <div>
+            <dt class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-steel-text">
+              {fact.live && <span class="size-2 rounded-full bg-signal" aria-hidden="true" />}
+              {fact.label}
+            </dt>
+            <dd class="mt-1 font-display text-[1.375rem] leading-tight lg:text-[1.625rem]">{fact.value}</dd>
+            {fact.detail && <dd class="mt-1 text-sm text-steel-text">{fact.detail}</dd>}
+          </div>
+        ))}
+      </dl>
+    )
+  }
+
+  <div class="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+    <LocalizedText
+      field={profile.tagline}
+      lang={lang}
+      as="p"
+      class="max-w-xl text-lg leading-snug [text-wrap:balance] sm:text-xl"
+    />
+    <ul class="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap" aria-label={tr("hero.cta.label")}>
       {
         email && (
-          <li>
+          <li class="col-span-2 sm:col-span-1">
             <a class="cta cta-primary" href={`mailto:${email}`}>
               {tr("hero.cta.contact")}
             </a>
@@ -235,19 +289,6 @@ const valueText = tr("hero.bridge.value");
       </li>
     </ul>
   </div>
-
-  {
-    facts.length > 0 && (
-      <dl class="mt-12 grid gap-x-8 gap-y-4 border-t border-rule pt-6 sm:grid-cols-3">
-        {facts.map((fact) => (
-          <div>
-            <dt class="font-mono text-xs uppercase tracking-[0.12em] text-steel-text">{fact.label}</dt>
-            <dd class="mt-1 text-[0.9375rem] leading-snug">{fact.value}</dd>
-          </div>
-        ))}
-      </dl>
-    )
-  }
 </section>
 
 <script>
@@ -263,7 +304,22 @@ const valueText = tr("hero.bridge.value");
       minmax(0, calc((100% - var(--bar)) * var(--split) / 100))
       var(--bar)
       minmax(0, 1fr);
-    height: clamp(15rem, 34vw, 26rem);
+    height: 15rem;
+    cursor: pointer;
+    /* --split is a registered <number> (global.css), so taps and keys ease. */
+    transition: --split 300ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .bridge[data-dragging] {
+    cursor: ew-resize;
+    transition: none;
+    user-select: none;
+  }
+
+  @media (min-width: 640px) {
+    .bridge {
+      height: clamp(17rem, 10vw + 11.75rem, 20rem);
+    }
   }
 
   .bridge-panel {
@@ -278,6 +334,7 @@ const valueText = tr("hero.bridge.value");
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
+    transition: opacity 150ms ease-out;
   }
 
   @media (min-width: 640px) {
@@ -286,7 +343,7 @@ const valueText = tr("hero.bridge.value");
     }
   }
 
-  /* A panel fades out as the bridge closes over it. */
+  /* A panel fades out as the bridge closes over it… */
   .bridge-business .bridge-inner {
     opacity: clamp(0, (var(--split) - 8) / 12, 1);
   }
@@ -295,12 +352,45 @@ const valueText = tr("hero.bridge.value");
     opacity: clamp(0, (92 - var(--split)) / 12, 1);
   }
 
+  /* …and before its copy would be cut mid-word on narrow screens. */
+  @container (inline-size < 7.5rem) {
+    .bridge-business .bridge-inner {
+      opacity: 0;
+    }
+  }
+
+  @container (inline-size < 8.25rem) {
+    .bridge-tech .bridge-inner {
+      opacity: 0;
+    }
+  }
+
+  @media (min-width: 640px) {
+    @container (inline-size < 9.5rem) {
+      .bridge-business .bridge-inner {
+        opacity: 0;
+      }
+    }
+
+    @container (inline-size < 10.5rem) {
+      .bridge-tech .bridge-inner {
+        opacity: 0;
+      }
+    }
+  }
+
   /* Text scales with its panel, so dragging reads as translating, not cropping.
      The <p> comes from LocalizedText, so it needs :global() inside this scope. */
   .bridge :global(.bridge-business-text) {
     font-size: clamp(1.125rem, 10cqi, 4.75rem);
     line-height: 1.02;
     text-wrap: balance;
+  }
+
+  @media (min-width: 640px) {
+    .bridge :global(.bridge-business-text) {
+      font-size: clamp(1.125rem, 10cqi, min(4.75rem, 7vw));
+    }
   }
 
   .bridge :global(.bridge-tech-text) {
@@ -313,7 +403,9 @@ const valueText = tr("hero.bridge.value");
     z-index: 1;
   }
 
-  /* 44px target; orange needs the ink outline for 3:1 against paper (WCAG 1.4.11). */
+  /* 44px target. The ink ring gives 3:1 against paper (WCAG 1.4.11); the paper halo
+     keeps that edge visible on the ink panel and in dark mode. Centring and the edge
+     clamp share `translate`, so `scale` (hover, press, intro) stays centred. */
   .bridge-handle {
     position: absolute;
     top: 50%;
@@ -325,11 +417,33 @@ const valueText = tr("hero.bridge.value");
     border-radius: 9999px;
     background-color: var(--signal);
     color: #111111;
-    box-shadow: 0 0 0 2px var(--ink);
+    box-shadow:
+      0 0 0 2px var(--ink),
+      0 0 0 4px var(--paper);
     cursor: ew-resize;
     touch-action: none;
-    transform: translate(-50%, -50%);
+    translate: calc(-50% + clamp(0px, (2 - var(--split)) * 3px, 6px) - clamp(0px, (var(--split) - 98) * 3px, 6px)) -50%;
+    transition: scale 120ms ease-out;
     visibility: hidden;
+  }
+
+  /* Phones: the handle sits in the empty band under the copy, never on it. */
+  @media (max-width: 639px) {
+    .bridge-handle {
+      top: auto;
+      bottom: 0.75rem;
+      translate: calc(-50% + clamp(0px, (7 - var(--split)) * 4px, 28px) - clamp(0px, (var(--split) - 93) * 4px, 28px)) 0;
+    }
+  }
+
+  .bridge[data-dragging] .bridge-handle {
+    scale: 1.08;
+  }
+
+  @media (hover: hover) {
+    .bridge-handle:hover {
+      scale: 1.08;
+    }
   }
 
   :global(.js) .bridge-handle {
@@ -346,13 +460,18 @@ const valueText = tr("hero.bridge.value");
 
   .bridge-handle:focus-visible {
     outline: 2px solid var(--focus);
-    outline-offset: 3px;
+    outline-offset: 4px;
+    box-shadow:
+      0 0 0 2px var(--ink),
+      0 0 0 8px var(--paper);
   }
 
   .cta {
     display: inline-flex;
+    width: 100%;
     min-height: 2.75rem;
     align-items: center;
+    justify-content: center;
     padding: 0 1.25rem;
     border: 1px solid var(--ink);
     font-size: 0.9375rem;
@@ -360,6 +479,12 @@ const valueText = tr("hero.bridge.value");
     transition:
       background-color 150ms ease-out,
       color 150ms ease-out;
+  }
+
+  @media (min-width: 640px) {
+    .cta {
+      width: auto;
+    }
   }
 
   .cta:hover {
@@ -377,7 +502,10 @@ const valueText = tr("hero.bridge.value");
     color: var(--ink);
   }
 
-  /* ───────── decode intro (only while html.intro is set) ───────── */
+  /* ───────── decode intro (only while html.intro is set) ─────────
+     Letters land 80–620 ms; the line draws 575–995 ms and the pillar drops from it as
+     its head crosses the split; the handle pops in, then one nudge shows the bridge
+     moves. Everything ends by 1.56 s. */
 
   .hero-rule {
     transform-origin: left center;
@@ -387,20 +515,52 @@ const valueText = tr("hero.bridge.value");
     transform: scaleX(0);
   }
 
-  :global(.intro) .bridge-pillar,
+  :global(.intro) .bridge-pillar {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  :global(.intro) .bridge-handle,
   :global(.intro) .bridge-hint {
     opacity: 0;
   }
 
-  :global(.intro.intro-bridge) .hero-rule {
-    transform: scaleX(1);
-    transition: transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  :global(.intro) .bridge-handle {
+    scale: 0.6;
   }
 
-  :global(.intro.intro-bridge) .bridge-pillar,
+  :global(.intro.intro-bridge) .hero-rule {
+    transform: scaleX(1);
+    transition: transform 420ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  :global(.intro.intro-bridge) .bridge-pillar {
+    transform: none;
+    transition: transform 260ms cubic-bezier(0.2, 0.7, 0.2, 1) 210ms;
+  }
+
+  :global(.intro.intro-bridge) .bridge-handle {
+    opacity: 1;
+    scale: 1;
+    transition:
+      opacity 140ms ease-out 470ms,
+      scale 240ms cubic-bezier(0.34, 1.56, 0.64, 1) 470ms;
+  }
+
   :global(.intro.intro-bridge) .bridge-hint {
     opacity: 1;
-    transition: opacity 250ms ease-out 200ms;
+    transition: opacity 200ms ease-out 620ms;
+  }
+
+  /* 0% and 100% fall back to the inline value, so it returns to where the bridge is. */
+  @keyframes bridge-nudge {
+    45% {
+      --split: 57;
+    }
+  }
+
+  :global(.intro.intro-nudge.intro-bridge) .bridge {
+    animation: bridge-nudge 360ms cubic-bezier(0.45, 0, 0.55, 1) 600ms;
   }
 
   .hero :global(.decode-ch) {
@@ -417,7 +577,9 @@ const valueText = tr("hero.bridge.value");
     inset: 0;
     display: grid;
     place-items: center;
-    color: var(--ink);
+    color: var(--steel-text);
+    /* Browsers without alt text for generated content use the first declaration. */
+    content: attr(data-g);
     content: attr(data-g) / "";
     font-family: var(--font-mono);
     font-size: 0.5em;
@@ -433,5 +595,11 @@ const valueText = tr("hero.bridge.value");
     font-size: 0.75rem;
     text-decoration: underline;
     text-underline-offset: 4px;
+    transition: opacity 150ms ease-out;
+  }
+
+  .hero :global(.intro-skip.is-leaving) {
+    opacity: 0;
+    pointer-events: none;
   }
 </style>

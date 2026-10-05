@@ -1,5 +1,6 @@
 // The hero bridge: a slider (pointer, touch and keyboard) that moves the split
-// between the business and the tech panel. Without JS the split stays at 50.
+// between the business and the tech panel. A tap on either panel moves it there
+// too (WCAG 2.2 SC 2.5.7). Without JS the split stays at 50.
 
 const STEP = 5;
 const PAGE = 20;
@@ -26,7 +27,7 @@ function initBridge(bridge: HTMLElement, handle: HTMLElement): void {
     );
   };
 
-  const fromPointer = (event: PointerEvent) => {
+  const fromPointer = (event: MouseEvent) => {
     const rect = bridge.getBoundingClientRect();
     set(((event.clientX - rect.left) / rect.width) * 100);
   };
@@ -49,6 +50,7 @@ function initBridge(bridge: HTMLElement, handle: HTMLElement): void {
 
   handle.addEventListener("pointerdown", (event) => {
     dragging = true;
+    bridge.dataset.dragging = "";
     handle.setPointerCapture(event.pointerId);
     event.preventDefault();
   });
@@ -57,8 +59,15 @@ function initBridge(bridge: HTMLElement, handle: HTMLElement): void {
   });
   const stop = () => {
     dragging = false;
+    delete bridge.dataset.dragging;
   };
   handle.addEventListener("pointerup", stop);
   handle.addEventListener("pointercancel", stop);
   handle.addEventListener("lostpointercapture", stop);
+
+  bridge.addEventListener("click", (event) => {
+    // A finished drag ends on the captured handle; a text selection is not a tap.
+    if (handle.contains(event.target as Node) || getSelection()?.toString()) return;
+    fromPointer(event);
+  });
 }
