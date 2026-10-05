@@ -12,9 +12,9 @@ title:
 # Source: CV-2 and CV-CBS ("Daginstitution (Børne- og Kulturhuset)"). Conflict
 # noted: the old site said "Børnehave i Taastrupgaard"; the CVs win.
 organization: "Daginstitution (Børne- og Kulturhuset)"
-# Source: none. Neither CV gives dates.
-start: "TODO: dates (not in CV-2 or CV-CBS)"
-end: "TODO: dates (not in CV-2 or CV-CBS)"
+# Source: CV-2 and CV-CBS list this under "Øvrig erhvervserfaring" without dates, and no other
+# source dates it, so it is shown undated, as in the CVs (owner's answers, 2026-10-05).
+undated: true
 summary:
   en: "Worked in a kindergarten with a focus on the children's well-being, sense of security, play and daily activities."
   da: "Arbejdede i børnehave med fokus på børnenes trivsel, tryghed, leg og daglige aktiviteter."

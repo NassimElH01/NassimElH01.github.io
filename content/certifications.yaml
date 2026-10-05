@@ -4,9 +4,9 @@
 - id: prince2-foundation
   order: 1
   name: PRINCE2 Foundation
-  # Source: REPORT (p.13: completed as an online course via Mentorix; p.8 says the same).
-  # Mentorix ran the course; the report does not name the exam/certification body.
-  issuer: "TODO: confirm — online course via Mentorix; exam body?"
+  # Source: REPORT (p.13: completed as an online course via Mentorix; p.8 says the same) and the
+  # owner's answers (2026-10-05: Mentorix is the issuer to show).
+  issuer: Mentorix
   # Source: REPORT (p.13: completed during the internship; p.1 report dated 04-07-2025;
   # p.21 cites the spring-2025 internship guide)
   year: 2025
@@ -14,9 +14,9 @@
 - id: prince2-practitioner
   order: 2
   name: PRINCE2 Practitioner
-  # Source: REPORT (p.13: completed as an online course via Mentorix; p.8 says the same).
-  # Mentorix ran the course; the report does not name the exam/certification body.
-  issuer: "TODO: confirm — online course via Mentorix; exam body?"
+  # Source: REPORT (p.13: completed as an online course via Mentorix; p.8 says the same) and the
+  # owner's answers (2026-10-05: Mentorix is the issuer to show).
+  issuer: Mentorix
   # Source: REPORT (p.13: completed during the internship; p.1 report dated 04-07-2025;
   # p.21 cites the spring-2025 internship guide)
   year: 2025

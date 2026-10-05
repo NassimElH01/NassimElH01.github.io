@@ -15,19 +15,21 @@ title:
   en: "Financial Budget & Liquidity Model"
   da: "Finansiel budget- og likviditetsmodel"
 year: "TODO: year — owner to confirm (the template's only sheet is named 'Privatøkonomi 2025')"
-context: "TODO: confirm — personal? (the old site filed it under 'FinTech & Dataanalyse')"
+# Source: the owner's answers (2026-10-05): the four confirmed projects are personal projects.
+context: "personal"
 problem:
   en: "TODO: which need the model was built for — owner to confirm"
   da: "TODO: hvilket behov modellen blev lavet til — ejer bekræfter"
+# Source: the owner's answers (2026-10-04: his work; 2026-10-05: personal)
 role:
-  en: "TODO: Nassim's role (sole author?) — owner to confirm"
-  da: "TODO: Nassims rolle (eneste forfatter?) — ejer bekræfter"
+  en: "Nassim's own personal project."
+  da: "Nassims eget personlige projekt."
 # Source: OLD-SITE (projectsData.ts "budget-model", description, line 223: "udviklet i Microsoft
 # Excel", "månedlig opfølgning", "privatøkonomi") and the linked file public/budget-skabelon.xlsx
 # (columns Kategori, Type, Budget, Faktisk, Difference; rows Lønudbetaling, Husleje & Forbrug,
 # Mad & Indkøb, Transport, Forsikringer, Abonnementer, Opsparing; types Indtægt/Udgift).
 method:
-  en: "A budget template built in Microsoft Excel for monthly follow-up of personal finances. Each category of income and expenses, such as salary, rent and utilities, food, transport, insurance, subscriptions and savings, has columns for budget, actual and difference."
+  en: "A budget template built in Microsoft Excel for tracking personal finances month by month. Each category of income and expenses, such as salary, rent and utilities, food, transport, insurance, subscriptions and savings, has columns for budget, actual and difference."
   da: "En budgetskabelon udviklet i Microsoft Excel til månedlig opfølgning på privatøkonomien. Hver kategori af indtægter og udgifter, fx lønudbetaling, husleje og forbrug, mad og indkøb, transport, forsikringer, abonnementer og opsparing, har kolonner for budget, faktisk og difference."
 # Source: OLD-SITE (projectsData.ts "budget-model", description and tags, lines 223-224;
 # highlights, lines 226-228). Claims the downloadable file does not show stay TODO.

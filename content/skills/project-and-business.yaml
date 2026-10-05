@@ -78,9 +78,6 @@ items:
     name:
       en: "Financial management and financial statement analysis"
       da: "Økonomistyring og regnskabsanalyse"
-    # TODO (owner): the budget-model project (OLD-SITE: Excel budget and liquidity model,
-    # authorship confirmed) also fits this skill. Add it here once its context
-    # (study, work, freelance or personal) is confirmed.
     usedIn:
       # Source: EXAM (p.18: "regnskabsanalyse" in the situation analysis)
       - context: study
@@ -88,6 +85,13 @@ items:
         note:
           en: "Financial statement analysis as part of an AI-assisted business analysis"
           da: "Regnskabsanalyse som en del af en AI-assisteret forretningsanalyse"
+      # Source: public/budget-skabelon.xlsx (budget, actual and difference per category);
+      # OWNER (his work, personal)
+      - context: personal
+        project: budget-model
+        note:
+          en: "Monthly budget tracking: budget, actual and difference per category"
+          da: "Månedlig budgetopfølgning: budget, faktisk og difference pr. kategori"
 
   - id: supply-chain
     name:

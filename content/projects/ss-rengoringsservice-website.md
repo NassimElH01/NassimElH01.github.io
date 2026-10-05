@@ -6,16 +6,16 @@
 # translation).
 # CONFLICT: the old site called this "Freelance webarbejde", but both CVs list S&S Rengøringsservice
 # as a job (IT-support & Webdesigner). The CVs win, so "freelance" was taken out of method and
-# context is a TODO until the owner confirms.
-# Possible timeline link once confirmed: "ss-rengoringservice" (the S&S job in content/timeline/).
+# the context is work.
 # Source: OLD-SITE (projectsData.ts "ss-rengoringservice-website", title)
 title:
   en: "S&S Rengøringsservice website"
   da: "S&S Rengøringsservice hjemmeside"
-# Source: CV-2 (ERHVERVSERFARING: "2023 - nuværrende") dates the S&S role, not the website itself;
-# no source dates the website, so the year stays TODO.
-year: "TODO: confirm — website year (CV-2: the S&S role runs 2023–present)"
-context: "TODO: confirm — freelance or work (the CV lists S&S as a job)"
+# No year: no source dates the website itself. It is ongoing work inside the S&S job
+# (CV-2: "2023 - nuværrende", "vedligeholdt virksomhedens hjemmeside"), so `timeline` below
+# supplies the period.
+# Source: CV-2 and CV-CBS (ERHVERVSERFARING: S&S is listed as a job)
+context: "work"
 problem:
   en: "TODO: what S&S Rengøringsservice needed — owner to confirm"
   da: "TODO: hvad S&S Rengøringsservice havde brug for — ejer bekræfter"
@@ -41,6 +41,8 @@ link: "https://ss.ssrengoringsservice.dk/"
 linkLabel:
   en: "Visit website"
   da: "Besøg hjemmeside"
+# Source: CV-2 (ERHVERVSERFARING: the website is part of the S&S job)
+timeline: "ss-rengoringservice"
 featured: false
 order: 3
 ---

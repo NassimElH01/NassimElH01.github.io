@@ -14,14 +14,20 @@
 title:
   en: "Ascension Cards — Habit RPG"
   da: "Ascension Cards — Habit RPG"
-year: "TODO: year — owner to confirm"
-context: "TODO: confirm — personal? (the old site filed it under 'Full Stack & Web App')"
+# Source: git history, commit dates only (not a year the owner confirmed): FlightWorld3D.tsx first
+# committed on 2026-09-09 (1b5c8b4, src/components/ascension/), the Lovable app in ascensioncards/
+# on 2026-09-12 (a092d0f). The local clone is shallow (cut at 2026-08-06); upstream history is older.
+year: 2026
+# Source: the owner's answers (2026-10-05): the four confirmed projects are personal projects.
+context: "personal"
 problem:
   en: "TODO: which need or idea started Ascension Cards — owner to confirm"
   da: "TODO: hvilket behov eller hvilken idé startede Ascension Cards — ejer bekræfter"
+# Source: the owner's answers (2026-10-04: his work; 2026-10-05: personal) and
+# legacy/ascensioncards/README.md (line 3: "This project was built with Lovable").
 role:
-  en: "TODO: Nassim's role — owner to confirm; legacy/ascensioncards/README.md says the app was built with Lovable (an AI app builder), so say how it was made and what Nassim did himself"
-  da: "TODO: Nassims rolle — ejer bekræfter; legacy/ascensioncards/README.md siger, at appen er bygget med Lovable (en AI-appbygger), så beskriv hvordan den blev lavet, og hvad Nassim selv gjorde"
+  en: "Nassim's own personal project, built with the AI app builder Lovable."
+  da: "Nassims eget personlige projekt, bygget med AI-appbyggeren Lovable."
 # Source: OLD-SITE (projectsData.ts "ascension-cards": description and highlights, lines 168-173;
 # "flight-world-3d": description and highlights, lines 205-209; screen and component names from
 # the file names in legacy/vite-spa/src/components/ascension/screens/ and ascension3d/).

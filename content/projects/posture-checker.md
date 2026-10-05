@@ -11,14 +11,18 @@
 title:
   en: "Femtech 65+ Surveillance Mirror (posture checker)"
   da: "Femtech 65+ Surveillance Mirror (holdningstjek)"
-year: "TODO: year — owner to confirm"
-context: "TODO: confirm — study or personal project?"
+# Not dated: git history has a single upload of the finished sketch (a29d69b, 2026-09-14), with no
+# development history. That shows only when it was added, not when it was built. The owner gave no year.
+year: "TODO: year — owner to confirm (uploaded to the repo in September 2026; build year unknown)"
+# Source: the owner's answers (2026-10-05): the four confirmed projects are personal projects.
+context: "personal"
 problem:
   en: "TODO: the brief behind 'Femtech 65+' (who it was for and why) — owner to confirm"
   da: "TODO: opgaven bag 'Femtech 65+' (hvem den var til og hvorfor) — ejer bekræfter"
+# Source: the owner's answers (2026-10-04: his work; 2026-10-05: personal)
 role:
-  en: "TODO: solo or group work, and Nassim's part — owner to confirm"
-  da: "TODO: individuelt eller i gruppe, og Nassims del — ejer bekræfter"
+  en: "Nassim's own personal project."
+  da: "Nassims eget personlige projekt."
 # Source: OLD-SITE (legacy/posture-checker/sketch.js: ml5.bodyPose("MoveNet") on a createCapture
 # webcam feed, lines 34-52 and 109-206; analyzePosture() shoulder delta in px, tilt in degrees,
 # 0-100 score and three thresholds, lines 330-369; lerp smoothing, line 527; drawSkeleton() and

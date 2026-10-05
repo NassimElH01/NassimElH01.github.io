@@ -42,6 +42,7 @@ content/
 - In production it is never rendered as copy. The page instead gets a hidden `data-todo` marker.
 - Bilingual fields need both `en` and `da`. A missing translation is `TODO: translate`.
 - Projects with `draft: true` only appear in dev.
+- A timeline entry may be `undated: true` only when every source lists it without dates, as the CV does under "Øvrig erhvervserfaring". An unknown date is still a `TODO:`.
 
 ## Languages
 

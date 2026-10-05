@@ -12,9 +12,9 @@ title:
   da: "Frivillig brandvagt"
 # Source: CV-2 and CV-CBS ("CNS Security")
 organization: "CNS Security"
-# Source: none. Neither CV gives dates.
-start: "TODO: dates (not in CV-2 or CV-CBS)"
-end: "TODO: dates (not in CV-2 or CV-CBS)"
+# Source: CV-2 and CV-CBS list this under "Øvrig erhvervserfaring" without dates, and no other
+# source dates it, so it is shown undated, as in the CVs (owner's answers, 2026-10-05).
+undated: true
 summary:
   en: "Volunteer support in a safety-focused environment requiring vigilance, coordination, and professionalism under operational conditions."
   da: "Frivillig støtte i et sikkerhedsfokuseret miljø, der krævede årvågenhed, koordinering og professionalisme under operationelle forhold."

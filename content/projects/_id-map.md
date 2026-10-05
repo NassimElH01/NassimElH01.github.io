@@ -7,7 +7,7 @@ Old ids come from `legacy/vite-spa/src/data/projectsData.ts` (and `cvData.ts` wh
 | `strength-conditioning-tracking` | `strength-conditioning-tracking` | unchanged |
 | `24support-julekalender` | `24support-christmas-calendar` | renamed |
 | `ss-rengoringservice-website` | `ss-rengoringsservice-website` | spelling fixed to match the company domain |
-| `royal-unibrew-project` | `royal-unibrew-hybrid-pmo-bachelor-project` | renamed to the bachelor title on both CVs ("Fra Vandfald til Hybrid PMO"); merged with cvData `royal-unibrew-bachelor-project`; the old OT-security framing is a TODO to confirm |
+| `royal-unibrew-project` | `royal-unibrew-hybrid-pmo-bachelor-project` | renamed to the bachelor title on both CVs ("Fra Vandfald til Hybrid PMO"); merged with cvData `royal-unibrew-bachelor-project`; the old "OT Cyber Security" framing is left out (the CVs win; in the internship report OT Cyber Security is an internship project, see `content/timeline/royal-unibrew-pmo.md`). Owner answers 2026-10-05: solo, 2025, grade 10 |
 | `data-integration-visualizer` | `data-integration-process-case` | renamed; `draft: true` |
 | `ascension-cards` | `ascension-cards` | authorship confirmed by the owner on 2026-10-04 (commits under the "Can Kurt" git identity) |
 | `flight-world-3d` | `ascension-cards` | merged: FlightWorld 3D is part of the Ascension Cards app (the old card opened the same game) |

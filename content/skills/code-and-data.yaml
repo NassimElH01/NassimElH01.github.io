@@ -1,9 +1,8 @@
 # Skill group "Kode & data" from the owner's brief (CLAUDE.md).
 # usedIn cites Nassim's own text: the old site (NassimElH01), the owner's CVs, the
 # Gen AI & ML elective exam (EXAM) and the Royal Unibrew internship report (REPORT).
-# The posture checker (p5.js) was committed under the "Can Kurt" identity, but the
-# owner confirmed authorship on 2026-10-04. Its context is not known yet, so p5.js
-# stays a TODO that points at it.
+# The posture checker and the arcade (p5.js) were committed under the "Can Kurt" identity,
+# but the owner confirmed authorship on 2026-10-04 and called them personal on 2026-10-05.
 group:
   en: "Code & data"
   da: "Kode & data"
@@ -39,7 +38,7 @@ items:
       # Source: CV-2 (ERHVERVSERFARING, S&S Rengøringsservice | IT-support & Webdesigner:
       # "vedligeholdt virksomhedens hjemmeside")
       # CONFLICT: the old site called this "Freelance webarbejde"; CV-2 lists S&S as a job and
-      # wins, so the context is work. The project file's own context stays a TODO for the owner.
+      # wins, so the context is work, as in the project file.
       - context: work
         timeline: ss-rengoringservice
         project: ss-rengoringsservice-website
@@ -51,8 +50,19 @@ items:
     name:
       en: "p5.js"
       da: "p5.js"
-    # Source: OLD-SITE (legacy/posture-checker/index.html loads p5.js) + OWNER (authorship confirmed)
-    usedIn: "TODO: context to confirm — p5.js is used in the posture-checker project; study, personal or freelance?"
+    usedIn:
+      # Source: legacy/posture-checker/index.html loads p5.js; OWNER (his work, personal)
+      - context: personal
+        project: posture-checker
+        note:
+          en: "Browser sketch that uses the webcam to check posture"
+          da: "Browserskitse, der bruger webkameraet til at tjekke kropsholdningen"
+      # Source: git history (PongGame.tsx moved to p5.js on 2026-09-04); OWNER (his work, personal)
+      - context: personal
+        project: canvas-arcade
+        note:
+          en: "Pong"
+          da: "Pong"
 
   - id: client-server-apps-and-guis
     name:

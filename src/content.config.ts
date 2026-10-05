@@ -76,21 +76,40 @@ const certifications = defineCollection({
 
 const timeline = defineCollection({
   loader: glob({ base: "./content/timeline", pattern: "[^_]*.md" }),
-  schema: z.object({
-    kind: orTodo(z.enum(["education", "internship", "work", "volunteer"])),
-    title: localized,
-    organization: text,
-    start: orTodo(yearMonth),
-    end: z.union([yearMonth, z.literal("present"), todo]).optional(),
-    expected: z.boolean().default(false),
-    summary: localized,
-    responsibilities: localizedList.default({ en: [], da: [] }),
-    strengths: localizedList.optional(),
-    tags: z.array(text).default([]),
-    showOnPrintCv: z.boolean().default(true),
-    order: z.number().int(),
-    draft: z.boolean().default(false),
-  }),
+  schema: z
+    .object({
+      kind: orTodo(z.enum(["education", "internship", "work", "volunteer"])),
+      title: localized,
+      organization: text,
+      start: orTodo(yearMonth).optional(),
+      end: z.union([yearMonth, z.literal("present"), todo]).optional(),
+      // Only when every source lists it without dates (like the CV's "Øvrig erhvervserfaring").
+      // An unknown date is "TODO: …", never undated.
+      undated: z.boolean().default(false),
+      expected: z.boolean().default(false),
+      summary: localized,
+      responsibilities: localizedList.default({ en: [], da: [] }),
+      strengths: localizedList.optional(),
+      tags: z.array(text).default([]),
+      showOnPrintCv: z.boolean().default(true),
+      order: z.number().int(),
+      draft: z.boolean().default(false),
+    })
+    .superRefine((entry, ctx) => {
+      if (entry.undated) {
+        for (const key of ["start", "end"] as const) {
+          if (entry[key] !== undefined) {
+            ctx.addIssue({ code: "custom", path: [key], message: `leave out ${key} on an undated entry, or drop undated` });
+          }
+        }
+      } else if (entry.start === undefined) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["start"],
+          message: 'give a start date, or "TODO: …" if it is unknown (undated is only for entries the sources list without dates)',
+        });
+      }
+    }),
 });
 
 /* ───────── projects: content/projects/*.md (owner workflow: /add-project) ───────── */
@@ -98,32 +117,40 @@ const timeline = defineCollection({
 const projects = defineCollection({
   // Non-recursive, skips "_" files: content/projects/_id-map.md is never loaded.
   loader: glob({ base: "./content/projects", pattern: "[^_]*.md" }),
-  schema: z.object({
-    title: localized,
-    year: orTodo(year),
-    context: orTodo(z.enum(["study", "work", "freelance", "personal"])),
-    problem: localized,
-    role: localized,
-    method: localized,
-    technology: z.array(text).default([]),
-    result: localized,
-    link: href.optional(),
-    linkLabel: localized.optional(),
-    repo: repoUrl.optional(),
-    demo: z
-      .object({
-        kind: z.enum(["iframe", "download", "external"]),
-        src: href,
-        // Heavy demos never load before the visitor asks for them.
-        loadOnClick: z.literal(true).default(true),
-        needsCamera: z.boolean().default(false),
-      })
-      .optional(),
-    timeline: reference("timeline").optional(),
-    featured: z.boolean().default(false),
-    order: z.number().int(),
-    draft: z.boolean().default(false),
-  }),
+  schema: z
+    .object({
+      title: localized,
+      // Leave out only for ongoing work inside a timeline entry, which then supplies the period.
+      year: orTodo(year).optional(),
+      context: orTodo(z.enum(["study", "work", "freelance", "personal"])),
+      problem: localized,
+      role: localized,
+      method: localized,
+      technology: z.array(text).default([]),
+      result: localized,
+      link: href.optional(),
+      linkLabel: localized.optional(),
+      // Further material, e.g. notebooks or reports, each with its own label.
+      links: z.array(z.object({ label: localized, href })).default([]),
+      repo: repoUrl.optional(),
+      demo: z
+        .object({
+          kind: z.enum(["iframe", "download", "external"]),
+          src: href,
+          // Heavy demos never load before the visitor asks for them.
+          loadOnClick: z.literal(true).default(true),
+          needsCamera: z.boolean().default(false),
+        })
+        .optional(),
+      timeline: reference("timeline").optional(),
+      featured: z.boolean().default(false),
+      order: z.number().int(),
+      draft: z.boolean().default(false),
+    })
+    .refine((project) => project.year !== undefined || project.timeline !== undefined, {
+      message: "give a year, or link the timeline entry whose period covers the project",
+      path: ["year"],
+    }),
 });
 
 /* ───────── skills: one YAML file per group from the brief ───────── */

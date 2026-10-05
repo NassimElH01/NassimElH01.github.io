@@ -1,17 +1,23 @@
 ---
-# Source: legacy cvData.ts (Nassim's own Danish text, filed there as paid
-# "Erfaring") and the owner's brief (trains martial arts, volunteer coach).
+# Source: legacy cvData.ts (Nassim's own Danish text, filed there as "Erfaring",
+# not "Frivilligt arbejde") and the owner's brief (trains martial arts, volunteer coach).
 # English is a faithful translation for the owner to review.
 # Not in CV-2 or CV-CBS. The EXAM (5th-semester elective, pp.18-19) confirms a
 # link to the club (he chose it for an assignment and used some of his own
 # recordings) but not this role, its kind or its dates.
-kind: "TODO: confirm — work or volunteer"
+# CONFLICT, unresolved: the old site (the owner's own text, commit 79f3364) filed this under "Erfaring",
+# not "Frivilligt arbejde", with period "Tidligere erfaring". The brief says "jeg træner kampsport og er
+# frivillig træner" (present tense) but names no club, so it may be a different role. Asked on
+# 2026-10-05 ("din rolle i Badr Fight Club (frivillig træner?)"); not confirmed, and the CVs don't list it.
+kind: "TODO: confirm — work or volunteer (old site: 'Erfaring'; the brief's 'frivillig træner' names no club)"
+# "medarbejder" is translated neutrally ("team member") because the kind is unconfirmed.
 title:
-  en: "Coach / Service Desk Employee"
+  en: "Coach / Service Desk Team Member"
   da: "Træner / Servicedesk-medarbejder"
 organization: "Badr Fight Club"
-start: "TODO: dates"
-end: "TODO: dates — the brief says he is a volunteer coach (present tense); confirm whether ongoing"
+# Not in either CV and no source dates it, so it is shown undated like the CVs' "Øvrig
+# erhvervserfaring" (owner's answers, 2026-10-05).
+undated: true
 summary:
   en: "Worked as a coach and on the service desk in an active club environment, responsible for members, practical support, coordination and day-to-day operations."
   da: "Arbejdede som træner og på servicedesk i et aktivt klubmiljø med ansvar for medlemmer, praktisk support, koordinering og daglig drift."

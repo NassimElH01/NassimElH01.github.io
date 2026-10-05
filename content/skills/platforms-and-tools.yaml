@@ -104,8 +104,15 @@ items:
       da: "Excel"
     # Source: CV-2 (Kompetencer: Excel; Profil: "kan lide at planlægge i Excel"), no place given.
     # REPORT p.20 (literature list) says Excel was "Brugt til analyse og rapportering", but
-    # p.5 says the agreed risk work in Excel was not done. OLD-SITE: budget-model is an Excel template.
-    usedIn: "TODO: where used — Royal Unibrew internship (analysis and reporting)? budget-model project (Excel template, context unknown)? Owner to confirm"
+    # p.5 says the agreed risk work in Excel was not done, so the internship is not cited.
+    usedIn:
+      # Source: public/budget-skabelon.xlsx (the template) and OLD-SITE ("udviklet i Microsoft
+      # Excel"); OWNER (his work, personal)
+      - context: personal
+        project: budget-model
+        note:
+          en: "Budget template for tracking personal finances month by month"
+          da: "Budgetskabelon til månedlig opfølgning på privatøkonomien"
 
   - id: windows
     name:

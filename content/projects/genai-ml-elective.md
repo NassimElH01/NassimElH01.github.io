@@ -4,8 +4,7 @@
 # faithful translation.
 # Not published on purpose: the UFC fighters, the charity and the club's branding that appear in
 # the exam's communication products, and the HeyGen video of Nassim himself.
-# TODO: owner to confirm notebook links. The exam (p.21) lists five GitHub gists under NassimElH01;
-# two of the URLs contain non-hex characters and look broken, so no `link` or `repo` is set.
+# Notebook links: see `links` below.
 # Source: EXAM (p.1: "Machine learning & Gen AI", "Valgfags eksamen"); title wording per the lead's brief
 title:
   en: "Generative AI & Machine Learning elective"
@@ -52,6 +51,31 @@ technology:
 result:
   en: "TODO: grade or outcome — the exam paper states none"
   da: "TODO: karakter eller resultat — eksamensopgaven nævner ingen"
+# Source: EXAM (p.21, "Machine-learning": five gists under NassimElH01, labelled by task) and the
+# owner's answers (2026-10-05: publish them). In the PDF text two IDs read "…686t78…" and "…5e6t76…":
+# the "ff" ligature was extracted as "t". The IDs below come from gist.github.com/NassimElH01, and all
+# five returned HTTP 200 on 2026-10-05. Labels follow the exam's task names.
+links:
+  - label:
+      en: "Notebook: linear regression (task 1A)"
+      da: "Notebook: lineær regression (opgave 1A)"
+    href: "https://gist.github.com/NassimElH01/0864262cf43f4be38a7bc686ff78c6e3"
+  - label:
+      en: "Notebook: fashion classification with neural nets (task 1B)"
+      da: "Notebook: klassifikation af tøj med neurale net (opgave 1B)"
+    href: "https://gist.github.com/NassimElH01/7432e41fc6a1d18f1982faca6d64263b"
+  - label:
+      en: "Notebook: ChatGPT chat sequence (task 2)"
+      da: "Notebook: ChatGPT-chatsekvens (opgave 2)"
+    href: "https://gist.github.com/NassimElH01/08c0cdeecd130e184a43ceab155b8b47"
+  - label:
+      en: "Notebook: ChatGPT news generator (task 3A)"
+      da: "Notebook: ChatGPT-nyhedsgenerator (opgave 3A)"
+    href: "https://gist.github.com/NassimElH01/119c584579c38f70273845b4e9117a4d"
+  - label:
+      en: "Notebook: ChatGPT structured output (task 3B)"
+      da: "Notebook: struktureret output med ChatGPT (opgave 3B)"
+    href: "https://gist.github.com/NassimElH01/9e12a8d824aa6e17a2ba5e6ff7692dfb"
 # Source: EXAM (p.2: Økonomi & IT, Zealand) and CV-2 (Zealand PBA 2022–2026)
 timeline: "zealand-professionsbachelor"
 featured: false

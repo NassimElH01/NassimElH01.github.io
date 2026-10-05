@@ -12,9 +12,9 @@ title:
   da: "Kontaktperson"
 # Source: CV-2 and CV-CBS ("CareCompagniet")
 organization: "CareCompagniet"
-# Source: none. Neither CV gives dates.
-start: "TODO: dates (not in CV-2 or CV-CBS)"
-end: "TODO: dates (not in CV-2 or CV-CBS)"
+# Source: CV-2 and CV-CBS list this under "Øvrig erhvervserfaring" without dates, and no other
+# source dates it, so it is shown undated, as in the CVs (owner's answers, 2026-10-05).
+undated: true
 summary:
   en: "Supportive contact role focused on communication, trust, and practical coordination in a care-oriented setting."
   da: "Støttende kontaktrolle med fokus på kommunikation, tillid og praktisk koordinering i en omsorgsorienteret sammenhæng."

@@ -12,14 +12,21 @@
 title:
   en: "Canvas Arcade State Machines"
   da: "Canvas Arcade State Machines"
-year: "TODO: year — owner to confirm"
-context: "TODO: confirm — personal? (the old site filed it under 'Full Stack & Web App')"
+# Source: GitHub history of NassimElH01/NassimElH01.github.io (the local clone is shallow; upstream
+# goes back to 2026-01-08). Snake, Pong and Blackjack were first committed on 2026-01-08 by
+# gpt-engineer-app[bot] (Lovable; e377df6 and d77bfe2 "Modernize portfolio app"), Vanekort on
+# 2026-08-04 (0d5e6e0), and Pong was rewritten with p5.js on 2026-09-04 (8ba3fda).
+year: 2026
+# Source: the owner's answers (2026-10-05): the four confirmed projects are personal projects.
+context: "personal"
 problem:
   en: "TODO: why Nassim built the arcade — owner to confirm"
   da: "TODO: hvorfor Nassim byggede arkaden — ejer bekræfter"
+# Source: the owner's answers (2026-10-04: his work; 2026-10-05: personal) and the GitHub history above
+# (the first versions of Snake, Pong and Blackjack were committed by Lovable's bot).
 role:
-  en: "TODO: Nassim's role (sole developer?) — owner to confirm"
-  da: "TODO: Nassims rolle (eneste udvikler?) — ejer bekræfter"
+  en: "Nassim's own personal project. The first versions of Snake, Pong and Blackjack were generated with the AI app builder Lovable."
+  da: "Nassims eget personlige projekt. De første versioner af Snake, Pong og Blackjack blev genereret med AI-appbyggeren Lovable."
 # Source: OLD-SITE (projectsData.ts "arcade-games": description, line 241; highlights, line 245).
 # Vanekort is named only (VanekortGame.tsx is a habit tracker, not a card game; no description).
 # Source: OLD-SITE (SnakeGame.tsx lines 16-17 and 108-110: "snakeHighScore" in localStorage). The
@@ -35,9 +42,12 @@ technology:
   - "TypeScript"
   - "Canvas API"
   - "Framer Motion"
+  # Source: CODE legacy/vite-spa/src/components/games/PongGame.tsx line 2 (`import p5 from "p5"`),
+  # introduced in commit 8ba3fda (2026-09-04); matches the p5.js usedIn entry in content/skills/code-and-data.yaml
+  - "p5.js"
   - "TODO: confirm — framerate-independent deterministic game loops"
   - "TODO: confirm — responsive canvas layouts for mobile and desktop"
-  - "TODO: confirm — 'built from scratch with pure TypeScript and HTML5 Canvas' (the code shows Pong uses p5.js, and Blackjack is React + Framer Motion without a canvas)"
+  - "TODO: confirm — 'built from scratch with pure TypeScript and HTML5 Canvas' (the code shows Pong uses p5.js, Blackjack is React + Framer Motion without a canvas, and the first versions came from Lovable)"
 result:
   en: "TODO: outcome — owner to confirm"
   da: "TODO: resultat — ejer bekræfter"
