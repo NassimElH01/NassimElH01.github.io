@@ -1,6 +1,7 @@
 # Skill group "Systemudvikling & design" from the owner's brief (CLAUDE.md).
-# The old site has no matching group and no text by Nassim that says where any of
-# these were used, so every usedIn is a TODO for the owner.
+# CV-2 lists "systemudvikling og IT-arkitektur" as a focus area of the Zealand PBA;
+# that is cited for UML and system modeling only. No source says where the other
+# items were used, so their usedIn stays a TODO for the owner.
 group:
   en: "Systems development & design"
   da: "Systemudvikling & design"
@@ -10,7 +11,14 @@ items:
     name:
       en: "UML and system modeling"
       da: "UML og systemmodellering"
-    usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
+    usedIn:
+      # Source: CV-2 (Uddannelse, Zealand "Fokus: ... systemudvikling og IT-arkitektur").
+      # CV-2 does not name UML itself.
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Focus area in the programme: systems development and IT architecture"
+          da: "Fokusområde på uddannelsen: systemudvikling og IT-arkitektur"
 
   - id: requirements-specification
     name:

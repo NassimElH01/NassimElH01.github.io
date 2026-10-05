@@ -1,7 +1,7 @@
 # Skill group "Bæredygtig digital transformation" from the owner's brief (CLAUDE.md).
-# Nassim's old text never says where any of these were used. His RUC MSc
-# description mentions technology strategy, but the programme started in 2026,
-# so nothing is cited as usage until the owner confirms.
+# CV-2 lists "IT-arkitektur" as a focus area of the Zealand PBA; that is cited for
+# enterprise architecture. No source says where the other items were used. The RUC
+# MSc started in 2026, so nothing from it is cited as usage until the owner confirms.
 group:
   en: "Sustainable digital transformation"
   da: "Bæredygtig digital transformation"
@@ -11,7 +11,13 @@ items:
     name:
       en: "Enterprise architecture"
       da: "Enterprise-arkitektur"
-    usedIn: "TODO: where used — Zealand PBA or RUC MSc coursework? Owner to confirm"
+    usedIn:
+      # Source: CV-2 (Uddannelse, Zealand "Fokus: ... systemudvikling og IT-arkitektur")
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Focus area in the programme: IT architecture"
+          da: "Fokusområde på uddannelsen: IT-arkitektur"
 
   - id: digitalization-strategy
     name:

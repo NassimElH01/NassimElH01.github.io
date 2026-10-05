@@ -1,6 +1,15 @@
 # Skill group "IT-governance & sikkerhed" from the owner's brief (CLAUDE.md).
 # Evidence: brief (PMO-praktik at Royal Unibrew with IT/OT and cybersecurity
-# projects; IBM Cybersecurity certification) and Nassim's own cvData/projectsData text.
+# projects; IBM Cybersecurity certification), the owner's CVs (CV-2, CV-CBS) and
+# the Royal Unibrew internship report (REPORT).
+#
+# Conflict on the bachelor project: the old site (cvData) described it as OT
+# cybersecurity and "cyber risk and governance in OT environments". CV-2 (which
+# wins) names it "Fra Vandfald til Hybrid PMO ... via ProjectFlow 365, Power BI og
+# Azure DevOps" with analysis of system integration, data ownership and role
+# clarification, and REPORT p.17 names ProjectFlow 365 to Power BI integration as
+# its problem area. So the bachelor project is no longer cited for cybersecurity,
+# and its IT-governance note uses CV-2's wording. Owner: confirm.
 group:
   en: "IT governance & security"
   da: "IT-governance & sikkerhed"
@@ -11,19 +20,27 @@ items:
       en: "IT governance"
       da: "IT-governance"
     usedIn:
-      # Old cvData (NassimElH01): "Worked with Azure DevOps governance, project tracking ..."
+      # Source: CV-2 (Royal Unibrew: "governance og fremdrift i Azure DevOps",
+      # "governance-dokumentation"); CV-CBS (Royal Unibrew: "governance, dokumentation og
+      # opfølgning i Azure DevOps og SharePoint")
       - context: internship
         timeline: royal-unibrew-pmo
         note:
-          en: "Azure DevOps governance"
-          da: "Governance i Azure DevOps"
-      # Old cvData (NassimElH01): "Examined cyber risk and governance in operational
-      # technology environments alongside digital transformation initiatives."
+          en: "Governance in Azure DevOps and governance documentation"
+          da: "Governance i Azure DevOps og governance-dokumentation"
+      # Source: CV-2 (Uddannelse, Zealand "Fokus: ... IT-governance")
       - context: study
-        project: royal-unibrew-ot-security-bachelor-project
+        timeline: zealand-professionsbachelor
         note:
-          en: "Cyber risk and governance in OT environments"
-          da: "Cyberrisiko og governance i OT-miljøer"
+          en: "Focus area in the programme"
+          da: "Fokusområde på uddannelsen"
+      # Source: CV-2 (Uddannelse, bachelorprojekt: "analyse af systemintegration,
+      # dataejerskab og rolleafklaring"). Conflicts with OLD-SITE, see the top comment.
+      - context: study
+        project: royal-unibrew-hybrid-pmo-bachelor-project
+        note:
+          en: "Analysis of system integration, data ownership and role clarification"
+          da: "Analyse af systemintegration, dataejerskab og rolleafklaring"
 
   - id: networks-and-computer-architecture
     name:
@@ -38,16 +55,11 @@ items:
     certifications:
       - ibm-cybersecurity
     usedIn:
-      # Brief + old cvData (NassimElH01): "Supported cross-functional IT/OT and
-      # cybersecurity projects with governance, stakeholder coordination, reporting ..."
+      # Source: REPORT (p.6: OT Cyber Security project with "udvikling af use cases,
+      # udarbejdelse af stakeholderanalyser, opfølgning på compliance-krav"); CV-2 (Royal Unibrew:
+      # "IT- og OT-projekter (bl.a. Cyber Security)")
       - context: internship
         timeline: royal-unibrew-pmo
         note:
-          en: "Supported cross-functional IT/OT and cybersecurity projects"
-          da: "Understøttede tværfaglige IT/OT- og cybersikkerhedsprojekter"
-      # Old cvData/projectsData (NassimElH01): bachelor project on OT cybersecurity.
-      - context: study
-        project: royal-unibrew-ot-security-bachelor-project
-        note:
-          en: "OT cybersecurity in a production-focused industrial setting"
-          da: "OT-cybersikkerhed i et produktionsorienteret industrimiljø"
+          en: "OT Cyber Security project: use cases, stakeholder analyses and compliance follow-up"
+          da: "OT Cyber Security-projektet: use cases, stakeholderanalyser og opfølgning på compliance-krav"

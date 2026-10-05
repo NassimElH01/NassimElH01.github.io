@@ -1,14 +1,20 @@
 ---
-# Source: legacy cvData.ts (Nassim's own Danish text). English is a faithful
-# translation for the owner to review. The old site gave no dates
-# ("Tidligere erfaring"); organization is his description, not a formal name.
+# Source: legacy cvData.ts (Nassim's own Danish text) for summary, bullets and
+# strengths. English is a faithful translation for the owner to review. The old
+# site gave no dates ("Tidligere erfaring"). The file id is kept for references.
+# Source: CV-2 and CV-CBS (listed under "Øvrig erhvervserfaring")
 kind: "work"
+# Source: CV-2 and CV-CBS ("Tilkaldevikar / pædagogmedhjælper"); English is a
+# faithful translation. Replaces the old-site "Pædagogmedhjælper / Vikar".
 title:
-  en: "Childcare Assistant / Substitute"
-  da: "Pædagogmedhjælper / Vikar"
-organization: "Børnehave i Taastrupgaard"
-start: "TODO: dates"
-end: "TODO: dates"
+  en: "On-call substitute / pedagogical assistant"
+  da: "Tilkaldevikar / pædagogmedhjælper"
+# Source: CV-2 and CV-CBS ("Daginstitution (Børne- og Kulturhuset)"). Conflict
+# noted: the old site said "Børnehave i Taastrupgaard"; the CVs win.
+organization: "Daginstitution (Børne- og Kulturhuset)"
+# Source: none. Neither CV gives dates.
+start: "TODO: dates (not in CV-2 or CV-CBS)"
+end: "TODO: dates (not in CV-2 or CV-CBS)"
 summary:
   en: "Worked in a kindergarten with a focus on the children's well-being, sense of security, play and daily activities."
   da: "Arbejdede i børnehave med fokus på børnenes trivsel, tryghed, leg og daglige aktiviteter."

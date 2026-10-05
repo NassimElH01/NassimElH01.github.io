@@ -2,6 +2,9 @@
 # Source: legacy cvData.ts (Nassim's own Danish text, filed there as paid
 # "Erfaring") and the owner's brief (trains martial arts, volunteer coach).
 # English is a faithful translation for the owner to review.
+# Not in CV-2 or CV-CBS. The EXAM (5th-semester elective, pp.18-19) confirms a
+# link to the club (he chose it for an assignment and used some of his own
+# recordings) but not this role, its kind or its dates.
 kind: "TODO: confirm — work or volunteer"
 title:
   en: "Coach / Service Desk Employee"

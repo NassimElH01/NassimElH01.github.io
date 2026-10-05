@@ -3,13 +3,18 @@
 # strengths; filed there as "Frivilligt arbejde"). The other language is a
 # faithful translation for the owner to review. The old site gave no dates
 # ("Selected experience").
+# Source: CV-2 and CV-CBS (Øvrig erhvervserfaring: "CNS Security – Frivillig brandvagt";
+# the title says "Frivillig", so kind stays volunteer)
 kind: "volunteer"
+# Source: CV-2 and CV-CBS ("Frivillig brandvagt"); English is a faithful translation
 title:
-  en: "Volunteer Fire Watch"
+  en: "Volunteer fire watch"
   da: "Frivillig brandvagt"
+# Source: CV-2 and CV-CBS ("CNS Security")
 organization: "CNS Security"
-start: "TODO: dates"
-end: "TODO: dates"
+# Source: none. Neither CV gives dates.
+start: "TODO: dates (not in CV-2 or CV-CBS)"
+end: "TODO: dates (not in CV-2 or CV-CBS)"
 summary:
   en: "Volunteer support in a safety-focused environment requiring vigilance, coordination, and professionalism under operational conditions."
   da: "Frivillig støtte i et sikkerhedsfokuseret miljø, der krævede årvågenhed, koordinering og professionalisme under operationelle forhold."

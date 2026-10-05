@@ -1,6 +1,8 @@
 # Skill group "Projekt & forretning" from the owner's brief (CLAUDE.md).
-# Certifications are from the brief. Nassim's old text never says PRINCE2 or agile
-# methods were applied anywhere, so their usedIn stays TODO.
+# Certifications are from the brief and CV-2. Usage comes from the Royal Unibrew
+# internship report (REPORT), the Gen AI & ML elective exam (EXAM) and CV-2.
+# Agile methods are NOT cited for Royal Unibrew: REPORT p.8 says it works mainly
+# with the waterfall model, and p.19 says agile/Scrum was not applied there.
 group:
   en: "Projects & business"
   da: "Projekt & forretning"
@@ -13,7 +15,14 @@ items:
     certifications:
       - prince2-foundation
       - prince2-practitioner
-    usedIn: "TODO: where applied (Royal Unibrew PMO? study projects?) — owner to confirm"
+    usedIn:
+      # Source: REPORT (p.8: "anvendte jeg PRINCE2's faseopdeling og risikostyringsprincipper"
+      # in the project plan for the OT Cyber Security project)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Applied PRINCE2 phase division and risk management to the OT Cyber Security project plan"
+          da: "Anvendte PRINCE2's faseopdeling og risikostyring i projektplanen for OT Cyber Security-projektet"
 
   - id: agile-methods
     name:
@@ -23,28 +32,62 @@ items:
     # Agile Project Management certification belongs with this skill.
     certifications:
       - agile-project-management
-    usedIn: "TODO: where applied (Royal Unibrew PMO? study projects?) — owner to confirm"
+    usedIn:
+      # Source: REPORT (p.8: "På Zealand har jeg arbejdet meget med agile metoder og Scrum")
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Agile methods and Scrum"
+          da: "Agile metoder og Scrum"
+      # Source: CV-2 (Uddannelse, bachelorprojekt: "Fra Vandfald til Hybrid PMO")
+      - context: study
+        project: royal-unibrew-hybrid-pmo-bachelor-project
+        note:
+          en: "From waterfall to a hybrid PMO"
+          da: "Fra vandfald til hybrid PMO"
 
   - id: stakeholder-risk-communication-plans
     name:
       en: "Stakeholder, risk and communication plans"
       da: "Interessent-, risiko- og kommunikationsplaner"
-    # Old cvData bullet (NassimElH01): "Coordinated project reporting, meeting
-    # structure, and stakeholder communication across technology and operations teams."
-    # It mentions no plans and nothing about risk, so where this was used stays TODO.
-    usedIn: "TODO: where used — Royal Unibrew PMO internship? (old text says 'stakeholder communication and meeting structure', not formal stakeholder/risk/communication plans); owner to confirm"
+    # No source mentions a communication plan; only stakeholder analyses and risk
+    # management are cited.
+    usedIn:
+      # Source: REPORT (p.6: "udarbejdelse af stakeholderanalyser" for OT Cyber Security;
+      # p.8: PRINCE2 "risikostyringsprincipper" in the OT project plan)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Stakeholder analyses and PRINCE2 risk management for the OT Cyber Security project"
+          da: "Stakeholderanalyser og PRINCE2-risikostyring til OT Cyber Security-projektet"
 
   - id: business-strategy-and-models
     name:
       en: "Business strategy and business models"
       da: "Forretningsstrategi og forretningsmodeller"
-    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+    usedIn:
+      # Source: EXAM (p.18: "situationsanalyse (BMC, regnskabsanalyse, Porter's Five Forces og
+      # PESTEL), en SWOT-oversigt", solved with ChatGPT prompts)
+      - context: study
+        project: genai-ml-elective
+        note:
+          en: "AI-assisted business analysis with BMC, Porter's Five Forces, PESTEL and SWOT"
+          da: "AI-assisteret forretningsanalyse med BMC, Porters Five Forces, PESTEL og SWOT"
 
   - id: financial-management-and-financial-statement-analysis
     name:
       en: "Financial management and financial statement analysis"
       da: "Økonomistyring og regnskabsanalyse"
-    usedIn: "TODO: where used — likely Zealand PBA (Økonomi & IT) coursework; owner to confirm"
+    # TODO (owner): the budget-model project (OLD-SITE: Excel budget and liquidity model,
+    # authorship confirmed) also fits this skill. Add it here once its context
+    # (study, work, freelance or personal) is confirmed.
+    usedIn:
+      # Source: EXAM (p.18: "regnskabsanalyse" in the situation analysis)
+      - context: study
+        project: genai-ml-elective
+        note:
+          en: "Financial statement analysis as part of an AI-assisted business analysis"
+          da: "Regnskabsanalyse som en del af en AI-assisteret forretningsanalyse"
 
   - id: supply-chain
     name:
@@ -56,4 +99,12 @@ items:
     name:
       en: "Change management"
       da: "Forandringsledelse"
-    usedIn: "TODO: where used — RUC MSc (focus on organizational change)? Royal Unibrew? Owner to confirm"
+    usedIn:
+      # Source: REPORT (p.10: "modstand eller usikkerhed blandt kolleger i forbindelse med
+      # implementeringen af nye Power BI-rapporter"; "brugte tid på at lave brugerdokumentation og
+      # undervise kollegerne"; p.21: Kotter as inspiration for organisational resistance)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Met colleagues' resistance or uncertainty about new Power BI reports with user documentation and training"
+          da: "Mødte kollegers modstand eller usikkerhed over for nye Power BI-rapporter med brugerdokumentation og undervisning"

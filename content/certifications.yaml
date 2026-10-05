@@ -1,16 +1,25 @@
-# Certifications from the brief. Issuer is only filled where it is part of the
-# certificate's own name; year and credential links wait for the owner.
+# Certifications from the brief and CV-2 (Certificeringer). Issuer is only filled
+# where a source names it or it is part of the certificate's own name.
+# Credential links and most years wait for the owner.
 - id: prince2-foundation
   order: 1
   name: PRINCE2 Foundation
-  issuer: "TODO: confirm issuer"
-  year: "TODO: year"
+  # Source: REPORT (p.13: completed as an online course via Mentorix; p.8 says the same).
+  # Mentorix ran the course; the report does not name the exam/certification body.
+  issuer: "TODO: confirm — online course via Mentorix; exam body?"
+  # Source: REPORT (p.13: completed during the internship; p.1 report dated 04-07-2025;
+  # p.21 cites the spring-2025 internship guide)
+  year: 2025
   credentialUrl: "TODO: credential link"
 - id: prince2-practitioner
   order: 2
   name: PRINCE2 Practitioner
-  issuer: "TODO: confirm issuer"
-  year: "TODO: year"
+  # Source: REPORT (p.13: completed as an online course via Mentorix; p.8 says the same).
+  # Mentorix ran the course; the report does not name the exam/certification body.
+  issuer: "TODO: confirm — online course via Mentorix; exam body?"
+  # Source: REPORT (p.13: completed during the internship; p.1 report dated 04-07-2025;
+  # p.21 cites the spring-2025 internship guide)
+  year: 2025
   credentialUrl: "TODO: credential link"
 - id: ibm-data-analytics
   order: 3
@@ -32,7 +41,17 @@
   credentialUrl: "TODO: credential link"
 - id: agile-project-management
   order: 6
+  # Name as in the brief; CV-2 calls it "Agile Projektledelse".
   name: Agile Project Management
-  issuer: "TODO: confirm issuer"
+  # Source: CV-2 (Certificeringer: "Agile Projektledelse (BlivProjektleder.dk)")
+  issuer: BlivProjektleder.dk
+  year: "TODO: year"
+  credentialUrl: "TODO: credential link"
+# Source: CV-2 (Certificeringer: "PwC HackSchool"). Not in the brief or CV-CBS.
+- id: pwc-hackschool
+  order: 7
+  name: PwC HackSchool
+  # Source: CV-2 (Certificeringer; issuer is part of the name)
+  issuer: PwC
   year: "TODO: year"
   credentialUrl: "TODO: credential link"
