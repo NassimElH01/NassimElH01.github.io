@@ -242,3 +242,9 @@ test("the freelance demo in public/ is still served unchanged", async ({ request
   const response = await request.get("/freelance/24support-julekalender/index.html");
   expect(response.ok()).toBe(true);
 });
+
+test("the budget template is downloadable at its old URL", async ({ request }) => {
+  const response = await request.get("/budget-skabelon.xlsx");
+  expect(response.ok()).toBe(true);
+  expect((await response.body()).subarray(0, 2).toString()).toBe("PK");
+});
