@@ -3,8 +3,9 @@
 
 export const en = {
   "meta.title": "Nassim Hassani",
+  // Draft awaiting the owner's approval with the profile texts (content/profile.yaml `approved`).
   "meta.description":
-    "TODO: owner approve — Nassim Hassani bridges business and technology: MSc student in Digital Transformation at RUC, with PMO experience from Royal Unibrew and PRINCE2 certification.",
+    "Nassim Hassani: MSc student in Digital Transformation at RUC with PRINCE2, Power BI and junior project manager experience. Looking for a student job.",
   "nav.skip": "Skip to content",
   "nav.primary": "Main navigation",
   "section.about": "About",
@@ -39,7 +40,7 @@ export type UiKey = keyof typeof en;
 export const da: Record<UiKey, string> = {
   "meta.title": "Nassim Hassani",
   "meta.description":
-    "TODO: owner approve — Nassim Hassani er brobygger mellem forretning og teknologi: cand.it.-studerende i Digital Transformation på RUC med PMO-erfaring fra Royal Unibrew og PRINCE2-certificering.",
+    "Nassim Hassani: cand.it.-studerende i Digital Transformation på RUC med PRINCE2, Power BI og erfaring som junior projektleder. Søger studiejob.",
   "nav.skip": "Spring til indhold",
   "nav.primary": "Hovednavigation",
   "section.about": "Om mig",

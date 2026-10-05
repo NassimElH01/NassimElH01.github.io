@@ -271,23 +271,30 @@ const valueText = tr("hero.bridge.value");
       as="p"
       class="max-w-xl text-lg leading-snug [text-wrap:balance] sm:text-xl"
     />
-    <ul class="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap" aria-label={tr("hero.cta.label")}>
+    <div class="flex flex-col gap-3 lg:items-end">
       {
-        email && (
-          <li class="col-span-2 sm:col-span-1">
-            <a class="cta cta-primary" href={`mailto:${email}`}>
-              {tr("hero.cta.contact")}
-            </a>
-          </li>
+        profile.availability && (
+          <LocalizedText field={profile.availability} lang={lang} as="p" class="font-mono text-[0.8125rem] leading-snug" />
         )
       }
-      <li>
-        <a class="cta" href="#projects">{tr("hero.cta.projects")}</a>
-      </li>
-      <li>
-        <a class="cta" href={profile.links.linkedin} rel="me noopener">LinkedIn</a>
-      </li>
-    </ul>
+      <ul class="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap" aria-label={tr("hero.cta.label")}>
+        {
+          email && (
+            <li class="col-span-2 sm:col-span-1">
+              <a class="cta cta-primary" href={`mailto:${email}`}>
+                {tr("hero.cta.contact")}
+              </a>
+            </li>
+          )
+        }
+        <li>
+          <a class="cta" href="#projects">{tr("hero.cta.projects")}</a>
+        </li>
+        <li>
+          <a class="cta" href={profile.links.linkedin} rel="me noopener">LinkedIn</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
 

@@ -167,4 +167,6 @@ test("the hero states only facts from content/", async ({ page }) => {
   await expect(hero.locator("dl")).toContainText("PRINCE2 Practitioner");
   await expect(hero.locator("dl")).toContainText("Danish · English · Arabic · German");
   await expect(hero.getByRole("link", { name: "Get in touch" })).toHaveAttribute("href", "mailto:naselh01@gmail.com");
+  await expect(hero).toContainText("I'm looking for a student job alongside my MSc at RUC.");
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /Looking for a student job\.$/);
 });

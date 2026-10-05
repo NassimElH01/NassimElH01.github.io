@@ -17,7 +17,9 @@ for (const { path, name } of PAGES) {
         const page = await context.newPage();
         await page.goto(path, { waitUntil: "networkidle" });
         await page.evaluate(() => document.fonts.ready);
-        await page.waitForFunction(() => !document.documentElement.classList.contains("intro"));
+        await page.waitForFunction(
+          () => !document.documentElement.classList.contains("intro") && !document.querySelector(".intro-skip"),
+        );
         await page.screenshot({ path: `screenshots/${name}-${width}-${colorScheme}.png`, fullPage: true });
         // What a visitor sees first, before scrolling.
         await page.screenshot({ path: `screenshots/${name}-${width}-${colorScheme}-fold.png` });

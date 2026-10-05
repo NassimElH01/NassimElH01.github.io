@@ -10,7 +10,9 @@ const WCAG = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 
 /** The decode intro hides letters for up to 1.6 s; audit the settled page. */
 async function axe(page: Page) {
-  await page.waitForFunction(() => !document.documentElement.classList.contains("intro"));
+  await page.waitForFunction(
+    () => !document.documentElement.classList.contains("intro") && !document.querySelector(".intro-skip"),
+  );
   const results = await new AxeBuilder({ page }).withTags(WCAG).analyze();
   return results.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`);
 }
