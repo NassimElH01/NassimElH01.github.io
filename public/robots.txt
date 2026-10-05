@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://cankurtcvr.github.io/sitemap.xml
+Sitemap: https://nassimelh01.github.io/sitemap.xml

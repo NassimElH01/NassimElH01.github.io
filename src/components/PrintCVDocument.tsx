@@ -112,35 +112,7 @@ export default function PrintCVDocument() {
                 {item.description}
               </p>
 
-              {/* Danske Bank specifikke bullets */}
-              {item.id === "danske-bank-it" && (
-                <ul className="list-disc pl-4 space-y-0.5 text-[8.5pt] text-slate-700">
-                  <li>
-                    <strong>Sagsrekonstruktion:</strong> Rekonstruerede det fulde økonomiske og juridiske sagsforløb for kunder gennem grundig analyse af retsbøger, forlig og renteberegninger i forbindelse med inkasso-oprydning.
-                  </li>
-                  <li>
-                    <strong>Kompleks datavalidering:</strong> Validering af indbetalinger, renter og rentepauser i avancerede Excel-modeller for over 400 kunder med høje krav til dataintegritet.
-                  </li>
-                  <li>
-                    <strong>Onboarding & Vidensdeling:</strong> Fungerede som <em>floorwalker</em> og udarbejdede procesoplæg til sidemandsoplæring af nye konsulenter i teamet.
-                  </li>
-                </ul>
-              )}
-
-              {/* Tolk Danmark specifikke bullets */}
-              {item.id === "tolk-danmark" && (
-                <ul className="list-disc pl-4 space-y-0.5 text-[8.5pt] text-slate-700">
-                  <li>
-                    <strong>Certificeret tolkning:</strong> Formidling af præcis simultan- og konsekutiv tolkning mellem dansk og engelsk.
-                  </li>
-                  <li>
-                    <strong>Etik & Diskretion:</strong> Tolkning ved kritiske samtaler og møder i offentligt og privat regi under streng tavshedspligt og terminologisk præcision.
-                  </li>
-                </ul>
-              )}
-
-              {/* Andre roller */}
-              {item.id !== "danske-bank-it" && item.id !== "tolk-danmark" && item.bullets && item.bullets.length > 0 && (
+              {item.bullets && item.bullets.length > 0 && (
                 <ul className="list-disc pl-4 space-y-0.5 text-[8.5pt] text-slate-700">
                   {item.bullets.map((b, idx) => (
                     <li key={idx}>{b}</li>
@@ -242,7 +214,7 @@ export default function PrintCVDocument() {
       {/* Referencer */}
       <footer className="pt-2.5 border-t border-slate-300 text-[8pt] text-slate-600 flex justify-between items-center break-inside-avoid">
         <p>
-          <strong>Referencer:</strong> Udtalelser og kontaktpersoner fra Danske Bank, EY / M-Networks, TolkDanmark m.fl. fremsendes gerne ved henvendelse.
+          <strong>Referencer:</strong> Oplyses gerne ved henvendelse.
         </p>
       </footer>
     </div>
