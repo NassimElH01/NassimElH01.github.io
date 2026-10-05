@@ -52,8 +52,12 @@ items:
     name:
       en: "Cybersecurity (IBM Cybersecurity)"
       da: "Cybersikkerhed (IBM Cybersecurity)"
+    # Source: LinkedIn certificates (2026-10-05): PwC Security Awareness diploma; PwC Hackschool 2024
+    # certificate (teaching in cybersecurity, data protection law and technical implementation of security)
     certifications:
       - ibm-cybersecurity
+      - pwc-security-awareness
+      - pwc-hackschool
     usedIn:
       # Source: REPORT (p.6: OT Cyber Security project with "udvikling af use cases,
       # udarbejdelse af stakeholderanalyser, opfølgning på compliance-krav"); CV-2 (Royal Unibrew:
@@ -63,3 +67,9 @@ items:
         note:
           en: "OT Cyber Security project: use cases, stakeholder analyses and compliance follow-up"
           da: "OT Cyber Security-projektet: use cases, stakeholderanalyser og opfølgning på compliance-krav"
+      # Source: EXAM-DTI (elective synopsis "Data og teknologi integration – Enhanced security", p.3-5)
+      - context: study
+        project: enhanced-security-synopsis
+        note:
+          en: "Elective synopsis on encryption, access control (RBAC, MFA) and GDPR in data integration"
+          da: "Valgfagssynopsis om kryptering, adgangskontrol (RBAC, MFA) og GDPR i dataintegration"

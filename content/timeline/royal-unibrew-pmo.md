@@ -31,6 +31,8 @@ responsibilities:
     - "Integrated ProjectFlow 365 data into Power BI: built data models, set up API connections and developed dashboards for management reporting and portfolio overview, used by the PMO and management."
     # Source: REPORT p.6 (Cybersikkerhedsprojekter)
     - "Contributed to the OT Cyber Security project: planned workshops, developed use cases, wrote stakeholder analyses, followed up on compliance requirements and built dashboards for monitoring security KPIs."
+    # Source: CV (newest, Nassim_Hassani_CV.docx shared 2026-10-05: "Koordinerede interessenter på tværs af IT, OT, compliance og forretningen")
+    - "Coordinated stakeholders across IT, OT, compliance and the business."
     # Source: REPORT p.5 (planning in Azure DevOps, meetings, deadlines), p.9 (facilitated a retrospective meeting)
     - "Planned work in Azure DevOps, coordinated weekly and monthly meetings, followed up on deadlines and took part in status and retrospective meetings, including facilitating a retrospective."
     # Source: CV-CBS (governance, documentation and follow-up in Azure DevOps and SharePoint); CV-2 (project material, management, status reporting and governance documentation). Conflict noted: the REPORT does not mention SharePoint; the CVs win.
@@ -44,6 +46,8 @@ responsibilities:
     - "Integrerede data fra ProjectFlow 365 i Power BI: udviklede datamodeller, opsatte API-forbindelser og byggede dashboards til ledelsesrapportering og porteføljeoverblik, som PMO og ledelsen benyttede."
     # Source: REPORT p.6 (Cybersikkerhedsprojekter)
     - "Bidrog til OT Cyber Security-projektet: planlagde workshops, udviklede use cases, udarbejdede stakeholderanalyser, fulgte op på compliance-krav og byggede dashboards til monitorering af sikkerhedsnøgletal."
+    # Source: CV (newest, 2026-10-05)
+    - "Koordinerede interessenter på tværs af IT, OT, compliance og forretningen."
     # Source: REPORT p.5, p.9
     - "Planlagde i Azure DevOps, koordinerede ugentlige og månedlige møder, fulgte op på deadlines og deltog i status- og retrospektive møder, herunder som facilitator af et retrospektivt møde."
     # Source: CV-CBS and CV-2 (see the English bullet; REPORT does not mention SharePoint)
