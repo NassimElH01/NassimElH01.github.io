@@ -35,5 +35,10 @@ export default [
     languageOptions: {
       globals: globals.browser,
     },
+    rules: {
+      // Safari/VoiceOver drop list semantics from <ul> with list-style: none (Tailwind
+      // preflight), so styled lists keep an explicit role="list".
+      "astro/jsx-a11y/no-redundant-roles": ["error", { nav: ["navigation"], ul: ["list"] }],
+    },
   },
 ];

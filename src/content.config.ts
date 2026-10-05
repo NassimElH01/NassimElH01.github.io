@@ -34,30 +34,46 @@ const year = z.number().int().min(2015).max(2030);
 
 const profile = defineCollection({
   loader: file("./content/profile.yaml"),
-  schema: z.object({
-    name: text,
-    /** The hero's statement in business language (serif, left of the bridge). */
-    headline: localized,
-    /** The same statement as code (mono, right of the bridge). Line breaks are kept. */
-    headlineTech: localized,
-    /** One line under the bridge. */
-    tagline: localized,
-    summary: localized,
-    // The texts above are drafts until the owner sets this to true. Shown on the site,
-    // but `content:todos --strict` (the deploy gate on main) fails while it is false.
-    approved: z.boolean().default(false),
-    availability: localized.optional(),
-    location: localized,
-    links: z.object({
-      linkedin: z.url({ protocol: /^https$/ }),
-      github: z.url({ protocol: /^https$/ }),
+  schema: z
+    .object({
+      name: text,
+      /** The hero's statement in business language (serif, left of the bridge). */
+      headline: localized,
+      /** The same statement as code (mono, right of the bridge). Line breaks are kept. */
+      headlineTech: localized,
+      /** One line under the bridge. */
+      tagline: localized,
+      summary: localized,
+      /** Presentation only: phrases About emphasises in the summary (each must occur in it). */
+      summaryEmphasis: z.object({ role: localized, tools: localizedList }).optional(),
+      // The texts above are drafts until the owner sets this to true. Shown on the site,
+      // but `content:todos --strict` (the deploy gate on main) fails while it is false.
+      approved: z.boolean().default(false),
+      availability: localized.optional(),
+      location: localized,
+      links: z.object({
+        linkedin: z.url({ protocol: /^https$/ }),
+        github: z.url({ protocol: /^https$/ }),
+      }),
+      contact: z.object({
+        email: orTodo(z.email()),
+        phone: orTodo(z.string().regex(/^\+\d[\d ]{6,}$/)).optional(),
+      }),
+      interests: localizedList.optional(),
+      /** The owner's own CV as a file in public/, and the language it is written in. */
+      cv: z.object({ href, lang: z.enum(["en", "da"]) }).optional(),
+    })
+    .superRefine((profile, ctx) => {
+      for (const lang of ["en", "da"] as const) {
+        const emphasis = profile.summaryEmphasis;
+        const phrases = emphasis ? [emphasis.role[lang], ...emphasis.tools[lang]] : [];
+        for (const phrase of phrases) {
+          if (!profile.summary[lang].includes(phrase)) {
+            ctx.addIssue({ code: "custom", path: ["summaryEmphasis"], message: `"${phrase}" is not in summary.${lang}` });
+          }
+        }
+      }
     }),
-    contact: z.object({
-      email: orTodo(z.email()),
-      phone: orTodo(z.string().regex(/^\+\d[\d ]{6,}$/)).optional(),
-    }),
-    interests: localizedList.optional(),
-  }),
 });
 
 const languages = defineCollection({
@@ -72,10 +88,12 @@ const languages = defineCollection({
 const certifications = defineCollection({
   loader: file("./content/certifications.yaml"),
   schema: z.object({
-    name: text,
+    // The official name; bilingual only where the certificate itself is in one language.
+    name: z.union([text, localized]),
     issuer: orTodo(text),
     year: orTodo(year),
     credentialUrl: orTodo(z.url({ protocol: /^https$/ })).optional(),
+    credentialId: text.optional(),
     order: z.number().int(),
   }),
 });

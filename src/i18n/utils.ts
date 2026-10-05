@@ -41,3 +41,8 @@ export function pick<T>(field: Record<Lang, T>, lang: Lang): Picked<T> {
   if (!isTodo(fallback)) return { value: fallback, lang: other, isFallback: true, isTodo: false };
   return { value: own, lang, isFallback: false, isTodo: true };
 }
+
+/** A value that is either the same in both languages or given per language. */
+export function localize(value: string | Record<Lang, string>, lang: Lang): string {
+  return typeof value === "string" ? value : value[lang];
+}

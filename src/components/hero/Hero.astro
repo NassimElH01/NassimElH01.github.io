@@ -7,7 +7,7 @@
 // or after a scroll.
 import { getCollection, getEntry } from "astro:content";
 import type { Lang } from "@/i18n/config";
-import { pick, t } from "@/i18n/utils";
+import { localize, pick, t } from "@/i18n/utils";
 import { getProfile } from "@/lib/content";
 import { isTodo } from "@/lib/todo";
 import LocalizedText from "@/components/LocalizedText.astro";
@@ -49,7 +49,7 @@ const candidates: (Fact | false | undefined)[] = [
     value: internship.data.organization,
     detail: line(pick(internship.data.title, lang).value, period(internship.data.start)),
   },
-  prince2 && { label: tr("hero.facts.certified"), value: prince2.data.name },
+  prince2 && { label: tr("hero.facts.certified"), value: localize(prince2.data.name, lang) },
   languages.length > 0 && {
     label: tr("hero.facts.languages"),
     value: languages.map((language) => pick(language.data.name, lang).value).join(" · "),
@@ -277,6 +277,7 @@ const valueText = tr("hero.bridge.value");
           <LocalizedText field={profile.availability} lang={lang} as="p" class="font-mono text-[0.8125rem] leading-snug" />
         )
       }
+      <LocalizedText field={profile.location} lang={lang} as="p" class="-mt-2 font-mono text-[0.8125rem] text-steel-text" />
       <ul class="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap" aria-label={tr("hero.cta.label")}>
         {
           email && (
@@ -287,9 +288,15 @@ const valueText = tr("hero.bridge.value");
             </li>
           )
         }
-        <li>
-          <a class="cta" href="#projects">{tr("hero.cta.projects")}</a>
-        </li>
+        {
+          profile.cv && (
+            <li>
+              <a class="cta" href={profile.cv.href} hreflang={profile.cv.lang} type="application/pdf" download>
+                {tr(profile.cv.lang === lang ? "cta.cv" : "cta.cvOtherLang")}
+              </a>
+            </li>
+          )
+        }
         <li>
           <a class="cta" href={profile.links.linkedin} rel="me noopener">LinkedIn</a>
         </li>
@@ -471,42 +478,6 @@ const valueText = tr("hero.bridge.value");
     box-shadow:
       0 0 0 2px var(--ink),
       0 0 0 8px var(--paper);
-  }
-
-  .cta {
-    display: inline-flex;
-    width: 100%;
-    min-height: 2.75rem;
-    align-items: center;
-    justify-content: center;
-    padding: 0 1.25rem;
-    border: 1px solid var(--ink);
-    font-size: 0.9375rem;
-    font-weight: 500;
-    transition:
-      background-color 150ms ease-out,
-      color 150ms ease-out;
-  }
-
-  @media (min-width: 640px) {
-    .cta {
-      width: auto;
-    }
-  }
-
-  .cta:hover {
-    background-color: var(--ink);
-    color: var(--paper);
-  }
-
-  .cta-primary {
-    background-color: var(--ink);
-    color: var(--paper);
-  }
-
-  .cta-primary:hover {
-    background-color: transparent;
-    color: var(--ink);
   }
 
   /* ───────── decode intro (only while html.intro is set) ─────────

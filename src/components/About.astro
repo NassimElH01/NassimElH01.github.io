@@ -1,13 +1,16 @@
 ---
-// About: who Nassim is (the owner-approved summary) beside three short lists
-// read from content/: education, courses & certifications, and languages.
-// Unknown values (e.g. a certification year still "TODO:") are left out.
+// About: who Nassim is (the owner-approved summary), his portrait and three short
+// lists read from content/: education, courses & certifications, and languages.
+// The summary's last paragraph is the offer, followed by the next step. Unknown
+// values (e.g. a certification year still "TODO:") are left out. No client JS.
 import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
 import type { Lang } from "@/i18n/config";
-import { pick, t } from "@/i18n/utils";
+import { localize, pick, t } from "@/i18n/utils";
 import { getProfile, getPublished } from "@/lib/content";
 import { isTodo } from "@/lib/todo";
 import LocalizedText from "@/components/LocalizedText.astro";
+import portrait from "@/assets/portrait/nassim-hassani.jpg";
 
 interface Props {
   lang: Lang;
@@ -20,6 +23,20 @@ const profile = await getProfile();
 const summary = pick(profile.summary, lang);
 const paragraphs = summary.isTodo ? [] : summary.value.split(/\n\s*\n/).map((part) => part.trim());
 
+// Emphasis is presentation only: the phrases are checked against the summary at build time.
+const role = profile.summaryEmphasis?.role[summary.lang];
+const tools = profile.summaryEmphasis?.tools[summary.lang] ?? [];
+const phrases = [role, ...tools].filter((phrase): phrase is string => Boolean(phrase));
+const escape = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const splitter = phrases.length
+  ? new RegExp(`(${[...phrases].sort((a, b) => b.length - a.length).map(escape).join("|")})`)
+  : undefined;
+const segments = (text: string) =>
+  (splitter ? text.split(splitter) : [text]).map((part, index) => ({
+    text: part,
+    kind: index % 2 === 0 ? "plain" : part === role ? "role" : "tool",
+  }));
+
 const known = (value: unknown) => (value === undefined || isTodo(value) ? undefined : String(value));
 
 const education = (await getPublished("timeline"))
@@ -30,102 +47,286 @@ const education = (await getPublished("timeline"))
     const end = data.end === "present" ? undefined : known(data.end);
     const period =
       start && end ? (data.expected ? `${start} – ${tr("about.expected")} ${end}` : `${start}–${end}`) : (start ?? "");
-    return { title: pick(data.title, lang).value, organization: data.organization, period };
+    return { title: pick(data.title, lang).value, details: [data.organization, period].filter(Boolean) };
   });
 
 const certifications = (await getCollection("certifications"))
   .sort((a, b) => a.data.order - b.data.order)
-  .map(({ data }) => ({
-    name: data.name,
-    detail: [known(data.issuer), known(data.year)].filter(Boolean).join(" · "),
-  }));
+  .map(({ data }) => {
+    const name = localize(data.name, lang);
+    const issuer = known(data.issuer);
+    // "IBM Data Analytics · IBM" says the issuer twice; keep it only when it adds something.
+    const showIssuer = issuer && !name.toLowerCase().startsWith(issuer.split(/\s/)[0].toLowerCase());
+    return {
+      name,
+      details: [showIssuer ? issuer : undefined, known(data.year), data.credentialId && `ID ${data.credentialId}`].filter(
+        (part): part is string => Boolean(part),
+      ),
+    };
+  });
 
 const languages = (await getCollection("languages"))
   .sort((a, b) => a.data.order - b.data.order)
   .map(({ data }) => ({ name: pick(data.name, lang).value, level: pick(data.level, lang).value }));
+
+const email = isTodo(profile.contact.email) ? undefined : profile.contact.email;
+const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/certifications/`;
 ---
 
-<section id="about" aria-labelledby="about-title" class="scroll-mt-28 border-t border-rule py-20 sm:py-28">
-  <div class="mx-auto grid max-w-6xl gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16">
-    <div class="lg:col-span-7">
-      <h2 id="about-title" class="font-display text-4xl sm:text-5xl">{tr("section.about")}</h2>
+<section id="about" aria-labelledby="about-title" class="border-t border-rule py-20 sm:py-28">
+  <div class="about-grid mx-auto max-w-6xl px-4 sm:px-6">
+    <h2 id="about-title" class="about-head font-display text-4xl sm:text-5xl">{tr("section.about")}</h2>
+
+    <figure class="about-photo">
+      <Picture
+        src={portrait}
+        formats={["avif", "webp"]}
+        widths={[portrait.width]}
+        sizes="(min-width: 1024px) 16rem, 6.5rem"
+        alt={tr("about.portrait")}
+        loading="lazy"
+        decoding="async"
+        class="portrait"
+      />
+    </figure>
+
+    <div class="about-text">
       {
         paragraphs.length > 0 ? (
-          <div class="mt-8 max-w-[62ch]" lang={summary.isFallback ? summary.lang : undefined}>
+          <div class="max-w-[34rem]" lang={summary.isFallback ? summary.lang : undefined}>
             {paragraphs.map((paragraph, index) =>
               index === 0 ? (
-                <p class="font-display text-[1.625rem] leading-snug sm:text-[2rem]">{paragraph}</p>
+                <p class="font-display text-[1.375rem] leading-[1.3] [text-wrap:pretty] sm:text-[1.625rem] lg:text-[1.75rem]">
+                  {paragraph}
+                </p>
+              ) : index === paragraphs.length - 1 && paragraphs.length > 2 ? (
+                <p class="mt-8 border-l-[3px] border-signal pl-5 font-display text-[1.375rem] leading-[1.25] text-balance sm:text-[1.5rem]">
+                  {paragraph}
+                </p>
               ) : (
-                <p class="mt-6 text-lg leading-relaxed">{paragraph}</p>
+                <p class="mt-7 text-lg leading-relaxed [text-wrap:pretty]">
+                  {segments(paragraph).map((part) =>
+                    part.kind === "role" ? (
+                      <strong class="font-semibold">{part.text}</strong>
+                    ) : part.kind === "tool" ? (
+                      <span class="font-mono text-[0.92em] font-medium whitespace-nowrap">{part.text}</span>
+                    ) : (
+                      part.text
+                    ),
+                  )}
+                </p>
               ),
             )}
           </div>
         ) : (
-          <LocalizedText field={profile.summary} lang={lang} as="p" class="mt-8" />
+          <LocalizedText field={profile.summary} lang={lang} as="p" />
         )
       }
+
+      <ul role="list" class="mt-7 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap" aria-label={tr("hero.cta.label")}>
+        {
+          email && (
+            <li class="col-span-2 sm:col-span-1">
+              <a class="cta cta-primary" href={`mailto:${email}`}>
+                {tr("hero.cta.contact")}
+              </a>
+            </li>
+          )
+        }
+        {
+          profile.cv && (
+            <li>
+              <a class="cta" href={profile.cv.href} hreflang={profile.cv.lang} type="application/pdf" download>
+                {tr(profile.cv.lang === lang ? "cta.cv" : "cta.cvOtherLang")}
+              </a>
+            </li>
+          )
+        }
+        <li>
+          <a class="cta" href={profile.links.linkedin} rel="me noopener">LinkedIn</a>
+        </li>
+      </ul>
     </div>
 
-    <div class="grid content-start gap-10 lg:col-span-5 lg:pt-3">
-      {
-        education.length > 0 && (
-          <div>
-            <h3 class="about-label">{tr("about.education")}</h3>
-            <ul class="mt-3 divide-y divide-rule border-y border-rule">
-              {education.map((item) => (
-                <li class="py-4">
-                  <p class="font-display text-[1.375rem] leading-tight">{item.title}</p>
-                  <p class="mt-1 text-sm text-steel-text">
-                    {[item.organization, item.period].filter(Boolean).join(" · ")}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
+    {
+      education.length > 0 && (
+        <div class="about-edu">
+          <h3 class="about-label">{tr("about.education")}</h3>
+          <ul role="list" class="mt-3 divide-y divide-rule border-y border-rule">
+            {education.map((item) => (
+              <li class="py-4">
+                <p class="font-display text-[1.375rem] leading-tight [text-wrap:balance]">{item.title}</p>
+                <p class="mt-1 text-sm text-steel-text">
+                  {item.details.map((detail, index) => (
+                    <>
+                      {index > 0 && <span aria-hidden="true"> · </span>}
+                      {detail}
+                    </>
+                  ))}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
 
-      {
-        certifications.length > 0 && (
-          <div>
-            <h3 class="about-label">{tr("about.certifications")}</h3>
-            <ul class="mt-3 grid gap-2.5">
-              {certifications.map((item) => (
-                <li class="leading-snug">
-                  <span class="font-medium">{item.name}</span>
-                  {item.detail && <span class="text-sm text-steel-text"> · {item.detail}</span>}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
+    {
+      certifications.length > 0 && (
+        <div class="about-certs">
+          <h3 class="about-label">{tr("about.certifications")}</h3>
+          <ul role="list" class="mt-3 grid gap-2.5">
+            {certifications.map((item) => (
+              <li class="leading-snug">
+                <span class="font-medium">{item.name}</span>
+                {item.details.map((detail) => (
+                  <span class="text-sm text-steel-text">
+                    <span aria-hidden="true"> · </span>
+                    {detail}
+                  </span>
+                ))}
+              </li>
+            ))}
+          </ul>
+          <a class="mt-4 inline-flex min-h-11 items-center text-sm underline underline-offset-4" href={certificatesUrl} rel="noopener">
+            {tr("about.certificatesLink")}
+          </a>
+        </div>
+      )
+    }
 
-      {
-        languages.length > 0 && (
-          <div>
-            <h3 class="about-label">{tr("about.languages")}</h3>
-            <dl class="mt-3 grid grid-cols-2 gap-x-6 gap-y-4">
-              {languages.map((item) => (
-                <div>
-                  <dt class="font-display text-[1.375rem] leading-tight">{item.name}</dt>
-                  <dd class="mt-0.5 text-sm text-steel-text">{item.level}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        )
-      }
-    </div>
+    {
+      languages.length > 0 && (
+        <div class="about-langs">
+          <h3 class="about-label">{tr("about.languages")}</h3>
+          <dl class="mt-3 grid grid-cols-2 gap-x-6 gap-y-4">
+            {languages.map((item) => (
+              <div>
+                <dt class="font-display text-[1.375rem] leading-tight">{item.name}</dt>
+                <dd class="mt-0.5 text-sm text-steel-text">{item.level}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )
+    }
   </div>
 </section>
 
 <style>
+  /* Phones: heading beside a small portrait, then the text, then the lists.
+     Tablet: certifications and languages side by side.
+     Desktop: text then languages on the left; portrait, education and certifications
+     on the right, so the two columns end close together. */
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "head photo"
+      "text text"
+      "edu edu"
+      "certs certs"
+      "langs langs";
+    align-items: end;
+    column-gap: 1.5rem;
+    row-gap: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-areas:
+        "head photo"
+        "text text"
+        "edu edu"
+        "certs langs";
+      column-gap: 3rem;
+    }
+
+    .about-photo {
+      justify-self: end;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .about-grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      grid-template-areas:
+        "head head"
+        "text photo"
+        "text edu"
+        "langs certs";
+      align-items: start;
+      column-gap: 4rem;
+    }
+
+    .about-photo {
+      justify-self: start;
+    }
+  }
+
+  .about-head {
+    grid-area: head;
+  }
+
+  .about-photo {
+    grid-area: photo;
+    width: 6.5rem;
+    /* The bridge's orange line under the portrait; on the frame, so the photo filter leaves it orange. */
+    border-bottom: 3px solid var(--signal);
+  }
+
+  @media (min-width: 1024px) {
+    .about-photo {
+      width: 16rem;
+    }
+  }
+
+  .about-text {
+    grid-area: text;
+  }
+
+  .about-edu {
+    grid-area: edu;
+  }
+
+  .about-certs {
+    grid-area: certs;
+  }
+
+  .about-langs {
+    grid-area: langs;
+  }
+
+  /* Paper-and-ink duotone: grey tones multiplied into the paper, so the studio
+     backdrop becomes the page. In dark mode the photo stays grey and a little dimmer. */
+  .about-photo :global(.portrait) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.08);
+    mix-blend-mode: multiply;
+  }
+
+  :global([data-theme="dark"]) .about-photo :global(.portrait) {
+    filter: grayscale(1) contrast(1.1) brightness(0.74);
+    mix-blend-mode: normal;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme])) .about-photo :global(.portrait) {
+      filter: grayscale(1) contrast(1.1) brightness(0.74);
+      mix-blend-mode: normal;
+    }
+  }
+
   .about-label {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.8125rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--steel-text);
+    color: var(--ink);
   }
 </style>

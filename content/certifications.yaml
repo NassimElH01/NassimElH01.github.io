@@ -1,6 +1,11 @@
-# Certifications from the brief and CV-2 (Certificeringer). Issuer is only filled
-# where a source names it or it is part of the certificate's own name.
-# Credential links and most years wait for the owner.
+# Certifications from the brief, CV-2 (Certificeringer) and the owner's LinkedIn
+# "Licenser og certificeringer" (screenshots he shared on 2026-10-05: issuer, month
+# and year, and the certificate PDFs attached there). Issuer is only filled where a
+# source names it or it is part of the certificate's own name.
+# No credentialUrl: the certificates are PDFs attached on LinkedIn, not public
+# verification pages; About links to the LinkedIn certifications list instead. The
+# PRINCE2 certificates went to the owner's Royal Unibrew mail and are not available.
+# `order` puts project management first (About lists them in this order).
 - id: prince2-foundation
   order: 1
   name: PRINCE2 Foundation
@@ -10,7 +15,6 @@
   # Source: REPORT (p.13: completed during the internship; p.1 report dated 04-07-2025;
   # p.21 cites the spring-2025 internship guide)
   year: 2025
-  credentialUrl: "TODO: credential link"
 - id: prince2-practitioner
   order: 2
   name: PRINCE2 Practitioner
@@ -20,38 +24,52 @@
   # Source: REPORT (p.13: completed during the internship; p.1 report dated 04-07-2025;
   # p.21 cites the spring-2025 internship guide)
   year: 2025
-  credentialUrl: "TODO: credential link"
-- id: ibm-data-analytics
-  order: 3
-  name: IBM Data Analytics
-  issuer: IBM
-  year: "TODO: year"
-  credentialUrl: "TODO: credential link"
-- id: ibm-cybersecurity
-  order: 4
-  name: IBM Cybersecurity
-  issuer: IBM
-  year: "TODO: year"
-  credentialUrl: "TODO: credential link"
-- id: mckinsey-forward
-  order: 5
-  name: McKinsey Forward
-  issuer: McKinsey & Company
-  year: "TODO: year"
-  credentialUrl: "TODO: credential link"
 - id: agile-project-management
-  order: 6
-  # Name as in the brief; CV-2 calls it "Agile Projektledelse".
+  order: 3
+  # Name as in the brief; the certificate reads "Certificering i Agil Projektledelse".
   name: Agile Project Management
-  # Source: CV-2 (Certificeringer: "Agile Projektledelse (BlivProjektleder.dk)")
+  # Source: CV-2 (Certificeringer: "Agile Projektledelse (BlivProjektleder.dk)") and LinkedIn
   issuer: BlivProjektleder.dk
-  year: "TODO: year"
-  credentialUrl: "TODO: credential link"
+  # Source: LinkedIn (certificate: "Dato: 19 marts 2024", "Certifikat ID: A4291-172")
+  year: 2024
+  credentialId: A4291-172
+- id: ibm-data-analytics
+  order: 4
+  name: IBM Data Analytics
+  # Source: LinkedIn ("Data Analytics", IBM; the certificate is an IBM SkillsBuild completion
+  # certificate for the "Programme in Data Analytics")
+  issuer: IBM
+  # Source: LinkedIn ("Udstedt okt. 2023")
+  year: 2023
+- id: ibm-cybersecurity
+  order: 5
+  name: IBM Cybersecurity
+  # Source: LinkedIn ("Cybersecurity", IBM)
+  issuer: IBM
+  # Source: LinkedIn ("Udstedt okt. 2023")
+  year: 2023
+- id: pwc-security-awareness
+  order: 6
+  # Source: LinkedIn ("Praktiserende i cybersikkerhed", PwC Danmark; the diploma says the holder
+  # "har deltaget i programmet PwC Security Awareness", 24 February 2024). Not in the brief or the CVs.
+  name:
+    en: "PwC Security Awareness: Cybersecurity Practitioner"
+    da: "PwC Security Awareness: Praktiserende i cybersikkerhed"
+  issuer: PwC
+  # Source: LinkedIn ("Udstedt feb. 2024"; diploma dated 24 February 2024)
+  year: 2024
 # Source: CV-2 (Certificeringer: "PwC HackSchool"). Not in the brief or CV-CBS.
 - id: pwc-hackschool
   order: 7
   name: PwC HackSchool
-  # Source: CV-2 (Certificeringer; issuer is part of the name)
+  # Source: CV-2 (Certificeringer; issuer is part of the name) and LinkedIn ("Hackschool forløb", PwC Danmark)
   issuer: PwC
-  year: "TODO: year"
-  credentialUrl: "TODO: credential link"
+  # Source: LinkedIn ("Udstedt mar. 2024"; certificate "Deltagerbevis PwC Hackschool 2024")
+  year: 2024
+- id: mckinsey-forward
+  order: 8
+  # Source: LinkedIn ("McKinsey Forward Program", McKinsey & Company)
+  name: McKinsey Forward
+  issuer: McKinsey & Company
+  # Source: LinkedIn ("Udstedt maj 2024")
+  year: 2024

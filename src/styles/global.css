@@ -156,6 +156,43 @@
     }
   }
 
+  /* Calls to action, shared by the hero and About. */
+  .cta {
+    display: inline-flex;
+    width: 100%;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
+    border: 1px solid var(--ink);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition:
+      background-color 150ms ease-out,
+      color 150ms ease-out;
+  }
+
+  @media (min-width: 640px) {
+    .cta {
+      width: auto;
+    }
+  }
+
+  .cta:hover {
+    background-color: var(--ink);
+    color: var(--paper);
+  }
+
+  .cta-primary {
+    background-color: var(--ink);
+    color: var(--paper);
+  }
+
+  .cta-primary:hover {
+    background-color: transparent;
+    color: var(--ink);
+  }
+
   /* Dev-only marker for content that still waits for the owner. */
   .todo-badge {
     display: inline-block;
