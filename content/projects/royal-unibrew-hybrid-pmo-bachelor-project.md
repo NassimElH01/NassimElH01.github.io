@@ -66,6 +66,8 @@ result:
   da: "Analysen viste, at PMO'ets udfordringer er socioteknologiske snarere end tekniske (manglende datadisciplin, svag systemintegration, uklare roller og et begrænset ledelsesmæssigt mandat), og projektet svarer på dem med et hybridt PMO-design med klar governance, datastandarder, rolleforankring og systemintegration. Bedømt til 10 på 7-trinsskalaen."
 # Source: BACHELOR p.2 (Forord: Professionsbachelor i Økonomi & IT, Zealand)
 timeline: "zealand-professionsbachelor"
-featured: false
-order: 4
+# Order and featured: presentation only (Projects section, 2026-10-06): the three projects that
+# best show the student-job profile lead.
+featured: true
+order: 2
 ---

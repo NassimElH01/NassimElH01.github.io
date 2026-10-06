@@ -46,5 +46,5 @@ demo:
   kind: "iframe"
   src: "/freelance/24support-julekalender/index.html"
 featured: true
-order: 2
+order: 3
 ---

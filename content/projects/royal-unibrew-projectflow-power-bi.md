@@ -12,8 +12,9 @@ title:
   da: "ProjectFlow 365 til Power BI: ledelsesrapportering til PMO hos Royal Unibrew"
 # Source: REPORT (p.1: dated 04-07-2025; p.21: "ØKOIT-praktikguide forår 2025"); CV-2 (Royal Unibrew, 2025)
 year: 2025
-# Source: CV-2 (listed under ERHVERVSERFARING); REPORT p.3 (internship in the PMO)
-context: "work"
+# Source: REPORT p.3 (a 6th-semester internship in the PMO); CV-2 lists it under ERHVERVSERFARING.
+# "internship" was added to the project contexts on 2026-10-06; this was "work" before.
+context: "internship"
 # Source: REPORT (p.5: Azure DevOps and ProjectFlow 365 "som netop var blevet implementeret i
 # PMO/Group IT"; p.3: ProjectFlow 365 "et tidsregistreringssystem for projekter"; p.6: integrate
 # ProjectFlow 365 data in Power BI "til ledelsesrapportering"; p.9: "især fordi data ofte gav fejl";
@@ -56,6 +57,8 @@ result:
   da: "Dashboards, som PMO og ledelsen faktisk brugte til ledelsesrapportering, og som bidrog til øget gennemsigtighed i projektporteføljen, bedre overblik, bedre rapportering og et styrket datadrevet beslutningsgrundlag."
 # Source: REPORT and CV-2 (the Royal Unibrew PMO internship)
 timeline: "royal-unibrew-pmo"
+# Order and featured: presentation only (Projects section, 2026-10-06): the three projects that
+# best show the student-job profile lead.
 featured: true
-order: 6
+order: 1
 ---

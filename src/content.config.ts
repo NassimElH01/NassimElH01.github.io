@@ -148,7 +148,7 @@ const projects = defineCollection({
       title: localized,
       // Leave out only for ongoing work inside a timeline entry, which then supplies the period.
       year: orTodo(year).optional(),
-      context: orTodo(z.enum(["study", "work", "freelance", "personal"])),
+      context: orTodo(z.enum(["study", "internship", "work", "freelance", "personal"])),
       problem: localized,
       role: localized,
       method: localized,

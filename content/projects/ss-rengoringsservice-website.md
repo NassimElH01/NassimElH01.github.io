@@ -47,5 +47,5 @@ linkLabel:
 # Source: CV-2 (ERHVERVSERFARING: the website is part of the S&S job)
 timeline: "ss-rengoringservice"
 featured: false
-order: 3
+order: 4
 ---

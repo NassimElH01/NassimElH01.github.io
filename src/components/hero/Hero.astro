@@ -278,16 +278,19 @@ const valueText = tr("hero.bridge.value");
         )
       }
       <LocalizedText field={profile.location} lang={lang} as="p" class="-mt-2 font-mono text-[0.8125rem] text-steel-text" />
-      <ul class="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap" aria-label={tr("hero.cta.label")}>
+      <ul class="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap lg:grid lg:w-full lg:max-w-[32rem] lg:[&_.cta]:w-full" aria-label={tr("hero.cta.label")}>
         {
           email && (
-            <li class="col-span-2 sm:col-span-1">
+            <li>
               <a class="cta cta-primary" href={`mailto:${email}`}>
                 {tr("hero.cta.contact")}
               </a>
             </li>
           )
         }
+        <li>
+          <a class="cta" href="#projects">{tr("hero.cta.projects")}</a>
+        </li>
         {
           profile.cv && (
             <li>

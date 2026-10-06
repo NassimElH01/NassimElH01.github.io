@@ -1,5 +1,5 @@
 ---
-// Home page. The hero and About are built; every other section is a placeholder
+// Home page. The hero, About and Projects are built; every other section is a placeholder
 // until it is built, one at a time, in later steps (see docs/design-direction.md).
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
@@ -7,6 +7,7 @@ import Footer from "@/components/Footer.astro";
 import SectionPlaceholder from "@/components/SectionPlaceholder.astro";
 import Hero from "@/components/hero/Hero.astro";
 import About from "@/components/About.astro";
+import Projects from "@/components/Projects.astro";
 import type { Lang } from "@/i18n/config";
 import { t } from "@/i18n/utils";
 import { getProfile } from "@/lib/content";
@@ -46,11 +47,16 @@ const sections = [
   <Header lang={lang} sections={sections} />
   <main id="main" tabindex="-1">
     <Hero lang={lang} />
-    <About lang={lang} />
     {
-      sections
-        .filter((section) => section.id !== "about")
-        .map((section) => <SectionPlaceholder id={section.id} label={section.label} />)
+      sections.map((section) =>
+        section.id === "about" ? (
+          <About lang={lang} />
+        ) : section.id === "projects" ? (
+          <Projects lang={lang} />
+        ) : (
+          <SectionPlaceholder id={section.id} label={section.label} />
+        ),
+      )
     }
   </main>
   <Footer lang={lang} />

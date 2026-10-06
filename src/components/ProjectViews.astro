@@ -1,0 +1,80 @@
+---
+// The two views of one project for the Business ⇄ Tech switch in Projects.astro:
+// problem, role and result, or method and tools. A field that is still "TODO:"
+// gets no row; LocalizedText leaves its marker after the list instead (a dashed
+// badge in dev, a hidden data-todo element in the build).
+import type { CollectionEntry } from "astro:content";
+import type { Lang } from "@/i18n/config";
+import type { UiKey } from "@/i18n/ui";
+import { pick, t } from "@/i18n/utils";
+import { isTodo } from "@/lib/todo";
+import LocalizedText from "@/components/LocalizedText.astro";
+
+interface Props {
+  project: CollectionEntry<"projects">["data"];
+  lang: Lang;
+}
+
+const { project, lang } = Astro.props;
+const tr = t(lang);
+
+type Key = "problem" | "role" | "result" | "method";
+const rows = (keys: [Key, UiKey][]) =>
+  keys.map(([key, label]) => ({ key, label: tr(label), field: project[key], todo: pick(project[key], lang).isTodo }));
+
+const business = rows([
+  ["problem", "projects.problem"],
+  ["role", "projects.role"],
+  ["result", "projects.result"],
+]);
+const method = rows([["method", "projects.method"]]);
+const technology = project.technology.filter((item) => !isTodo(item));
+const technologyTodo = project.technology.some((item) => isTodo(item));
+---
+
+<div class="view-business">
+  <dl class="project-rows">
+    {
+      business
+        .filter((row) => !row.todo)
+        .map((row) => (
+          <div class:list={[row.key === "result" && "result"]}>
+            <dt class="project-label">{row.label}</dt>
+            <LocalizedText field={row.field} lang={lang} as="dd" class="project-text" />
+          </div>
+        ))
+    }
+  </dl>
+  {business.filter((row) => row.todo).map((row) => <LocalizedText field={row.field} lang={lang} as="div" />)}
+</div>
+
+<div class="view-tech">
+  <dl class="project-rows">
+    {
+      method
+        .filter((row) => !row.todo)
+        .map((row) => (
+          <div>
+            <dt class="project-label">{row.label}</dt>
+            <LocalizedText field={row.field} lang={lang} as="dd" class="project-text" />
+          </div>
+        ))
+    }
+    {
+      technology.length > 0 && (
+        <div>
+          <dt class="project-label">{tr("projects.technology")}</dt>
+          <dd>
+            <ul role="list" class="chips">
+              {technology.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+      )
+    }
+  </dl>
+  {method.filter((row) => row.todo).map((row) => <LocalizedText field={row.field} lang={lang} as="div" />)}
+  {technologyTodo && <div hidden data-todo />}
+</div>

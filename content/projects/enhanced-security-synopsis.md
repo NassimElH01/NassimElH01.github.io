@@ -45,5 +45,5 @@ result:
 # Source: EXAM-DTI cover (Økonomi & IT, 5th semester, Zealand)
 timeline: "zealand-professionsbachelor"
 featured: false
-order: 12
+order: 6
 ---
