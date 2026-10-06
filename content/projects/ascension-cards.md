@@ -56,8 +56,8 @@ technology:
 # (lines 85 and 120: progress in localStorage) and the owner's answer (2026-10-06: he does not use
 # it himself, but it is "et fedt projekt at vise"), so no usage claim. Two sentences, as the owner asked.
 result:
-  en: "A playable version went online on Nassim's previous portfolio in September 2026 and saves each player's progress locally in the browser. It included FlightWorld 3D, a 3D world visitors could fly through right in the browser."
-  da: "En spilbar version kom online på Nassims tidligere portfolio i september 2026 og gemmer hver spillers fremskridt lokalt i browseren. Den indeholdt FlightWorld 3D, en 3D-verden, som besøgende kunne flyve rundt i direkte i browseren."
+  en: "A playable version went live on Nassim's previous portfolio in September 2026 and saved each player's progress locally in the browser. It included FlightWorld 3D, a 3D world that visitors could fly through."
+  da: "En spilbar version blev lagt online på Nassims tidligere portfolio i september 2026 og gemte hver spillers fremskridt lokalt i browseren. Den indeholdt FlightWorld 3D, en 3D-verden, som besøgende kunne flyve rundt i."
 featured: false
 order: 8
 ---

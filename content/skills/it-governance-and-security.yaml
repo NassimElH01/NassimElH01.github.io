@@ -5,13 +5,13 @@
 # (PwC Security Awareness, PwC HackSchool; shared 2026-10-05) and the elective exam
 # synopsis "Data og teknologi integration – Enhanced security" (EXAM-DTI).
 #
-# Conflict on the bachelor project: the old site (cvData) described it as OT
-# cybersecurity and "cyber risk and governance in OT environments". CV-2 (which
-# wins) names it "Fra Vandfald til Hybrid PMO ... via ProjectFlow 365, Power BI og
-# Azure DevOps" with analysis of system integration, data ownership and role
-# clarification, and REPORT p.17 names ProjectFlow 365 to Power BI integration as
-# its problem area. So the bachelor project is no longer cited for cybersecurity,
-# and its IT-governance note uses CV-2's wording. Owner: confirm.
+# Conflict on the bachelor project, settled by the bachelor PDF (BACHELOR, shared by
+# the owner on 2026-10-06): the old site (cvData) described it as OT cybersecurity and
+# "cyber risk and governance in OT environments", and the owner's newest CV named it
+# "OT Cyber Security & datadrevet projektstyring". The cover title, the abstract (p.1)
+# and the research question (p.8) are about a hybrid PMO with ProjectFlow 365, Power BI
+# and Azure DevOps. So the bachelor project is not cited for cybersecurity, and its
+# IT-governance note uses CV-2's wording, which BACHELOR supports.
 group:
   en: "IT governance & security"
   da: "IT-governance & sikkerhed"
@@ -37,7 +37,9 @@ items:
           en: "Focus area in the programme"
           da: "Fokusområde på uddannelsen"
       # Source: CV-2 (Uddannelse, bachelorprojekt: "analyse af systemintegration,
-      # dataejerskab og rolleafklaring"). Conflicts with OLD-SITE, see the top comment.
+      # dataejerskab og rolleafklaring") and BACHELOR p.14-15 (dataejerskab), p.29 (4.6),
+      # p.36 (6.4.3 Data Stewardship) and p.37 (6.5 Systemintegration, 6.6 Rolleafklaring).
+      # Conflicts with OLD-SITE, see the top comment.
       - context: study
         project: royal-unibrew-hybrid-pmo-bachelor-project
         note:

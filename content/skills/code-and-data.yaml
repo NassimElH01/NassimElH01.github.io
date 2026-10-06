@@ -107,12 +107,13 @@ items:
         note:
           en: "AI tools such as Copilot and ChatGPT for process optimisation, including user documentation and onboarding material often made with AI"
           da: "AI-værktøjer som Copilot og ChatGPT til procesoptimering, herunder brugerdokumentation og onboardingmateriale, ofte lavet med AI"
-      # Source: the owner's answer (2026-10-06: "programering igennem claude og co pilot")
+      # Source: the owner's answer (2026-10-06: "programering igennem claude og co pilot"), given to
+      # the question whether he built the 24Support server and admin tool.
       - context: freelance
         project: 24support-christmas-calendar
         note:
-          en: "Programmed the calendar, server and admin tool with Claude and Copilot"
-          da: "Programmerede kalenderen, serveren og adminværktøjet med Claude og Copilot"
+          en: "Programmed the server and admin tool with Claude and Copilot"
+          da: "Programmerede serveren og adminværktøjet med Claude og Copilot"
 
   - id: machine-learning-basics
     name:

@@ -17,10 +17,12 @@ problem:
   da: "TODO: hvad 24Support havde brug for — ejer bekræfter"
 # Source: the owner's answer (2026-10-06, quoted above) and OLD-SITE (projectsData.ts
 # "24support-julekalender": "en separat Node.js-server til datostyring og et loginbeskyttet
-# adminværktøj"). He wrote "co pilot", so the product is not named beyond "Copilot".
+# adminværktøj"). The question was about the server and the admin tool, so Claude and Copilot are
+# tied to those two; the calendar design is from OLD-SITE (highlights). He wrote "co pilot", so the
+# product is not named beyond "Copilot".
 role:
-  en: "Nassim built the whole solution himself: the calendar, the server that controls when each door opens, and the login-protected admin tool. He collected the use cases first, programmed with Claude and Copilot, and set the site up on its own domain with HTTPS."
-  da: "Nassim byggede hele løsningen selv: kalenderen, serveren, der styrer, hvornår hver låge åbner, og det loginbeskyttede adminværktøj. Han indsamlede først use cases, programmerede med Claude og Copilot og satte siden op på eget domæne med HTTPS."
+  en: "Nassim built the whole solution himself. He designed the calendar, and he programmed the server that controls when each door opens and the login-protected admin tool with Claude and Copilot, based on use cases he collected. He also set the site up on its own domain with HTTPS."
+  da: "Nassim byggede hele løsningen selv. Han designede kalenderen og programmerede serveren, der styrer, hvornår hver låge åbner, og det loginbeskyttede adminværktøj med Claude og Copilot ud fra use cases, han selv indsamlede. Han satte også siden op på eget domæne med HTTPS."
 method:
   en: "Designed a responsive 16:9 experience with Danish townhouses, animation, snowfall and interactions, and built 24 interactive doors with keyboard support and saved demo progress. The public portfolio demo uses sample content only."
   da: "Designede en responsiv 16:9-oplevelse med danske byhuse, animationer, snefald og interaktioner og udviklede 24 interaktive låger med tastaturbetjening og gemt demo-fremdrift. Den offentlige portfolio-demo bruger kun eksempelindhold."
@@ -36,8 +38,8 @@ technology:
 # bruger kun eksempelindhold"). No claim about 24Support's use or approval: no source gives one.
 # Two sentences, as the owner asked.
 result:
-  en: "The calendar is built for December 2026 and runs on its own domain, with the server and admin tool behind it. A public demo with sample content can be tried on this site."
-  da: "Kalenderen er bygget til december 2026 og kører på eget domæne med serveren og adminværktøjet bag sig. En offentlig demo med eksempelindhold kan prøves her på siden."
+  en: "The calendar is built for December 2026 and runs on its own domain together with its server and admin tool. A public demo with sample content is available to try on this site."
+  da: "Kalenderen er bygget til december 2026 og kører på eget domæne med tilhørende server og adminværktøj. En offentlig demo med eksempelindhold kan afprøves her på siden."
 link: "/freelance/24support-julekalender/index.html"
 linkLabel:
   en: "Open calendar demo"
