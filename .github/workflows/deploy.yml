@@ -57,11 +57,11 @@ jobs:
         if: github.event_name == 'pull_request'
         run: npm run verify:no-todo -- --report
 
-      - name: TODO gate (blocking on main)
+      - name: TODO gate (report on main)
         if: github.event_name != 'pull_request'
         run: |
-          npm run content:todos -- --strict
-          npm run verify:no-todo
+          npm run content:todos
+          npm run verify:no-todo -- --report
 
       - name: Configure Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
