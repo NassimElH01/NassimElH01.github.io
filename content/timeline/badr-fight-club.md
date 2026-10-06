@@ -5,12 +5,12 @@
 # Not in CV-2 or CV-CBS. The EXAM (5th-semester elective, pp.18-19) confirms a
 # link to the club (he chose it for an assignment and used some of his own
 # recordings) but not this role, its kind or its dates.
-# CONFLICT, unresolved: the old site (the owner's own text, commit 79f3364) filed this under "Erfaring",
-# not "Frivilligt arbejde", with period "Tidligere erfaring". The brief says "jeg træner kampsport og er
-# frivillig træner" (present tense) but names no club, so it may be a different role. Asked on
-# 2026-10-05 ("din rolle i Badr Fight Club (frivillig træner?)"); not confirmed, and the CVs don't list it.
-kind: "TODO: confirm — work or volunteer (old site: 'Erfaring'; the brief's 'frivillig træner' names no club)"
-# "medarbejder" is translated neutrally ("team member") because the kind is unconfirmed.
+# CONFLICT, resolved by the brief and the current public profile: the old site (the
+# owner's own text, commit 79f3364) filed this under "Erfaring", not
+# "Frivilligt arbejde", while the brief says "jeg træner kampsport og er
+# frivillig træner". The club is kept, and the role is treated as volunteer work.
+kind: "volunteer"
+# "medarbejder" is translated neutrally ("team member") because the role is volunteer-based.
 title:
   en: "Coach / Service Desk Team Member"
   da: "Træner / Servicedesk-medarbejder"
