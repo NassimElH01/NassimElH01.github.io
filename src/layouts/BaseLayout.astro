@@ -1,0 +1,109 @@
+---
+import { Font } from "astro:assets";
+import { OG_LOCALE, type Lang } from "@/i18n/config";
+import { alternates, otherLang } from "@/i18n/utils";
+import "../styles/global.css";
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  /** Locale-neutral path of this page ("" for home), used for canonical and hreflang. */
+  path?: string;
+  /** The hero turns this on once it renders mono text above the fold. */
+  preloadMono?: boolean;
+  /** Also drops canonical and hreflang, which a noindex page should not have. */
+  noindex?: boolean;
+  /** Root-relative path of the 1200×630 share image. */
+  ogImage?: string;
+}
+
+const {
+  lang,
+  title,
+  description,
+  path = "",
+  preloadMono = false,
+  noindex = false,
+  ogImage = "/og/default.png",
+} = Astro.props;
+
+const links = alternates(path);
+const canonical = links.find((link) => link.lang === lang)!.href;
+const xDefault = links.find((link) => link.lang === "en")!.href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f3f0e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e0e0e" media="(prefers-color-scheme: dark)" />
+    <!--
+      Theme bootstrap: runs before CSS so the page never flashes the wrong theme.
+      Storage key "theme" holds only "light" or "dark"; anything else (for example
+      next-themes' "system" from the old site) is removed and the system wins.
+    -->
+    <script is:inline>
+      (() => {
+        document.documentElement.classList.add("js");
+        let stored;
+        try {
+          stored = localStorage.getItem("theme");
+          if (stored !== "light" && stored !== "dark") {
+            if (stored !== null) localStorage.removeItem("theme");
+            stored = null;
+          }
+        } catch {
+          stored = null;
+        }
+        if (stored) {
+          document.documentElement.setAttribute("data-theme", stored);
+          const color = stored === "dark" ? "#0e0e0e" : "#f3f0e8";
+          for (const meta of document.querySelectorAll('meta[name="theme-color"]')) {
+            meta.setAttribute("content", color);
+          }
+        }
+      })();
+    </script>
+    <Font cssVariable="--font-geist" preload={[{ style: "normal" }]} />
+    <Font cssVariable="--font-instrument-serif" preload={[{ style: "normal" }]} />
+    <Font cssVariable="--font-geist-mono" preload={preloadMono ? [{ style: "normal" }] : false} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {
+      !noindex && (
+        <>
+          <link rel="canonical" href={canonical} />
+          {links.map((link) => (
+            <link rel="alternate" hreflang={link.lang} href={link.href} />
+          ))}
+          <link rel="alternate" hreflang="x-default" href={xDefault} />
+        </>
+      )
+    }
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Nassim Hassani" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {!noindex && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nassim Hassani" />
+    <meta property="og:locale" content={OG_LOCALE[lang]} />
+    <meta property="og:locale:alternate" content={OG_LOCALE[otherLang(lang)]} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

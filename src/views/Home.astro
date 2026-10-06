@@ -1,0 +1,63 @@
+---
+// Home page. The hero, About and Projects are built; every other section is a placeholder
+// until it is built, one at a time, in later steps (see docs/design-direction.md).
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import SectionPlaceholder from "@/components/SectionPlaceholder.astro";
+import Hero from "@/components/hero/Hero.astro";
+import About from "@/components/About.astro";
+import Projects from "@/components/Projects.astro";
+import type { Lang } from "@/i18n/config";
+import { t } from "@/i18n/utils";
+import { getProfile } from "@/lib/content";
+import { isTodo } from "@/lib/todo";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const tr = t(lang);
+const profile = await getProfile();
+
+// Structured data: only facts that are certain (no skills, no schools yet).
+const person = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  url: Astro.site?.href,
+  sameAs: [profile.links.linkedin, profile.links.github],
+  ...(isTodo(profile.contact.email) ? {} : { email: `mailto:${profile.contact.email}` }),
+  ...(!profile.contact.phone || isTodo(profile.contact.phone) ? {} : { telephone: profile.contact.phone }),
+};
+
+const sections = [
+  { id: "about", label: tr("section.about") },
+  { id: "skills", label: tr("section.skills") },
+  { id: "projects", label: tr("section.projects") },
+  { id: "experience", label: tr("section.experience") },
+  { id: "playground", label: tr("section.playground") },
+  { id: "contact", label: tr("section.contact") },
+];
+---
+
+<BaseLayout lang={lang} title={tr("meta.title")} description={tr("meta.description")} preloadMono>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(person)} />
+  <Header lang={lang} sections={sections} />
+  <main id="main" tabindex="-1">
+    <Hero lang={lang} />
+    {
+      sections.map((section) =>
+        section.id === "about" ? (
+          <About lang={lang} />
+        ) : section.id === "projects" ? (
+          <Projects lang={lang} />
+        ) : (
+          <SectionPlaceholder id={section.id} label={section.label} />
+        ),
+      )
+    }
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>

@@ -1,0 +1,224 @@
+/* Scan src/ only, so legacy/ never leaks classes into the build. */
+@import "tailwindcss" source("..");
+
+/* Explicit theme choice; the no-JS system fallback uses the media query below. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* "The Translator" tokens: see docs/design-direction.md */
+:root {
+  --paper: #f3f0e8;
+  --ink: #111111;
+  --signal: #ff4f00; /* large shapes and graphics only: 2.89:1 on paper */
+  --signal-text: #c2410c; /* orange text that must pass AA */
+  --steel: #6b6f76;
+  --steel-text: #686c73;
+  --rule: color-mix(in srgb, var(--ink) 14%, transparent);
+  --focus: #111111;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --paper: #0e0e0e;
+  --ink: #edeae2;
+  --signal: #ff6a2b;
+  --signal-text: #ff6a2b;
+  --steel: #8a8e95;
+  --steel-text: #8a8e95;
+  --focus: #edeae2;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --paper: #0e0e0e;
+    --ink: #edeae2;
+    --signal: #ff6a2b;
+    --signal-text: #ff6a2b;
+    --steel: #8a8e95;
+    --steel-text: #8a8e95;
+    --focus: #edeae2;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-signal: var(--signal);
+  --color-signal-text: var(--signal-text);
+  --color-steel: var(--steel);
+  --color-steel-text: var(--steel-text);
+  --color-rule: var(--rule);
+
+  /* Each <Font> variable already carries its metric-matched fallback stack. */
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-instrument-serif);
+}
+
+/* Typed so the hero bridge can ease between positions (components/hero/Hero.astro). */
+@property --split {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 50;
+}
+
+@layer base {
+  html {
+    /* Focused or linked targets never land under the sticky header (WCAG 2.2 SC 2.4.11). */
+    scroll-padding-top: 7.5rem;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      scroll-padding-top: 4.5rem;
+    }
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--paper);
+    color: var(--ink);
+  }
+
+  /* Instrument Serif has a single weight: never fake bold or italic. */
+  .font-display {
+    font-synthesis: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* The skip link focuses <main tabindex="-1">; don't ring the whole page. */
+  main:focus {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--signal);
+    color: #111111;
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: absolute;
+    inset-inline-start: 1rem;
+    top: 1rem;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    background-color: var(--ink);
+    color: var(--paper);
+    font-weight: 600;
+    transform: translateY(-200%);
+    transition: transform 150ms ease-out;
+  }
+
+  .skip-link:focus-visible {
+    transform: none;
+  }
+
+  /* Theme toggle: reserves its space but stays invisible without JS. */
+  .theme-toggle {
+    visibility: hidden;
+  }
+
+  .js .theme-toggle {
+    visibility: visible;
+  }
+
+  .theme-icon-sun {
+    display: none;
+  }
+
+  :root[data-theme="dark"] .theme-icon-sun {
+    display: block;
+  }
+
+  :root[data-theme="dark"] .theme-icon-moon {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) .theme-icon-sun {
+      display: block;
+    }
+
+    :root:not([data-theme]) .theme-icon-moon {
+      display: none;
+    }
+  }
+
+  /* Calls to action, shared by the hero and About. */
+  .cta {
+    display: inline-flex;
+    width: 100%;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.25rem;
+    border: 1px solid var(--ink);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition:
+      background-color 150ms ease-out,
+      color 150ms ease-out;
+  }
+
+  @media (min-width: 640px) {
+    .cta {
+      width: auto;
+    }
+  }
+
+  .cta:hover {
+    background-color: var(--ink);
+    color: var(--paper);
+  }
+
+  .cta-primary {
+    background-color: var(--ink);
+    color: var(--paper);
+  }
+
+  .cta-primary:hover {
+    background-color: transparent;
+    color: var(--ink);
+  }
+
+  /* Dev-only marker for content that still waits for the owner. */
+  .todo-badge {
+    display: inline-block;
+    padding: 0.125rem 0.5rem;
+    border: 1px dashed var(--signal-text);
+    color: var(--signal-text);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-style: normal;
+    letter-spacing: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

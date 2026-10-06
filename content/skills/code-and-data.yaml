@@ -1,0 +1,129 @@
+# Skill group "Kode & data" from the owner's brief (CLAUDE.md).
+# usedIn cites Nassim's own text: the old site (NassimElH01), the owner's CVs, the
+# Gen AI & ML elective exam (EXAM) and the Royal Unibrew internship report (REPORT).
+# The posture checker and the arcade (p5.js) were committed under the "Can Kurt" identity,
+# but the owner confirmed authorship on 2026-10-04 and called them personal on 2026-10-05.
+group:
+  en: "Code & data"
+  da: "Kode & data"
+order: 1
+items:
+  - id: python
+    name:
+      en: "Python"
+      da: "Python"
+    usedIn:
+      # Source: EXAM (p.21: ML notebook assignments, "mit arbejde med Google Colab og Python-udvidelser")
+      - context: study
+        project: genai-ml-elective
+        note:
+          en: "Machine learning notebooks in Google Colab"
+          da: "Machine learning-notebooks i Google Colab"
+
+  - id: sql-relational-databases
+    name:
+      en: "SQL and relational databases (normalization, data modeling)"
+      da: "SQL og relationelle databaser (normalisering, datamodellering)"
+    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+
+  - id: html-css-javascript
+    name:
+      en: "HTML/CSS/JavaScript"
+      da: "HTML/CSS/JavaScript"
+    usedIn:
+      # Old projectsData tags (NassimElH01): "HTML", "CSS", "JavaScript".
+      - context: freelance
+        project: 24support-christmas-calendar
+      # Old projectsData tags (NassimElH01): "HTML/CSS" only, no JavaScript.
+      # Source: CV-2 (ERHVERVSERFARING, S&S Rengøringsservice | IT-support & Webdesigner:
+      # "vedligeholdt virksomhedens hjemmeside")
+      # CONFLICT: the old site called this "Freelance webarbejde"; CV-2 lists S&S as a job and
+      # wins, so the context is work, as in the project file.
+      - context: work
+        timeline: ss-rengoringservice
+        project: ss-rengoringsservice-website
+        note:
+          en: "HTML and CSS; maintenance of the company website"
+          da: "HTML og CSS; vedligeholdelse af virksomhedens hjemmeside"
+
+  - id: p5js
+    name:
+      en: "p5.js"
+      da: "p5.js"
+    usedIn:
+      # Source: legacy/posture-checker/index.html loads p5.js; OWNER (his work, personal)
+      - context: personal
+        project: posture-checker
+        note:
+          en: "Browser sketch that uses the webcam to check posture"
+          da: "Browserskitse, der bruger webkameraet til at tjekke kropsholdningen"
+      # Source: git history (PongGame.tsx moved to p5.js on 2026-09-04); OWNER (his work, personal)
+      - context: personal
+        project: canvas-arcade
+        note:
+          en: "Pong"
+          da: "Pong"
+
+  - id: client-server-apps-and-guis
+    name:
+      en: "Client-server applications and graphical user interfaces"
+      da: "Client-server-applikationer og grafiske brugergrænseflader"
+    usedIn:
+      # Source: the owner's answer (2026-10-06: he built the 24Support server and admin tool
+      # himself) and OLD-SITE (projectsData.ts "24support-julekalender": "en separat Node.js-server
+      # til datostyring og et loginbeskyttet adminværktøj").
+      - context: freelance
+        project: 24support-christmas-calendar
+        note:
+          en: "Node.js server that controls when each door opens, and a login-protected admin tool"
+          da: "Node.js-server, der styrer, hvornår hver låge åbner, og et loginbeskyttet adminværktøj"
+
+  # [BEKRÆFT] in the brief: hidden until the owner confirms the language.
+  - id: c-sharp-java
+    name:
+      en: "TODO: confirm — C#/Java/other language from the Software Construction course"
+      da: "TODO: bekræft — C#/Java/andet sprog fra faget Softwarekonstruktion"
+    confirm: true
+    usedIn: "TODO: where used — Softwarekonstruktion course (which programme?); owner to confirm"
+
+  # The next two items are NOT in the original brief. They were added from the EXAM
+  # and REPORT evidence below; the owner may remove them.
+  - id: generative-ai-prompting
+    name:
+      en: "Generative AI & prompting"
+      da: "Generativ AI & prompting"
+    usedIn:
+      # Source: EXAM (p.18: prompting in ChatGPT; p.19: DALL-E, Adobe Firefly, HeyGen, InVideo)
+      - context: study
+        project: genai-ml-elective
+        note:
+          en: "Prompting in ChatGPT, plus AI image and video tools (DALL-E, Adobe Firefly, HeyGen, InVideo)"
+          da: "Prompting i ChatGPT samt AI-værktøjer til billeder og video (DALL-E, Adobe Firefly, HeyGen, InVideo)"
+      # Source: REPORT (p.5: "procesoptimering – herunder brugen af AI-værktøjer som CoPilot og
+      # ChatGPT"; p.6: "brugerdokumentation og onboardingmateriale (ofte ved brug af AI)").
+      # p.6 does not name the AI tools, so the note does not tie Copilot/ChatGPT to the documentation.
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "AI tools such as Copilot and ChatGPT for process optimisation, including user documentation and onboarding material often made with AI"
+          da: "AI-værktøjer som Copilot og ChatGPT til procesoptimering, herunder brugerdokumentation og onboardingmateriale, ofte lavet med AI"
+      # Source: the owner's answer (2026-10-06: "programering igennem claude og co pilot"), given to
+      # the question whether he built the 24Support server and admin tool.
+      - context: freelance
+        project: 24support-christmas-calendar
+        note:
+          en: "Programmed the server and admin tool with Claude and Copilot"
+          da: "Programmerede serveren og adminværktøjet med Claude og Copilot"
+
+  - id: machine-learning-basics
+    name:
+      en: "Machine learning basics (Python notebooks)"
+      da: "Grundlæggende machine learning (Python-notebooks)"
+    usedIn:
+      # Source: EXAM (p.21: notebook titles "Linear_Regression" and
+      # "Fashion_classification_neural_nets"; no data or results are given)
+      - context: study
+        project: genai-ml-elective
+        note:
+          en: "Notebook assignments on linear regression and neural-network classification"
+          da: "Notebook-opgaver i lineær regression og klassifikation med neurale netværk"

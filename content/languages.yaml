@@ -1,0 +1,24 @@
+# Languages from the brief (dansk, engelsk, arabisk, tysk). Levels come from the
+# owner's CVs, which agree: "Dansk (modersmål) · Engelsk (flydende) ·
+# Arabisk (flydende) · Tysk (øvet)".
+- id: danish
+  order: 1
+  name: { en: Danish, da: Dansk }
+  # Source: CV-2 and CV-CBS (Sprog: "Dansk (modersmål)")
+  level: { en: Native, da: Modersmål }
+- id: english
+  order: 2
+  name: { en: English, da: Engelsk }
+  # Source: CV-2 and CV-CBS (Sprog: "Engelsk (flydende)")
+  level: { en: Fluent, da: Flydende }
+- id: arabic
+  order: 3
+  name: { en: Arabic, da: Arabisk }
+  # Source: CV-2 and CV-CBS (Sprog: "Arabisk (flydende)")
+  level: { en: Fluent, da: Flydende }
+- id: german
+  order: 4
+  name: { en: German, da: Tysk }
+  # Source: CV-2 and CV-CBS (Sprog: "Tysk (øvet)"). Conflict: BRIEF (Hvem er Nassim)
+  # says "mellem"; CV-2 wins for the Danish label. "Intermediate" fits both.
+  level: { en: Intermediate, da: Øvet }

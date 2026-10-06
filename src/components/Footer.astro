@@ -1,0 +1,36 @@
+---
+import type { Lang } from "@/i18n/config";
+import { t } from "@/i18n/utils";
+import { isTodo } from "@/lib/todo";
+import { getProfile } from "@/lib/content";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const tr = t(lang);
+const profile = await getProfile();
+// Contact details only show once they are real values, never while TODO.
+const email = isTodo(profile.contact.email) ? null : profile.contact.email;
+const phone = !profile.contact.phone || isTodo(profile.contact.phone) ? null : profile.contact.phone;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-rule">
+  <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <p class="text-sm text-steel-text">© {year} {profile.name}</p>
+    <nav aria-label={tr("footer.elsewhere")}>
+      <ul class="flex flex-wrap gap-1 font-mono text-sm">
+        <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={profile.links.linkedin} rel="me noopener">LinkedIn</a></li>
+        <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={profile.links.github} rel="me noopener">GitHub</a></li>
+        {email && (
+          <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={`mailto:${email}`}>{email}</a></li>
+        )}
+        {phone && (
+          <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={`tel:${phone.replace(/\s+/g, "")}`}>{phone}</a></li>
+        )}
+      </ul>
+    </nav>
+  </div>
+</footer>

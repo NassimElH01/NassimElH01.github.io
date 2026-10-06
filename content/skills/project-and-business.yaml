@@ -1,0 +1,114 @@
+# Skill group "Projekt & forretning" from the owner's brief (CLAUDE.md).
+# Certifications are from the brief and CV-2. Usage comes from the Royal Unibrew
+# internship report (REPORT), the Gen AI & ML elective exam (EXAM) and CV-2.
+# Agile methods are NOT cited for Royal Unibrew: REPORT p.8 says it works mainly
+# with the waterfall model, and p.19 says agile/Scrum was not applied there.
+group:
+  en: "Projects & business"
+  da: "Projekt & forretning"
+order: 3
+items:
+  - id: prince2
+    name:
+      en: "PRINCE2"
+      da: "PRINCE2"
+    certifications:
+      - prince2-foundation
+      - prince2-practitioner
+    usedIn:
+      # Source: REPORT (p.8: "anvendte jeg PRINCE2's faseopdeling og risikostyringsprincipper"
+      # in the project plan for the OT Cyber Security project)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Applied PRINCE2 phase division and risk management to the OT Cyber Security project plan"
+          da: "Anvendte PRINCE2's faseopdeling og risikostyring i projektplanen for OT Cyber Security-projektet"
+
+  - id: agile-methods
+    name:
+      en: "Agile methods"
+      da: "Agile metoder"
+    # Owner: the brief lists this certification and this skill separately. Confirm the
+    # Agile Project Management certification belongs with this skill.
+    certifications:
+      - agile-project-management
+    usedIn:
+      # Source: REPORT (p.8: "På Zealand har jeg arbejdet meget med agile metoder og Scrum")
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Agile methods and Scrum"
+          da: "Agile metoder og Scrum"
+      # Source: CV-2 (Uddannelse, bachelorprojekt: "Fra Vandfald til Hybrid PMO")
+      - context: study
+        project: royal-unibrew-hybrid-pmo-bachelor-project
+        note:
+          en: "From waterfall to a hybrid PMO"
+          da: "Fra vandfald til hybrid PMO"
+
+  - id: stakeholder-risk-communication-plans
+    name:
+      en: "Stakeholder, risk and communication plans"
+      da: "Interessent-, risiko- og kommunikationsplaner"
+    # No source mentions a communication plan; only stakeholder analyses and risk
+    # management are cited.
+    usedIn:
+      # Source: REPORT (p.6: "udarbejdelse af stakeholderanalyser" for OT Cyber Security;
+      # p.8: PRINCE2 "risikostyringsprincipper" in the OT project plan)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Stakeholder analyses and PRINCE2 risk management for the OT Cyber Security project"
+          da: "Stakeholderanalyser og PRINCE2-risikostyring til OT Cyber Security-projektet"
+
+  - id: business-strategy-and-models
+    name:
+      en: "Business strategy and business models"
+      da: "Forretningsstrategi og forretningsmodeller"
+    usedIn:
+      # Source: EXAM (p.18: "situationsanalyse (BMC, regnskabsanalyse, Porter's Five Forces og
+      # PESTEL), en SWOT-oversigt", solved with ChatGPT prompts)
+      - context: study
+        project: genai-ml-elective
+        note:
+          en: "AI-assisted business analysis with BMC, Porter's Five Forces, PESTEL and SWOT"
+          da: "AI-assisteret forretningsanalyse med BMC, Porters Five Forces, PESTEL og SWOT"
+
+  - id: financial-management-and-financial-statement-analysis
+    name:
+      en: "Financial management and financial statement analysis"
+      da: "Økonomistyring og regnskabsanalyse"
+    usedIn:
+      # Source: EXAM (p.18: "regnskabsanalyse" in the situation analysis)
+      - context: study
+        project: genai-ml-elective
+        note:
+          en: "Financial statement analysis as part of an AI-assisted business analysis"
+          da: "Regnskabsanalyse som en del af en AI-assisteret forretningsanalyse"
+      # Source: public/budget-skabelon.xlsx (budget, actual and difference per category);
+      # OWNER (his work, personal)
+      - context: personal
+        project: budget-model
+        note:
+          en: "Monthly budget tracking: budget, actual and difference per category"
+          da: "Månedlig budgetopfølgning: budget, faktisk og difference pr. kategori"
+
+  - id: supply-chain
+    name:
+      en: "Supply chain"
+      da: "Supply chain"
+    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+
+  - id: change-management
+    name:
+      en: "Change management"
+      da: "Forandringsledelse"
+    usedIn:
+      # Source: REPORT (p.10: "modstand eller usikkerhed blandt kolleger i forbindelse med
+      # implementeringen af nye Power BI-rapporter"; "brugte tid på at lave brugerdokumentation og
+      # undervise kollegerne"; p.21: Kotter as inspiration for organisational resistance)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Met colleagues' resistance or uncertainty about new Power BI reports with user documentation and training"
+          da: "Mødte kollegers modstand eller usikkerhed over for nye Power BI-rapporter med brugerdokumentation og undervisning"

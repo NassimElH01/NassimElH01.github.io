@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Astro and test output
+.astro/
+test-results/
+playwright-report/
+screenshots/
+.lighthouse/

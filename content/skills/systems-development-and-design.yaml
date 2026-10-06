@@ -1,0 +1,59 @@
+# Skill group "Systemudvikling & design" from the owner's brief (CLAUDE.md).
+# CV-2 lists "systemudvikling og IT-arkitektur" as a focus area of the Zealand PBA;
+# that is cited for UML and system modeling only. No source says where the other
+# items were used, so their usedIn stays a TODO for the owner.
+group:
+  en: "Systems development & design"
+  da: "Systemudvikling & design"
+order: 2
+items:
+  - id: uml-system-modeling
+    name:
+      en: "UML and system modeling"
+      da: "UML og systemmodellering"
+    usedIn:
+      # Source: CV-2 (Uddannelse, Zealand "Fokus: ... systemudvikling og IT-arkitektur").
+      # CV-2 does not name UML itself.
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Focus area in the programme: systems development and IT architecture"
+          da: "Fokusområde på uddannelsen: systemudvikling og IT-arkitektur"
+
+  - id: requirements-specification
+    name:
+      en: "Requirements specification"
+      da: "Kravspecifikation"
+    usedIn: "TODO: where used — study coursework or freelance? Owner to confirm"
+
+  - id: ux-usability-testing
+    name:
+      en: "UX and usability testing"
+      da: "UX og usability-test"
+    usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
+
+  - id: prototyping
+    name:
+      en: "Prototyping (low → high fidelity)"
+      da: "Prototyping (low → high fidelity)"
+    usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
+
+  - id: user-driven-design
+    name:
+      en: "User-driven design"
+      da: "Brugerdrevet design"
+    usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
+
+  - id: hci
+    name:
+      en: "Human-computer interaction (HCI)"
+      da: "Menneske-computer-interaktion (HCI)"
+    usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
+
+  # [BEKRÆFT] in the brief: hidden until the owner confirms.
+  - id: physical-computing-digital-fabrication
+    name:
+      en: "Physical computing and digital fabrication"
+      da: "Physical computing og digital fabrikation"
+    confirm: true
+    usedIn: "TODO: where used — owner to confirm whether to include, and which course"

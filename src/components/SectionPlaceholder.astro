@@ -1,0 +1,17 @@
+---
+// Stand-in for a section that is built later. Its "TODO:" note makes the
+// deploy gate fail on main, so a placeholder page can never go live.
+interface Props {
+  id: string;
+  label: string;
+}
+
+const { id, label } = Astro.props;
+---
+
+<section id={id} aria-labelledby={`${id}-title`} class="border-t border-rule py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <h2 id={`${id}-title`} class="font-display text-4xl sm:text-5xl">{label}</h2>
+    <p class="todo-badge mt-6" data-todo>TODO: section content (built in a later step)</p>
+  </div>
+</section>

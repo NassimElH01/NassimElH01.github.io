@@ -1,0 +1,35 @@
+---
+// Renders one bilingual field.
+// - Missing in this language: shows the other language inside a lang= wrapper.
+// - Missing in both: a dashed TODO badge in dev; in production a hidden
+//   data-todo marker that the deploy gate (scripts/verify-no-todo.mjs) fails on.
+import type { Lang } from "@/i18n/config";
+import { pick } from "@/i18n/utils";
+
+interface Props {
+  field: Record<Lang, string>;
+  lang: Lang;
+  as?: "span" | "p" | "h2" | "h3" | "li" | "div" | "dd";
+  class?: string;
+}
+
+const { field, lang, as: Tag = "span", class: className } = Astro.props;
+const picked = pick(field, lang);
+const isDev = import.meta.env.DEV;
+---
+
+{
+  picked.isTodo ? (
+    isDev ? (
+      <Tag class:list={["todo-badge", className]} data-todo>
+        {picked.value}
+      </Tag>
+    ) : (
+      <Tag hidden data-todo />
+    )
+  ) : (
+    <Tag class={className} lang={picked.isFallback ? picked.lang : undefined}>
+      {picked.value}
+    </Tag>
+  )
+}

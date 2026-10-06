@@ -1,0 +1,53 @@
+---
+import type { Lang } from "@/i18n/config";
+import { localeUrl, t } from "@/i18n/utils";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+
+interface Props {
+  lang: Lang;
+  sections: { id: string; label: string }[];
+  path?: string;
+}
+
+const { lang, sections, path = "" } = Astro.props;
+const tr = t(lang);
+---
+
+<a class="skip-link" href="#main">{tr("nav.skip")}</a>
+<header class="sticky top-0 z-50 border-b border-rule bg-paper">
+  <!--
+    DOM order = desktop visual order (name, nav, controls), so Tab follows what
+    is on screen. Below lg the nav drops to its own scrollable row.
+  -->
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 px-4 sm:px-6 lg:flex-nowrap">
+    <a href={localeUrl(lang)} class="font-display mr-auto inline-flex min-h-14 shrink-0 items-center text-xl lg:mr-0">
+      Nassim Hassani
+    </a>
+    <nav
+      aria-label={tr("nav.primary")}
+      class="order-last -mx-1 w-[calc(100%+0.5rem)] overflow-x-auto p-1 [mask-image:linear-gradient(90deg,#000_85%,transparent)] focus-within:[mask-image:none] lg:order-none lg:mx-0 lg:ml-auto lg:w-auto lg:[mask-image:none]"
+    >
+      <!-- p-1 on the scroll container leaves room for the 2px + 2px focus ring. The fade on
+           the right says "scrolls"; it drops while a link has focus, so no ring is faded. -->
+      <ul class="flex gap-1">
+        {
+          sections.map((section) => (
+            <li>
+              <a
+                href={`#${section.id}`}
+                class="inline-flex min-h-11 items-center whitespace-nowrap px-3 text-sm underline-offset-4 hover:underline"
+              >
+                {section.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="flex shrink-0 items-center">
+      <LanguageSwitcher lang={lang} path={path} />
+      <ThemeToggle lang={lang} />
+    </div>
+  </div>
+</header>

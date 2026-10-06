@@ -1,0 +1,101 @@
+# Profile facts. Source: the owner's brief (CLAUDE.md) unless marked otherwise.
+# "TODO: confirm — <text>" = taken from the old site, waiting for the owner to confirm.
+- id: nassim
+  name: Nassim Hassani
+  # Drafts by Claude from the owner's own words, waiting for his approval (see `approved`).
+  # headline: the brief, Trin 2 Struktur ("ét skarpt udsagn om hvem jeg er: brobyggeren mellem
+  # forretning, data og teknologi"). headlineTech: the same statement written as code.
+  headline:
+    en: "Bridging business, data and technology."
+    da: "Brobyggeren mellem forretning, data og teknologi."
+  headlineTech:
+    en: |-
+      nassim.bridge(
+        business,
+        data,
+        technology,
+      );
+    da: |-
+      nassim.bridge(
+        business,
+        data,
+        technology,
+      );
+  # Source: CLAUDE.md, Hvem er Nassim ("brobygger mellem forretning og teknologi, som både kan kode,
+  # styre projekter og forstå økonomien").
+  tagline:
+    en: "I can code, run projects and understand the economics behind them."
+    da: "Jeg kan både kode, styre projekter og forstå økonomien."
+  # The owner's direction (2026-10-05): the goal is a student job; tell who he is and what he can do,
+  # mention project-manager experience and courses, and do not name Royal Unibrew here (the hero's facts
+  # row already does). Written from three drafts, three judges and a fact check. Sources:
+  # - education: content/timeline/zealand-professionsbachelor.md, ruc-master-digital-transformation.md
+  # - IT support and web design alongside studies: zealand-it-student-assistant.md (2025–2026),
+  #   ss-rengoringservice.md (2023–present)
+  # - martial arts and volunteer coach: the brief (Om mig) and `interests` below
+  # - junior project manager / PMO intern, project-management support on IT and cybersecurity projects
+  #   and led parts of some of them, Azure DevOps planning, Power BI dashboards management used,
+  #   taught colleagues new tools: royal-unibrew-pmo.md (CV-2, CV-CBS, REPORT p.5-6, 9, 15, 17, 22)
+  # - PRINCE2 and courses in agile project management, data analytics and cybersecurity:
+  #   content/certifications.yaml
+  # - "structure, follow-up and data that people can act on": the owner's own strengths text in
+  #   royal-unibrew-pmo.md
+  # The blank line before the last sentence is presentation only: About shows that sentence as the
+  # offer. The wording is unchanged since the owner's approval of 2026-10-05.
+  summary:
+    en: |-
+      Hi, I'm Nassim, an MSc student in Digital Transformation at Roskilde University with a professional bachelor's in Business Economics & IT behind me. Alongside my studies, I've worked in IT support and web design. In my free time, I train in martial arts and volunteer as a coach.
+
+      As a junior project manager and PMO intern, I helped run IT and cybersecurity projects and led parts of some of them myself. I planned work in Azure DevOps, built Power BI dashboards that management used and trained colleagues on new tools. I'm PRINCE2 certified and have taken courses in agile project management, data analytics and cybersecurity.
+
+      In a student job, I'd bring structure, follow-up and data that people can act on.
+    da: |-
+      Hej, jeg hedder Nassim. Jeg har en professionsbachelor i Økonomi & IT med i bagagen og læser nu cand.it. i Digital Transformation på RUC. Sideløbende med studierne har jeg arbejdet med IT-support og webdesign. I fritiden dyrker jeg kampsport og er frivillig træner.
+
+      Som junior projektleder og PMO-praktikant støttede jeg projektledelsen på IT- og cybersikkerhedsprojekter og stod selv for dele af nogle af dem. Jeg planlagde arbejdet i Azure DevOps, byggede Power BI-dashboards, som ledelsen brugte, og lærte kolleger at bruge nye værktøjer. Jeg er PRINCE2-certificeret og har taget kurser i agil projektledelse, dataanalyse og cybersikkerhed.
+
+      I et studiejob kan jeg bidrage med struktur, opfølgning og data, der er til at handle på.
+  # Presentation only: phrases About emphasises in the summary's second paragraph (the role in bold,
+  # the tools in the mono "tech" voice). Each must appear verbatim in summary.<lang>; the build fails
+  # otherwise. Adds no facts.
+  summaryEmphasis:
+    role:
+      en: "junior project manager and PMO intern"
+      da: "junior projektleder og PMO-praktikant"
+    tools:
+      en: ["Azure DevOps", "Power BI"]
+      da: ["Azure DevOps", "Power BI"]
+  # Source: the owner's goal (2026-10-05: "mening med den er [at] lande et studiejob") and the RUC MSc.
+  # Replaces the old site's unconfirmed "student jobs, part-time roles, or freelance work".
+  availability:
+    en: "I'm looking for a student job alongside my MSc at RUC. Let's talk."
+    da: "Jeg søger studiejob ved siden af kandidaten på RUC. Lad os tage en snak."
+  # Approved by the owner on 2026-10-05 ("ja"): headline, headlineTech, tagline, summary, availability
+  # and the meta description in src/i18n/ui.ts. Set back to false while new drafts await approval.
+  approved: true
+  # Source: the owner's answer (2026-10-05: "København / sjælland")
+  location:
+    en: "Copenhagen / Zealand"
+    da: "København / Sjælland"
+  links:
+    linkedin: https://www.linkedin.com/in/nassim-hassani-63835a220
+    github: https://github.com/NassimElH01
+  contact:
+    # Source: owner's answer (2026-10-04) and the CV header.
+    email: naselh01@gmail.com
+    phone: "+45 24 77 07 84"
+  # The owner's own CV (Nassim_Hassani_CV.docx, shared 2026-10-05), converted to PDF unchanged
+  # apart from the document metadata (author and title set to Nassim Hassani) and, at the owner's
+  # request (2026-10-06), the bachelor line, which now gives the title of his bachelor project:
+  # "Bachelorprojekt: Fra Vandfald til Hybrid PMO – datadrevet projektledelse (Royal Unibrew)".
+  # It is in Danish.
+  cv:
+    href: /Nassim-Hassani-CV.pdf
+    lang: da
+  interests:
+    en:
+      - Trains martial arts
+      - Volunteer coach
+    da:
+      - Træner kampsport
+      - Frivillig træner

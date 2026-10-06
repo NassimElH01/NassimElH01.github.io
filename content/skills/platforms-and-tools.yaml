@@ -1,0 +1,130 @@
+# Skill group "Platforme & værktøjer" from the owner's brief (CLAUDE.md).
+# Evidence: brief (PMO-praktik at Royal Unibrew), the owner's CVs (CV-2, CV-CBS)
+# and the Royal Unibrew internship report (REPORT). ProjectFlow 365 is named in
+# CV-2 and the REPORT, so it is now named here too.
+# The [BEKRÆFT] placeholder "other-tools" is replaced by the concrete tools the CVs
+# and the REPORT list (Microsoft 365, ticket systems, SharePoint, Excel, Windows,
+# ProjectFlow 365).
+group:
+  en: "Platforms & tools"
+  da: "Platforme & værktøjer"
+order: 4
+items:
+  - id: power-bi
+    name:
+      en: "Power BI"
+      da: "Power BI"
+    usedIn:
+      # Source: CV-2 (Royal Unibrew: "Udviklede Power BI-dashboards baseret på
+      # ProjectFlow-data til ledelsesrapportering og porteføljeoverblik")
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Dashboards on ProjectFlow 365 data for management reporting and portfolio overview"
+          da: "Dashboards baseret på ProjectFlow 365-data til ledelsesrapportering og porteføljeoverblik"
+      # Source: REPORT (p.6: "integrere data fra ProjectFlow 365 i Power BI"; p.15, p.17)
+      - context: internship
+        project: royal-unibrew-projectflow-power-bi
+
+  - id: azure-devops
+    name:
+      en: "Azure DevOps"
+      da: "Azure DevOps"
+    usedIn:
+      # Source: CV-2 (Royal Unibrew: "Arbejde med projektstyring, governance og fremdrift i
+      # Azure DevOps"); REPORT (p.5: planning via Azure DevOps)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Project management, governance and progress tracking"
+          da: "Projektstyring, governance og fremdrift"
+      # Source: REPORT (p.5: Azure DevOps and ProjectFlow 365 "som netop var blevet implementeret i
+      # PMO/Group IT"); the project file lists Azure DevOps in technology. The REPORT does not say
+      # Azure DevOps was part of the Power BI integration itself.
+      - context: internship
+        project: royal-unibrew-projectflow-power-bi
+
+  - id: projectflow-365
+    name:
+      en: "ProjectFlow 365"
+      da: "ProjectFlow 365"
+    usedIn:
+      # Source: REPORT (p.5: "opsætning af projektplaner, ressourceallokering,
+      # tidsregistrering"; p.22: own user and onboarding guide)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Project plans, resource allocation and time registration; wrote a user and onboarding guide"
+          da: "Projektplaner, ressourceallokering og tidsregistrering; udarbejdede en bruger- og onboardingguide"
+      # Source: REPORT (p.6: "integrere data fra ProjectFlow 365 i Power BI")
+      - context: internship
+        project: royal-unibrew-projectflow-power-bi
+
+  - id: sharepoint
+    name:
+      en: "SharePoint"
+      da: "SharePoint"
+    usedIn:
+      # Source: CV-CBS (Royal Unibrew: "governance, dokumentation og opfølgning i Azure DevOps
+      # og SharePoint"); CV-2 (Kompetencer: SharePoint). The REPORT does not mention SharePoint.
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Governance, documentation and follow-up"
+          da: "Governance, dokumentation og opfølgning"
+
+  - id: microsoft-365
+    name:
+      en: "Microsoft 365"
+      da: "Microsoft 365"
+    usedIn:
+      # Source: CV-2 (Zealand: "Fejlfinder på hardware, software og Microsoft 365-løsninger");
+      # CV-CBS (Zealand: "Fejlsøger hardware, software og Microsoft 365-løsninger")
+      - context: work
+        timeline: zealand-it-student-assistant
+        note:
+          en: "Troubleshooting Microsoft 365 solutions"
+          da: "Fejlfinding af Microsoft 365-løsninger"
+
+  - id: ticket-systems
+    name:
+      en: "Ticket systems"
+      da: "Ticketsystemer"
+    usedIn:
+      # Source: CV-CBS (Zealand: "Registrerer og løser sager i ticketsystem og følger dem til dørs")
+      - context: work
+        timeline: zealand-it-student-assistant
+        note:
+          en: "Logging and resolving support cases"
+          da: "Registrering og løsning af supportsager"
+
+  - id: excel
+    name:
+      en: "Excel"
+      da: "Excel"
+    # Source: CV-2 (Kompetencer: Excel; Profil: "kan lide at planlægge i Excel"), no place given.
+    # REPORT p.20 (literature list) says Excel was "Brugt til analyse og rapportering", but
+    # p.5 says the agreed risk work in Excel was not done, so the internship is not cited.
+    usedIn:
+      # Source: public/budget-skabelon.xlsx (the template) and OLD-SITE ("udviklet i Microsoft
+      # Excel"); OWNER (his work, personal)
+      - context: personal
+        project: budget-model
+        note:
+          en: "Budget template for tracking personal finances month by month"
+          da: "Budgetskabelon til månedlig opfølgning på privatøkonomien"
+
+  - id: windows
+    name:
+      en: "Windows"
+      da: "Windows"
+    # Source: CV-CBS (Kompetencer, Systemer & Teknik: Windows), no place given.
+    usedIn: "TODO: where used — e.g. Zealand IT support? Owner to confirm"
+
+  - id: github
+    name:
+      en: "GitHub"
+      da: "GitHub"
+    # Nassim's old text links a GitHub repository for SCT, but also says SCT's source
+    # code is in a private repository, and SCT's context (personal project) is not decided yet.
+    usedIn: "TODO: where used — owner to confirm context (e.g. SCT repository (private?), this portfolio)"
