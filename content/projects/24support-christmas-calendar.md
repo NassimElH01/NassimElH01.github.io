@@ -47,6 +47,12 @@ linkLabel:
 demo:
   kind: "iframe"
   src: "/freelance/24support-julekalender/index.html"
+# Keyline: a verbatim part of role (the schema checks it), shown under the featured title.
+keyline:
+  en: "Nassim built the whole solution himself."
+  da: "Nassim byggede hele løsningen selv."
+# Order and featured: presentation only (Projects section, 2026-10-06): the three projects that
+# best show the student-job profile lead, in the order work, code with a live demo, study.
 featured: true
-order: 3
+order: 2
 ---

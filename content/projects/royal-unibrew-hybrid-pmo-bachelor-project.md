@@ -64,10 +64,14 @@ technology:
 result:
   en: "The analysis showed that Royal Unibrew's current challenges are primarily sociotechnical rather than technical (a lack of data discipline, weak system integration, unclear roles and a limited management mandate), and on that basis the project develops a hybrid PMO design focused on clear governance, data standards, firmly anchored roles and system integration. Graded 10 on the Danish 7-point scale (grades run from -3 to 12; 12 is the top grade)."
   da: "Analysen viste, at Royal Unibrews nuværende udfordringer primært er socioteknologiske snarere end tekniske (manglende datadisciplin, svag systemintegration, uklare roller og et begrænset ledelsesmæssigt mandat), og på den baggrund udvikler projektet et hybridt PMO-design med fokus på klar governance, datastandarder, rolleforankring og systemintegration. Bedømt til 10 på 7-trinsskalaen."
+# Keyline: a verbatim part of result (the schema checks it), shown under the featured title.
+keyline:
+  en: "Graded 10 on the Danish 7-point scale (grades run from -3 to 12; 12 is the top grade)"
+  da: "Bedømt til 10 på 7-trinsskalaen"
 # Source: BACHELOR p.2 (Forord: Professionsbachelor i Økonomi & IT, Zealand)
 timeline: "zealand-professionsbachelor"
 # Order and featured: presentation only (Projects section, 2026-10-06): the three projects that
-# best show the student-job profile lead.
+# best show the student-job profile lead, in the order work, code with a live demo, study.
 featured: true
-order: 2
+order: 3
 ---

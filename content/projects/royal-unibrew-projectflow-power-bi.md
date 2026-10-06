@@ -55,10 +55,14 @@ technology:
 result:
   en: "Dashboards that the PMO and management actually used for management reporting, contributing to more transparency in the project portfolio, a better overview, better reporting and a stronger data-driven basis for decisions."
   da: "Dashboards, som PMO og ledelsen faktisk brugte til ledelsesrapportering, og som bidrog til øget gennemsigtighed i projektporteføljen, bedre overblik, bedre rapportering og et styrket datadrevet beslutningsgrundlag."
+# Keyline: a verbatim part of result (the schema checks it), shown under the featured title.
+keyline:
+  en: "Dashboards that the PMO and management actually used for management reporting"
+  da: "Dashboards, som PMO og ledelsen faktisk brugte til ledelsesrapportering"
 # Source: REPORT and CV-2 (the Royal Unibrew PMO internship)
 timeline: "royal-unibrew-pmo"
 # Order and featured: presentation only (Projects section, 2026-10-06): the three projects that
-# best show the student-job profile lead.
+# best show the student-job profile lead, in the order work, code with a live demo, study.
 featured: true
 order: 1
 ---

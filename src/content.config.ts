@@ -3,6 +3,7 @@
 import { defineCollection, reference } from "astro:content";
 import { file, glob } from "astro/loaders";
 import { z } from "astro/zod";
+import { isTodo } from "./lib/todo";
 
 /* ───────── shared helpers ───────── */
 
@@ -154,6 +155,9 @@ const projects = defineCollection({
       method: localized,
       technology: z.array(text).default([]),
       result: localized,
+      // The entry's strongest line, shown under a featured title. Selection only: it must be
+      // a verbatim part of result or role (checked below), so it never adds new copy.
+      keyline: localized.optional(),
       link: href.optional(),
       linkLabel: localized.optional(),
       // Further material, e.g. notebooks or reports, each with its own label.
@@ -176,6 +180,15 @@ const projects = defineCollection({
     .refine((project) => project.year !== undefined || project.timeline !== undefined, {
       message: "give a year, or link the timeline entry whose period covers the project",
       path: ["year"],
+    })
+    .superRefine((project, ctx) => {
+      for (const lang of ["en", "da"] as const) {
+        const keyline = project.keyline?.[lang];
+        if (!keyline || isTodo(keyline)) continue;
+        if (!project.result[lang].includes(keyline) && !project.role[lang].includes(keyline)) {
+          ctx.addIssue({ code: "custom", path: ["keyline", lang], message: `"${keyline}" is not in result.${lang} or role.${lang}` });
+        }
+      }
     }),
 });
 

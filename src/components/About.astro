@@ -159,7 +159,12 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
                 <p class="mt-1 text-sm text-steel-text">
                   {item.details.map((detail, index) => (
                     <>
-                      {index > 0 && <span aria-hidden="true"> · </span>}
+                      {index > 0 && (
+                        <>
+                          {" "}
+                          <span aria-hidden="true">·</span>{" "}
+                        </>
+                      )}
                       {detail}
                     </>
                   ))}
@@ -181,8 +186,8 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
                 <span class="font-medium">{item.name}</span>
                 {item.details.map((detail) => (
                   <span class="text-sm text-steel-text">
-                    <span aria-hidden="true"> · </span>
-                    {detail}
+                    {" "}
+                    <span aria-hidden="true">·</span> {detail}
                   </span>
                 ))}
               </li>

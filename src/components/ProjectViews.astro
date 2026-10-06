@@ -3,6 +3,9 @@
 // problem, role and result, or method and tools. A field that is still "TODO:"
 // gets no row; LocalizedText leaves its marker after the list instead (a dashed
 // badge in dev, a hidden data-todo element in the build).
+// showTools: false when the caller already shows the tool chips (featured entries).
+// markResult: false when the caller already shows the entry's keyline, so each entry
+// keeps a single orange accent.
 import type { CollectionEntry } from "astro:content";
 import type { Lang } from "@/i18n/config";
 import type { UiKey } from "@/i18n/ui";
@@ -13,9 +16,11 @@ import LocalizedText from "@/components/LocalizedText.astro";
 interface Props {
   project: CollectionEntry<"projects">["data"];
   lang: Lang;
+  showTools?: boolean;
+  markResult?: boolean;
 }
 
-const { project, lang } = Astro.props;
+const { project, lang, showTools = true, markResult = true } = Astro.props;
 const tr = t(lang);
 
 type Key = "problem" | "role" | "result" | "method";
@@ -38,7 +43,7 @@ const technologyTodo = project.technology.some((item) => isTodo(item));
       business
         .filter((row) => !row.todo)
         .map((row) => (
-          <div class:list={[row.key === "result" && "result"]}>
+          <div class:list={[row.key === "result" && ["result", markResult && "result-marked"]]}>
             <dt class="project-label">{row.label}</dt>
             <LocalizedText field={row.field} lang={lang} as="dd" class="project-text" />
           </div>
@@ -61,7 +66,7 @@ const technologyTodo = project.technology.some((item) => isTodo(item));
         ))
     }
     {
-      technology.length > 0 && (
+      showTools && technology.length > 0 && (
         <div>
           <dt class="project-label">{tr("projects.technology")}</dt>
           <dd>

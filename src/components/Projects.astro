@@ -1,9 +1,11 @@
 ---
 // Projects: every published project from content/projects, sorted by `order`.
-// Featured projects come first as large entries; the rest are a compact list
-// that opens with <details>. A CSS-only Business ⇄ Tech switch (radio buttons
-// and :has()) picks what each project shows: problem, role and result, or
-// method and tools. Browsers without :has() show both views. No client JS.
+// Featured projects come first as large entries: title, keyline (a verbatim line
+// from the result or role), tool chips and the demo button on the left, the chosen
+// view on the right. The rest are a compact list that opens with <details>.
+// A CSS-only Business ⇄ Tech switch, drawn as a small copy of the hero's bridge
+// (radio buttons, :has() and the registered --split), picks problem, role and
+// result, or method and tools. Browsers without :has() show both views. No client JS.
 // Unknown values ("TODO:") are left out; see ProjectViews.astro for the markers
 // that keep the deploy gate aware of them.
 import type { CollectionEntry } from "astro:content";
@@ -54,14 +56,21 @@ function links(project: Project) {
   }));
 }
 
-const projects = (await getPublished("projects")).map(({ id, data }) => ({
-  id,
-  data,
-  title: pick(data.title, lang),
-  period: period(data),
-  context: isTodo(data.context) ? undefined : tr(`projects.context.${data.context}` as UiKey),
-  links: links(data),
-}));
+const projects = (await getPublished("projects")).map(({ id, data }) => {
+  const keyline = data.keyline && pick(data.keyline, lang);
+  return {
+    id,
+    data,
+    title: pick(data.title, lang),
+    keyline: keyline && !keyline.isTodo ? keyline : undefined,
+    // Year and context, whichever are known.
+    meta: [period(data), isTodo(data.context) ? undefined : tr(`projects.context.${data.context}` as UiKey)].filter(
+      (part): part is string => part !== undefined,
+    ),
+    technology: data.technology.filter((item) => !isTodo(item)),
+    links: links(data),
+  };
+});
 
 const featured = projects.filter((project) => project.data.featured);
 const more = projects.filter((project) => !project.data.featured);
@@ -69,15 +78,15 @@ const more = projects.filter((project) => !project.data.featured);
 
 <section id="projects" aria-labelledby="projects-title" class="projects border-t border-rule py-20 sm:py-28">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
-    <div class="flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
+    <div class="grid items-end gap-y-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-x-16">
       <h2 id="projects-title" class="font-display text-4xl sm:text-5xl">{tr("section.projects")}</h2>
       <fieldset class="lens" aria-describedby="projects-lens-hint">
         <legend class="sr-only">{tr("projects.lens.legend")}</legend>
         <div class="lens-options">
           <input type="radio" name="projects-lens" id="projects-lens-business" value="business" checked />
-          <label for="projects-lens-business">{tr("projects.lens.business")}</label>
+          <label for="projects-lens-business" class="lens-business">{tr("projects.lens.business")}</label>
           <input type="radio" name="projects-lens" id="projects-lens-tech" value="tech" />
-          <label for="projects-lens-tech">{tr("projects.lens.tech")}</label>
+          <label for="projects-lens-tech" class="lens-tech">{tr("projects.lens.tech")}</label>
         </div>
         <p id="projects-lens-hint" class="mt-2 font-mono text-[0.8125rem] text-steel-text">{tr("projects.lens.hint")}</p>
       </fieldset>
@@ -93,14 +102,12 @@ const more = projects.filter((project) => !project.data.featured);
                   <span class="text-signal-text" aria-hidden="true">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  {[project.period, project.context]
-                    .filter((part) => part !== undefined)
-                    .map((part) => (
-                      <>
-                        <span aria-hidden="true"> · </span>
-                        {part}
-                      </>
-                    ))}
+                  {project.meta.map((part) => (
+                    <>
+                      {" "}
+                      <span aria-hidden="true">·</span> {part}
+                    </>
+                  ))}
                 </p>
                 <h3
                   id={`project-${project.id}`}
@@ -109,13 +116,30 @@ const more = projects.filter((project) => !project.data.featured);
                 >
                   {project.title.value}
                 </h3>
+                {project.keyline && (
+                  <p class="keyline" lang={project.keyline.isFallback ? project.keyline.lang : undefined}>
+                    {project.keyline.value}
+                  </p>
+                )}
+                {project.technology.length > 0 && (
+                  <ul role="list" class="chips mt-5" aria-label={tr("projects.technology")}>
+                    {project.technology.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                )}
                 {project.links.length > 0 && (
-                  <ul role="list" class="project-links">
+                  <ul role="list" class="featured-links">
                     {project.links.map((item) => (
                       <li>
-                        <a href={item.href} download={item.download || undefined} rel={item.external ? "noopener" : undefined}>
+                        <a
+                          class="cta"
+                          href={item.href}
+                          download={item.download || undefined}
+                          rel={item.external ? "noopener" : undefined}
+                        >
                           {item.label}
-                          <span class="ml-1.5" aria-hidden="true">
+                          <span class="ml-2" aria-hidden="true">
                             {item.external ? "↗" : "→"}
                           </span>
                         </a>
@@ -125,7 +149,7 @@ const more = projects.filter((project) => !project.data.featured);
                 )}
               </header>
               <div class="featured-body">
-                <ProjectViews project={project.data} lang={lang} />
+                <ProjectViews project={project.data} lang={lang} showTools={false} markResult={!project.keyline} />
               </div>
             </article>
           </li>
@@ -142,9 +166,37 @@ const more = projects.filter((project) => !project.data.featured);
               <li class="border-t border-rule">
                 <details class="more">
                   <summary>
-                    <span class="more-year">{project.period}</span>
-                    <LocalizedText field={project.data.title} lang={lang} class="more-title" />
-                    <span class="more-context">{project.context}</span>
+                    <LocalizedText field={project.data.title} lang={lang} class="more-title" />{" "}
+                    {project.meta.length > 0 && (
+                      <span class="more-meta">
+                        {project.meta.map((part, index) => (
+                          <>
+                            {index > 0 && (
+                              <>
+                                {" "}
+                                <span aria-hidden="true">·</span>{" "}
+                              </>
+                            )}
+                            <span>{part}</span>
+                          </>
+                        ))}
+                      </span>
+                    )}{" "}
+                    {project.technology.length > 0 && (
+                      <span class="more-tools">
+                        {project.technology.slice(0, 3).map((item, index) => (
+                          <>
+                            {index > 0 && (
+                              <>
+                                {" "}
+                                <span aria-hidden="true">·</span>{" "}
+                              </>
+                            )}
+                            {item}
+                          </>
+                        ))}
+                      </span>
+                    )}
                     <span class="more-marker" aria-hidden="true" />
                   </summary>
                   <div class="more-body">
@@ -175,8 +227,15 @@ const more = projects.filter((project) => !project.data.featured);
 </section>
 
 <style>
-  /* Business ⇄ Tech: one switch for the whole section, like the hero's bridge.
-     Without :has() the switch is hidden and both views show. */
+  .projects {
+    /* The views slide in by 0.75rem; never let that cause a horizontal scroll. */
+    overflow-x: clip;
+  }
+
+  /* Business ⇄ Tech: one switch for the whole section, drawn like the hero's bridge:
+     business on paper in serif, an orange pillar, tech on ink in mono. The chosen
+     side is wider and at full contrast. Without :has() the switch is hidden and
+     both views show. */
   .lens {
     display: none;
   }
@@ -193,50 +252,97 @@ const more = projects.filter((project) => !project.data.featured);
   }
 
   .lens-options {
-    display: inline-flex;
-    border-bottom: 1px solid var(--rule);
+    --bar: 4px;
+    --split: 62;
+    position: relative;
+    display: grid;
+    width: min(100%, 22rem);
+    min-height: 2.75rem;
+    grid-template-columns:
+      minmax(0, calc((100% - var(--bar)) * var(--split) / 100))
+      var(--bar)
+      minmax(0, 1fr);
+    border: 1px solid var(--ink);
+    /* --split is a registered <number> (global.css), so the switch eases like the bridge. */
+    transition: --split 300ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .lens-options:has(#projects-lens-tech:checked) {
+    --split: 38;
+  }
+
+  .lens-options::before {
+    grid-row: 1;
+    grid-column: 2;
+    background-color: var(--signal);
+    content: "";
+  }
+
+  .lens-options:has(input:focus-visible) {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
   }
 
   .lens input {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 1px;
     height: 1px;
     opacity: 0;
   }
 
   .lens label {
-    display: inline-flex;
-    min-height: 2.75rem;
+    display: flex;
+    grid-row: 1;
     align-items: center;
-    padding: 0 1rem;
-    color: var(--steel-text);
+    justify-content: center;
+    padding: 0 0.75rem;
+    overflow: hidden;
     cursor: pointer;
+    white-space: nowrap;
+    transition: color 150ms ease-out;
+  }
+
+  .lens-business {
+    grid-column: 1;
+    background-color: var(--paper);
+    color: var(--steel-text);
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-synthesis: none;
+  }
+
+  .lens-tech {
+    grid-column: 3;
+    background-color: var(--ink);
+    color: color-mix(in srgb, var(--paper) 70%, var(--ink));
     font-family: var(--font-mono);
     font-size: 0.8125rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    transition:
-      color 150ms ease-out,
-      box-shadow 150ms ease-out;
   }
 
-  .lens label:first-of-type {
-    padding-left: 0;
-  }
-
-  .lens label:hover {
+  .lens-business:hover,
+  .lens input:checked + .lens-business {
     color: var(--ink);
   }
 
-  /* The active view carries the bridge's orange line. */
-  .lens input:checked + label {
-    color: var(--ink);
-    box-shadow: inset 0 -3px 0 var(--signal);
+  .lens-tech:hover,
+  .lens input:checked + .lens-tech {
+    color: var(--paper);
   }
 
-  .lens input:focus-visible + label {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+  @media (forced-colors: active) {
+    .lens input:checked + label {
+      text-decoration: underline 3px;
+      text-underline-offset: 0.35em;
+    }
+
+    .lens-options::before {
+      forced-color-adjust: none;
+      background-color: CanvasText;
+    }
   }
 
   .project-meta,
@@ -255,7 +361,7 @@ const more = projects.filter((project) => !project.data.featured);
     color: var(--ink);
   }
 
-  /* Featured: the title and links on the left, the chosen view on the right. */
+  /* Featured: title, keyline, tools and demo on the left; the chosen view on the right. */
   .featured {
     display: grid;
     gap: 1.5rem;
@@ -277,11 +383,91 @@ const more = projects.filter((project) => !project.data.featured);
     line-height: 1.08;
     text-wrap: balance;
     font-synthesis: none;
+    hyphens: auto;
+    overflow-wrap: break-word;
   }
 
   @media (min-width: 640px) {
     .featured-title {
       font-size: 2.375rem;
+    }
+  }
+
+  /* The entry's strongest line, in the voice of About's offer. */
+  .keyline {
+    max-width: 26rem;
+    margin-top: 1.25rem;
+    border-left: 3px solid var(--signal);
+    padding-left: 1.25rem;
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    line-height: 1.25;
+    text-wrap: balance;
+    font-synthesis: none;
+  }
+
+  @media (min-width: 640px) {
+    .keyline {
+      font-size: 1.5rem;
+    }
+  }
+
+  .featured-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .featured-links li {
+    width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .featured-links li {
+      width: auto;
+    }
+  }
+
+  /* Tech view of a featured entry: the hero's ink panel. */
+  .featured-body :global(.view-tech) {
+    background-color: var(--ink);
+    color: var(--paper);
+    padding: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .featured-body :global(.view-tech) {
+      padding: 1.5rem 2rem;
+    }
+  }
+
+  .featured-body :global(.view-tech .project-label) {
+    color: var(--paper);
+  }
+
+  /* Switching views slides the new one in from its side of the bridge. */
+  @media (prefers-reduced-motion: no-preference) {
+    .featured-body :global(.view-business) {
+      animation: projects-lens-from-left 260ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    .featured-body :global(.view-tech) {
+      animation: projects-lens-from-right 260ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+  }
+
+  @keyframes projects-lens-from-left {
+    from {
+      opacity: 0;
+      translate: -0.75rem 0;
+    }
+  }
+
+  @keyframes projects-lens-from-right {
+    from {
+      opacity: 0;
+      translate: 0.75rem 0;
     }
   }
 
@@ -322,8 +508,8 @@ const more = projects.filter((project) => !project.data.featured);
     text-wrap: pretty;
   }
 
-  /* The result is the payoff: it gets the same orange rule as About's offer. */
-  .projects :global(.result) {
+  /* Without a keyline, the result is the payoff and gets About's orange rule. */
+  .projects :global(.result-marked) {
     border-left: 3px solid var(--signal);
     padding-left: 1rem;
   }
@@ -341,15 +527,20 @@ const more = projects.filter((project) => !project.data.featured);
     font-size: 0.8125rem;
   }
 
-  /* More projects: one row each, opened with the native disclosure widget. */
+  /* More projects: title first, then year · context and the first three tools,
+     opened with the native disclosure widget. */
   .more summary {
     display: grid;
-    grid-template-columns: 4.5rem minmax(0, 1fr) auto;
-    grid-template-areas: "year title marker";
-    align-items: baseline;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "title marker"
+      "meta marker"
+      "tools marker";
+    align-items: start;
     column-gap: 1rem;
+    row-gap: 0.25rem;
     min-height: 2.75rem;
-    padding: 1.125rem 0;
+    padding: 1rem 0;
     cursor: pointer;
     list-style: none;
   }
@@ -360,16 +551,11 @@ const more = projects.filter((project) => !project.data.featured);
 
   @media (min-width: 640px) {
     .more summary {
-      grid-template-columns: 5.5rem minmax(0, 1fr) auto auto;
-      grid-template-areas: "year title context marker";
+      grid-template-columns: 6rem minmax(0, 1fr) auto;
+      grid-template-areas:
+        "meta title marker"
+        "meta tools marker";
     }
-  }
-
-  .more-year {
-    grid-area: year;
-    color: var(--steel-text);
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
   }
 
   .more summary :global(.more-title) {
@@ -378,26 +564,44 @@ const more = projects.filter((project) => !project.data.featured);
     font-size: 1.375rem;
     line-height: 1.2;
     font-synthesis: none;
+    hyphens: auto;
+    overflow-wrap: break-word;
   }
 
-  .more summary:hover :global(.more-title) {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.2em;
+  @media (hover: hover) {
+    .more summary:hover :global(.more-title) {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+    }
   }
 
-  .more-context {
-    display: none;
-    grid-area: context;
+  .more-meta {
+    display: flex;
+    flex-wrap: wrap;
+    grid-area: meta;
+    column-gap: 0.375rem;
     color: var(--steel-text);
     font-family: var(--font-mono);
     font-size: 0.8125rem;
   }
 
   @media (min-width: 640px) {
-    .more-context {
-      display: inline;
+    /* Year above context in the left column; the dot is only for one line. */
+    .more-meta {
+      flex-direction: column;
+      padding-top: 0.4rem;
     }
+
+    .more-meta > [aria-hidden] {
+      display: none;
+    }
+  }
+
+  .more-tools {
+    grid-area: tools;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
   }
 
   /* A plus that turns into a minus. */
@@ -406,7 +610,7 @@ const more = projects.filter((project) => !project.data.featured);
     grid-area: marker;
     width: 0.875rem;
     height: 0.875rem;
-    align-self: center;
+    margin-top: 0.5rem;
   }
 
   .more-marker::before,
@@ -429,13 +633,21 @@ const more = projects.filter((project) => !project.data.featured);
     transform: rotate(0deg);
   }
 
+  @media (forced-colors: active) {
+    .more-marker::before,
+    .more-marker::after {
+      forced-color-adjust: none;
+      background-color: CanvasText;
+    }
+  }
+
   .more-body {
     padding-bottom: 2rem;
   }
 
   @media (min-width: 640px) {
     .more-body {
-      padding-left: 6.5rem;
+      padding-left: 7rem;
     }
   }
 </style>
