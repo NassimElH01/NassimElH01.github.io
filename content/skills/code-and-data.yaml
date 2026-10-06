@@ -68,9 +68,15 @@ items:
     name:
       en: "Client-server applications and graphical user interfaces"
       da: "Client-server-applikationer og grafiske brugergrænseflader"
-    # The 24Support production setup has a separate Node.js server and admin tool,
-    # but whether Nassim built them is unconfirmed (see that project's role TODO).
-    usedIn: "TODO: where used — study course? 24Support server (unconfirmed who built it); owner to confirm"
+    usedIn:
+      # Source: the owner's answer (2026-10-06: he built the 24Support server and admin tool
+      # himself) and OLD-SITE (projectsData.ts "24support-julekalender": "en separat Node.js-server
+      # til datostyring og et loginbeskyttet adminværktøj").
+      - context: freelance
+        project: 24support-christmas-calendar
+        note:
+          en: "Node.js server that controls when each door opens, and a login-protected admin tool"
+          da: "Node.js-server, der styrer, hvornår hver låge åbner, og et loginbeskyttet adminværktøj"
 
   # [BEKRÆFT] in the brief: hidden until the owner confirms the language.
   - id: c-sharp-java
@@ -101,6 +107,12 @@ items:
         note:
           en: "AI tools such as Copilot and ChatGPT for process optimisation, including user documentation and onboarding material often made with AI"
           da: "AI-værktøjer som Copilot og ChatGPT til procesoptimering, herunder brugerdokumentation og onboardingmateriale, ofte lavet med AI"
+      # Source: the owner's answer (2026-10-06: "programering igennem claude og co pilot")
+      - context: freelance
+        project: 24support-christmas-calendar
+        note:
+          en: "Programmed the calendar, server and admin tool with Claude and Copilot"
+          da: "Programmerede kalenderen, serveren og adminværktøjet med Claude og Copilot"
 
   - id: machine-learning-basics
     name:

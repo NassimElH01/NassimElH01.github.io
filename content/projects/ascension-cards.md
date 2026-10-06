@@ -51,9 +51,13 @@ technology:
   - "TODO: confirm — shaders (FlightWorld3D.tsx has a THREE.ShaderMaterial for the sky)"
   - "TODO: confirm — performance-optimised render loop with frustum culling"
   - "TODO: confirm — particle systems 'optimised for high performance'"
+# Source: git history (FlightWorld3D.tsx committed 2026-09-09, the app 2026-09-12, both on the old
+# site, which deployed from main), legacy/vite-spa/src/components/ascension3d/AscensionGame.tsx
+# (lines 85 and 120: progress in localStorage) and the owner's answer (2026-10-06: he does not use
+# it himself, but it is "et fedt projekt at vise"), so no usage claim. Two sentences, as the owner asked.
 result:
-  en: "TODO: outcome — owner to confirm (is the app finished, live or used by anyone?)"
-  da: "TODO: resultat — ejer bekræfter (er appen færdig, live eller i brug?)"
+  en: "A playable version went online on Nassim's previous portfolio in September 2026 and saves each player's progress locally in the browser. It included FlightWorld 3D, a 3D world visitors could fly through right in the browser."
+  da: "En spilbar version kom online på Nassims tidligere portfolio i september 2026 og gemmer hver spillers fremskridt lokalt i browseren. Den indeholdt FlightWorld 3D, en 3D-verden, som besøgende kunne flyve rundt i direkte i browseren."
 featured: false
 order: 8
 ---

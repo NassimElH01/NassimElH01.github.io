@@ -32,11 +32,14 @@ method:
 technology:
   - "HTML"
   - "CSS"
-# Source: CV-2 (ERHVERVSERFARING: S&S listed as a job, "virksomhedens hjemmeside"), so the TODO
-# says "company", not "client" (see the conflict note above).
+# Source: CV-2 (ERHVERVSERFARING: "2023 - nuværrende", "vedligeholdt virksomhedens hjemmeside"),
+# the owner's answer (2026-10-06: he still works at S&S, on IT support and administration) and
+# OLD-SITE (projectsData.ts "ss-rengoringservice-website", highlight 3: "Forbandt virksomhedens
+# serviceprofil med en mere professionel digital tilstedeværelse"). Whether the site is live was
+# not checked from this session (the domain is blocked here). Two sentences, as the owner asked.
 result:
-  en: "TODO: outcome for the company (launch date, feedback?) — owner to confirm"
-  da: "TODO: resultat for virksomheden (lanceringsdato, feedback?) — ejer bekræfter"
+  en: "Nassim maintains the website as part of his job at the company. It gives S&S Rengøringsservice a more professional online presence."
+  da: "Nassim vedligeholder hjemmesiden som en del af sit job i virksomheden. Den giver S&S Rengøringsservice en mere professionel digital tilstedeværelse."
 link: "https://ss.ssrengoringsservice.dk/"
 linkLabel:
   en: "Visit website"

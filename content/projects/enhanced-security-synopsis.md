@@ -4,8 +4,6 @@
 # 15-page PDF shared by the owner on 2026-10-05; page numbers below are the synopsis' own).
 # Danish follows the synopsis; English is a faithful translation. The synopsis is the owner's own
 # work; it is not linked, because it was not published.
-# Possibly the same elective as the old site's draft "data-integration-process-case"; the owner is
-# asked before the two are merged.
 # Source: EXAM-DTI cover, unnumbered ("Data og teknologi integration – Enhanced security")
 title:
   en: "Enhanced Security in data and technology integration"
@@ -19,13 +17,11 @@ context: "study"
 problem:
   en: "Data security has become critical because companies depend on secure data flows, and the threats from data leaks and cybercrime are rising sharply. The question was how encryption and access control can best protect data flows in networked systems and ensure GDPR compliance, and how to balance strong security against efficiency in Industry 4.0."
   da: "Datasikkerhed er blevet en kritisk faktor, fordi virksomheder er afhængige af sikre datastrømme, og samtidig stiger truslerne fra datalæk og cyberkriminalitet markant. Spørgsmålet var, hvordan kryptering og adgangskontrol bedst kan beskytte datastrømme i netværksbaserede systemer og sikre overholdelse af GDPR, og hvordan man finder balancen mellem høj sikkerhed og effektivitet i Industri 4.0."
-# Source: EXAM-DTI cover and every page header (only Nassim Hassani is named). The synopsis does not
-# say whether the exam was individual, and its one first-person phrase is plural ("Som vi tidligere
-# har nævnt", p.4). Owner to confirm "individual exam" (see also data-integration-process-case,
-# which may be the same elective). "Paper" in English: an English "synopsis" reads as a summary.
+# Source: the owner's answer (2026-10-06: an individual exam) and EXAM-DTI cover and every page
+# header (only Nassim Hassani is named). "Paper" in English: an English "synopsis" reads as a summary.
 role:
-  en: "Sole author: Nassim wrote the paper on his own."
-  da: "Eneste forfatter: Nassim skrev synopsen alene."
+  en: "Individual elective exam: Nassim wrote the paper on his own."
+  da: "Individuel valgfagseksamen: Nassim skrev synopsen alene."
 # Source: EXAM-DTI p.3 (Teoretisk grundlag: CIA-trekanten; Analyse: AES, RSA; Bilag 1 compares symmetric
 # and asymmetric encryption), p.4 (Analyse continued: RBAC, MFA, netværkssegmentering, fordele og ulemper,
 # "Risiko for reduceret systemhastighed"; Metode: kvalitativ tilgang, sekundære data fra rapporter og
