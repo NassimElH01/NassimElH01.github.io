@@ -95,6 +95,8 @@ const certifications = defineCollection({
     year: orTodo(year),
     credentialUrl: orTodo(z.url({ protocol: /^https$/ })).optional(),
     credentialId: text.optional(),
+    // The assessment's own result, in its own terms (e.g. "Grade A, full score"); never converted.
+    result: localized.optional(),
     order: z.number().int(),
   }),
 });
@@ -118,6 +120,8 @@ const timeline = defineCollection({
       responsibilities: localizedList.default({ en: [], da: [] }),
       strengths: localizedList.optional(),
       tags: z.array(text).default([]),
+      // Exam results as the source states them, in the order to show them.
+      grades: z.array(z.object({ label: localized, grade: text })).optional(),
       showOnPrintCv: z.boolean().default(true),
       order: z.number().int(),
       draft: z.boolean().default(false),

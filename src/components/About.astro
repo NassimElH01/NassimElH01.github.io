@@ -9,6 +9,7 @@ import type { Lang } from "@/i18n/config";
 import { localize, pick, t } from "@/i18n/utils";
 import { getProfile, getPublished } from "@/lib/content";
 import { isTodo } from "@/lib/todo";
+import { formatPeriod, yearOf } from "@/lib/dates";
 import LocalizedText from "@/components/LocalizedText.astro";
 import portrait from "@/assets/portrait/nassim-hassani.jpg";
 
@@ -41,14 +42,14 @@ const known = (value: unknown) => (value === undefined || isTodo(value) ? undefi
 
 const education = (await getPublished("timeline"))
   .filter((entry) => entry.data.kind === "education")
-  .sort((a, b) => Number(known(b.data.start) ?? 0) - Number(known(a.data.start) ?? 0))
-  .map(({ data }) => {
-    const start = known(data.start);
-    const end = data.end === "present" ? undefined : known(data.end);
-    const period =
-      start && end ? (data.expected ? `${start} – ${tr("about.expected")} ${end}` : `${start}–${end}`) : (start ?? "");
-    return { title: pick(data.title, lang).value, details: [data.organization, period].filter(Boolean) };
-  });
+  .sort((a, b) => Number(yearOf(b.data.start) ?? 0) - Number(yearOf(a.data.start) ?? 0))
+  .map(({ data }) => ({
+    title: pick(data.title, lang).value,
+    details: [data.organization, formatPeriod(data, lang, { expectedLabel: tr("about.expected") })].filter(
+      (part): part is string => Boolean(part),
+    ),
+    grades: (data.grades ?? []).map((item) => ({ label: pick(item.label, lang).value, grade: item.grade })),
+  }));
 
 const certifications = (await getCollection("certifications"))
   .sort((a, b) => a.data.order - b.data.order)
@@ -59,9 +60,12 @@ const certifications = (await getCollection("certifications"))
     const showIssuer = issuer && !name.toLowerCase().startsWith(issuer.split(/\s/)[0].toLowerCase());
     return {
       name,
-      details: [showIssuer ? issuer : undefined, known(data.year), data.credentialId && `ID ${data.credentialId}`].filter(
-        (part): part is string => Boolean(part),
-      ),
+      details: [
+        showIssuer ? issuer : undefined,
+        known(data.year),
+        data.credentialId && `ID ${data.credentialId}`,
+        data.result && pick(data.result, lang).value,
+      ].filter((part): part is string => Boolean(part)),
     };
   });
 
@@ -169,6 +173,15 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
                     </>
                   ))}
                 </p>
+                {item.grades.length > 0 && (
+                  <ul role="list" class="grades" aria-label={tr("about.grades")}>
+                    {item.grades.map((grade) => (
+                      <li>
+                        {grade.label} <span class="grade">{grade.grade}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </ul>
@@ -325,6 +338,22 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
       filter: grayscale(1) contrast(1.1) brightness(0.74);
       mix-blend-mode: normal;
     }
+  }
+
+  /* Grades: label in steel, the grade itself in mono ink, so the numbers scan. */
+  .grades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin-top: 0.5rem;
+    color: var(--steel-text);
+    font-size: 0.875rem;
+  }
+
+  .grade {
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-weight: 500;
   }
 
   .about-label {

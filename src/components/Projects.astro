@@ -14,6 +14,7 @@ import type { UiKey } from "@/i18n/ui";
 import { pick, t } from "@/i18n/utils";
 import { getPublished } from "@/lib/content";
 import { isTodo } from "@/lib/todo";
+import { formatPeriod } from "@/lib/dates";
 import LocalizedText from "@/components/LocalizedText.astro";
 import ProjectViews from "@/components/ProjectViews.astro";
 
@@ -34,10 +35,7 @@ function period(project: Project): string | undefined {
   const year = known(project.year);
   if (year) return year;
   const entry = project.timeline ? timeline.get(project.timeline.id) : undefined;
-  const start = known(entry?.start);
-  if (!entry || !start) return undefined;
-  const end = entry.end === "present" ? tr("projects.present") : known(entry.end);
-  return !end || end === start ? start : `${start}–${end}`;
+  return entry && formatPeriod(entry, lang, { months: false, presentLabel: tr("projects.present") });
 }
 
 function links(project: Project) {
