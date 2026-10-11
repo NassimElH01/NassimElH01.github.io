@@ -59,5 +59,5 @@ result:
   en: "A playable version went live on Nassim's previous portfolio in September 2026 and saved each player's progress locally in the browser. It included FlightWorld 3D, a 3D world that visitors could fly through."
   da: "En spilbar version blev lagt online på Nassims tidligere portfolio i september 2026 og gemte hver spillers fremskridt lokalt i browseren. Den indeholdt FlightWorld 3D, en 3D-verden, som besøgende kunne flyve rundt i."
 featured: false
-order: 8
+order: 12
 ---

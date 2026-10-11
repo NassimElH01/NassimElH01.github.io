@@ -12,7 +12,7 @@ export function yearOf(value: string | undefined): string | undefined {
 export function formatDate(value: string, lang: Lang, { months = true } = {}): string {
   const [year, month] = value.split("-");
   if (!month || !months) return year;
-  return new Intl.DateTimeFormat(lang === "da" ? "da-DK" : "en-GB", {
+  return new Intl.DateTimeFormat(lang === "da" ? "da-DK" : "en-US", {
     month: "short",
     year: "numeric",
     timeZone: "UTC",

@@ -6,14 +6,21 @@
 kind: "work"
 # Source: CV-2 and CV-CBS ("Tilkaldevikar / pædagogmedhjælper"); English is a
 # faithful translation. Replaces the old-site "Pædagogmedhjælper / Vikar".
+# OWNER-PDF p.13 confirms the role ("Tilkaldevikar og pædagogmedhjælper").
 title:
   en: "On-call substitute / pedagogical assistant"
   da: "Tilkaldevikar / pædagogmedhjælper"
-# Source: CV-2 and CV-CBS ("Daginstitution (Børne- og Kulturhuset)"). Conflict
-# noted: the old site said "Børnehave i Taastrupgaard"; the CVs win.
-organization: "Daginstitution (Børne- og Kulturhuset)"
+# Source: OWNER-PDF p.13 (Tidligere Erhvervserfaring: "Børnehuset Lindegaarden / Børne- og
+# Kulturhuset"), read as the name of the institution the CVs call "Daginstitution (Børne- og
+# Kulturhuset)" (CV-2 and CV-CBS), kept in the CVs' "name (Børne- og Kulturhuset)" form.
+# Owner: confirm that Børnehuset Lindegaarden is part of Børne- og Kulturhuset (the PDF's
+# slash could also mean two workplaces). Conflict noted: the old site said "Børnehave i
+# Taastrupgaard"; the CVs and the PDF win.
+organization: "Børnehuset Lindegaarden (Børne- og Kulturhuset)"
 # Source: CV-2 and CV-CBS list this under "Øvrig erhvervserfaring" without dates, and no other
 # source dates it, so it is shown undated, as in the CVs (owner's answers, 2026-10-05).
+# OWNER-PDF p.13 groups it under "Tidligere Erhvervserfaring (2020 – 2024)" with no dates
+# for the job itself, so it stays undated.
 undated: true
 summary:
   en: "Worked in a kindergarten with a focus on the children's well-being, sense of security, play and daily activities."

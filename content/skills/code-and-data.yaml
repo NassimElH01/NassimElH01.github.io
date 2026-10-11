@@ -3,6 +3,12 @@
 # Gen AI & ML elective exam (EXAM) and the Royal Unibrew internship report (REPORT).
 # The posture checker and the arcade (p5.js) were committed under the "Can Kurt" identity,
 # but the owner confirmed authorship on 2026-10-04 and called them personal on 2026-10-05.
+# OWNER-PDF is the owner's 18-page text pack ("Her er en komplet ... tekstpakke", shared
+# 2026-10-11; written with an AI assistant, so used for facts only; PDF page numbers).
+# It is cited only where it ties a skill to a project, course or job; a skill it merely
+# lists is not usage. Earlier sources win where they conflict.
+# Tjekkit is a group project (owner 2026-10-11); his own part is a TODO in the project
+# file, so its entries below say "group project".
 group:
   en: "Code & data"
   da: "Kode & data"
@@ -19,17 +25,45 @@ items:
         note:
           en: "Machine learning notebooks in Google Colab"
           da: "Machine learning-notebooks i Google Colab"
+      # Source: OWNER-PDF p.7 (3. Udvalgte Projekter, Tjekkit: "Udviklet i Python med modulariseret
+      # OOP-struktur opdelt i logiske ansvarsområder: App, Menu, LogIn og Ansat"); owner 2026-10-11
+      # (group project, 2nd semester)
+      - context: study
+        project: tjekkit
+        note:
+          en: "Group project: object-oriented registration system split into App, Menu, LogIn and Ansat"
+          da: "Gruppeprojekt: objektorienteret registreringssystem opdelt i App, Menu, LogIn og Ansat"
+      # Source: OWNER-PDF p.9-10 (3. Udvalgte Projekter, Airbnb, "Metode & Eksekvering i Python":
+      # loading with Pandas and NumPy, cleaning, lambda functions, Seaborn and Matplotlib)
+      - context: study
+        project: airbnb-eda
+        note:
+          en: "Data cleaning and analysis with pandas and NumPy, charts with Matplotlib and Seaborn"
+          da: "Datarensning og analyse med pandas og NumPy, diagrammer med Matplotlib og Seaborn"
 
   - id: sql-relational-databases
     name:
       en: "SQL and relational databases (normalization, data modeling)"
       da: "SQL og relationelle databaser (normalisering, datamodellering)"
-    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+    # OWNER-PDF p.2 (Kernekompetencer, Relationelle Databaser & SQL) also names E/R modelling,
+    # normalisation (1NF-3NF) and DDL/DML in MySQL, and p.16 lists SQL under the IBM Data Analyst
+    # certificate, but neither ties them to a project, so only Tjekkit is cited.
+    usedIn:
+      # Source: OWNER-PDF p.7 (3. Udvalgte Projekter, Tjekkit: "Tilknyttet en relationel
+      # MySQL-database: Tabeller til medarbejderstamdata (ansat) og tidsregistrering (Vagt)
+      # struktureret med primær- og fremmednøgler samt dataintegritet"); owner 2026-10-11 (group project)
+      - context: study
+        project: tjekkit
+        note:
+          en: "Group project: MySQL database with tables for employee data and time registration, linked by primary and foreign keys"
+          da: "Gruppeprojekt: MySQL-database med tabeller til medarbejderdata og tidsregistrering, forbundet med primær- og fremmednøgler"
 
   - id: html-css-javascript
     name:
       en: "HTML/CSS/JavaScript"
       da: "HTML/CSS/JavaScript"
+    # OWNER-PDF p.11-12 (Freelance Web- & IT-Løsninger) names no languages, so the freelance-web
+    # card is not cited here; its HTML/CSS/JavaScript comes from the 24Support entry below.
     usedIn:
       # Old projectsData tags (NassimElH01): "HTML", "CSS", "JavaScript".
       - context: freelance
@@ -78,13 +112,16 @@ items:
           en: "Node.js server that controls when each door opens, and a login-protected admin tool"
           da: "Node.js-server, der styrer, hvornår hver låge åbner, og et loginbeskyttet adminværktøj"
 
-  # [BEKRÆFT] in the brief: hidden until the owner confirms the language.
+  # [BEKRÆFT] in the brief: hidden until the owner confirms where it was used.
+  # The id is kept from the brief's "C#/Java" so nothing that refers to it breaks.
   - id: c-sharp-java
+    # Source: OWNER-PDF p.2 (Kernekompetencer: "Objektorienteret Programmering (Python & Java)").
+    # The PDF names no C#. It ties Java to no project or course (Tjekkit, p.7, is in Python).
     name:
-      en: "TODO: confirm — C#/Java/other language from the Software Construction course"
-      da: "TODO: bekræft — C#/Java/andet sprog fra faget Softwarekonstruktion"
+      en: "Java"
+      da: "Java"
     confirm: true
-    usedIn: "TODO: where used — Softwarekonstruktion course (which programme?); owner to confirm"
+    usedIn: "TODO: where used — the Softwarekonstruktion course (which programme?) or another project; owner to confirm"
 
   # The next two items are NOT in the original brief. They were added from the EXAM
   # and REPORT evidence below; the owner may remove them.
@@ -127,3 +164,28 @@ items:
         note:
           en: "Notebook assignments on linear regression and neural-network classification"
           da: "Notebook-opgaver i lineær regression og klassifikation med neurale netværk"
+
+  # Not in the original brief either: added because the group had no data-analysis item,
+  # the owner's CVs list "Dataanalyse" (new CV, Kompetencer; CV-2, Zealand "Fokus"), and the
+  # IBM Data Analytics certificate had no skill. The owner may remove it.
+  - id: data-analysis-visualization
+    # Source: OWNER-PDF p.4 (Kernekompetencer, Data Wrangling & Eksplorativ Analyse: Pandas,
+    # NumPy, Matplotlib, Seaborn) and p.9-10 (Airbnb, where they were used)
+    name:
+      en: "Data analysis and visualization (pandas, NumPy, Matplotlib, Seaborn)"
+      da: "Dataanalyse og visualisering (pandas, NumPy, Matplotlib, Seaborn)"
+    # Source: LinkedIn and the new CV (Certificeringer: "IBM Data Analytics", a data analytics
+    # programme); owner 2026-10-11 (the Airbnb analysis is the "IBM Data Analyst" capstone).
+    # CONFLICT (name): OWNER-PDF p.16 calls it "IBM Data Analyst Professional Certificate";
+    # airbnb-eda.md asks the owner to confirm it is the same certificate.
+    certifications:
+      - ibm-data-analytics
+    usedIn:
+      # Source: OWNER-PDF p.9-10 (3. Udvalgte Projekter, Airbnb: bookings in New York City;
+      # cleaning; "kortlægge prisforskelle på tværs af værelsestyper, evaluere afbestillingsreglers
+      # indflydelse på lejepriser via boxplots"); owner 2026-10-11 (IBM capstone)
+      - context: study
+        project: airbnb-eda
+        note:
+          en: "IBM capstone: cleaned Airbnb booking data from New York City and compared prices across room types and cancellation policies"
+          da: "IBM-capstone: rensede Airbnb-bookingdata fra New York City og sammenlignede priser på tværs af værelsestyper og afbestillingsregler"

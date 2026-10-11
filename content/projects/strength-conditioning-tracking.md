@@ -33,5 +33,5 @@ linkLabel:
 # Order and featured: presentation only (Projects section, 2026-10-06): the three projects that
 # best show the student-job profile lead.
 featured: false
-order: 5
+order: 10
 ---

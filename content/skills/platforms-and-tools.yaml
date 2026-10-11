@@ -5,6 +5,10 @@
 # The [BEKRÆFT] placeholder "other-tools" is replaced by the concrete tools the CVs
 # and the REPORT list (Microsoft 365, ticket systems, SharePoint, Excel, Windows,
 # ProjectFlow 365).
+# OWNER-PDF (the owner's 18-page text pack, shared 2026-10-11; written with an AI
+# assistant, so used for facts only) adds no usage here: it names WordPress (p.3,
+# Kernekompetencer: "CMS-konfiguration (WordPress)") but ties it to no project; its
+# freelance section (p.11-12) does not name WordPress. So no WordPress item is added.
 group:
   en: "Platforms & tools"
   da: "Platforme & værktøjer"
@@ -33,6 +37,8 @@ items:
     usedIn:
       # Source: CV-2 (Royal Unibrew: "Arbejde med projektstyring, governance og fremdrift i
       # Azure DevOps"); REPORT (p.5: planning via Azure DevOps)
+      # OWNER-PDF p.12 adds "sprint-kadencer"; not used, as REPORT p.19 says agile/Scrum was not
+      # applied at Royal Unibrew (see project-and-business.yaml).
       - context: internship
         timeline: royal-unibrew-pmo
         note:

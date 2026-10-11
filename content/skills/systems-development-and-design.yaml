@@ -1,7 +1,10 @@
 # Skill group "Systemudvikling & design" from the owner's brief (CLAUDE.md).
 # CV-2 lists "systemudvikling og IT-arkitektur" as a focus area of the Zealand PBA;
-# that is cited for UML and system modeling only. No source says where the other
-# items were used, so their usedIn stays a TODO for the owner.
+# that is cited for UML and system modeling only. OWNER-PDF (the owner's 18-page text
+# pack, shared 2026-10-11; written with an AI assistant, so used for facts only; PDF
+# page numbers) adds the Tjekkit group project for UML (owner 2026-10-11: group project,
+# his own part is a TODO in the project file). No source says where the other items
+# were used, so their usedIn stays a TODO for the owner.
 group:
   en: "Systems development & design"
   da: "Systemudvikling & design"
@@ -19,6 +22,14 @@ items:
         note:
           en: "Focus area in the programme: systems development and IT architecture"
           da: "Fokusområde på uddannelsen: systemudvikling og IT-arkitektur"
+      # Source: OWNER-PDF p.7 (3. Udvalgte Projekter, Tjekkit, Systemdesign & Arkitektur:
+      # "Use Case-diagrammer, domænemodeller, sekvensdiagrammer (SSD) og klassediagrammer");
+      # owner 2026-10-11 (group project)
+      - context: study
+        project: tjekkit
+        note:
+          en: "Group project: use case diagrams, domain model, system sequence diagrams and class diagrams"
+          da: "Gruppeprojekt: use case-diagrammer, domænemodel, systemsekvensdiagrammer og klassediagrammer"
 
   - id: requirements-specification
     name:
@@ -30,6 +41,8 @@ items:
     name:
       en: "UX and usability testing"
       da: "UX og usability-test"
+    # OWNER-PDF p.12 (Freelance Web- & IT-Løsninger) mentions advice on user experience, but no
+    # usability testing, so the freelance-web card is not cited.
     usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
 
   - id: prototyping

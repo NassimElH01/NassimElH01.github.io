@@ -79,5 +79,5 @@ links:
 # Source: EXAM (p.2: Økonomi & IT, Zealand) and CV-2 (Zealand PBA 2022–2026)
 timeline: "zealand-professionsbachelor"
 featured: false
-order: 7
+order: 9
 ---

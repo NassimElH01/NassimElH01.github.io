@@ -4,32 +4,46 @@
 # English is a faithful translation for the owner to review.
 # Not in CV-2 or CV-CBS. The EXAM (5th-semester elective, pp.18-19) confirms a
 # link to the club (he chose it for an assignment and used some of his own
-# recordings) but not this role, its kind or its dates.
-# CONFLICT, resolved by the brief and the current public profile: the old site (the
-# owner's own text, commit 79f3364) filed this under "Erfaring", not
-# "Frivilligt arbejde", while the brief says "jeg træner kampsport og er
-# frivillig træner". The club is kept, and the role is treated as volunteer work.
+# recordings).
+# Source: OWNER-PDF p.13 (Erhvervserfaring: "Frivillig Boksetræner & Service Desk",
+# "Badr Fight Club | 2023 – Nu"). The title says "Frivillig", so kind is volunteer (as with
+# CNS Security's "Frivillig brandvagt"); the brief and profile.yaml ("er frivillig træner",
+# present tense, no club named) agree. Resolves the earlier work/volunteer TODO.
+# Conflict noted: the old site (the owner's own text, commit 79f3364) filed this under
+# "Erfaring", not "Frivilligt arbejde", with period "Tidligere erfaring" and past-tense text;
+# the PDF and the brief are followed. The owner confirmed "volunteer" himself in commit
+# 1bdba07 (2026-10-06).
 kind: "volunteer"
-# "medarbejder" is translated neutrally ("team member") because the role is volunteer-based.
+# Source: OWNER-PDF p.13 ("Frivillig Boksetræner & Service Desk"). Replaces the old-site
+# "Træner / Servicedesk-medarbejder".
 title:
-  en: "Coach / Service Desk Team Member"
-  da: "Træner / Servicedesk-medarbejder"
+  en: "Volunteer boxing coach & service desk"
+  da: "Frivillig boksetræner & service desk"
 organization: "Badr Fight Club"
-# Not in either CV and no source dates it, so it is shown undated like the CVs' "Øvrig
-# erhvervserfaring" (owner's answers, 2026-10-05).
-undated: true
+# Source: OWNER-PDF p.13 ("2023 – Nu"). Replaces the earlier undated entry (no source
+# dated it before; owner's answers, 2026-10-05).
+start: "2023"
+end: "present"
+# Source: OLD-SITE legacy cvData.ts (Nassim's own Danish text), put in the present tense
+# to match OWNER-PDF p.13 ("2023 – Nu") and named a volunteer boxing coach as the PDF does.
 summary:
-  en: "Worked as a coach and on the service desk in an active club environment, responsible for members, practical support, coordination and day-to-day operations."
-  da: "Arbejdede som træner og på servicedesk i et aktivt klubmiljø med ansvar for medlemmer, praktisk support, koordinering og daglig drift."
+  en: "Volunteers as a boxing coach and on the service desk in an active club environment, responsible for members, practical support, coordination and day-to-day operations."
+  da: "Er frivillig boksetræner og står i servicedesken i et aktivt klubmiljø med ansvar for medlemmer, praktisk support, koordinering og daglig drift."
 responsibilities:
   en:
-    - "Planned and ran training sessions and supported members in their development."
-    - "Ensured service desk support, answered questions and helped with practical club tasks."
-    - "Contributed to a safe, positive and structured environment for members and activities."
+    # Source: OWNER-PDF p.13 (structured training and mental coaching for children and young people); legacy cvData.ts (planned and ran training)
+    - "Plans and runs structured training and mental coaching for children and young people."
+    # Source: OWNER-PDF p.13 (member administration, front desk, communication with parents; the PDF's "under højt ledelsesansvar" is left out); legacy cvData.ts (questions and practical club tasks)
+    - "Handles member administration, the front desk and communication with parents, and helps with questions and practical club tasks."
+    # Source: legacy cvData.ts
+    - "Contributes to a safe, positive and structured environment for members and activities."
   da:
-    - "Planlagde og gennemførte træning samt støttede medlemmer i deres udvikling."
-    - "Sikrede service desk-support, besvarede spørgsmål og hjalp med praktiske klubopgaver."
-    - "Bidrog til et trygt, positivt og struktureret miljø for medlemmer og aktiviteter."
+    # Source: OWNER-PDF p.13; legacy cvData.ts
+    - "Planlægger og afvikler struktureret træning og mental coaching for børn og unge."
+    # Source: OWNER-PDF p.13; legacy cvData.ts
+    - "Står for medlemsadministration, skrankebetjening og kommunikation med forældre og hjælper med spørgsmål og praktiske klubopgaver."
+    # Source: legacy cvData.ts
+    - "Bidrager til et trygt, positivt og struktureret miljø for medlemmer og aktiviteter."
 strengths:
   en:
     - "Disciplined and motivating in an active environment"
@@ -43,6 +57,8 @@ strengths:
     - "Ansvarsbevidst og løsningsorienteret"
 tags:
   - "Træning"
+  # Source: OWNER-PDF p.13 (mental coaching for children and young people)
+  - "Coaching"
   - "Servicedesk"
   - "Medlemsservice"
   - "Kommunikation"

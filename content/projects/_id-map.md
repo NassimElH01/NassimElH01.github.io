@@ -20,8 +20,12 @@ Old ids come from `legacy/vite-spa/src/data/projectsData.ts` (and `cvData.ts` wh
 - `royal-unibrew-projectflow-power-bi`: from the Royal Unibrew internship report and CV-2.
 - `genai-ml-elective`: from the Gen AI & Machine learning elective exam.
 - `enhanced-security-synopsis`: from the Enhanced Security elective exam (individual, confirmed 2026-10-06).
+- `tjekkit`: from the owner's text pack (OWNER-PDF p.7-8, shared 2026-10-11) and the owner's answers of 2026-10-11 (group project, 2nd semester, handed in 26 May 2023). His own part in the group is still a TODO; no repo link (the PDF's link is a placeholder).
+- `airbnb-eda`: from OWNER-PDF p.9-10 and p.16 (IBM Data Analyst capstone) and the owner's answers of 2026-10-11 (Grade A, full score; the PDF's "12" is not used).
+- `ibm-cybersecurity-lab`: from IBM's evaluation of the IBM Cybersecurity Analyst capstone, pasted by the owner on 2026-10-11 (five tasks, 2 January 2024, Grade A, 50/50), and OWNER-PDF p.6-7, p.10-11 and p.16. The evaluator's name is not published.
+- `freelance-web`: from OWNER-PDF p.1 and p.11-12 and the owner's answers of 2026-10-11 (general, no client names).
 
 ## Not migrated
 
 - Stay in `legacy/`, not confirmed by the owner as his projects: `web-shooter` (hand-gesture demo; it also uses Marvel character names) and the demos in `legacy/vite-spa/src/components/projects/` (DebtSimulator, ProcessVisualizer, ComplianceInspector).
-- `ibm-data-analytics` (project card) was not migrated as a project. The IBM certificates are in `content/certifications.yaml`.
+- `ibm-data-analytics` (project card "IBM Data Analytics & Cybersecurity Capstone") was not migrated: its text was generic and unsourced. The two IBM capstones now have their own entries, `airbnb-eda` and `ibm-cybersecurity-lab`, built from the owner's 2026-10-11 sources, not from the old card. The IBM certificates are in `content/certifications.yaml`.

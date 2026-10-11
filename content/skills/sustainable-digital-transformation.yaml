@@ -2,6 +2,10 @@
 # CV-2 lists "IT-arkitektur" as a focus area of the Zealand PBA; that is cited for
 # enterprise architecture. No source says where the other items were used. The RUC
 # MSc started in 2026, so nothing from it is cited as usage until the owner confirms.
+# OWNER-PDF (the owner's 18-page text pack, shared 2026-10-11; used for facts only)
+# p.14 lists the RUC programme's core areas (enterprise architecture, business models,
+# IT governance, digital leadership, systems engineering). A programme description is
+# not usage, and the PDF ties none of these items to a project, so nothing changes here.
 group:
   en: "Sustainable digital transformation"
   da: "Bæredygtig digital transformation"

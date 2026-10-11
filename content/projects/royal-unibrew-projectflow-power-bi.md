@@ -46,7 +46,10 @@ technology:
   - "Power BI"
   - "ProjectFlow 365"
   - "Azure DevOps"
-  - "API integration"
+  # Source: OWNER-PDF p.8-9 (Royal Unibrew section: "dataudtræk via REST API mod ProjectFlow 365
+  # (JSON/OData)") and p.12 (Royal Unibrew: "REST API-kald mod ProjectFlow 365"). Refines REPORT's
+  # "API-integration"/"API-forbindelser" (p.6, p.15); OWNER-PDF is the owner's 2026-10-11 text pack.
+  - "REST API (JSON/OData)"
 # Source: REPORT (p.15: dashboards "som faktisk blev brugt til ledelsesrapportering"; p.17:
 # dashboards "som PMO og ledelsen faktisk benyttede"); CV-2 (ERHVERVSERFARING, Royal Unibrew:
 # "Resultat: Bidrog til øget gennemsigtighed i projektporteføljen som skaber bedre overblik, bedre

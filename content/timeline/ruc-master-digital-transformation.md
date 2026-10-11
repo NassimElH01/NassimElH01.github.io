@@ -1,22 +1,30 @@
 ---
 # Sources: owner's brief (Cand.it. in Digital Transformation, RUC, 2026–2028),
 # CV-2 and CV-CBS (Uddannelse), and legacy cvData.ts (responsibilities, Nassim's
-# own English text). Danish text is a faithful translation for the owner to review.
+# own English text). Months and core subject areas: OWNER-PDF, the owner's 18-page
+# text pack ("Her er en komplet ... tekstpakke", shared 2026-10-11; written with an
+# AI assistant, so used for facts only; PDF page numbers).
+# Danish text is a faithful translation for the owner to review.
 kind: "education"
 # Source: BRIEF (Cand.it. i Digital Transformation); CV-2 and CV-CBS ("MSc Digital Transformation")
 title:
   en: "MSc in Digital Transformation"
   da: "Cand.it. i Digital Transformation"
 organization: "Roskilde University (RUC)"
-# Source: CV-2 ("2026 – forventet 2028"); CV-CBS and BRIEF ("2026–2028")
-start: "2026"
-end: "2028"
+# Source: CV-2 ("2026 – forventet 2028"); CV-CBS and BRIEF ("2026–2028").
+# Source: OWNER-PDF p.14 (5. Uddannelse & Eksamensresultater: "Forventet: September
+# 2026 – Juni 2028") adds the months; the years agree with the CVs.
+start: "2026-09"
+end: "2028-06"
 expected: true
 # Source: CV-2 (Uddannelse, RUC "Fokus"). Replaces the old-site summary; English
 # is a faithful translation.
+# Second sentence. Source: OWNER-PDF p.14 ("Faglige kerneområder: Enterprise-arkitektur,
+# forretningsmodeller, IT-governance, digital ledelse og systems engineering"); it adds
+# to the CV-2 focus areas without contradicting them, so those stay first.
 summary:
-  en: "Graduate study focused on digital transformation and organizational change; data- and technology-driven innovation; AI, digitalization and value creation; and strategy, governance and technology management."
-  da: "Kandidatstudie med fokus på digital transformation og organisatorisk forandring, data- og teknologidrevet innovation, AI, digitalisering og værdiskabelse samt strategi, governance og teknologiledelse."
+  en: "Graduate study focused on digital transformation and organizational change; data- and technology-driven innovation; AI, digitalization and value creation; and strategy, governance and technology management. Core subject areas are enterprise architecture, business models, IT governance, digital leadership and systems engineering."
+  da: "Kandidatstudie med fokus på digital transformation og organisatorisk forandring, data- og teknologidrevet innovation, AI, digitalisering og værdiskabelse samt strategi, governance og teknologiledelse. De faglige kerneområder er enterprise-arkitektur, forretningsmodeller, IT-governance, digital ledelse og systems engineering."
 responsibilities:
   en:
     - "Exploring digital transformation in complex organizations with focus on strategy, governance, and technology adoption."

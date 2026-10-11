@@ -12,6 +12,11 @@
 # and the research question (p.8) are about a hybrid PMO with ProjectFlow 365, Power BI
 # and Azure DevOps. So the bachelor project is not cited for cybersecurity, and its
 # IT-governance note uses CV-2's wording, which BACHELOR supports.
+#
+# OWNER-PDF is the owner's 18-page text pack ("Her er en komplet ... tekstpakke", shared
+# 2026-10-11; written with an AI assistant, so used for facts only; PDF page numbers).
+# The IBM cybersecurity capstone is cited from it and from the owner's answers on
+# 2026-10-11 (IBM's evaluation: five tasks). Earlier sources win where they conflict.
 group:
   en: "IT governance & security"
   da: "IT-governance & sikkerhed"
@@ -50,7 +55,22 @@ items:
     name:
       en: "Networks and computer architecture"
       da: "Netværk og computerarkitektur"
-    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+    usedIn:
+      # Source: owner 2026-10-11 (IBM's evaluation, task 1: traffic analysis in Wireshark with
+      # filters on an IP address, filter buttons and colouring a conversation; task 2: VoIP
+      # analysis, SIP endpoints and call flow); OWNER-PDF p.10 (IBM Cybersecurity Project)
+      - context: study
+        project: ibm-cybersecurity-lab
+        note:
+          en: "Traffic analysis in Wireshark: IP filters, colour-coding a conversation and the SIP call flow of VoIP calls"
+          da: "Trafikanalyse i Wireshark: IP-filtre, farvekodning af en samtale og SIP-opkaldsforløbet i VoIP-opkald"
+      # Source: CV-2 and CV-CBS (Zealand: troubleshooting hardware); OWNER-PDF p.12 (4. Erhvervserfaring,
+      # Zealand: "Fejlsøgte og konfigurerede hardware, netværk ..."), as in the timeline entry
+      - context: work
+        timeline: zealand-it-student-assistant
+        note:
+          en: "Troubleshooting hardware and networks in IT support"
+          da: "Fejlfinding på hardware og netværk i IT-supporten"
 
   - id: cybersecurity
     name:
@@ -77,3 +97,12 @@ items:
         note:
           en: "Elective exam paper on encryption, access control (RBAC, MFA) and GDPR in data integration"
           da: "Valgfagssynopsis om kryptering, adgangskontrol (RBAC, MFA) og GDPR i dataintegration"
+      # Source: owner 2026-10-11 (IBM's evaluation of the IBM Cybersecurity Analyst capstone, five
+      # tasks: Wireshark, VoIP, password cracking with Hashcat and John the Ripper, manual SQL
+      # injection on a test banking website, pen-tests with ZAP); OWNER-PDF p.10-11 (IBM
+      # Cybersecurity Project)
+      - context: study
+        project: ibm-cybersecurity-lab
+        note:
+          en: "IBM capstone: traffic analysis in Wireshark, password cracking with Hashcat and John the Ripper, SQL injection and ZAP scans on test websites"
+          da: "IBM-capstone: trafikanalyse i Wireshark, password-cracking med Hashcat og John the Ripper, SQL-injection og ZAP-scanninger af testsider"
