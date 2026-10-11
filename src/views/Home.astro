@@ -1,10 +1,11 @@
 ---
-// Home page. The hero, About and Projects are built; every other section is a placeholder
-// until it is built, one at a time, in later steps (see docs/design-direction.md).
+// Home page sections are built in focused steps and read their facts from content/.
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import SectionPlaceholder from "@/components/SectionPlaceholder.astro";
+import Skills from "@/components/Skills.astro";
+import Experience from "@/components/Experience.astro";
 import Hero from "@/components/hero/Hero.astro";
 import About from "@/components/About.astro";
 import Projects from "@/components/Projects.astro";
@@ -51,8 +52,12 @@ const sections = [
       sections.map((section) =>
         section.id === "about" ? (
           <About lang={lang} />
+        ) : section.id === "skills" ? (
+          <Skills lang={lang} />
         ) : section.id === "projects" ? (
           <Projects lang={lang} />
+        ) : section.id === "experience" ? (
+          <Experience lang={lang} />
         ) : (
           <SectionPlaceholder id={section.id} label={section.label} />
         ),

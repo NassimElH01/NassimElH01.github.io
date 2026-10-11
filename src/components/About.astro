@@ -1,13 +1,13 @@
 ---
 // About: who Nassim is (the owner-approved summary), his portrait and three short
-// lists read from content/: education, courses & certifications, and languages.
+// lists read from content/: courses & certifications, and languages.
 // The summary's last paragraph is the offer, followed by the next step. Unknown
 // values (e.g. a certification year still "TODO:") are left out. No client JS.
 import { getCollection } from "astro:content";
 import { Picture } from "astro:assets";
 import type { Lang } from "@/i18n/config";
 import { localize, pick, t } from "@/i18n/utils";
-import { getProfile, getPublished } from "@/lib/content";
+import { getProfile } from "@/lib/content";
 import { isTodo } from "@/lib/todo";
 import LocalizedText from "@/components/LocalizedText.astro";
 import portrait from "@/assets/portrait/nassim-hassani.jpg";
@@ -38,17 +38,6 @@ const segments = (text: string) =>
   }));
 
 const known = (value: unknown) => (value === undefined || isTodo(value) ? undefined : String(value));
-
-const education = (await getPublished("timeline"))
-  .filter((entry) => entry.data.kind === "education")
-  .sort((a, b) => Number(known(b.data.start) ?? 0) - Number(known(a.data.start) ?? 0))
-  .map(({ data }) => {
-    const start = known(data.start);
-    const end = data.end === "present" ? undefined : known(data.end);
-    const period =
-      start && end ? (data.expected ? `${start} – ${tr("about.expected")} ${end}` : `${start}–${end}`) : (start ?? "");
-    return { title: pick(data.title, lang).value, details: [data.organization, period].filter(Boolean) };
-  });
 
 const certifications = (await getCollection("certifications"))
   .sort((a, b) => a.data.order - b.data.order)
@@ -149,34 +138,6 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
     </div>
 
     {
-      education.length > 0 && (
-        <div class="about-edu">
-          <h3 class="about-label">{tr("about.education")}</h3>
-          <ul role="list" class="mt-3 divide-y divide-rule border-y border-rule">
-            {education.map((item) => (
-              <li class="py-4">
-                <p class="font-display text-[1.375rem] leading-tight [text-wrap:balance]">{item.title}</p>
-                <p class="mt-1 text-sm text-steel-text">
-                  {item.details.map((detail, index) => (
-                    <>
-                      {index > 0 && (
-                        <>
-                          {" "}
-                          <span aria-hidden="true">·</span>{" "}
-                        </>
-                      )}
-                      {detail}
-                    </>
-                  ))}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
-
-    {
       certifications.length > 0 && (
         <div class="about-certs">
           <h3 class="about-label">{tr("about.certifications")}</h3>
@@ -221,15 +182,13 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
 <style>
   /* Phones: heading beside a small portrait, then the text, then the lists.
      Tablet: certifications and languages side by side.
-     Desktop: text then languages on the left; portrait, education and certifications
-     on the right, so the two columns end close together. */
+     Desktop: text and languages on the left; portrait and certifications on the right. */
   .about-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
       "head photo"
       "text text"
-      "edu edu"
       "certs certs"
       "langs langs";
     align-items: end;
@@ -243,7 +202,6 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
       grid-template-areas:
         "head photo"
         "text text"
-        "edu edu"
         "certs langs";
       column-gap: 3rem;
     }
@@ -259,7 +217,7 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
       grid-template-areas:
         "head head"
         "text photo"
-        "text edu"
+        "text certs"
         "langs certs";
       align-items: start;
       column-gap: 4rem;
@@ -289,10 +247,6 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
 
   .about-text {
     grid-area: text;
-  }
-
-  .about-edu {
-    grid-area: edu;
   }
 
   .about-certs {

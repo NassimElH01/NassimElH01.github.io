@@ -1,0 +1,102 @@
+---
+import { getCollection } from "astro:content";
+import type { Lang } from "@/i18n/config";
+import type { UiKey } from "@/i18n/ui";
+import { pick, t } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const tr = t(lang);
+const groups = (await getCollection("skills"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(({ data }) => {
+    const group = pick(data.group, lang);
+    const items = data.items
+      .filter((item) => !item.confirm)
+      .map((item) => {
+        const name = pick(item.name, lang);
+        const usage = Array.isArray(item.usedIn)
+          ? item.usedIn.flatMap((entry) => {
+              if (!entry.note) return [];
+              const note = pick(entry.note, lang);
+              if (note.isTodo) return [];
+              return [{ context: tr(`projects.context.${entry.context}` as UiKey), note: note.value }];
+            })
+          : [];
+        return { name, usage };
+      })
+      .filter(({ name }) => !name.isTodo);
+    return { group, items };
+  })
+  .filter(({ group, items }) => !group.isTodo && items.length > 0);
+---
+
+<section id="skills" aria-labelledby="skills-title" class="border-t border-rule py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <h2 id="skills-title" class="font-display text-4xl sm:text-5xl">{tr("section.skills")}</h2>
+
+    <div class="skills-grid mt-12 sm:mt-16">
+      {
+        groups.map(({ group, items }) => (
+          <article class="skill-group" aria-labelledby={`skills-${group.value.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
+            <h3
+              id={`skills-${group.value.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+              class="font-display text-2xl leading-tight"
+            >
+              {group.value}
+            </h3>
+            <ul role="list" class="mt-4 divide-y divide-rule border-y border-rule">
+              {items.map(({ name, usage }) => (
+                <li class="py-3">
+                  <p class="font-medium leading-snug" lang={name.isFallback ? name.lang : undefined}>
+                    {name.value}
+                  </p>
+                  {usage.length > 0 && (
+                    <ul role="list" class="mt-1.5 grid gap-1">
+                      {usage.map((entry) => (
+                        <li class="text-sm leading-relaxed text-steel-text">
+                          <span class="font-mono text-xs uppercase tracking-wide">{entry.context}</span>
+                          <span aria-hidden="true"> · </span>
+                          {entry.note}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-grid {
+    display: grid;
+    gap: 2.75rem 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 3rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .skills-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 2.5rem;
+    }
+  }
+
+  .skill-group {
+    border-top: 1px solid var(--ink);
+    padding-top: 1rem;
+  }
+</style>
