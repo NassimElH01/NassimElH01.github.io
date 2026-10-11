@@ -88,7 +88,7 @@ const more = projects.filter((project) => !project.data.featured);
           <input type="radio" name="projects-lens" id="projects-lens-tech" value="tech" />
           <label for="projects-lens-tech" class="lens-tech">{tr("projects.lens.tech")}</label>
         </div>
-        <p id="projects-lens-hint" class="mt-2 font-mono text-[0.8125rem] text-steel-text">{tr("projects.lens.hint")}</p>
+        <p id="projects-lens-hint" class="mt-2 font-mono text-[0.8125rem] text-balance text-steel-text">{tr("projects.lens.hint")}</p>
       </fieldset>
     </div>
 
@@ -118,7 +118,9 @@ const more = projects.filter((project) => !project.data.featured);
                 </h3>
                 {project.keyline && (
                   <p class="keyline" lang={project.keyline.isFallback ? project.keyline.lang : undefined}>
-                    {project.keyline.value}
+                    {project.keyline.value
+                      .split(/(\S+ -\d\S*|\S*-\S*)/)
+                      .map((part, index) => (index % 2 ? <span class="whitespace-nowrap">{part}</span> : part))}
                   </p>
                 )}
                 {project.technology.length > 0 && (
@@ -166,20 +168,23 @@ const more = projects.filter((project) => !project.data.featured);
               <li class="border-t border-rule">
                 <details class="more">
                   <summary>
-                    <LocalizedText field={project.data.title} lang={lang} class="more-title" />{" "}
+                    {/* The dots are for the eye; screen readers get commas, so the parts of the
+                        row's name stay apart ("…Machines, 2026, Personal, TypeScript, …"). */}
+                    <LocalizedText field={project.data.title} lang={lang} class="more-title" />
+                    {(project.meta.length > 0 || project.technology.length > 0) && <span class="sr-only">,</span>}{" "}
                     {project.meta.length > 0 && (
                       <span class="more-meta">
                         {project.meta.map((part, index) => (
                           <>
                             {index > 0 && (
                               <>
-                                {" "}
-                                <span aria-hidden="true">·</span>{" "}
+                                <span class="sr-only">,</span> <span aria-hidden="true">·</span>{" "}
                               </>
                             )}
                             <span>{part}</span>
                           </>
                         ))}
+                        {project.technology.length > 0 && <span class="sr-only">,</span>}
                       </span>
                     )}{" "}
                     {project.technology.length > 0 && (
@@ -188,11 +193,15 @@ const more = projects.filter((project) => !project.data.featured);
                           <>
                             {index > 0 && (
                               <>
-                                {" "}
-                                <span aria-hidden="true">·</span>{" "}
+                                <span class="sr-only">,</span>{" "}
                               </>
                             )}
-                            {item}
+                            {/* One unit per tool: lines break between tools, and only inside one
+                                that is wider than the line (very large text). */}
+                            <span class="inline-block">
+                              {index > 0 && <span aria-hidden="true">· </span>}
+                              {item}
+                            </span>
                           </>
                         ))}
                       </span>
@@ -227,11 +236,6 @@ const more = projects.filter((project) => !project.data.featured);
 </section>
 
 <style>
-  .projects {
-    /* The views slide in by 0.75rem; never let that cause a horizontal scroll. */
-    overflow-x: clip;
-  }
-
   /* Business ⇄ Tech: one switch for the whole section, drawn like the hero's bridge:
      business on paper in serif, an orange pillar, tech on ink in mono. The chosen
      side is wider and at full contrast. Without :has() the switch is hidden and
@@ -297,10 +301,13 @@ const more = projects.filter((project) => !project.data.featured);
     grid-row: 1;
     align-items: center;
     justify-content: center;
-    padding: 0 0.75rem;
-    overflow: hidden;
+    padding: 0 0.5rem;
     cursor: pointer;
-    white-space: nowrap;
+    line-height: 1.1;
+    text-align: center;
+    /* With a large default font the narrow side wraps instead of clipping its name. */
+    overflow-wrap: anywhere;
+    hyphens: auto;
     transition: color 150ms ease-out;
   }
 
@@ -331,6 +338,12 @@ const more = projects.filter((project) => !project.data.featured);
   .lens-tech:hover,
   .lens input:checked + .lens-tech {
     color: var(--paper);
+  }
+
+  /* The chosen side is also underlined, so the state never rests on width or colour alone. */
+  .lens input:checked + label {
+    text-decoration: underline 2px;
+    text-underline-offset: 0.35em;
   }
 
   @media (forced-colors: active) {
@@ -364,6 +377,8 @@ const more = projects.filter((project) => !project.data.featured);
   /* Featured: title, keyline, tools and demo on the left; the chosen view on the right. */
   .featured {
     display: grid;
+    /* minmax(0, …): long Danish words wrap instead of widening the column. */
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
     border-top: 1px solid var(--ink);
     padding-top: 1.5rem;
@@ -404,6 +419,8 @@ const more = projects.filter((project) => !project.data.featured);
     line-height: 1.25;
     text-wrap: balance;
     font-synthesis: none;
+    hyphens: auto;
+    overflow-wrap: break-word;
   }
 
   @media (min-width: 640px) {
@@ -429,16 +446,26 @@ const more = projects.filter((project) => !project.data.featured);
     }
   }
 
-  /* Tech view of a featured entry: the hero's ink panel. */
-  .featured-body :global(.view-tech) {
+  /* Tech view of a featured entry: the hero's ink panel (never an empty one). */
+  .featured-body :global(.view-tech:not([data-empty])) {
     background-color: var(--ink);
     color: var(--paper);
     padding: 1.25rem;
   }
 
   @media (min-width: 640px) {
-    .featured-body :global(.view-tech) {
+    .featured-body :global(.view-tech:not([data-empty])) {
       padding: 1.5rem 2rem;
+    }
+  }
+
+  /* On desktop the panel hangs from the entry's rule, so METHOD lines up with the
+     meta line, as PROBLEM does. Only where a single view shows (see .lens above). */
+  @supports selector(:has(*)) {
+    @media (min-width: 1024px) {
+      .featured-body :global(.view-tech:not([data-empty])) {
+        margin-top: -1.5rem;
+      }
     }
   }
 
@@ -479,6 +506,8 @@ const more = projects.filter((project) => !project.data.featured);
 
   .project-links a {
     display: inline-flex;
+    max-width: 100%;
+    flex-wrap: wrap;
     min-height: 2.75rem;
     align-items: center;
     font-weight: 500;
@@ -494,6 +523,7 @@ const more = projects.filter((project) => !project.data.featured);
 
   .projects :global(.project-rows) {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.25rem;
     max-width: 40rem;
   }
@@ -506,6 +536,8 @@ const more = projects.filter((project) => !project.data.featured);
     font-size: 1.0625rem;
     line-height: 1.6;
     text-wrap: pretty;
+    hyphens: auto;
+    overflow-wrap: break-word;
   }
 
   /* Without a keyline, the result is the payoff and gets About's orange rule. */

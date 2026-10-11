@@ -62,13 +62,18 @@ for (const lang of ["en", "da"] as const) {
       await page.locator("#projects-lens-business").focus();
       await page.keyboard.press("ArrowRight");
       await expect(page.locator("#projects-lens-tech")).toBeChecked();
-      // Colours ease for 150 ms, so wait for the end state.
+      // Colours ease for 150 ms, so wait for the end state: Tech at full contrast,
+      // Business back to steel.
       await expect.poll(() => color(".lens-tech")).toBe("rgb(243, 240, 232)");
-      await expect.poll(() => color("article.featured .view-tech", "background-color")).toBe("rgb(17, 17, 17)");
+      await expect.poll(() => color(".lens-business")).toBe("rgb(104, 108, 115)");
       await expect(first.locator(".view-business")).toBeHidden();
       await expect(first.locator(".view-tech")).toBeVisible();
       if (!isTodo(project.method[lang])) await expect(first.locator(".view-tech dd").first()).toHaveText(project.method[lang]);
-      await expect(first.locator(".chips li").first()).toBeVisible();
+      // Featured entries show their tools under the title, so the Tech view holds the method only.
+      await expect(first.locator(".view-tech dt")).toHaveText([lang === "en" ? "Method" : "Metode"]);
+      await expect(first.locator(".view-tech .chips")).toHaveCount(0);
+      // Panel style: the hero's ink panel.
+      await expect.poll(() => color("article.featured .view-tech", "background-color")).toBe("rgb(17, 17, 17)");
     });
 
     test("each featured project shows its keyline and tools in the default view", async ({ page }) => {
@@ -128,8 +133,12 @@ test("list rows show year, context and tools on a phone, and screen readers get 
   await page.goto("/");
   const row = page.locator("details.more").filter({ hasText: "S&S Rengøringsservice website" });
   await expect(row.locator(".more-meta")).toBeVisible();
-  await expect(row.locator(".more-meta")).toContainText("Work");
+  // The year comes from the timeline entry (the project has none), then the context.
+  await expect(row.locator(".more-meta > span:not([aria-hidden]):not(.sr-only)")).toHaveText(["2023–now", "Work"]);
   await expect(row.locator(".more-tools")).toContainText("HTML");
+  // The row's name keeps its parts apart for screen readers.
+  // (sr-only commas are positioned boxes, so Chromium puts a space before each one.)
+  expect(await row.locator("summary").ariaSnapshot()).toMatch(/S&S Rengøringsservice website ?, 2023–now ?, Work ?, HTML ?, CSS/);
   // aria-hidden dots must not glue the words together for screen readers.
   expect(await page.locator("article.featured .project-meta").first().ariaSnapshot()).toContain("2025 Internship");
   expect(await page.locator("section#about .about-edu li").first().ariaSnapshot()).toMatch(/\(RUC\) 2026/);
