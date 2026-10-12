@@ -1,11 +1,14 @@
 ---
+// Experience: work, then education, read from content/timeline. Each entry's heading is
+// an anchor (#timeline-<id>) that Skills links to. Unknown values are left out.
 import type { CollectionEntry } from "astro:content";
 import type { Lang } from "@/i18n/config";
 import type { UiKey } from "@/i18n/ui";
 import { pick, t } from "@/i18n/utils";
-import { getPublished } from "@/lib/content";
+import { getRenderedTimeline } from "@/lib/content";
 import { isTodo } from "@/lib/todo";
 import { formatPeriod } from "@/lib/dates";
+import { timelineAnchor } from "@/lib/anchors";
 
 interface Props {
   lang: Lang;
@@ -14,17 +17,17 @@ interface Props {
 const { lang } = Astro.props;
 const tr = t(lang);
 type Entry = CollectionEntry<"timeline">["data"];
-const entries = (await getPublished("timeline"))
-  .filter(({ data }) => !data.draft && !isTodo(data.kind))
-  .map(({ data }) => {
-    const title = pick(data.title, lang);
-    const summary = pick(data.summary, lang);
-    const responsibilities = (data.responsibilities[lang] ?? []).filter((item) => !isTodo(item));
-    const period = formatPeriod(data, lang, { presentLabel: tr("experience.current") });
-    const grades = (data.grades ?? []).map((item) => ({ label: pick(item.label, lang).value, grade: item.grade }));
-    return { data, title, summary, responsibilities, period, grades };
-  })
-  .filter(({ title, summary }) => !title.isTodo && !summary.isTodo);
+const entries = (await getRenderedTimeline()).map(({ id, data }) => {
+  const title = pick(data.title, lang);
+  const summary = pick(data.summary, lang);
+  const responsibilities = (data.responsibilities[lang] ?? []).filter((item) => !isTodo(item));
+  const period = formatPeriod(data, lang, {
+    expectedLabel: tr("about.expected"),
+    presentLabel: tr("experience.current"),
+  });
+  const grades = (data.grades ?? []).map((item) => ({ label: pick(item.label, lang).value, grade: item.grade }));
+  return { anchor: timelineAnchor(id), data, title, summary, responsibilities, period, grades };
+});
 const kindLabel = (kind: Entry["kind"]) => tr(`experience.kind.${kind}` as UiKey);
 const education = entries.filter(({ data }) => data.kind === "education");
 const experience = entries.filter(({ data }) => data.kind !== "education");
@@ -39,9 +42,9 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
         <div class="mt-12 sm:mt-16">
           <h3 class="section-label">{tr("experience.workHeading")}</h3>
           <ol role="list" class="mt-4 border-b border-rule">
-            {experience.map(({ data, title, summary, responsibilities, period }) => (
+            {experience.map(({ anchor, data, title, summary, responsibilities, period }) => (
               <li class="timeline-row">
-                <article class="timeline-entry" aria-labelledby={`experience-${data.order}`}>
+                <article class="timeline-entry" aria-labelledby={anchor}>
                   <div class="timeline-meta">
                     {period && <p class="font-mono text-sm text-steel-text">{period}</p>}
                     <p class="mt-1 font-mono text-xs uppercase tracking-wide text-steel-text">
@@ -49,7 +52,7 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
                     </p>
                   </div>
                   <div>
-                    <h4 id={`experience-${data.order}`} class="font-display text-2xl leading-tight">
+                    <h4 id={anchor} tabindex="-1" class="font-display text-2xl leading-tight">
                       {title.value}
                     </h4>
                     <p class="mt-1 text-sm text-steel-text">{data.organization}</p>
@@ -78,25 +81,20 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
         <div class="mt-16 sm:mt-20">
           <h3 class="section-label">{tr("experience.educationHeading")}</h3>
           <ol role="list" class="mt-4 border-b border-rule">
-            {education.map(({ data, title, summary, responsibilities, period, grades }) => (
+            {education.map(({ anchor, title, summary, responsibilities, period, grades, data }) => (
               <li class="timeline-row">
-                <article class="timeline-entry" aria-labelledby={`education-${data.order}`}>
+                <article class="timeline-entry" aria-labelledby={anchor}>
                   <div class="timeline-meta">
                     {period && <p class="font-mono text-sm text-steel-text">{period}</p>}
-                    {data.expected && (
-                      <p class="mt-1 font-mono text-xs uppercase tracking-wide text-steel-text">
-                        {tr("about.expected")}
-                      </p>
-                    )}
                   </div>
                   <div>
-                    <h4 id={`education-${data.order}`} class="font-display text-2xl leading-tight">
+                    <h4 id={anchor} tabindex="-1" class="font-display text-2xl leading-tight">
                       {title.value}
                     </h4>
                     <p class="mt-1 text-sm text-steel-text">{data.organization}</p>
                     <p class="mt-4 max-w-3xl text-base leading-relaxed [text-wrap:pretty]">{summary.value}</p>
                     {grades.length > 0 && (
-                      <ul role="list" class="grades" aria-label={tr("about.grades")}>
+                      <ul role="list" class="grades" aria-label={tr("experience.grades")}>
                         {grades.map((item) => (
                           <li>
                             {item.label} <span class="grade">{item.grade}</span>
