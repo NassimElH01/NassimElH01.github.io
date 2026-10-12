@@ -245,8 +245,10 @@ const options = [
 ---
 
 <section id="skills" aria-labelledby="skills-title" class="skills border-t border-rule py-20 sm:py-28">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6">
-    <div class="grid grid-cols-[minmax(0,1fr)] items-end gap-y-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-x-16">
+  <div class="@container mx-auto max-w-6xl px-4 sm:px-6">
+    <div
+      class="grid grid-cols-[minmax(0,1fr)] items-end gap-y-8 @min-[61rem]:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] @min-[61rem]:gap-x-16"
+    >
       <div>
         <h2 id="skills-title" class="font-display text-4xl hyphens-auto [overflow-wrap:break-word] sm:text-5xl">
           {tr("section.skills")}
@@ -453,6 +455,7 @@ const options = [
     font-size: 0.8125rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    overflow-wrap: anywhere;
     color: var(--ink);
   }
 
@@ -483,6 +486,7 @@ const options = [
   /* At most three per row; one per row at very large text. Rows always fill up. */
   .ctx-opt {
     position: relative;
+    display: grid; /* the label (fill, tint, pillar) stretches to the row's tallest tile */
     flex: 1 1 max(9.5rem, calc((100% - 2px) / 3));
     background: var(--paper);
   }
@@ -571,6 +575,11 @@ const options = [
     .ctx-opt:hover .ctx-name {
       color: var(--ink);
       text-decoration: underline 1px;
+    }
+
+    /* Steel is 4.63:1 on paper but under 4.5:1 on the tint, so the count goes to ink too. */
+    .ctx-opt:hover .ctx-count {
+      color: var(--ink);
     }
   }
 
@@ -789,8 +798,9 @@ const options = [
     }
   }
 
-  /* Headword and gloss left, register right, on the head's and Projects' 5/7 axis. 61rem
-     is the list's width at the lg breakpoint, so the list splits together with the head. */
+  /* Headword and gloss left, register right, on the head's 5/7 axis. The head queries the
+     wrapper's content box and the list its own, which are the same width, so both split at
+     61rem together, with or without a classic scrollbar, and stay single at very large text. */
   @container (min-width: 61rem) {
     .entry {
       grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -804,67 +814,69 @@ const options = [
     }
   }
 
-  /* ── Filter states (CSS only). Without :has() the filter stays hidden and everything
-     shows, with all the evidence. ─────────────────────────────────── */
+  /* ── Filter states (CSS only, screen only). Without :has() the filter stays hidden and
+     everything shows, with all the evidence; print uses these base rules too. ── */
   .entry-also,
   .sense-scope {
     display: none;
   }
 
-  @supports selector(:has(*)) {
-    .skills-filter {
-      display: block;
-    }
+  @media screen {
+    @supports selector(:has(*)) {
+      .skills-filter {
+        display: block;
+      }
 
-    .to-filter {
-      display: inline-flex;
-    }
+      .to-filter {
+        display: inline-flex;
+      }
 
-    /* All: the index. One gloss per skill, places named (not linked) with their qualifier;
-       the full notes wait for a context or a deep link. */
-    .skills:has(#skills-ctx-all:checked) .sense-evidence {
-      display: none;
-    }
+      /* All: the index. One gloss per skill, places named (not linked) with their qualifier;
+         the full notes wait for a context or a deep link. */
+      .skills:has(#skills-ctx-all:checked) .sense-evidence {
+        display: none;
+      }
 
-    .skills:has(#skills-ctx-all:checked) .sense-scope {
-      display: inline;
-    }
+      .skills:has(#skills-ctx-all:checked) .sense-scope {
+        display: inline;
+      }
 
-    .skills:has(#skills-ctx-all:checked) .entry:not(:has(> .entry-head > .headword:target)) .entry-gloss {
-      display: block;
-    }
+      .skills:has(#skills-ctx-all:checked) .entry:not(:has(> .entry-head > .headword:target)) .entry-gloss {
+        display: block;
+      }
 
-    .skills:has(#skills-ctx-all:checked) .entry:not(:has(> .entry-head > .headword:target)) .place-link {
-      display: none;
-    }
+      .skills:has(#skills-ctx-all:checked) .entry:not(:has(> .entry-head > .headword:target)) .place-link {
+        display: none;
+      }
 
-    .skills:has(#skills-ctx-all:checked) .entry:not(:has(> .entry-head > .headword:target)) .place-index {
-      display: inline;
-    }
+      .skills:has(#skills-ctx-all:checked) .entry:not(:has(> .entry-head > .headword:target)) .place-index {
+        display: inline;
+      }
 
-    .skills:has(#skills-ctx-all:checked) .entry:has(> .entry-head > .headword:target) .sense-evidence {
-      display: block;
-    }
+      .skills:has(#skills-ctx-all:checked) .entry:has(> .entry-head > .headword:target) .sense-evidence {
+        display: block;
+      }
 
-    .skills:has(#skills-ctx-all:checked) .entry:has(> .entry-head > .headword:target) .sense-scope {
-      display: none;
-    }
+      .skills:has(#skills-ctx-all:checked) .entry:has(> .entry-head > .headword:target) .sense-scope {
+        display: none;
+      }
 
-    /* A context: the report. Two rules per context in the schema's enum. */
-    .skills:has(#skills-ctx-internship:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="internship"]),
-    .skills:has(#skills-ctx-work:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="work"]),
-    .skills:has(#skills-ctx-freelance:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="freelance"]),
-    .skills:has(#skills-ctx-study:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="study"]),
-    .skills:has(#skills-ctx-personal:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="personal"]) {
-      display: none;
-    }
+      /* A context: the report. Two rules per context in the schema's enum. */
+      .skills:has(#skills-ctx-internship:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="internship"]),
+      .skills:has(#skills-ctx-work:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="work"]),
+      .skills:has(#skills-ctx-freelance:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="freelance"]),
+      .skills:has(#skills-ctx-study:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="study"]),
+      .skills:has(#skills-ctx-personal:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="personal"]) {
+        display: none;
+      }
 
-    .skills:has(#skills-ctx-internship:checked) .entry-also[data-for="internship"],
-    .skills:has(#skills-ctx-work:checked) .entry-also[data-for="work"],
-    .skills:has(#skills-ctx-freelance:checked) .entry-also[data-for="freelance"],
-    .skills:has(#skills-ctx-study:checked) .entry-also[data-for="study"],
-    .skills:has(#skills-ctx-personal:checked) .entry-also[data-for="personal"] {
-      display: block;
+      .skills:has(#skills-ctx-internship:checked) .entry-also[data-for="internship"],
+      .skills:has(#skills-ctx-work:checked) .entry-also[data-for="work"],
+      .skills:has(#skills-ctx-freelance:checked) .entry-also[data-for="freelance"],
+      .skills:has(#skills-ctx-study:checked) .entry-also[data-for="study"],
+      .skills:has(#skills-ctx-personal:checked) .entry-also[data-for="personal"] {
+        display: block;
+      }
     }
   }
 
@@ -884,7 +896,7 @@ const options = [
   }
 
   /* ── Motion: only on change, never at load. ─────────────────────── */
-  @media (prefers-reduced-motion: no-preference) {
+  @media screen and (prefers-reduced-motion: no-preference) {
     /* The tile's fill and text swap at once, as a radio's state should (no cross-fade
        through grey); the one motion is the pillar dropping into the newly chosen tile. The
        old pillar leaves at once, so there is never more than one orange in the block. */
@@ -959,8 +971,9 @@ const options = [
       display: inline !important;
     }
 
-    .skills :is(.skill-group, .entry, .sense, .sense-evidence) {
-      display: revert !important;
+    /* Nothing fades in on paper (a note caught mid-fade would print blank). */
+    .skills .sense-evidence {
+      animation: none !important;
     }
   }
 </style>

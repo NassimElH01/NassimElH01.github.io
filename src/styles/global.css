@@ -65,8 +65,12 @@
 
 @layer base {
   html {
-    /* Focused or linked targets never land under the sticky header (WCAG 2.2 SC 2.4.11). */
-    scroll-padding-top: 7.5rem;
+    /* Focused or linked targets never land under the sticky header (WCAG 2.2 SC 2.4.11).
+       --header-h is the header's height. Header.astro sets the measured value, so a wrapped
+       first row (large default text on a narrow phone) is covered too; this is the no-JS
+       fallback: a min-h-14 row, the nav row and the 1px border below lg. */
+    --header-h: calc(6.75rem + 1px);
+    scroll-padding-top: calc(var(--header-h) + 0.75rem);
     background-color: var(--paper);
     color: var(--ink);
     font-family: var(--font-sans);
@@ -74,25 +78,20 @@
     text-size-adjust: 100%;
   }
 
-  @media (min-width: 1024px) {
+  /* 64rem = Tailwind's lg, where the header becomes one row. In rem, like lg, so both follow
+     the browser's default font size together. */
+  @media (min-width: 64rem) {
     html {
-      scroll-padding-top: 4.5rem;
+      --header-h: calc(3.5rem + 1px);
     }
   }
 
   /* A nav jump lands a section's border-t exactly on the header's border-b, so the two
-     hairlines merge. Header height: 6.75rem + 1px below lg, 3.5rem + 1px at lg
-     (Header.astro: a min-h-14 row plus a p-1 / min-h-11 nav row). Focus targets inside
-     sections keep the full scroll-padding above. The hero (#top) has no border-t. If the
-     header's height or the scroll-padding changes, change these offsets with them. */
+     hairlines merge: the padding is the header plus 0.75rem, so pull back 0.75rem and the
+     1px rule. Focus targets inside sections keep the full padding. The hero (#top) has no
+     border-t. */
   section[id]:not(#top) {
-    scroll-margin-top: -0.75rem;
-  }
-
-  @media (min-width: 1024px) {
-    section[id]:not(#top) {
-      scroll-margin-top: -1rem;
-    }
+    scroll-margin-top: calc(-0.75rem - 1px);
   }
 
   body {

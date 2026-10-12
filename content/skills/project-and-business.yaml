@@ -66,12 +66,14 @@ items:
           en: "From waterfall to a hybrid PMO"
           da: "Fra vandfald til hybrid PMO"
 
-  - id: stakeholder-risk-communication-plans
+  # The brief's item "Interessent-, risiko- og kommunikationsplaner" is split in two, so the
+  # page never shows communication plans next to evidence that is only about stakeholders and
+  # risk (the section promises "every skill, traced to where it was used"). The name says what
+  # the source says (analyses, risk management). The owner may merge them back.
+  - id: stakeholder-analysis-risk-management
     name:
-      en: "Stakeholder, risk and communication plans"
-      da: "Interessent-, risiko- og kommunikationsplaner"
-    # No source mentions a communication plan; only stakeholder analyses and risk
-    # management are cited.
+      en: "Stakeholder analysis and risk management"
+      da: "Interessentanalyse og risikostyring"
     usedIn:
       # Source: REPORT (p.6: "udarbejdelse af stakeholderanalyser" for OT Cyber Security;
       # p.8: PRINCE2 "risikostyringsprincipper" in the OT project plan)
@@ -80,6 +82,14 @@ items:
         note:
           en: "Stakeholder analyses and PRINCE2 risk management for the OT Cyber Security project"
           da: "Stakeholderanalyser og PRINCE2-risikostyring til OT Cyber Security-projektet"
+
+  - id: communication-plans
+    name:
+      en: "Communication plans"
+      da: "Kommunikationsplaner"
+    # No source mentions a communication plan (the old site's cvData says "stakeholder
+    # communication", which is not a plan).
+    usedIn: "TODO: where used — split from the brief's 'Interessent-, risiko- og kommunikationsplaner'; no source mentions a communication plan. Royal Unibrew PMO? Owner to confirm, or merge back"
 
   - id: business-strategy-and-models
     name:
