@@ -67,6 +67,15 @@ export async function expectClearOfHeader(target: Locator, above?: Locator) {
   });
   expect(landed.top, `target top ${landed.top} vs header bottom ${header}`).toBeGreaterThanOrEqual(header - 0.5);
   expect(landed.drawn, "the target is what is drawn at its top left corner").toBe(true);
+  // Not just anywhere below the header: at most the scroll padding (0.75rem) plus the largest
+  // scroll-margin (3.5rem), unless the page ran out of room to scroll further.
+  const { rem, room } = await page.evaluate(() => ({
+    rem: parseFloat(getComputedStyle(document.documentElement).fontSize),
+    room: document.documentElement.scrollHeight - innerHeight - scrollY,
+  }));
+  if (room > 1) {
+    expect(landed.top, `target top ${landed.top} too far under header bottom ${header}`).toBeLessThanOrEqual(header + 4.25 * rem + 1);
+  }
   if (above) {
     const top = await above.evaluate((element) => element.getBoundingClientRect().top);
     expect(top, `line above the target at ${top} vs header bottom ${header}`).toBeGreaterThanOrEqual(header - 0.5);

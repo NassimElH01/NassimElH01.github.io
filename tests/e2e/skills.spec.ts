@@ -60,7 +60,14 @@ const groups: Group[] = readdirSync("content/skills")
   .map((file) => ({ id: file.replace(/\.yaml$/, ""), ...(load(readFileSync(`content/skills/${file}`, "utf8")) as Omit<Group, "id">) }))
   .sort((a, b) => a.order - b.order);
 const shown = (group: Group) => group.items.filter((item) => !item.confirm && Array.isArray(item.usedIn));
-const usages = (item: Item) => item.usedIn as Usage[];
+const known = (field: Localized) => !isTodo(field.en) || !isTodo(field.da);
+// As Skills.astro uses them: a note (and its scope) only when one language is not a TODO.
+const usages = (item: Item) =>
+  (item.usedIn as Usage[]).map((usage) =>
+    usage.note && known(usage.note)
+      ? { ...usage, scope: usage.scope && known(usage.scope) ? usage.scope : undefined }
+      : { ...usage, note: undefined, scope: undefined },
+  );
 const items = groups.flatMap(shown);
 const hidden = groups.flatMap((group) => group.items).filter((item) => !items.includes(item));
 const CONTEXTS = ["internship", "work", "freelance", "study", "personal"] as const;
@@ -70,7 +77,6 @@ const rank = (context: string) => (CONTEXTS as readonly string[]).indexOf(contex
 const REPORTS = CONTEXTS.filter((context) => items.some((item) => usedIn(item, context)));
 
 // What Skills links to: the projects and Experience entries the site renders.
-const known = (field: Localized) => !isTodo(field.en) || !isTodo(field.da);
 const read = <T>(dir: string) =>
   readdirSync(`content/${dir}`)
     .filter((file) => file.endsWith(".md") && !file.startsWith("_"))
@@ -380,7 +386,9 @@ for (const lang of ["en", "da"] as const) {
         await expect(entry.locator(".place-link:visible")).toHaveCount(places);
         await expect(entry.locator(".place-index:visible")).toHaveCount(0);
         await expect(page.locator("#skills .place-link:visible")).toHaveCount(places);
-        // Its qualifiers are in the full notes now, so the register lines drop them.
+        // Its qualifiers are in the full notes now, so the register lines drop them. Python has
+        // one (Tjekkit), so this rule is tested for real.
+        if (id === "python") expect(lines(item).flatMap((line) => scopes(line, lang)).length).toBeGreaterThan(0);
         await expect(entry.locator(".sense-scope")).toHaveCount(lines(item).flatMap((line) => scopes(line, lang)).length);
         await expect(entry.locator(".sense-scope:visible")).toHaveCount(0);
         // Its gloss gives way to the notes (it is there, so hidden is not just missing); the others keep theirs.
@@ -559,26 +567,25 @@ test("glosses keep a group project's qualifier unless the register line beside t
 const ordered = [...projects].sort(([, a], [, b]) => a.order - b.order);
 const firstFeatured = ordered.find(([, project]) => project.featured)![0];
 const firstRow = ordered.find(([, project]) => !project.featured)![0];
+// Whether a link's target is a closed "More projects" row, and which line must stay in view
+// above it, comes from content/: a featured project keeps its "01 · year · context" line, an
+// Experience entry its period (on phones it sits above the heading).
+const landing = (href: string) => {
+  const project = href.startsWith("#project-") ? projects.get(href.slice("#project-".length)) : undefined;
+  return {
+    row: project !== undefined && !project.featured,
+    above: project?.featured
+      ? `.featured:has(${href}) .project-meta`
+      : href.startsWith("#timeline-")
+        ? `.timeline-entry:has(${href}) .timeline-meta`
+        : undefined,
+  };
+};
 const CLICKS = [
-  // A closed "More projects" row: it opens.
-  { context: "study", link: ".entry:has(#skill-python) a.place-link[href='#project-tjekkit']", row: true },
-  // Featured projects keep their "01 · year · context" line in view.
-  {
-    context: "freelance",
-    link: "a.place-link[href='#project-24support-christmas-calendar']",
-    above: ".featured:has(#project-24support-christmas-calendar) .project-meta",
-  },
-  {
-    context: "internship",
-    link: ".entry:has(#skill-power-bi) a.proof-link[href='#project-royal-unibrew-projectflow-power-bi']",
-    above: ".featured:has(#project-royal-unibrew-projectflow-power-bi) .project-meta",
-  },
-  // An Experience entry keeps its period in view (on phones it sits above the heading).
-  {
-    context: "internship",
-    link: ".entry:has(#skill-power-bi) a.place-link[href='#timeline-royal-unibrew-pmo']",
-    above: ".timeline-entry:has(#timeline-royal-unibrew-pmo) .timeline-meta",
-  },
+  { context: "study", link: ".entry:has(#skill-python) a.place-link[href='#project-tjekkit']" },
+  { context: "freelance", link: "a.place-link[href='#project-24support-christmas-calendar']" },
+  { context: "internship", link: ".entry:has(#skill-power-bi) a.proof-link[href='#project-royal-unibrew-projectflow-power-bi']" },
+  { context: "internship", link: ".entry:has(#skill-power-bi) a.place-link[href='#timeline-royal-unibrew-pmo']" },
   // Back up to the filter, which has no landing bar.
   { context: "internship", link: "a.to-filter" },
 ];
@@ -599,10 +606,11 @@ for (const width of [375, 1440]) {
 
       test("each kind of link in a Skills report lands clear of the sticky header, on the entry it names", async ({ page }) => {
         await page.goto("/");
-        for (const { context, link, above, row } of CLICKS) {
+        for (const { context, link } of CLICKS) {
           await choose(page, context);
           const anchor = page.locator(`#skills ${link}:visible`).first();
           const href = (await anchor.getAttribute("href"))!;
+          const { row, above } = landing(href);
           await anchor.click();
           await expect(page).toHaveURL(new RegExp(`${href}$`));
           if (row) await expect(page.locator(`details:has(> summary${href})`)).toHaveAttribute("open", "");
