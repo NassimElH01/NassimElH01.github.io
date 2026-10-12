@@ -45,4 +45,7 @@ result:
   da: "TODO: resultat — ejer bekræfter (blev den præsenteret, testet eller brugt?)"
 featured: false
 order: 15
+# Hidden (CLAUDE.md <pending> 3, 2026-10-12): problem and result are missing, and the title
+# needs a new name without "surveillance"; title proposals wait for the owner.
+draft: true
 ---

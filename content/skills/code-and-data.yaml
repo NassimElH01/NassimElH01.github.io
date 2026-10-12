@@ -25,6 +25,8 @@ items:
       # Source: EXAM (p.21: ML notebook assignments, "mit arbejde med Google Colab og Python-udvidelser")
       - context: study
         project: genai-ml-elective
+        # While the project is hidden (CLAUDE.md <pending> 6), the place is the programme.
+        timeline: zealand-professionsbachelor
         note:
           en: "Machine learning notebooks in Google Colab"
           da: "Machine learning-notebooks i Google Colab"
@@ -89,8 +91,18 @@ items:
         scope:
           en: "JavaScript taught in the programme"
           da: "JavaScript undervist på uddannelsen"
+      # Source: CLAUDE.md <facts> (Cases: p5.js face tracking, "JavaScript i p5.js Web Editor";
+      # Profil: "Kode-fokus: Python, SQL og JavaScript (p5.js)")
+      - context: study
+        project: p5js-face-tracking
+        note:
+          en: "Course project: JavaScript in the p5.js Web Editor"
+          da: "Kursusprojekt: JavaScript i p5.js Web Editor"
+        scope:
+          en: "Course project"
+          da: "Kursusprojekt"
       # Source: owner 2026-10-11, second round ("p5.js"); p5.js sketches are JavaScript
-      # (legacy/posture-checker/index.html loads p5.js)
+      # (legacy/posture-checker/index.html loads p5.js). Hidden with the project (pending 3).
       - context: personal
         project: posture-checker
         note:
@@ -117,7 +129,17 @@ items:
       en: "p5.js"
       da: "p5.js"
     usedIn:
-      # Source: legacy/posture-checker/index.html loads p5.js; OWNER (his work, personal)
+      # Source: CLAUDE.md <facts> (Cases: p5.js face tracking)
+      - context: study
+        project: p5js-face-tracking
+        note:
+          en: "Course project: live webcam face tracking and real-time emotion classification that trigger graphic overlays"
+          da: "Kursusprojekt: live webcam med face tracking og real-time emotion classification, der udløser grafiske overlays"
+        scope:
+          en: "Course project"
+          da: "Kursusprojekt"
+      # Source: legacy/posture-checker/index.html loads p5.js; OWNER (his work, personal).
+      # Hidden with the project (pending 3).
       - context: personal
         project: posture-checker
         note:
@@ -158,6 +180,8 @@ items:
       # Source: EXAM (p.18: prompting in ChatGPT; p.19: DALL-E, Adobe Firefly, HeyGen, InVideo)
       - context: study
         project: genai-ml-elective
+        # While the project is hidden (CLAUDE.md <pending> 6), the place is the programme.
+        timeline: zealand-professionsbachelor
         note:
           en: "Prompting in ChatGPT, plus AI image and video tools (DALL-E, Adobe Firefly, HeyGen, InVideo)"
           da: "Prompting i ChatGPT samt AI-værktøjer til billeder og video (DALL-E, Adobe Firefly, HeyGen, InVideo)"
@@ -186,6 +210,8 @@ items:
       # "Fashion_classification_neural_nets"; no data or results are given)
       - context: study
         project: genai-ml-elective
+        # While the project is hidden (CLAUDE.md <pending> 6), the place is the programme.
+        timeline: zealand-professionsbachelor
         note:
           en: "Notebook assignments on linear regression and neural-network classification"
           da: "Notebook-opgaver i lineær regression og klassifikation med neurale netværk"

@@ -9,8 +9,9 @@
 # 2026-10-12: the owner confirmed the RUC course "Digitale Transformationer og Bæredygtighed"
 # (10 ECTS, autumn 2026; named in his portfolio PDF of 2026-10-12, p.7, under the first
 # semester's modules, E2026) and agreed that it may stand as evidence, with the note that the
-# course is in progress. It is cited for a new item named after the course itself;
-# digitalization-strategy, sustainable-business-models and sdgs-and-csr stay TODO.
+# course is in progress. It is cited for a new item named after the course itself.
+# 2026-10-12, CLAUDE.md <facts> (Kompetencer): digitalization strategy, sustainable business
+# models and SDGs/CSR, with their contexts and texts.
 group:
   en: "Sustainable digital transformation"
   da: "Bæredygtig digital transformation"
@@ -51,16 +52,58 @@ items:
     name:
       en: "Digitalization strategy"
       da: "Digitaliseringsstrategi"
-    usedIn: "TODO: where used — RUC MSc (technology strategy focus)? Zealand PBA? Owner to confirm"
+    # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "PBA 4. sem., RUC"; the text verbatim (Danish).
+    gloss:
+      en: "Linking business goals, enterprise architecture and IT support"
+      da: "Kobling mellem forretningsmål, enterprise-arkitektur og IT-understøttelse"
+    usedIn:
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "4th semester"
+          da: "4. semester"
+        scope:
+          en: "4th semester"
+          da: "4. semester"
+      - context: study
+        timeline: ruc-master-digital-transformation
 
   - id: sustainable-business-models
     name:
       en: "Sustainable business models"
       da: "Bæredygtige forretningsmodeller"
-    usedIn: "TODO: where used — Zealand PBA or RUC MSc coursework? Owner to confirm"
+    # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "Boozt, RUC DTB" (the course "Digitale Transformationer og
+    # Bæredygtighed"); the text verbatim (Danish).
+    gloss:
+      en: "Sustainability as added value in a business model; ESG fields in the domain model and the process"
+      da: "Bæredygtighed som merværdi i en forretningsmodel, ESG-felter i domænemodel og proces"
+    usedIn:
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Boozt case"
+          da: "Boozt-casen"
+        scope:
+          en: "Boozt case"
+          da: "Boozt-casen"
+      - context: study
+        timeline: ruc-master-digital-transformation
+        note:
+          en: "Course in progress: “Digitale Transformationer og Bæredygtighed”"
+          da: "Igangværende kursus: “Digitale Transformationer og Bæredygtighed”"
+        scope:
+          en: "Course in progress"
+          da: "Igangværende kursus"
 
   - id: sdgs-and-csr
     name:
       en: "SDGs and CSR"
       da: "SDG'er og CSR"
-    usedIn: "TODO: where used — Zealand PBA or RUC MSc coursework? Owner to confirm"
+    usedIn:
+      # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "PBA 4. sem., Boozt"; the text verbatim (Danish). Not
+      # "operationalisering" (facts: no source documents it yet).
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "The UN Sustainable Development Goals and responsible production, applied in case work (4th semester and the Boozt case)"
+          da: "FN's verdensmål og ansvarlig produktion anvendt i casearbejde (4. semester og Boozt-casen)"

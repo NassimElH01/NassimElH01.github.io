@@ -59,11 +59,26 @@ items:
           en: "Analysis of system integration, data ownership and role clarification; proposed a hybrid governance model on three levels: decision, execution and learning"
           da: "Analyse af systemintegration, dataejerskab og rolleafklaring; foreslog en hybrid governance-model på tre niveauer: beslutning, eksekvering og læring"
 
-  - id: networks-and-computer-architecture
+  # Renamed on 2026-10-12 (CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "Netværk & IT-infrastruktur (omdøbt)"); no source
+  # documents computer architecture.
+  - id: networks-and-it-infrastructure
     name:
-      en: "Networks and computer architecture"
-      da: "Netværk og computerarkitektur"
+      en: "Networks & IT infrastructure"
+      da: "Netværk & IT-infrastruktur"
+    # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "PBA 3. sem., IBM Cybersecurity"; the text verbatim (Danish).
+    gloss:
+      en: "Network topologies, the OSI model and packet analysis in Wireshark"
+      da: "Netværkstopologier, OSI-modellen og pakkeanalyse i Wireshark"
     usedIn:
+      # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12) ("PBA 3. sem.")
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "3rd semester"
+          da: "3. semester"
+        scope:
+          en: "3rd semester"
+          da: "3. semester"
       # Source: owner 2026-10-11 (IBM's evaluation, task 1: traffic analysis in Wireshark with
       # filters on an IP address, filter buttons and colouring a conversation; task 2: VoIP
       # analysis, SIP endpoints and call flow); OWNER-PDF p.10 (IBM Cybersecurity Project)
@@ -72,13 +87,13 @@ items:
         note:
           en: "Traffic analysis in Wireshark: IP filters, colour-coding a conversation and the SIP call flow of VoIP calls"
           da: "Trafikanalyse i Wireshark: IP-filtre, farvekodning af en samtale og SIP-opkaldsforløbet i VoIP-opkald"
-      # Source: CV-2 and CV-CBS (Zealand: troubleshooting hardware); OWNER-PDF p.12 (4. Erhvervserfaring,
-      # Zealand: "Fejlsøgte og konfigurerede hardware, netværk ..."), as in the timeline entry
+      # Source: CV-2 and CV-CBS (Zealand: troubleshooting hardware) and CLAUDE.md <facts> (Kompetencer, owner 2026-10-12) (Windows,
+      # Zealand: "fejlsøgning på Windows-klienter, netværksadgang"); "networks" was OWNER-PDF only.
       - context: work
         timeline: zealand-it-student-assistant
         note:
-          en: "Troubleshooting hardware and networks in IT support"
-          da: "Fejlfinding på hardware og netværk i IT-supporten"
+          en: "Troubleshooting hardware and network access in IT support"
+          da: "Fejlfinding på hardware og netværksadgang i IT-supporten"
 
   - id: cybersecurity
     name:

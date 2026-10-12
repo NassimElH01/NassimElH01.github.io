@@ -44,15 +44,22 @@ items:
     name:
       en: "Agile methods"
       da: "Agile metoder"
-    # Owner: the brief lists this certification and this skill separately. Confirm the
-    # Agile Project Management certification belongs with this skill.
     certifications:
       - agile-project-management
-    # CONFLICT: OWNER-PDF p.12 (4. Erhvervserfaring, Royal Unibrew) says he planned "backlogs,
-    # sprint-kadencer og fremdriftsopfølgning i Azure DevOps", and p.5 lists sprint planning,
-    # stand-ups and retrospectives. REPORT p.19 says agile/Scrum was not applied at Royal
-    # Unibrew; the REPORT is the earlier source and wins, so the internship is still not cited.
+    # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12), verbatim (Danish). No "sprint cadence": the owner resolved on 2026-10-12
+    # that REPORT p.19 (Royal Unibrew worked mainly by the waterfall model) wins over OWNER-PDF
+    # p.12 ("sprint-kadencer"); the certificate's own name is "Certificering i Agil Projektledelse".
+    gloss:
+      en: "Scrum and Kanban (Certification in Agile Project Management, 2024); a backlog with epics and features in Azure DevOps at Royal Unibrew"
+      da: "Scrum og Kanban (Certificering i Agil Projektledelse, 2024); backlog med epics og features i Azure DevOps hos Royal Unibrew"
     usedIn:
+      # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12) ("backlog med epics og features i Azure DevOps hos Royal Unibrew") and
+      # REPORT p.9 (epics and features for the OT Cyber Security project in Azure DevOps)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Backlog with epics and features in Azure DevOps"
+          da: "Backlog med epics og features i Azure DevOps"
       # Source: REPORT (p.8: "På Zealand har jeg arbejdet meget med agile metoder og Scrum")
       - context: study
         timeline: zealand-professionsbachelor
@@ -87,9 +94,21 @@ items:
     name:
       en: "Communication plans"
       da: "Kommunikationsplaner"
-    # No source mentions a communication plan (the old site's cvData says "stakeholder
-    # communication", which is not a plan).
-    usedIn: "TODO: where used — split from the brief's 'Interessent-, risiko- og kommunikationsplaner'; no source mentions a communication plan. Royal Unibrew PMO? Owner to confirm, or merge back"
+    # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "PBA 1. og 4. sem., Royal Unibrew PMO"; the text verbatim (Danish).
+    gloss:
+      en: "Communication and stakeholder plans for digital change"
+      da: "Kommunikations- og interessentplaner ved digitale forandringer"
+    usedIn:
+      - context: internship
+        timeline: royal-unibrew-pmo
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "1st and 4th semesters"
+          da: "1. og 4. semester"
+        scope:
+          en: "1st and 4th semesters"
+          da: "1. og 4. semester"
 
   - id: business-strategy-and-models
     name:
@@ -100,6 +119,8 @@ items:
       # PESTEL), en SWOT-oversigt", solved with ChatGPT prompts)
       - context: study
         project: genai-ml-elective
+        # While the project is hidden (CLAUDE.md <pending> 6), the place is the programme.
+        timeline: zealand-professionsbachelor
         note:
           en: "AI-assisted business analysis with BMC, Porter's Five Forces, PESTEL and SWOT"
           da: "AI-assisteret forretningsanalyse med BMC, Porters Five Forces, PESTEL og SWOT"
@@ -112,6 +133,8 @@ items:
       # Source: EXAM (p.18: "regnskabsanalyse" in the situation analysis)
       - context: study
         project: genai-ml-elective
+        # While the project is hidden (CLAUDE.md <pending> 6), the place is the programme.
+        timeline: zealand-professionsbachelor
         note:
           en: "Financial statement analysis as part of an AI-assisted business analysis"
           da: "Regnskabsanalyse som en del af en AI-assisteret forretningsanalyse"
@@ -137,7 +160,14 @@ items:
     name:
       en: "Supply chain"
       da: "Supply chain"
-    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+    usedIn:
+      # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "PBA 2. sem. (SCM), Boozt"; the text verbatim (Danish). The Boozt case
+      # gets its own project once its PDF is in _kilder/ (facts: every number is checked there).
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Service level, inventory optimization and an automated warehouse (AutoStore), analysed in the Boozt case"
+          da: "Servicegrad, lageroptimering og automatiseret lager (AutoStore) analyseret i Boozt-casen"
 
   - id: change-management
     name:

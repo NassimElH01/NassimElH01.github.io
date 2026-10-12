@@ -82,4 +82,7 @@ links:
 timeline: "zealand-professionsbachelor"
 featured: false
 order: 9
+# Hidden (CLAUDE.md <pending> 6, 2026-10-12): the text drafted from the exam paper waits for
+# the owner's approval. The grade (10) stays in Experience (facts).
+draft: true
 ---
