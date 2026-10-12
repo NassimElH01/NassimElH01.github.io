@@ -30,25 +30,17 @@ items:
         note:
           en: "Machine learning notebooks in Google Colab"
           da: "Machine learning-notebooks i Google Colab"
-      # Source: OWNER-PDF p.7 (3. Udvalgte Projekter, Tjekkit: "Udviklet i Python med modulariseret
-      # OOP-struktur opdelt i logiske ansvarsområder: App, Menu, LogIn og Ansat"); owner 2026-10-11
-      # (group project, 2nd semester) and owner 2026-10-11, second round (not finished; his part was the wireframes and
-      # the prototype), so the note does not claim a finished build.
+      # Source: CLAUDE.md <facts> (Tjekkit: "objektorienteret Python-program med MySQL-database");
+      # owner 2026-10-11 (group project; second round: not finished). Claim audit 2026-10-12 (CLAUDE.md, rule 1): the class names were
+      # OWNER-PDF only.
       - context: study
         project: tjekkit
         note:
-          en: "Group project (not finished): object-oriented structure split into App, Menu, LogIn and Ansat"
-          da: "Gruppeprojekt (ikke færdigt): objektorienteret struktur opdelt i App, Menu, LogIn og Ansat"
+          en: "Group project (not finished): object-oriented Python program"
+          da: "Gruppeprojekt (ikke færdigt): objektorienteret Python-program"
         scope:
           en: "Group project (not finished)"
           da: "Gruppeprojekt (ikke færdigt)"
-      # Source: OWNER-PDF p.9-10 (3. Udvalgte Projekter, Airbnb, "Metode & Eksekvering i Python":
-      # loading with Pandas and NumPy, cleaning, lambda functions, Seaborn and Matplotlib)
-      - context: study
-        project: airbnb-eda
-        note:
-          en: "Data cleaning and analysis with pandas and NumPy, charts with Matplotlib and Seaborn"
-          da: "Datarensning og analyse med pandas og NumPy, diagrammer med Matplotlib og Seaborn"
 
   - id: sql-relational-databases
     name:
@@ -58,15 +50,13 @@ items:
     # normalisation (1NF-3NF) and DDL/DML in MySQL, and p.16 lists SQL under the IBM Data Analyst
     # certificate, but neither ties them to a project, so only Tjekkit is cited.
     usedIn:
-      # Source: OWNER-PDF p.7 (3. Udvalgte Projekter, Tjekkit: "Tilknyttet en relationel
-      # MySQL-database: Tabeller til medarbejderstamdata (ansat) og tidsregistrering (Vagt)
-      # struktureret med primær- og fremmednøgler samt dataintegritet"); owner 2026-10-11 (group
-      # project) and owner 2026-10-11, second round (not finished), so the note does not claim a finished build.
+      # Source: CLAUDE.md <facts> (Tjekkit: "MySQL-database"); owner 2026-10-11 (group project;
+      # second round: not finished). Claim audit 2026-10-12 (CLAUDE.md, rule 1): the tables and keys were OWNER-PDF only.
       - context: study
         project: tjekkit
         note:
-          en: "Group project (not finished): MySQL database design with tables for employee data and time registration, linked by primary and foreign keys"
-          da: "Gruppeprojekt (ikke færdigt): MySQL-databasedesign med tabeller til medarbejderdata og tidsregistrering, forbundet med primær- og fremmednøgler"
+          en: "Group project (not finished): MySQL database"
+          da: "Gruppeprojekt (ikke færdigt): MySQL-database"
         scope:
           en: "Group project (not finished)"
           da: "Gruppeprojekt (ikke færdigt)"
@@ -220,11 +210,11 @@ items:
   # the owner's CVs list "Dataanalyse" (new CV, Kompetencer; CV-2, Zealand "Fokus"), and the
   # IBM Data Analytics certificate had no skill. The owner may remove it.
   - id: data-analysis-visualization
-    # Source: OWNER-PDF p.4 (Kernekompetencer, Data Wrangling & Eksplorativ Analyse: Pandas,
-    # NumPy, Matplotlib, Seaborn) and p.9-10 (Airbnb, where they were used)
+    # Source: the new CV ("Dataanalyse"), CV-2 (Zealand "Business intelligence og dataanalyse") and
+    # REPORT p.6 (datavisualisering). Claim audit 2026-10-12 (CLAUDE.md, rule 1): the four Python libraries were OWNER-PDF only.
     name:
-      en: "Data analysis and visualization (pandas, NumPy, Matplotlib, Seaborn)"
-      da: "Dataanalyse og visualisering (pandas, NumPy, Matplotlib, Seaborn)"
+      en: "Data analysis and visualization"
+      da: "Dataanalyse og visualisering"
     # Source: LinkedIn and the new CV (Certificeringer: "IBM Data Analytics", a data analytics
     # programme); owner 2026-10-11 (the Airbnb analysis is the "IBM Data Analyst" capstone).
     # CONFLICT (name): OWNER-PDF p.16 calls it "IBM Data Analyst Professional Certificate";
@@ -232,11 +222,10 @@ items:
     certifications:
       - ibm-data-analytics
     usedIn:
-      # Source: OWNER-PDF p.9-10 (3. Udvalgte Projekter, Airbnb: bookings in New York City;
-      # cleaning; "kortlægge prisforskelle på tværs af værelsestyper, evaluere afbestillingsreglers
-      # indflydelse på lejepriser via boxplots"); owner 2026-10-11 (IBM capstone)
+      # Source: owner 2026-10-11 ("IBM Data Analyst capstone (the Airbnb analysis)")
       - context: study
         project: airbnb-eda
         note:
-          en: "IBM capstone: cleaned Airbnb booking data from New York City and compared prices across room types and cancellation policies"
-          da: "IBM-capstone: rensede Airbnb-bookingdata fra New York City og sammenlignede priser på tværs af værelsestyper og afbestillingsregler"
+          en: "IBM capstone: Airbnb data analysis"
+          da: "IBM-capstone: Airbnb-dataanalyse"
+        # Claim audit 2026-10-12 (CLAUDE.md, rule 1): the owner's own words; New York, the cleaning and the price comparison were OWNER-PDF only.

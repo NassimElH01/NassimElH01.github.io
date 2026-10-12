@@ -30,7 +30,7 @@ responsibilities:
     # Source: CV-CBS (Zealand bullet 2)
     - "Register and resolve cases in a ticket system and follow them through to completion."
     # Source: CV-2 and CV-CBS (hardware, software and Microsoft 365); OWNER-PDF p.12 (network)
-    - "Troubleshoot hardware, networks, software and Microsoft 365 solutions."
+    - "Troubleshoot hardware, network access, software and Microsoft 365 solutions."
     # Source: CV-2 (user guides, documentation and guidance material); CV-CBS (documentation)
     - "Write user guides, documentation and guidance material."
     # Source: CV-2 (daily IT operations, high service quality); CV-CBS (operation and maintenance of IT systems)
@@ -41,7 +41,7 @@ responsibilities:
     # Source: CV-CBS
     - "Registrerer og løser sager i ticketsystem og følger dem til dørs."
     # Source: CV-2; CV-CBS; OWNER-PDF p.12
-    - "Fejlfinder på hardware, netværk, software og Microsoft 365-løsninger."
+    - "Fejlfinder på hardware, netværksadgang, software og Microsoft 365-løsninger."
     # Source: CV-2; CV-CBS
     - "Udarbejder brugerguides, dokumentation og vejledningsmateriale."
     # Source: CV-2; CV-CBS

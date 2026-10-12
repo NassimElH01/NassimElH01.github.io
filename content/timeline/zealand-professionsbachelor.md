@@ -21,15 +21,16 @@ organization: "Zealand – Sjællands Erhvervsakademi"
 # (bachelor project "afleveret jan." 2026; BACHELOR is dated 12-01-2026) agrees.
 # No source gives the start month, so start stays a year.
 start: "2022"
-end: "2026-01"
+# Claim audit 2026-10-12 (CLAUDE.md, rule 1): the year only, as the CVs give it ("2022–2026"); January was OWNER-PDF only.
+end: "2026"
 # Source: CV-2 (Uddannelse, Zealand "Fokus"); EXAM p.1 (title "Machine learning &
 # Gen AI / 5. Semester Valgfags eksamen", used verbatim in both languages because
 # extract-exam.json says it may cover two electives); REPORT p.3 (6th-semester
 # internship in Royal Unibrew's PMO). "Applied business and IT degree" is old-site wording.
 # Source: OWNER-PDF p.14 (5. Uddannelse & Eksamensresultater: "210 ECTS")
 summary:
-  en: "Applied business and IT degree (210 ECTS) with a focus on project management, digital transformation, business intelligence and data analysis, IT governance, systems development and IT architecture, and business analysis. The 5th semester included an elective exam in Machine learning & Gen AI, and the 6th semester an internship at Royal Unibrew."
-  da: "Praksisnær uddannelse i økonomi og IT (210 ECTS) med fokus på projektledelse, digital transformation, business intelligence og dataanalyse, IT-governance, systemudvikling og IT-arkitektur samt forretningsanalyse. 5. semester omfattede en valgfagseksamen i Machine learning & Gen AI, og 6. semester en praktik hos Royal Unibrew."
+  en: "Applied business and IT degree with a focus on project management, digital transformation, business intelligence and data analysis, IT governance, systems development and IT architecture, and business analysis. The 5th semester included an elective exam in Machine learning & Gen AI, and the 6th semester an internship at Royal Unibrew."
+  da: "Praksisnær uddannelse i økonomi og IT med fokus på projektledelse, digital transformation, business intelligence og dataanalyse, IT-governance, systemudvikling og IT-arkitektur samt forretningsanalyse. 5. semester omfattede en valgfagseksamen i Machine learning & Gen AI, og 6. semester en praktik hos Royal Unibrew."
 responsibilities:
   en:
     - "Built strong foundations in process optimization, digital tools, and technology-enabled business operations."

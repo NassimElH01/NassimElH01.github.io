@@ -7,8 +7,9 @@
 kind: "work"
 # Source: OWNER-PDF p.14 ("juicer")
 title:
-  en: "Juicer"
-  da: "Juicer"
+  en: "Employee"
+  da: "Medarbejder"
+# Claim audit 2026-10-12 (CLAUDE.md, rule 1): the role ("juicer") and the tasks were OWNER-PDF only.
 # Source: OWNER-PDF p.14 ("Joe & The Juice")
 organization: "Joe & The Juice"
 # Source: CV-version0 (owner, shared 2026-10-12: "2022"; earlier sources gave no dates).
@@ -16,8 +17,8 @@ start: "2022"
 end: "2022"
 # Source: OWNER-PDF p.14 ("Kundeservice & Logistik: Erfaring med drift og varedistribution")
 summary:
-  en: "Worked as a juicer with customer service and day-to-day operations."
-  da: "Arbejdede som juicer med kundeservice og daglig drift."
+  en: "Worked at Joe & The Juice."
+  da: "Arbejdede hos Joe & The Juice."
 responsibilities:
   en: []
   da: []

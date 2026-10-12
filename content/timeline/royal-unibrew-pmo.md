@@ -26,7 +26,7 @@ summary:
 responsibilities:
   en:
     # Source: REPORT p.5 (Projektledelsessupport); OWNER-PDF p.12 (the abbreviation CYOD)
-    - "Supported project management and led parts of selected projects myself, including OT Cyber Security and Choose Your Own Device (CYOD)."
+    - "Supported project management and led parts of selected projects myself, including OT Cyber Security and Choose Your Own Device."
     # Source: REPORT p.6 ("ansvar for at integrere data fra ProjectFlow 365 i Power BI"), p.15 ("udviklet datamodeller, opsat API-forbindelser og skabt dashboards"), p.17 (used by PMO and management); CV-2 (Power BI dashboards on ProjectFlow data). "REST" is left out: only the AI-written OWNER-PDF says it (CLAUDE.md, rule 1).
     - "Was responsible for integrating ProjectFlow 365 data into Power BI: set up API connections to ProjectFlow 365, built data models and developed dashboards for management reporting and portfolio overview, used by the PMO and management."
     # Source: CLAUDE.md <facts> (OT Cyber Security: the role as the owner describes it; rule 3: nothing
@@ -46,7 +46,7 @@ responsibilities:
     - "Wrote the Power BI Super User Guide, an internal user guide and governance standard for the PMO and Group IT, and a ProjectFlow 365 user and onboarding guide; ran workshops and taught colleagues the new tools (Azure DevOps, ProjectFlow 365 and AI tools such as Copilot and ChatGPT); documentation and onboarding material were often made with AI."
   da:
     # Source: REPORT p.5 (Projektledelsessupport); OWNER-PDF p.12 (CYOD)
-    - "Fungerede som støtte til projektledelsen og stod selv for dele af udvalgte projekter, herunder OT Cyber Security og Choose Your Own Device (CYOD)."
+    - "Fungerede som støtte til projektledelsen og stod selv for dele af udvalgte projekter, herunder OT Cyber Security og Choose Your Own Device."
     # Source: REPORT p.6, p.15, p.17; CV-2 (Power BI-dashboards baseret på ProjectFlow-data); no "REST" (see the English bullet)
     - "Havde ansvaret for at integrere data fra ProjectFlow 365 i Power BI: opsatte API-forbindelser til ProjectFlow 365, udviklede datamodeller og byggede dashboards til ledelsesrapportering og porteføljeoverblik, som PMO og ledelsen benyttede."
     # Source: CLAUDE.md <facts> (see the English bullet)
