@@ -553,7 +553,7 @@ test("glosses keep a group project's qualifier unless the register line beside t
   await page.goto("/");
   const gloss = (id: string) => page.locator(`.entry:has(#skill-${id}) .entry-gloss`);
   // One sense: the line beside it says "Tjekkit · 2023 · Group project", so the gloss can drop it.
-  await expect(gloss("prototyping")).toHaveText("Nassim made the wireframes and the prototype");
+  await expect(gloss("prototyping")).toHaveText("I made the wireframes and the prototype");
   // Several senses: the note stays whole, so the group work never reads as the whole entry's.
   await expect(gloss("uml-system-modeling")).toHaveText(/^Group project: /);
   await expect(gloss("html-css-javascript")).toHaveText(/^HTML and CSS; /);

@@ -27,16 +27,16 @@ end: "present"
 # Source: OLD-SITE legacy cvData.ts (Nassim's own Danish text), put in the present tense
 # to match OWNER-PDF p.13 ("2023 – Nu") and named a volunteer boxing coach as the PDF does.
 summary:
-  en: "Volunteers as a boxing coach and on the service desk in an active club environment, responsible for members, practical support, coordination and day-to-day operations."
-  da: "Er frivillig boksetræner og står i servicedesken i et aktivt klubmiljø med ansvar for medlemmer, praktisk support, koordinering og daglig drift."
+  en: "I volunteer as a boxing coach and on the service desk in an active club environment, responsible for members, practical support, coordination and day-to-day operations."
+  da: "Jeg er frivillig boksetræner og står i servicedesken i et aktivt klubmiljø med ansvar for medlemmer, praktisk support, koordinering og daglig drift."
 responsibilities:
   en:
     # Source: OWNER-PDF p.13 (structured training and mental coaching for children and young people); legacy cvData.ts (planned and ran training)
-    - "Plans and runs structured training and mental coaching for children and young people."
+    - "Plan and run structured training and mental coaching for children and young people."
     # Source: OWNER-PDF p.13 (member administration, front desk, communication with parents; the PDF's "under højt ledelsesansvar" is left out); legacy cvData.ts (questions and practical club tasks)
-    - "Handles member administration, the front desk and communication with parents, and helps with questions and practical club tasks."
+    - "Handle member administration, the front desk and communication with parents, and help with questions and practical club tasks."
     # Source: legacy cvData.ts
-    - "Contributes to a safe, positive and structured environment for members and activities."
+    - "Contribute to a safe, positive and structured environment for members and activities."
   da:
     # Source: OWNER-PDF p.13; legacy cvData.ts
     - "Planlægger og afvikler struktureret træning og mental coaching for børn og unge."

@@ -26,15 +26,15 @@ year: 2024
 context: "study"
 # Source: owner 2026-10-11 (the evaluation's project title, quoted above; five tasks)
 problem:
-  en: "Assess his own proficiency with popular cybersecurity analysis tools, including Wireshark, Kali Linux and ZAP, through five practical tasks."
-  da: "At vurdere sine egne færdigheder i udbredte værktøjer til cybersikkerhedsanalyse, bl.a. Wireshark, Kali Linux og ZAP, gennem fem praktiske opgaver."
+  en: "Assess my own proficiency with popular cybersecurity analysis tools, including Wireshark, Kali Linux and ZAP, through five practical tasks."
+  da: "At vurdere mine egne færdigheder i udbredte værktøjer til cybersikkerhedsanalyse, bl.a. Wireshark, Kali Linux og ZAP, gennem fem praktiske opgaver."
 # Source: owner 2026-10-11 (IBM's evaluation of his capstone; its remark says he carried out all
 # the tasks); OWNER-PDF p.10 ("Afsluttende Skriftligt Projekt"). The PDF's certificate name (p.16,
 # "IBM Cybersecurity Analyst Professional Certificate") is not used; CLAUDE.md, the CVs and
 # LinkedIn say "IBM Cybersecurity" (see the date conflict above).
 role:
-  en: "Individual capstone project in IBM's cybersecurity certificate course: Nassim carried out all five tasks."
-  da: "Individuelt capstone-projekt i IBM's certificeringsforløb i cybersikkerhed: Nassim løste alle fem opgaver."
+  en: "Individual capstone project in IBM's cybersecurity certificate course: I carried out all five tasks."
+  da: "Individuelt capstone-projekt i IBM's certificeringsforløb i cybersikkerhed: Jeg løste alle fem opgaver."
 # Source: owner 2026-10-11 (the five tasks: (1) network traffic analysis in Wireshark with filters,
 # filter buttons and colouring a conversation; (2) VoIP security analysis: common VoIP problems,
 # number of SIP endpoints and calls, playing audio streams, SIP call flow; (3) password cracking
@@ -46,7 +46,7 @@ role:
 # testplatforme") and p.11 (ZAP on a test web application).
 method:
   en: "Five practical tasks. Analysed network traffic in Wireshark with filters, filter buttons and colour-coding of a conversation. Analysed VoIP traffic: common VoIP problems, the number of SIP endpoints and calls, the SIP call flow and the calls' audio streams. Cracked password hashes in Kali Linux with Hashcat (a wordlist and built-in rules) and John the Ripper (different modes) and assessed how strong the passwords were. Carried out manual SQL injection on a test banking website, exploring it with admin access, making a transfer between accounts and identifying its SQL injection vulnerabilities. Ran automated penetration tests on a test website with ZAP, using both the traditional spider and the Ajax spider."
-  da: "Fem praktiske opgaver. Analyserede netværkstrafik i Wireshark med filtre, filterknapper og farvekodning af en samtale. Analyserede VoIP-trafik: typiske VoIP-problemer, antallet af SIP-endpoints og opkald, SIP-opkaldsforløbet og opkaldenes lydstreams. Knækkede password-hashes i Kali Linux med Hashcat (en ordliste og indbyggede regler) og John the Ripper (forskellige tilstande) og vurderede, hvor stærke adgangskoderne var. Udførte manuel SQL-injection på en test-netbank, hvor han undersøgte siden med administratoradgang, lavede en overførsel mellem konti og fandt dens SQL-injection-sårbarheder. Kørte automatiske penetrationstests på en testside med ZAP med både den traditionelle spider og Ajax-spideren."
+  da: "Fem praktiske opgaver. Analyserede netværkstrafik i Wireshark med filtre, filterknapper og farvekodning af en samtale. Analyserede VoIP-trafik: typiske VoIP-problemer, antallet af SIP-endpoints og opkald, SIP-opkaldsforløbet og opkaldenes lydstreams. Knækkede password-hashes i Kali Linux med Hashcat (en ordliste og indbyggede regler) og John the Ripper (forskellige tilstande) og vurderede, hvor stærke adgangskoderne var. Udførte manuel SQL-injection på en test-netbank, hvor jeg undersøgte siden med administratoradgang, lavede en overførsel mellem konti og fandt dens SQL-injection-sårbarheder. Kørte automatiske penetrationstests på en testside med ZAP med både den traditionelle spider og Ajax-spideren."
 # Source: owner 2026-10-11 (the project title and the five tasks); OWNER-PDF p.7 and p.16
 # ("OWASP ZAP")
 technology:

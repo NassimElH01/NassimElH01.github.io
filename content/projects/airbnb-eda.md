@@ -5,8 +5,8 @@
 # (6. Certificeringer: "IBM Data Analyst Professional Certificate | IBM SkillsBuild", capstone),
 # and the owner's answers of 2026-10-11 ("Ja, også fuld score"), which override the PDF.
 # Danish follows the PDF's facts; English is a faithful translation.
-# CONFLICT: the PDF gives the capstone "Karakteren 12" (p.9 and p.16); the owner chose
-# "Grade A, full score" on 2026-10-11 (IBM grades A–D, not on the Danish scale). The owner wins.
+# CONFLICT: the PDF gives the capstone "Karakteren 12" (p.9 and p.16); the owner said "Grade A,
+# full score" on 2026-10-11. CLAUDE.md <facts> (2026-10-12) wins over both: completed, no grade.
 # CONFLICT (name): content/certifications.yaml lists "IBM Data Analytics" (LinkedIn: an IBM
 # SkillsBuild certificate for the "Programme in Data Analytics", issued October 2023); the PDF
 # calls it "IBM Data Analyst Professional Certificate". Owner to confirm they are the same.
@@ -54,10 +54,12 @@ technology:
   - "NumPy"
   - "Matplotlib"
   - "Seaborn"
-# Source: owner 2026-10-11 ("Ja, også fuld score": Grade A, full score; see the conflict note above)
+# Source: CLAUDE.md <facts> (IBM-certifikater, 2026-10-12: "Gennemført, inkl. afsluttende
+# capstone-projekt") and owner 2026-10-11 (this analysis is the IBM Data Analytics capstone). No
+# grade: no document in _kilder/ shows one (the owner's "Ja, også fuld score" is not a document).
 result:
-  en: "Graded A with a full score in IBM's assessment of the capstone."
-  da: "Fik Grade A med fuld score i IBM's bedømmelse af capstone-projektet."
+  en: "Completed as the final capstone project of the IBM Data Analytics certificate."
+  da: "Gennemført som afsluttende capstone-projekt i IBM Data Analytics-certificeringen."
 # Order and featured: presentation only (Projects section, 2026-10-11, set by the lead's brief).
 featured: false
 order: 7

@@ -38,8 +38,8 @@ technology:
 # serviceprofil med en mere professionel digital tilstedeværelse"). Whether the site is live was
 # not checked from this session (the domain is blocked here). Two sentences, as the owner asked.
 result:
-  en: "Nassim maintains the website as part of his job at the company. It gives S&S Rengøringsservice a more professional online presence."
-  da: "Nassim vedligeholder hjemmesiden som en del af sit job i virksomheden. Den giver S&S Rengøringsservice en mere professionel digital tilstedeværelse."
+  en: "I maintain the website as part of my job at the company. It gives S&S Rengøringsservice a more professional online presence."
+  da: "Jeg vedligeholder hjemmesiden som en del af mit job i virksomheden. Den giver S&S Rengøringsservice en mere professionel digital tilstedeværelse."
 link: "https://ss.ssrengoringsservice.dk/"
 linkLabel:
   en: "Visit website"

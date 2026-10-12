@@ -38,7 +38,7 @@ const CASES = {
     periods: {
       "ruc-master-digital-transformation": "Sep 2026 – expected Jun 2028",
       "zealand-professionsbachelor": "2022 – Jan 2026",
-      "royal-unibrew-pmo": "2025",
+      "royal-unibrew-pmo": "Jan 2025 – Jun 2025",
       "ss-rengoringservice": "2023–now",
     },
   },
@@ -49,7 +49,7 @@ const CASES = {
     periods: {
       "ruc-master-digital-transformation": "sep. 2026 – forventet jun. 2028",
       "zealand-professionsbachelor": "2022 – jan. 2026",
-      "royal-unibrew-pmo": "2025",
+      "royal-unibrew-pmo": "jan. 2025 – jun. 2025",
       "ss-rengoringservice": "2023–nu",
     },
   },

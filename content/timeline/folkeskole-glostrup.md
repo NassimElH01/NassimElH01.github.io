@@ -8,6 +8,9 @@
 # faithful translation for the owner to review.
 # Left out on purpose: the PDF's "Stærkt tidligt analytisk fundament" (p.16), which is
 # phrasing, not a fact.
+# Not shown (CLAUDE.md <facts>, owner 2026-10-12: "Folkeskole vises ikke"; no "Glostrup" anywhere).
+# Kept as a draft so the record and its sources stay in the repo.
+draft: true
 # Source: OWNER-PDF p.15 ("Folkeskolens Afgangsprøve (9. klasse)")
 kind: "education"
 # Source: OWNER-PDF p.15 ("Folkeskolens Afgangsprøve (9. klasse)")

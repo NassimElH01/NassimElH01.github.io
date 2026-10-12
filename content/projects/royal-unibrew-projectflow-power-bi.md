@@ -27,8 +27,8 @@ problem:
 # systemer"; p.6: "ansvar for at integrere data fra ProjectFlow 365 i Power BI"; p.8: "PMO-teamet
 # kun består af seks medarbejdere (inklusive mig)")
 role:
-  en: "PMO intern with full responsibility for the ProjectFlow 365 to Power BI integration, in a PMO team of six people including himself."
-  da: "PMO-praktikant med det fulde ansvar for integrationen fra ProjectFlow 365 til Power BI i et PMO-team på seks medarbejdere inklusive ham selv."
+  en: "PMO intern with full responsibility for the ProjectFlow 365 to Power BI integration, in a PMO team of six people including me."
+  da: "PMO-praktikant med det fulde ansvar for integrationen fra ProjectFlow 365 til Power BI i et PMO-team på seks medarbejdere inklusive mig."
 # Source: REPORT (p.17: "fra at analysere dataudtræk og API-integration til at udvikle
 # brugervenlige dashboards"; p.15: "udviklet datamodeller, opsat API-forbindelser og skabt
 # dashboards"; p.9: datastruktur og visualisering "matche brugernes behov", "positiv feedback, men
@@ -46,10 +46,9 @@ technology:
   - "Power BI"
   - "ProjectFlow 365"
   - "Azure DevOps"
-  # Source: OWNER-PDF p.8-9 (Royal Unibrew section: "dataudtræk via REST API mod ProjectFlow 365
-  # (JSON/OData)") and p.12 (Royal Unibrew: "REST API-kald mod ProjectFlow 365"). Refines REPORT's
-  # "API-integration"/"API-forbindelser" (p.6, p.15); OWNER-PDF is the owner's 2026-10-11 text pack.
-  - "REST API (JSON/OData)"
+  # Source: REPORT p.6 and p.15 ("API-integration", "opsat API-forbindelser"). The AI-written
+  # OWNER-PDF's "REST API (JSON/OData)" has no other source, so it is not used (CLAUDE.md, rule 1).
+  - "API integration"
 # Source: REPORT (p.15: dashboards "som faktisk blev brugt til ledelsesrapportering"; p.17:
 # dashboards "som PMO og ledelsen faktisk benyttede"); CV-2 (ERHVERVSERFARING, Royal Unibrew:
 # "Resultat: Bidrog til øget gennemsigtighed i projektporteføljen som skaber bedre overblik, bedre

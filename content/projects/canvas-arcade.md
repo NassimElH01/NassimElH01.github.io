@@ -20,13 +20,13 @@ year: 2026
 # Source: the owner's answers (2026-10-05): the four confirmed projects are personal projects.
 context: "personal"
 problem:
-  en: "TODO: why Nassim built the arcade — owner to confirm"
-  da: "TODO: hvorfor Nassim byggede arkaden — ejer bekræfter"
+  en: "TODO: why I built the arcade — owner to confirm"
+  da: "TODO: hvorfor jeg byggede arkaden — ejer bekræfter"
 # Source: the owner's answers (2026-10-04: his work; 2026-10-05: personal) and the GitHub history above
 # (the first versions of Snake, Pong and Blackjack were committed by Lovable's bot).
 role:
-  en: "Nassim's own personal project. The first versions of Snake, Pong and Blackjack were generated with the AI app builder Lovable."
-  da: "Nassims eget personlige projekt. De første versioner af Snake, Pong og Blackjack blev genereret med AI-appbyggeren Lovable."
+  en: "My own personal project. The first versions of Snake, Pong and Blackjack were generated with the AI app builder Lovable."
+  da: "Mit eget personlige projekt. De første versioner af Snake, Pong og Blackjack blev genereret med AI-appbyggeren Lovable."
 # Source: OLD-SITE (projectsData.ts "arcade-games": description, line 241; highlights, line 245).
 # Vanekort is named only (VanekortGame.tsx is a habit tracker, not a card game; no description).
 # Source: OLD-SITE (SnakeGame.tsx lines 16-17 and 108-110: "snakeHighScore" in localStorage). The

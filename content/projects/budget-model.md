@@ -23,8 +23,8 @@ problem:
   da: "TODO: hvilket behov modellen blev lavet til — ejer bekræfter"
 # Source: the owner's answers (2026-10-04: his work; 2026-10-05: personal)
 role:
-  en: "Nassim's own personal project."
-  da: "Nassims eget personlige projekt."
+  en: "My own personal project."
+  da: "Mit eget personlige projekt."
 # Source: OLD-SITE (projectsData.ts "budget-model", description, line 223: "udviklet i Microsoft
 # Excel", "månedlig opfølgning", "privatøkonomi") and the linked file public/budget-skabelon.xlsx
 # (columns Kategori, Type, Budget, Faktisk, Difference; rows Lønudbetaling, Husleje & Forbrug,

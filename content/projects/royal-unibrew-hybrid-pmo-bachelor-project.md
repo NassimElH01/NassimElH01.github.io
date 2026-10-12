@@ -38,8 +38,8 @@ problem:
 # named as author) and p.2 (Forord: "tager udgangspunkt i mit praktikophold hos Royal Unibrew A/S,
 # gennemført i virksomhedens Project Management Office (PMO)").
 role:
-  en: "Solo project: Nassim wrote the bachelor project on his own, based on his internship in Royal Unibrew's PMO."
-  da: "Individuelt projekt: Nassim skrev bachelorprojektet alene med udgangspunkt i sin praktik i Royal Unibrews PMO."
+  en: "Solo project: I wrote the bachelor project on my own, based on my internship in Royal Unibrew's PMO."
+  da: "Individuelt projekt: Jeg skrev bachelorprojektet alene med udgangspunkt i min praktik i Royal Unibrews PMO."
 # Source: BACHELOR p.1 (Abstract), p.20 (3.3: forklarende casestudie; pragmatisme; abduktion; mixed
 # methods), p.21-23 (3.4-3.5: semistrukturerede interviews with key people in PMO and Group IT and
 # project managers; observations of stage gate-møder, sprintplanlægning and daglige stand-ups;
@@ -61,9 +61,13 @@ technology:
 # roller og et begrænset ledelsesmæssigt mandat"; "På baggrund af disse fund udvikles et hybridt
 # PMO-design med fokus på klar governance, datastandarder, rolleforankring og systemintegration")
 # and the owner's answers (2026-10-05: grade 10). Two sentences, as the owner asked for results.
+# Second sentence: CLAUDE.md <facts> (owner 2026-10-12: "Udviklede og anbefalede et socioteknisk
+# løsningsdesign med data stewardship og hybrid governance, baseret på empirisk analyse af Royal
+# Unibrews projektportefølje" — a recommended design, not an implementation), with the design's focus
+# from BACHELOR p.35-37 (6.3-6.6).
 result:
-  en: "The analysis showed that Royal Unibrew's current challenges are primarily sociotechnical rather than technical (a lack of data discipline, weak system integration, unclear roles and a limited management mandate), and on that basis the project develops a hybrid PMO design focused on clear governance, data standards, firmly anchored roles and system integration. Graded 10 on the Danish 7-point scale (grades run from -3 to 12; 12 is the top grade)."
-  da: "Analysen viste, at Royal Unibrews nuværende udfordringer primært er socioteknologiske snarere end tekniske (manglende datadisciplin, svag systemintegration, uklare roller og et begrænset ledelsesmæssigt mandat), og på den baggrund udvikler projektet et hybridt PMO-design med fokus på klar governance, datastandarder, rolleforankring og systemintegration. Bedømt til 10 på 7-trinsskalaen."
+  en: "The analysis showed that Royal Unibrew's current challenges are primarily sociotechnical rather than technical (a lack of data discipline, weak system integration, unclear roles and a limited management mandate). Based on an empirical analysis of Royal Unibrew's project portfolio, I developed and recommended a sociotechnical solution design with data stewardship and hybrid governance, focused on clear governance, data standards, firmly anchored roles and system integration: a recommended design, not an implementation. Graded 10 on the Danish 7-point scale (grades run from -3 to 12; 12 is the top grade)."
+  da: "Analysen viste, at Royal Unibrews nuværende udfordringer primært er socioteknologiske snarere end tekniske (manglende datadisciplin, svag systemintegration, uklare roller og et begrænset ledelsesmæssigt mandat). Baseret på en empirisk analyse af Royal Unibrews projektportefølje udviklede og anbefalede jeg et socioteknisk løsningsdesign med data stewardship og hybrid governance, med fokus på klar governance, datastandarder, rolleforankring og systemintegration: et anbefalet design, ikke en implementering. Bedømt til 10 på 7-trinsskalaen."
 # Keyline: a verbatim part of result (the schema checks it), shown under the featured title.
 keyline:
   en: "Graded 10 on the Danish 7-point scale (grades run from -3 to 12; 12 is the top grade)"

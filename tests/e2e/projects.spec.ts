@@ -172,7 +172,8 @@ test("list rows show year, context and tools on a phone, and screen readers get 
   const context = await browser.newContext({ viewport: { width: 375, height: 800 } });
   const page = await context.newPage();
   await page.goto("/");
-  const row = page.locator("details.more").filter({ hasText: "S&S Rengøringsservice website" });
+  // By its title: the freelance row names the S&S website as an example in its text.
+  const row = page.locator("details.more").filter({ has: page.locator(".more-title", { hasText: /^S&S Rengøringsservice website$/ }) });
   await expect(row.locator(".more-meta")).toBeVisible();
   // The year comes from the timeline entry (the project has none), then the context.
   await expect(row.locator(".more-meta > span:not([aria-hidden]):not(.sr-only)")).toHaveText(["2023–now", "Work"]);

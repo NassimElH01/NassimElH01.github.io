@@ -20,8 +20,8 @@ problem:
 # Source: the owner's answer (2026-10-06: an individual exam) and EXAM-DTI cover and every page
 # header (only Nassim Hassani is named). "Paper" in English: an English "synopsis" reads as a summary.
 role:
-  en: "Individual elective exam: Nassim wrote the paper on his own."
-  da: "Individuel valgfagseksamen: Nassim skrev synopsen alene."
+  en: "Individual elective exam: I wrote the paper on my own."
+  da: "Individuel valgfagseksamen: Jeg skrev synopsen alene."
 # Source: EXAM-DTI p.3 (Teoretisk grundlag: CIA-trekanten; Analyse: AES, RSA; Bilag 1 compares symmetric
 # and asymmetric encryption), p.4 (Analyse continued: RBAC, MFA, netværkssegmentering, fordele og ulemper,
 # "Risiko for reduceret systemhastighed"; Metode: kvalitativ tilgang, sekundære data fra rapporter og

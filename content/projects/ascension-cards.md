@@ -26,8 +26,8 @@ problem:
 # Source: the owner's answers (2026-10-04: his work; 2026-10-05: personal) and
 # legacy/ascensioncards/README.md (line 3: "This project was built with Lovable").
 role:
-  en: "Nassim's own personal project, built with the AI app builder Lovable."
-  da: "Nassims eget personlige projekt, bygget med AI-appbyggeren Lovable."
+  en: "My own personal project, built with the AI app builder Lovable."
+  da: "Mit eget personlige projekt, bygget med AI-appbyggeren Lovable."
 # Source: OLD-SITE (projectsData.ts "ascension-cards": description and highlights, lines 168-173;
 # "flight-world-3d": description and highlights, lines 205-209; screen and component names from
 # the file names in legacy/vite-spa/src/components/ascension/screens/ and ascension3d/).
@@ -56,8 +56,8 @@ technology:
 # (lines 85 and 120: progress in localStorage) and the owner's answer (2026-10-06: he does not use
 # it himself, but it is "et fedt projekt at vise"), so no usage claim. Two sentences, as the owner asked.
 result:
-  en: "A playable version went live on Nassim's previous portfolio in September 2026 and saved each player's progress locally in the browser. It included FlightWorld 3D, a 3D world that visitors could fly through."
-  da: "En spilbar version blev lagt online på Nassims tidligere portfolio i september 2026 og gemte hver spillers fremskridt lokalt i browseren. Den indeholdt FlightWorld 3D, en 3D-verden, som besøgende kunne flyve rundt i."
+  en: "A playable version went live on my previous portfolio in September 2026 and saved each player's progress locally in the browser. It included FlightWorld 3D, a 3D world that visitors could fly through."
+  da: "En spilbar version blev lagt online på min tidligere portfolio i september 2026 og gemte hver spillers fremskridt lokalt i browseren. Den indeholdt FlightWorld 3D, en 3D-verden, som besøgende kunne flyve rundt i."
 featured: false
 order: 12
 ---

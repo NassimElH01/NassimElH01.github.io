@@ -70,8 +70,8 @@ items:
       - context: study
         project: tjekkit
         note:
-          en: "Group project: Nassim made the wireframes and the prototype"
-          da: "Gruppeprojekt: Nassim lavede wireframes og prototypen"
+          en: "Group project: I made the wireframes and the prototype"
+          da: "Gruppeprojekt: Jeg lavede wireframes og prototypen"
         scope:
           en: "Group project"
           da: "Gruppeprojekt"

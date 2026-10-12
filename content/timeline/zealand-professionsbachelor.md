@@ -94,11 +94,8 @@ grades:
       en: "Elective: Data and technology integration (Enhanced Security)"
       da: "Valgfag: Data- og teknologiintegration (Enhanced Security)"
     grade: "10"
-  # Source: OWNER-PDF p.15 ("Valgfag: Webudvikling & Personligt Salg: 7"); no other source
-  - label:
-      en: "Elective: Web development & personal selling"
-      da: "Valgfag: Webudvikling & personligt salg"
-    grade: "7"
+  # Web development & personal selling is not shown (CLAUDE.md <facts>, owner 2026-10-12). Conflict
+  # noted for the owner: OWNER-PDF p.15 said 7, his facts say 4.
 showOnPrintCv: true
 order: 2
 ---

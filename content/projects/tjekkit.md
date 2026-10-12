@@ -23,8 +23,8 @@ problem:
 # Source: owner 2026-10-11 (group project, 2nd semester) and the second round the same day
 # ("jeg tog mig af wireframes og prototypen").
 role:
-  en: "Second-semester group project: Nassim was responsible for the wireframes and the prototype."
-  da: "Gruppeprojekt på 2. semester: Nassim stod for wireframes og prototypen."
+  en: "Second-semester group project: I was responsible for the wireframes and the prototype."
+  da: "Gruppeprojekt på 2. semester: Jeg stod for wireframes og prototypen."
 # Source: owner 2026-10-11 (group project); OWNER-PDF p.7 ("Use Case-diagrammer, domænemodeller,
 # sekvensdiagrammer (SSD) og klassediagrammer"; "Python med modulariseret OOP-struktur ... App,
 # Menu, LogIn og Ansat"; "relationel MySQL-database: Tabeller til medarbejderstamdata (ansat) og

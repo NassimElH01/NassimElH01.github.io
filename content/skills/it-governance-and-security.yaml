@@ -91,14 +91,13 @@ items:
       - pwc-security-awareness
       - pwc-hackschool
     usedIn:
-      # Source: REPORT (p.6: OT Cyber Security project with "udvikling af use cases,
-      # udarbejdelse af stakeholderanalyser, opfølgning på compliance-krav"); CV-2 (Royal Unibrew:
-      # "IT- og OT-projekter (bl.a. Cyber Security)")
+      # Source: CLAUDE.md <facts> (the OT Cyber Security role, worded as the owner describes it;
+      # rule 3: no sites, vendors, tools or network work); REPORT p.6 and p.13 agree.
       - context: internship
         timeline: royal-unibrew-pmo
         note:
-          en: "OT Cyber Security project: use cases, stakeholder analyses and compliance follow-up"
-          da: "OT Cyber Security-projektet: use cases, stakeholderanalyser og opfølgning på compliance-krav"
+          en: "OT Cyber Security project: project management support, use case modelling, stakeholder management and building the backlog in Azure DevOps"
+          da: "OT Cyber Security-projektet: projektledelsessupport, use case-modellering, interessentstyring og opbygning af backloggen i Azure DevOps"
       # Source: EXAM-DTI (elective synopsis "Data og teknologi integration – Enhanced security", p.3-5)
       - context: study
         project: enhanced-security-synopsis

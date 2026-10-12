@@ -24,8 +24,8 @@ problem:
 # tied to those two; the calendar design is from OLD-SITE (highlights). He wrote "co pilot", so the
 # product is not named beyond "Copilot".
 role:
-  en: "Nassim built the whole solution himself. He designed the calendar, and he programmed the server that controls when each door opens and the login-protected admin tool with Claude and Copilot, based on use cases he collected. He also set the site up on its own domain with HTTPS."
-  da: "Nassim byggede hele løsningen selv. Han designede kalenderen og programmerede serveren, der styrer, hvornår hver låge åbner, og det loginbeskyttede adminværktøj med Claude og Copilot ud fra use cases, han selv indsamlede. Han satte også siden op på eget domæne med HTTPS."
+  en: "I built the whole solution myself. I designed the calendar, and I programmed the server that controls when each door opens and the login-protected admin tool with Claude and Copilot, based on use cases I collected. I also set the site up on its own domain with HTTPS."
+  da: "Jeg byggede hele løsningen selv. Jeg designede kalenderen og programmerede serveren, der styrer, hvornår hver låge åbner, og det loginbeskyttede adminværktøj med Claude og Copilot ud fra use cases, jeg selv indsamlede. Jeg satte også siden op på eget domæne med HTTPS."
 # Source: OLD-SITE highlights (design and doors) and owner 2026-10-11, second round, verbatim
 # ("så skulle jeg lave en excel ark knyttet til medarbedjernes email for det til at virke").
 method:
@@ -55,9 +55,11 @@ demo:
   kind: "iframe"
   src: "/freelance/24support-julekalender/index.html"
 # Keyline: a verbatim part of role (the schema checks it), shown under the featured title.
+# The owner approved "Nassim built the whole solution himself." on 2026-10-11; rule 4 of CLAUDE.md
+# (2026-10-12: first person) puts it, and role, in the first person. Same claim, new grammar.
 keyline:
-  en: "Nassim built the whole solution himself."
-  da: "Nassim byggede hele løsningen selv."
+  en: "I built the whole solution myself."
+  da: "Jeg byggede hele løsningen selv."
 # Order and featured: presentation only (Projects section, 2026-10-06): the three projects that
 # best show the student-job profile lead, in the order work, code with a live demo, study.
 featured: true

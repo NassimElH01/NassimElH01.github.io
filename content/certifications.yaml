@@ -62,14 +62,13 @@
   issuer: IBM
   # Source: LinkedIn ("Udstedt okt. 2023")
   year: 2023
-  # Source: owner 2026-10-11 (the capstone, the Airbnb analysis: "Ja, også fuld score", recorded
-  # as Grade A, full score, the same terms as IBM's evaluation of the cybersecurity capstone) and
-  # OWNER-PDF p.16 (the result is "for det afsluttende capstone-projekt", so the text names the
-  # capstone and does not read as a grade for the whole certificate). OWNER-PDF p.9
-  # ("Karakter: 12") and p.16 ("karakteren 12") are not used.
+  # Source: CLAUDE.md <facts> (IBM-certifikater, 2026-10-12): "Gennemført, inkl. afsluttende
+  # capstone-projekt". No grade: no document in _kilder/ shows one for this capstone (the owner's
+  # "Ja, også fuld score" of 2026-10-11 is not a document; facts allow a designation only where
+  # the certificate or a source shows it). OWNER-PDF p.9 and p.16 ("karakteren 12") are not used.
   result:
-    en: "Capstone: Grade A, full score"
-    da: "Afsluttende projekt: Grade A, fuld score"
+    en: "Completed, including the final capstone project"
+    da: "Gennemført, inkl. afsluttende capstone-projekt"
 - id: ibm-cybersecurity
   order: 5
   # OWNER-PDF p.16 (Certificeringer & Kursusforløb) calls it "IBM Cybersecurity Analyst
@@ -82,13 +81,14 @@
   # date; the owner confirmed on 2026-10-11 (second round: "ja for fik den leveret der") that the
   # capstone belongs to this certificate. The year stays 2023, as LinkedIn shows.
   year: 2023
-  # Source: owner 2026-10-11 (IBM's evaluation of the capstone, dated 2 January 2024: rubric
-  # 50/50, "Grade: A"; the owner chose "Grade A, fuld score" for the site) and OWNER-PDF p.16
-  # (the result is "for den afsluttende eksamen"), so the text names the final project.
-  # OWNER-PDF p.10 ("Karakter: 12") and p.16 ("karakteren 12") are not used.
+  # Source: CLAUDE.md <facts> (IBM-certifikater, 2026-10-12): "Gennemført, inkl. afsluttende
+  # capstone-projekt", plus the designation the source shows, which facts allow: IBM's evaluation
+  # of the capstone, dated 2 January 2024, pasted by the owner on 2026-10-11
+  # (_kilder/owner-answers-2026-10-11.txt: rubric 50/50, "Grade: A"; the owner chose "Grade A, fuld
+  # score"). OWNER-PDF p.10 and p.16 ("karakteren 12") are not used.
   result:
-    en: "Capstone: Grade A, full score"
-    da: "Afsluttende projekt: Grade A, fuld score"
+    en: "Completed, including the final capstone project: Grade A, full score"
+    da: "Gennemført, inkl. afsluttende capstone-projekt: Grade A, fuld score"
 - id: pwc-security-awareness
   order: 6
   # Source: LinkedIn ("Praktiserende i cybersikkerhed", PwC Danmark; the diploma says the holder
