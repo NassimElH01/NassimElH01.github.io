@@ -85,13 +85,14 @@
     github: https://github.com/NassimElH01
   contact:
     # Source: owner's answer (2026-10-04) and the CV header.
+    # No phone number on the site (CLAUDE.md, rule 4; owner 2026-10-12): the schema has no field for it.
     email: naselh01@gmail.com
-    phone: "+45 24 77 07 84"
   # The owner's own CV (Nassim_Hassani_CV.docx, shared 2026-10-05), converted to PDF unchanged
   # apart from the document metadata (author and title set to Nassim Hassani) and, at the owner's
   # request (2026-10-06), the bachelor line, which now gives the title of his bachelor project:
   # "Bachelorprojekt: Fra Vandfald til Hybrid PMO – datadrevet projektledelse (Royal Unibrew)".
-  # It is in Danish.
+  # 2026-10-12, at the owner's request: the header's phone line is removed (CLAUDE.md, rules 4
+  # and 6); nothing else changed. It is in Danish.
   cv:
     href: /Nassim-Hassani-CV.pdf
     lang: da

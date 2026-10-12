@@ -56,9 +56,9 @@ const profile = defineCollection({
         linkedin: z.url({ protocol: /^https$/ }),
         github: z.url({ protocol: /^https$/ }),
       }),
+      // Email only: no phone number on the site (CLAUDE.md, rule 4).
       contact: z.object({
         email: orTodo(z.email()),
-        phone: orTodo(z.string().regex(/^\+\d[\d ]{6,}$/)).optional(),
       }),
       interests: localizedList.optional(),
       /** The owner's own CV as a file in public/, and the language it is written in. */
