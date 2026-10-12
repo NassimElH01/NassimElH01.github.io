@@ -11,6 +11,7 @@ interface Entry {
   summary: Localized;
   organization: string;
   grades?: { label: Localized; grade: string }[];
+  undated?: boolean;
   draft?: boolean;
   order: number;
 }
@@ -34,7 +35,6 @@ const CASES = {
     path: "/",
     heading: "Experience & education",
     grades: "Grades",
-    undated: "Work",
     periods: {
       "ruc-master-digital-transformation": "Sep 2026 – expected Jun 2028",
       "zealand-professionsbachelor": "2022 – Jan 2026",
@@ -46,7 +46,6 @@ const CASES = {
     path: "/da/",
     heading: "Erfaring & uddannelse",
     grades: "Karakterer",
-    undated: "Arbejde",
     periods: {
       "ruc-master-digital-transformation": "sep. 2026 – forventet jun. 2028",
       "zealand-professionsbachelor": "2022 – jan. 2026",
@@ -83,8 +82,13 @@ for (const lang of ["en", "da"] as const) {
       for (const [id, period] of Object.entries(item.periods)) {
         await expect(page.locator(`${article(id)} .timeline-meta`)).toHaveText(new RegExp(`^${period}`));
       }
-      // An undated job shows its kind only, no empty period.
-      await expect(page.locator(`${article("ab-catering-warehouse")} .timeline-meta`)).toHaveText(item.undated);
+      // Every dated entry shows a year; an undated one (the CVs list some without dates) shows
+      // its kind only, never an empty period.
+      for (const entry of entries) {
+        const meta = page.locator(`${article(entry.id)} .timeline-meta`);
+        if (entry.undated) await expect(meta).not.toHaveText(/\d/);
+        else await expect(meta).toHaveText(/\d{4}/);
+      }
     });
 
     test("lists each education's grades from content/, label then grade", async ({ page }) => {
