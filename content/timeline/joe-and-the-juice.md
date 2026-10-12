@@ -11,9 +11,9 @@ title:
   da: "Juicer"
 # Source: OWNER-PDF p.14 ("Joe & The Juice")
 organization: "Joe & The Juice"
-# Source: OWNER-PDF p.13 gives only the group period "2020 – 2024", no dates for this job,
-# so it is shown undated.
-undated: true
+# Source: CV-version0 (owner, shared 2026-10-12: "2022"; earlier sources gave no dates).
+start: "2022"
+end: "2022"
 # Source: OWNER-PDF p.14 ("Kundeservice & Logistik: Erfaring med drift og varedistribution")
 summary:
   en: "Worked as a juicer with customer service and day-to-day operations."

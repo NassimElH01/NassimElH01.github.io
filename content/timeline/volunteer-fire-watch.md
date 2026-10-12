@@ -14,11 +14,9 @@ title:
   da: "Frivillig brandvagt"
 # Source: CV-2 and CV-CBS ("CNS Security")
 organization: "CNS Security"
-# Source: CV-2 and CV-CBS list this under "Øvrig erhvervserfaring" without dates, and no other
-# source dates it, so it is shown undated, as in the CVs (owner's answers, 2026-10-05).
-# OWNER-PDF p.13 groups it under "Tidligere Erhvervserfaring (2020 – 2024)" with no dates
-# for the job itself, so it stays undated.
-undated: true
+# Source: CV-version0 (owner, shared 2026-10-12: "2022 – 2023"; earlier sources gave no dates).
+start: "2022"
+end: "2023"
 summary:
   en: "Volunteer support in a safety-focused environment requiring vigilance, coordination, and professionalism under operational conditions."
   da: "Frivillig støtte i et sikkerhedsfokuseret miljø, der krævede årvågenhed, koordinering og professionalisme under operationelle forhold."
