@@ -80,6 +80,21 @@
     }
   }
 
+  /* A nav jump lands a section's border-t exactly on the header's border-b, so the two
+     hairlines merge. Header height: 6.75rem + 1px below lg, 3.5rem + 1px at lg
+     (Header.astro: a min-h-14 row plus a p-1 / min-h-11 nav row). Focus targets inside
+     sections keep the full scroll-padding above. The hero (#top) has no border-t. If the
+     header's height or the scroll-padding changes, change these offsets with them. */
+  section[id]:not(#top) {
+    scroll-margin-top: -0.75rem;
+  }
+
+  @media (min-width: 1024px) {
+    section[id]:not(#top) {
+      scroll-margin-top: -1rem;
+    }
+  }
+
   body {
     min-height: 100dvh;
     background-color: var(--paper);

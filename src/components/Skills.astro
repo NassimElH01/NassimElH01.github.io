@@ -64,12 +64,17 @@ interface Proof {
 interface Note {
   value: string;
   lang?: string;
+  /** The usage's qualifier, which the note may open with ("Group project: …"). */
+  scope?: string;
 }
 interface Sense {
   key: string;
   context: Context;
   first: number;
   place?: { value: string; lang?: string };
+  /** In a report the place itself is the link to its proof: a project or Experience entry. */
+  placeHref?: string;
+  placeKind?: string;
   period?: string;
   scopes: Note[];
   notes: Note[];
@@ -100,15 +105,23 @@ const groups = (await getCollection("skills"))
 
         let key: string;
         let place: Sense["place"];
+        let placeHref: string | undefined;
+        let placeKind: string | undefined;
         let period: string | undefined;
+        const headingOf = (entry: { kind: string }) =>
+          entry.kind === "education" ? tr("experience.educationHeading") : tr("experience.workHeading");
         if (employerId) {
           const employer = timeline.get(employerId)!;
           key = `${context}|t:${employerId}`;
           place = { value: organizationOf(employer.organization) };
+          placeHref = `#${timelineAnchor(employerId)}`;
+          placeKind = headingOf(employer);
           period = yearsOf(employer);
         } else if (project && projectId) {
           key = `${context}|p:${projectId}`;
           place = projectTitle(project.title);
+          placeHref = `#${projectAnchor(projectId)}`;
+          placeKind = tr("skills.proof.project");
           const year = project.year !== undefined && !isTodo(String(project.year)) ? String(project.year) : undefined;
           const parent = project.timeline && timeline.get(project.timeline.id);
           period = year ?? (parent ? yearsOf(parent) : undefined);
@@ -116,6 +129,8 @@ const groups = (await getCollection("skills"))
           const entry = timeline.get(ownTimelineId)!;
           key = `${context}|t:${ownTimelineId}`;
           place = { value: organizationOf(entry.organization) };
+          placeHref = `#${timelineAnchor(ownTimelineId)}`;
+          placeKind = headingOf(entry);
           period = yearsOf(entry);
         } else {
           key = `${context}|n:${index}`;
@@ -123,17 +138,28 @@ const groups = (await getCollection("skills"))
         // No repeated year when the place already names it ("… Christmas Calendar 2026").
         if (period && place?.value.includes(period)) period = undefined;
 
-        const sense: Sense = senses.get(key) ?? { key, context, first: index, place, period, scopes: [], notes: [], proofs: [] };
+        const sense: Sense = senses.get(key) ?? {
+          key,
+          context,
+          first: index,
+          place,
+          placeHref,
+          placeKind,
+          period,
+          scopes: [],
+          notes: [],
+          proofs: [],
+        };
         senses.set(key, sense);
 
         const note = usage.note && shown(usage.note) ? text(usage.note) : undefined;
-        if (note) sense.notes.push(note);
-        if (note && usage.scope && shown(usage.scope)) {
-          const scope = text(usage.scope);
-          if (!sense.scopes.some((known) => known.value === scope.value)) sense.scopes.push(scope);
-        }
+        const scope = note && usage.scope && shown(usage.scope) ? text(usage.scope) : undefined;
+        if (note) sense.notes.push({ ...note, scope: scope?.value });
+        if (scope && !sense.scopes.some((known) => known.value === scope.value)) sense.scopes.push(scope);
 
+        // Further proofs; the place itself is already the link to its own.
         const addProof = (proof: Proof) => {
+          if (proof.href === sense.placeHref) return;
           if (!sense.proofs.some((known) => known.href === proof.href)) sense.proofs.push(proof);
         };
         if (project && projectId) {
@@ -143,9 +169,8 @@ const groups = (await getCollection("skills"))
         for (const timelineId of [employerId, ownTimelineId]) {
           if (!timelineId) continue;
           const entry = timeline.get(timelineId)!;
-          const heading = entry.kind === "education" ? tr("experience.educationHeading") : tr("experience.workHeading");
           const title = text(entry.title);
-          addProof({ href: `#${timelineAnchor(timelineId)}`, label: `${heading}: ${title.value}`, lang: title.lang });
+          addProof({ href: `#${timelineAnchor(timelineId)}`, label: `${headingOf(entry)}: ${title.value}`, lang: title.lang });
         }
       });
 
@@ -160,12 +185,32 @@ const groups = (await getCollection("skills"))
       // The headword: the term in serif, a qualifier in brackets in mono (the tech voice).
       const name = text(item.name);
       const cut = name.value.indexOf(" (");
+      const term = cut > 0 ? name.value.slice(0, cut) : name.value;
+      // The gloss in the index: the first note (senses come paid work first) that says more than
+      // the term or its own qualifier. The qualifier is cut off only when the entry has one sense,
+      // whose register line next to the gloss still shows it. With more senses the note stays
+      // whole, so a group project's work (or HTML and CSS without JavaScript) never reads as the
+      // whole entry's.
+      const glossOf = (note: Note): Note | undefined => {
+        if (note.value === note.scope) return undefined;
+        const prefix =
+          note.scope && list.length === 1
+            ? [`${note.scope}: `, `${note.scope}; `].find((start) => note.value.startsWith(start))
+            : undefined;
+        const value = prefix ? note.value.slice(prefix.length) : note.value;
+        return { value: value.charAt(0).toLocaleUpperCase(note.lang ?? lang) + value.slice(1), lang: note.lang };
+      };
+      const gloss = list
+        .flatMap((sense) => sense.notes)
+        .map(glossOf)
+        .find((note): note is Note => note !== undefined && !note.value.toLowerCase().startsWith(term.toLowerCase()));
       return [
         {
           id: item.id,
           name,
-          term: cut > 0 ? name.value.slice(0, cut) : name.value,
+          term,
           qualifier: cut > 0 ? name.value.slice(cut + 1) : undefined,
+          gloss,
           senses: list,
           contexts,
           certificates: item.certifications
@@ -250,15 +295,22 @@ const options = [
             <ul role="list" class="entries" aria-labelledby={skillGroupAnchor(group.id)}>
               {group.entries.map((entry) => (
                 <li class="entry" data-ctx={entry.contexts.join(" ")}>
-                  <h4 id={skillAnchor(entry.id)} class="headword" tabindex="-1" lang={entry.name.lang}>
-                    <span class="hw-term">{entry.term}</span>
-                    {entry.qualifier && (
-                      <>
-                        {" "}
-                        <span class="hw-qual">{entry.qualifier}</span>
-                      </>
+                  <div class="entry-head">
+                    <h4 id={skillAnchor(entry.id)} class="headword" tabindex="-1" lang={entry.name.lang}>
+                      <span class="hw-term">{entry.term}</span>
+                      {entry.qualifier && (
+                        <>
+                          {" "}
+                          <span class="hw-qual">{entry.qualifier}</span>
+                        </>
+                      )}
+                    </h4>
+                    {entry.gloss && (
+                      <p class="entry-gloss" lang={entry.gloss.lang}>
+                        {entry.gloss.value}
+                      </p>
                     )}
-                  </h4>
+                  </div>
                   <div class="entry-body">
                     <ul role="list" class="senses">
                       {entry.senses.map((sense) => (
@@ -268,22 +320,37 @@ const options = [
                               {contextLabel(sense.context)}
                               <span class="sr-only">:</span>
                             </span>{" "}
-                            {sense.place && (
-                              <span class="sense-place" lang={sense.place.lang}>
-                                {sense.place.value}
-                              </span>
-                            )}
-                            {sense.period && (
-                              <>
-                                <span class="sr-only">,</span> <span aria-hidden="true">·</span>{" "}
-                                <span class="sense-year">{sense.period}</span>
-                              </>
-                            )}
-                            {sense.scopes.map((scope) => (
-                              <span class="sense-scope" lang={scope.lang}>
-                                <span class="sr-only">,</span> <span aria-hidden="true">·</span> {scope.value}
-                              </span>
-                            ))}
+                            <span class="sense-where">
+                              {sense.place &&
+                                (sense.placeHref ? (
+                                  <>
+                                    {/* The index names the place; a report (or a deep link) links it. */}
+                                    <span class="sense-place place-index" lang={sense.place.lang}>
+                                      {sense.place.value}
+                                    </span>
+                                    <a class="sense-place place-link" href={sense.placeHref}>
+                                      <span lang={sense.place.lang}>{sense.place.value}</span>
+                                      <span class="sr-only">, {sense.placeKind}</span>
+                                      <span aria-hidden="true">&nbsp;↓</span>
+                                    </a>
+                                  </>
+                                ) : (
+                                  <span class="sense-place" lang={sense.place.lang}>
+                                    {sense.place.value}
+                                  </span>
+                                ))}
+                              {/* The dot travels with the word before it; "place · year" stays together. */}
+                              {sense.period && (
+                                <>
+                                  <span class="sr-only">,</span>&nbsp;<span aria-hidden="true">·</span>&nbsp;<span class="sense-year">{sense.period}</span>
+                                </>
+                              )}
+                              {sense.scopes.map((scope) => (
+                                <span class="sense-scope" lang={scope.lang}>
+                                  <span class="sr-only">,</span>&nbsp;<span aria-hidden="true">·</span> {scope.value}
+                                </span>
+                              ))}
+                            </span>
                           </p>
                           {(sense.notes.length > 0 || sense.proofs.length > 0) && (
                             <div class="sense-evidence">
@@ -318,16 +385,18 @@ const options = [
                           {tr("skills.certificates")}
                           <span class="sr-only">:</span>
                         </span>{" "}
-                        {entry.certificates.map((name, index) => (
-                          <>
-                            {index > 0 && (
-                              <>
-                                <span class="sr-only">,</span> <span aria-hidden="true">·</span>{" "}
-                              </>
-                            )}
-                            <span class="cert-name">{name}</span>
-                          </>
-                        ))}
+                        <span class="certs-list">
+                          {entry.certificates.map((name, index) => (
+                            <>
+                              {index > 0 && (
+                                <>
+                                  <span class="sr-only">,</span>&nbsp;<span aria-hidden="true">·</span>{" "}
+                                </>
+                              )}
+                              <span class="cert-name">{name}</span>
+                            </>
+                          ))}
+                        </span>
                       </p>
                     )}
                     {entry.contexts.length > 1 &&
@@ -340,10 +409,10 @@ const options = [
                               <>
                                 {index > 0 && (
                                   <>
-                                    <span class="sr-only">,</span> <span aria-hidden="true">·</span>{" "}
+                                    <span class="sr-only">,</span>&nbsp;<span aria-hidden="true">·</span>{" "}
                                   </>
                                 )}
-                                {contextLabel(other)}
+                                <span class="also-ctx">{contextLabel(other)}</span>
                               </>
                             ))}
                         </p>
@@ -387,9 +456,9 @@ const options = [
     color: var(--ink);
   }
 
-  /* ── Filter: a row of tiles, each a small hero fact (name over a serif count). The
-     chosen tile is ink with the hero's orange pillar; it never relies on colour alone
-     (inverted, and the name is underlined). Hidden without :has(), see below. ── */
+  /* ── Filter: a block of radio tiles, each a ring and a name with its count in mono.
+     The chosen tile is ink with the hero's orange pillar, a filled ring and an underlined
+     name, so it never relies on colour alone. Hidden without :has(), see below. ── */
   .skills-filter {
     display: none;
     min-inline-size: 0;
@@ -440,10 +509,13 @@ const options = [
   .ctx-label {
     position: relative;
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    min-height: 4.25rem;
-    padding: 0.625rem 0.75rem 0.625rem 1rem;
+    flex-wrap: wrap; /* at very large text the count drops under the name */
+    align-items: baseline;
+    align-content: center; /* centres the line in the 44px tile */
+    justify-content: space-between;
+    column-gap: 0.75rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem 0.5rem 1rem;
   }
 
   .ctx-label::before {
@@ -458,7 +530,7 @@ const options = [
   }
 
   .ctx-name {
-    color: var(--steel-text);
+    color: var(--ink);
     font-family: var(--font-mono);
     font-size: 0.75rem;
     letter-spacing: 0.12em;
@@ -466,21 +538,40 @@ const options = [
     text-underline-offset: 0.35em;
   }
 
+  /* A radio ring: round like the hero's live dot (no boxes are rounded). Filled when chosen. */
+  .ctx-name::before {
+    content: "";
+    display: inline-block;
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    margin-inline-end: 0.5rem;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    vertical-align: 0.05em;
+  }
+
+  .ctx-input:checked + .ctx-label .ctx-name::before {
+    background: currentColor;
+  }
+
   /* Mono, not the serif: Instrument Serif's 1 reads as an l ("11" as "ll"). */
   .ctx-count {
-    color: var(--ink);
+    color: var(--steel-text);
     font-family: var(--font-mono);
-    font-size: 1.375rem;
+    font-size: 0.9375rem;
     line-height: 1;
     font-variant-numeric: tabular-nums;
   }
 
-  .ctx-opt:hover .ctx-label {
-    background: color-mix(in srgb, var(--ink) 6%, var(--paper));
-  }
+  @media (hover: hover) {
+    .ctx-opt:hover .ctx-label {
+      background: color-mix(in srgb, var(--ink) 6%, var(--paper));
+    }
 
-  .ctx-opt:hover .ctx-name {
-    text-decoration: underline 1px;
+    .ctx-opt:hover .ctx-name {
+      color: var(--ink);
+      text-decoration: underline 1px;
+    }
   }
 
   .ctx-input:checked + .ctx-label {
@@ -562,8 +653,10 @@ const options = [
     overflow-wrap: break-word;
   }
 
+  /* Every context name on the page is set the same way: mono caps, like the tiles. */
   .sense-ctx,
-  .certs-label {
+  .certs-label,
+  .also-ctx {
     color: var(--steel-text);
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -571,10 +664,51 @@ const options = [
     text-transform: uppercase;
   }
 
-  .sense-place,
+  .sense-place {
+    color: var(--ink);
+  }
+
+  /* Certificates are credentials, so they carry a little more weight than places. */
   .cert-name {
     color: var(--ink);
     font-weight: 500;
+  }
+
+  /* "2022–2026" and "2023–now" never split at the dash. */
+  .sense-year {
+    white-space: nowrap;
+  }
+
+  /* The index names a place; a report (or a deep link) links it to its proof. */
+  .place-index {
+    display: none;
+  }
+
+  .place-link {
+    font-weight: 500;
+    text-decoration: underline 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  @media (hover: hover) {
+    .place-link:hover {
+      text-decoration-color: var(--signal);
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  /* The gloss: in the index, one line under the headword says what was done (the first
+     telling note, verbatim). Reports show the full notes instead. */
+  .entry-gloss {
+    display: none;
+    margin-top: 0.375rem;
+    max-width: 28rem;
+    color: var(--ink);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    text-wrap: pretty;
+    hyphens: auto;
+    overflow-wrap: break-word;
   }
 
   .sense-evidence {
@@ -600,11 +734,14 @@ const options = [
     column-gap: 1.5rem;
   }
 
+  /* The same space above every link, whether its label wraps or not; still a 44px target. */
   .proof-link {
     display: inline-flex;
-    align-items: center;
+    align-items: flex-start;
     max-width: 100%;
     min-height: 2.75rem;
+    padding-block: 0.6875rem;
+    line-height: 1.45;
     font-size: 0.9375rem;
     font-weight: 500;
     text-decoration: underline 1px;
@@ -636,32 +773,34 @@ const options = [
     text-underline-offset: 0.3em;
   }
 
-  /* Wide enough for two columns: headword left, register right, with a hanging label
-     column so places line up. Measured on the list itself, so it also switches off at
-     very large text. */
-  @container (min-width: 44rem) {
-    .entry {
-      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
-      column-gap: 2rem;
-      align-items: first baseline;
-    }
-
+  /* A label column, so places, notes and links share one edge (the grid drops the space
+     after the label). Measured on the list, so it switches off at very large text. */
+  @container (min-width: 40rem) {
     .sense-meta,
     .entry-certs {
-      padding-inline-start: 7rem;
-      text-indent: -7rem;
-    }
-
-    .sense-ctx,
-    .certs-label {
-      display: inline-block;
-      width: 7rem;
-      text-indent: 0;
+      display: grid;
+      grid-template-columns: 7rem minmax(0, 1fr);
+      align-items: baseline;
     }
 
     .sense-evidence,
     .entry-also {
       margin-inline-start: 7rem;
+    }
+  }
+
+  /* Headword and gloss left, register right, on the head's and Projects' 5/7 axis. 61rem
+     is the list's width at the lg breakpoint, so the list splits together with the head. */
+  @container (min-width: 61rem) {
+    .entry {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      column-gap: 4rem;
+      align-items: first baseline;
+    }
+
+    .headword {
+      font-size: 1.75rem;
+      line-height: 1.1;
     }
   }
 
@@ -681,7 +820,8 @@ const options = [
       display: inline-flex;
     }
 
-    /* All: the index. Notes wait for a context (or a deep link); the qualifier stays. */
+    /* All: the index. One gloss per skill, places named (not linked) with their qualifier;
+       the full notes wait for a context or a deep link. */
     .skills:has(#skills-ctx-all:checked) .sense-evidence {
       display: none;
     }
@@ -690,11 +830,23 @@ const options = [
       display: inline;
     }
 
-    .skills:has(#skills-ctx-all:checked) .entry:has(> .headword:target) .sense-evidence {
+    .skills:has(#skills-ctx-all:checked) .entry:not(:has(> .entry-head > .headword:target)) .entry-gloss {
       display: block;
     }
 
-    .skills:has(#skills-ctx-all:checked) .entry:has(> .headword:target) .sense-scope {
+    .skills:has(#skills-ctx-all:checked) .entry:not(:has(> .entry-head > .headword:target)) .place-link {
+      display: none;
+    }
+
+    .skills:has(#skills-ctx-all:checked) .entry:not(:has(> .entry-head > .headword:target)) .place-index {
+      display: inline;
+    }
+
+    .skills:has(#skills-ctx-all:checked) .entry:has(> .entry-head > .headword:target) .sense-evidence {
+      display: block;
+    }
+
+    .skills:has(#skills-ctx-all:checked) .entry:has(> .entry-head > .headword:target) .sense-scope {
       display: none;
     }
 
@@ -721,7 +873,7 @@ const options = [
     position: relative;
   }
 
-  .entry:has(> .headword:target)::before {
+  .entry:has(> .entry-head > .headword:target)::before {
     content: "";
     position: absolute;
     inset-block: 0;
@@ -733,15 +885,10 @@ const options = [
 
   /* ── Motion: only on change, never at load. ─────────────────────── */
   @media (prefers-reduced-motion: no-preference) {
-    .ctx-label,
-    .ctx-name,
-    .ctx-count {
-      transition:
-        background-color 150ms cubic-bezier(0.2, 0.7, 0.2, 1),
-        color 150ms cubic-bezier(0.2, 0.7, 0.2, 1);
-    }
-
-    .ctx-label::before {
+    /* The tile's fill and text swap at once, as a radio's state should (no cross-fade
+       through grey); the one motion is the pillar dropping into the newly chosen tile. The
+       old pillar leaves at once, so there is never more than one orange in the block. */
+    .ctx-input:checked + .ctx-label::before {
       transition: scale 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
     }
 
@@ -749,7 +896,7 @@ const options = [
       animation: evidence-in 200ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
     }
 
-    .entry:has(> .headword:target)::before {
+    .entry:has(> .entry-head > .headword:target)::before {
       animation: landing 300ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
     }
   }
@@ -791,7 +938,7 @@ const options = [
       background: HighlightText;
     }
 
-    .entry:has(> .headword:target)::before {
+    .entry:has(> .entry-head > .headword:target)::before {
       forced-color-adjust: none;
       background: Highlight;
     }
@@ -802,8 +949,14 @@ const options = [
     .skills-filter,
     .to-filter,
     .entry-also,
-    .sense-scope {
+    .sense-scope,
+    .entry-gloss,
+    .place-link {
       display: none !important;
+    }
+
+    .place-index {
+      display: inline !important;
     }
 
     .skills :is(.skill-group, .entry, .sense, .sense-evidence) {

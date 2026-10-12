@@ -39,8 +39,8 @@ const CONTEXTS = ["internship", "work", "freelance", "study", "personal"] as con
 const usedIn = (item: Item, context: string) => usages(item).some((usage) => usage.context === context);
 
 const LABELS = {
-  en: { legend: "Skills used in", all: "All", unit: "skills", internship: "Internship", work: "Work", freelance: "Freelance", study: "Study", personal: "Personal" },
-  da: { legend: "Kompetencer brugt i", all: "Alle", unit: "kompetencer", internship: "Praktik", work: "Arbejde", freelance: "Freelance", study: "Studie", personal: "Personligt" },
+  en: { legend: "Show skills used in", all: "All", unit: "skills", internship: "Internship", work: "Work", freelance: "Freelance", study: "Study", personal: "Personal" },
+  da: { legend: "Vis kompetencer brugt i", all: "Alle", unit: "kompetencer", internship: "Praktik", work: "Arbejde", freelance: "Freelance", study: "Studie", personal: "Personligt" },
 } as const;
 
 const pickedName = (item: Item, lang: Lang) => item.name[lang];
@@ -98,6 +98,8 @@ for (const lang of ["en", "da"] as const) {
         const notes = expected.flatMap((item) => usages(item).filter((usage) => usage.context === context && usage.note).map((usage) => usage.note![lang]));
         await expect(page.locator("#skills .sense-note:visible")).toHaveText(notes);
         await expect(page.locator("#skills .sense-scope:visible")).toHaveCount(0);
+        // A report shows the full notes, not the glosses.
+        await expect(page.locator("#skills .entry-gloss:visible")).toHaveCount(0);
       }
       // The arrow keys wrap back to All, which shows everything again.
       await page.keyboard.press("ArrowRight");
@@ -105,16 +107,28 @@ for (const lang of ["en", "da"] as const) {
       await expect(page.locator("#skills .headword:visible")).toHaveCount(items.length);
     });
 
-    test("All is an index: places and qualifiers, no notes", async ({ page }) => {
+    test("All is an index: a gloss per skill, places and qualifiers, no full notes", async ({ page }) => {
       await page.goto(path);
       await expect(page.locator("#skills .sense-evidence:visible")).toHaveCount(0);
+      // Places are named, not linked, in the index.
+      await expect(page.locator("#skills .place-link:visible")).toHaveCount(0);
+      // Each gloss is a note from content/, verbatim (at most its qualifier is cut off).
+      const glosses = page.locator("#skills .entry-gloss:visible");
+      expect(await glosses.count()).toBeGreaterThan(items.length / 2);
+      for (const item of items) {
+        const gloss = page.locator(`.entry:has(#skill-${item.id}) .entry-gloss`);
+        if ((await gloss.count()) === 0) continue;
+        const value = (await gloss.innerText()).trim().toLowerCase();
+        const notes = usages(item).filter((usage) => usage.note).map((usage) => usage.note![lang].toLowerCase());
+        expect(notes.some((note) => note.endsWith(value)), `${item.id}: "${value}"`).toBe(true);
+      }
       // Every qualifier stays next to its place, so no claim is shown without it.
       const scopes = [...new Set(items.flatMap((item) => usages(item).filter((usage) => usage.scope).map((usage) => usage.scope![lang])))];
       expect(scopes.length).toBeGreaterThan(0);
       for (const scope of scopes) await expect(page.locator("#skills .sense-scope:visible", { hasText: scope }).first()).toBeVisible();
       for (const item of items) {
         const withScope = usages(item).filter((usage) => usage.scope).length;
-        if (withScope) await expect(page.locator(`#skill-${item.id} ~ .entry-body .sense-scope:visible`)).not.toHaveCount(0);
+        if (withScope) await expect(page.locator(`.entry:has(#skill-${item.id}) .entry-body .sense-scope:visible`)).not.toHaveCount(0);
       }
     });
   });
@@ -133,9 +147,13 @@ test("every proof link lands, and a link to a closed project row opens it", asyn
   );
   expect(above).toEqual([]);
 
-  // Study → Python → Tjekkit, a closed "More projects" row.
+  // Study → Python → Tjekkit, a closed "More projects" row. In a report the place is the link,
+  // named with what it leads to.
   await choose(page, "study");
-  await page.locator("#skill-python ~ .entry-body a[href='#project-tjekkit']").click();
+  const place = page.locator(".entry:has(#skill-python) .entry-body a[href='#project-tjekkit']");
+  await expect(place).toHaveClass(/place-link/);
+  await expect(place).toHaveAccessibleName(/^Tjekkit\s*,\s*Project$/);
+  await place.click();
   await expect(page).toHaveURL(/#project-tjekkit$/);
   await expect(page.locator("details.more:has(> summary#project-tjekkit)")).toHaveAttribute("open", "");
   await expect(page.locator("#project-tjekkit")).toBeInViewport();
@@ -143,7 +161,7 @@ test("every proof link lands, and a link to a closed project row opens it", asyn
   // Back to the skill, then Internship → Power BI → the Experience entry.
   await page.goBack();
   await choose(page, "internship");
-  await page.locator("#skill-power-bi ~ .entry-body a[href='#timeline-royal-unibrew-pmo']").first().click();
+  await page.locator(".entry:has(#skill-power-bi) .entry-body a[href='#timeline-royal-unibrew-pmo']").first().click();
   await expect(page.locator("#timeline-royal-unibrew-pmo")).toBeInViewport();
 });
 
@@ -151,9 +169,11 @@ test("a deep link to a skill shows its evidence in the index", async ({ page }) 
   await page.goto("/#skill-prince2");
   await expect(page.locator("#skills-ctx-all")).toBeChecked();
   const prince2 = items.find((item) => item.id === "prince2")!;
-  await expect(page.locator("#skill-prince2 ~ .entry-body .sense-note")).toHaveText(usages(prince2).map((usage) => usage.note!.en));
-  // Other skills keep their notes folded away.
+  await expect(page.locator(".entry:has(#skill-prince2) .entry-body .sense-note")).toHaveText(usages(prince2).map((usage) => usage.note!.en));
+  // Other skills keep their notes folded away and show their glosses; this one shows its notes.
   await expect(page.locator("#skills .sense-note:visible")).toHaveCount(usages(prince2).length);
+  await expect(page.locator(".entry:has(#skill-prince2) .entry-gloss")).toBeHidden();
+  await expect(page.locator(".entry:has(#skill-power-bi) .entry-gloss")).toBeVisible();
 });
 
 test("the chosen tile carries the section's one orange pillar; the others do not", async ({ page }) => {
@@ -212,6 +232,18 @@ for (const colorScheme of ["light", "dark"] as const) {
 
 test("screen readers hear each register line with pauses", async ({ page }) => {
   await page.goto("/");
-  const line = await page.locator("#skill-python ~ .entry-body .sense").filter({ hasText: "Tjekkit" }).ariaSnapshot();
-  expect(line).toMatch(/Study ?: Tjekkit ?, 2023 ?, Group project \(not finished\)/);
+  const line = await page.locator(".entry:has(#skill-python) .entry-body .sense").filter({ hasText: "Tjekkit" }).ariaSnapshot();
+  expect(line).toMatch(/Study\s*:\s*Tjekkit\s*,\s*2023\s*,\s*Group project \(not finished\)/);
+});
+
+test("glosses keep a group project's qualifier unless the register line beside them shows it", async ({ page }) => {
+  await page.goto("/");
+  const gloss = (id: string) => page.locator(`.entry:has(#skill-${id}) .entry-gloss`);
+  // One sense: the line beside it says "Tjekkit · 2023 · Group project", so the gloss can drop it.
+  await expect(gloss("prototyping")).toHaveText("Nassim made the wireframes and the prototype");
+  // Several senses: the note stays whole, so the group work never reads as the whole entry's.
+  await expect(gloss("uml-system-modeling")).toHaveText(/^Group project: /);
+  await expect(gloss("html-css-javascript")).toHaveText(/^HTML and CSS; /);
+  // A note that is only its qualifier gives no gloss.
+  await expect(gloss("enterprise-architecture")).toHaveCount(0);
 });
