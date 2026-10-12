@@ -9,12 +9,12 @@ kind: "work"
 title:
   en: "Shop assistant"
   da: "Butiksmedarbejder"
-# Source: OWNER-PDF p.14 ("T. Hansen"). The CVs write "Hansen Glostrup"; read as the same
-# employer and the PDF's name is used. Owner: confirm.
+# Source: OWNER-PDF p.14 ("T. Hansen"); CV-version0 ("T-Hansen Glostrup - butiksmedarbejder")
+# confirms it is the same employer as the CVs' "Hansen Glostrup".
 organization: "T. Hansen"
-# Source: OWNER-PDF p.13 gives only the group period "2020 – 2024", no dates for this job,
-# and the CVs list it without dates, so it is shown undated.
-undated: true
+# Source: CV-version0 (owner, shared 2026-10-12: "2020 – 2021"; earlier sources gave no dates).
+start: "2020"
+end: "2021"
 # Source: OWNER-PDF p.14 ("Kundeservice & Logistik: Erfaring med drift og varedistribution")
 summary:
   en: "Worked in the shop with customer service and day-to-day operations."

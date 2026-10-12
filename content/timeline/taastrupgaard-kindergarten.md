@@ -12,13 +12,12 @@ title:
   da: "Tilkaldevikar / pædagogmedhjælper"
 # Source: owner 2026-10-12 ("jeg har arbejdet i børne og kulturhuset i taastrupgaard"),
 # matching the old site ("Børnehave i Taastrupgaard") and the CVs ("Daginstitution (Børne- og
-# Kulturhuset)"). OWNER-PDF p.13 ("Børnehuset Lindegaarden") is wrong and is not used.
+# Kulturhuset)"). OWNER-PDF p.13 ("Børnehuset Lindegaarden / Børne- og Kulturhuset") merged two
+# workplaces; CV-version0 lists them apart. Lindegaarden is lindegaarden-kindergarten.md.
 organization: "Børne- og Kulturhuset Taastrupgaard"
-# Source: CV-2 and CV-CBS list this under "Øvrig erhvervserfaring" without dates, and no other
-# source dates it, so it is shown undated, as in the CVs (owner's answers, 2026-10-05).
-# OWNER-PDF p.13 groups it under "Tidligere Erhvervserfaring (2020 – 2024)" with no dates
-# for the job itself, so it stays undated.
-undated: true
+# Source: CV-version0 (owner, shared 2026-10-12: "2023 – 2024"; earlier sources gave no dates).
+start: "2023"
+end: "2024"
 summary:
   en: "Worked in a kindergarten with a focus on the children's well-being, sense of security, play and daily activities."
   da: "Arbejdede i børnehave med fokus på børnenes trivsel, tryghed, leg og daglige aktiviteter."
