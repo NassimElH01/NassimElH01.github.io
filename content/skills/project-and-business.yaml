@@ -5,8 +5,9 @@
 # with the waterfall model, and p.19 says agile/Scrum was not applied there.
 # OWNER-PDF is the owner's 18-page text pack ("Her er en komplet ... tekstpakke", shared
 # 2026-10-11; written with an AI assistant, so used for facts only; PDF page numbers).
-# Earlier sources win where they conflict. Tjekkit is a group project (owner 2026-10-11);
-# his own part is a TODO in the project file, so its entries say "group project".
+# Earlier sources win where they conflict. Tjekkit is a group project (owner 2026-10-11); his
+# own part was the wireframes and the prototype (second round), so entries that describe the
+# group's work say "group project".
 group:
   en: "Projects & business"
   da: "Projekt & forretning"

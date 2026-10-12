@@ -2,9 +2,9 @@
 # CV-2 lists "systemudvikling og IT-arkitektur" as a focus area of the Zealand PBA;
 # that is cited for UML and system modeling only. OWNER-PDF (the owner's 18-page text
 # pack, shared 2026-10-11; written with an AI assistant, so used for facts only; PDF
-# page numbers) adds the Tjekkit group project for UML (owner 2026-10-11: group project,
-# his own part is a TODO in the project file). No source says where the other items
-# were used, so their usedIn stays a TODO for the owner.
+# page numbers) adds the Tjekkit group project for UML and prototyping (owner 2026-10-11:
+# group project; his own part was the wireframes and the prototype, second round). No source
+# says where the other items were used, so their usedIn stays a TODO for the owner.
 group:
   en: "Systems development & design"
   da: "Systemudvikling & design"
@@ -49,7 +49,13 @@ items:
     name:
       en: "Prototyping (low → high fidelity)"
       da: "Prototyping (low → high fidelity)"
-    usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
+    usedIn:
+      # Source: owner 2026-10-11, second round ("jeg tog mig af wireframes og prototypen")
+      - context: study
+        project: tjekkit
+        note:
+          en: "Group project: Nassim made the wireframes and the prototype"
+          da: "Gruppeprojekt: Nassim lavede wireframes og prototypen"
 
   - id: user-driven-design
     name:

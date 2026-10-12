@@ -3,7 +3,8 @@
 # shared 2026-10-11; written with an AI assistant, so used for facts only; PDF page
 # numbers), section 5 "Uddannelse & Eksamensresultater" (p.15-16), and the owner's
 # answers of 2026-10-11 (answer 1: "Dem alle 3 ( Vidergående, gymnaisum & folkeskole )",
-# so folkeskole grades may be shown). No earlier source mentions it. English is a
+# so folkeskole grades may be shown; in the second round he chose not to show them, see
+# below). No earlier source mentions it. English is a
 # faithful translation for the owner to review.
 # Left out on purpose: the PDF's "Stærkt tidligt analytisk fundament" (p.16), which is
 # phrasing, not a fact.
@@ -16,18 +17,18 @@ title:
 # Source: OWNER-PDF p.16 ("Glostrup Skole, Vestervang")
 organization: "Glostrup Skole, Vestervang"
 # Source: OWNER-PDF p.16 ("Afsluttet 2017"), confirmed by the owner's leaving certificate
-# (dated June 2017). Only the completion year is shown, so the
-# entry is dated as the exam itself: start and end are both 2017.
+# (dated June 2017). Only the completion year is shown, so the entry is dated as the exam
+# itself: start and end are both 2017.
 start: "2017"
 end: "2017"
 # Source: OWNER-PDF p.16 ("Afsluttet 2017")
 summary:
   en: "Completed lower secondary school (folkeskole) with the leaving examination in 2017."
   da: "Afsluttede folkeskolen med afgangsprøven i 2017."
-# No grades, by the owner's choice (owner 2026-10-11, second round). His leaving certificate (shared the same day;
-# not stored, as it carries personal data) showed that the PDF's folkeskole grades were wrong:
-# the PDF's 10s in mathematics are year marks, and the examination results differ. Only the
-# school and the year are shown.
+# No grades, by the owner's choice (owner 2026-10-11, second round). His leaving certificate
+# (shared the same day; not stored, as it carries personal data) showed that the PDF's
+# folkeskole grades were wrong: the PDF's 10s in mathematics are year marks, and the
+# examination results differ. Only the school and the year are shown.
 # Presentation choice, not a sourced fact: a lower secondary school exam is usually left
 # off a graduate's CV, so it stays on the site only. Owner: set true to print it.
 showOnPrintCv: false

@@ -7,8 +7,9 @@
 # 2026-10-11; written with an AI assistant, so used for facts only; PDF page numbers).
 # It is cited only where it ties a skill to a project, course or job; a skill it merely
 # lists is not usage. Earlier sources win where they conflict.
-# Tjekkit is a group project (owner 2026-10-11); his own part is a TODO in the project
-# file, so its entries below say "group project".
+# Tjekkit is a group project (owner 2026-10-11). His own part was the wireframes and the
+# prototype, and the system was not finished (second round, same day), so entries below that
+# describe the group's work say "group project (not finished)".
 group:
   en: "Code & data"
   da: "Kode & data"
@@ -27,12 +28,13 @@ items:
           da: "Machine learning-notebooks i Google Colab"
       # Source: OWNER-PDF p.7 (3. Udvalgte Projekter, Tjekkit: "Udviklet i Python med modulariseret
       # OOP-struktur opdelt i logiske ansvarsområder: App, Menu, LogIn og Ansat"); owner 2026-10-11
-      # (group project, 2nd semester)
+      # (group project, 2nd semester) and owner 2026-10-11, second round (not finished; his part was the wireframes and
+      # the prototype), so the note does not claim a finished build.
       - context: study
         project: tjekkit
         note:
-          en: "Group project: object-oriented registration system split into App, Menu, LogIn and Ansat"
-          da: "Gruppeprojekt: objektorienteret registreringssystem opdelt i App, Menu, LogIn og Ansat"
+          en: "Group project (not finished): object-oriented structure split into App, Menu, LogIn and Ansat"
+          da: "Gruppeprojekt (ikke færdigt): objektorienteret struktur opdelt i App, Menu, LogIn og Ansat"
       # Source: OWNER-PDF p.9-10 (3. Udvalgte Projekter, Airbnb, "Metode & Eksekvering i Python":
       # loading with Pandas and NumPy, cleaning, lambda functions, Seaborn and Matplotlib)
       - context: study
@@ -51,12 +53,13 @@ items:
     usedIn:
       # Source: OWNER-PDF p.7 (3. Udvalgte Projekter, Tjekkit: "Tilknyttet en relationel
       # MySQL-database: Tabeller til medarbejderstamdata (ansat) og tidsregistrering (Vagt)
-      # struktureret med primær- og fremmednøgler samt dataintegritet"); owner 2026-10-11 (group project)
+      # struktureret med primær- og fremmednøgler samt dataintegritet"); owner 2026-10-11 (group
+      # project) and owner 2026-10-11, second round (not finished), so the note does not claim a finished build.
       - context: study
         project: tjekkit
         note:
-          en: "Group project: MySQL database with tables for employee data and time registration, linked by primary and foreign keys"
-          da: "Gruppeprojekt: MySQL-database med tabeller til medarbejderdata og tidsregistrering, forbundet med primær- og fremmednøgler"
+          en: "Group project (not finished): MySQL database design with tables for employee data and time registration, linked by primary and foreign keys"
+          da: "Gruppeprojekt (ikke færdigt): MySQL-databasedesign med tabeller til medarbejderdata og tidsregistrering, forbundet med primær- og fremmednøgler"
 
   - id: html-css-javascript
     name:
@@ -128,7 +131,6 @@ items:
   # The brief's "[BEKRÆFT] C#/Java/andet sprog" item is removed: the owner meant JavaScript
   # (owner 2026-10-11, second round: "p5.js og også i min bachelor"; p5.js is JavaScript),
   # which html-css-javascript above covers.
-
 
   # The next two items are NOT in the original brief. They were added from the EXAM
   # and REPORT evidence below; the owner may remove them.

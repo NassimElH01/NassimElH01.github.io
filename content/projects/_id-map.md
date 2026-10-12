@@ -20,7 +20,7 @@ Old ids come from `legacy/vite-spa/src/data/projectsData.ts` (and `cvData.ts` wh
 - `royal-unibrew-projectflow-power-bi`: from the Royal Unibrew internship report and CV-2.
 - `genai-ml-elective`: from the Gen AI & Machine learning elective exam.
 - `enhanced-security-synopsis`: from the Enhanced Security elective exam (individual, confirmed 2026-10-06).
-- `tjekkit`: from the owner's text pack (OWNER-PDF p.7-8, shared 2026-10-11) and the owner's answers of 2026-10-11 (group project, 2nd semester, handed in 26 May 2023). His own part in the group is still a TODO; no repo link (the PDF's link is a placeholder).
+- `tjekkit`: from the owner's text pack (OWNER-PDF p.7-8, shared 2026-10-11) and the owner's answers of 2026-10-11 (group project, 2nd semester, handed in 26 May 2023; second round: Nassim did the wireframes and the prototype, and the system was not finished). No repo link (the PDF's link is a placeholder).
 - `airbnb-eda`: from OWNER-PDF p.9-10 and p.16 (IBM Data Analyst capstone) and the owner's answers of 2026-10-11 (Grade A, full score; the PDF's "12" is not used).
 - `ibm-cybersecurity-lab`: from IBM's evaluation of the IBM Cybersecurity Analyst capstone, pasted by the owner on 2026-10-11 (five tasks, 2 January 2024, Grade A, 50/50), and OWNER-PDF p.6-7, p.10-11 and p.16. The evaluator's name is not published.
 - `freelance-web`: from OWNER-PDF p.1 and p.11-12 and the owner's answers of 2026-10-11 (general, no client names).

@@ -16,11 +16,9 @@
 title:
   en: "Exploratory data analysis of Airbnb bookings (IBM capstone)"
   da: "Eksplorativ dataanalyse af Airbnb-bookinger (IBM-capstone)"
-# No source dates the capstone. The IBM Data Analytics certificate on LinkedIn is dated October
-# 2023 (content/certifications.yaml), but the IBM Cybersecurity capstone was evaluated on
-# 2 January 2024 although that certificate is also dated October 2023, so the certificate's
-# year does not reliably date the capstone.
-# Source: owner 2026-10-11, second round ("2023").
+# Source: owner 2026-10-11, second round ("2023"). Before that answer no source dated the
+# capstone: the IBM Data Analytics certificate on LinkedIn is dated October 2023
+# (content/certifications.yaml), and a certificate's year alone does not date its capstone.
 year: 2023
 # Source: OWNER-PDF p.16 (a capstone in an IBM professional certificate course, not the PBA).
 # "study" is the closest context in the enum.

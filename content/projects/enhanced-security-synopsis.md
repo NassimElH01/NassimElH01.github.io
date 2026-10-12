@@ -37,14 +37,15 @@ technology:
   - "MFA"
   - "Network segmentation"
   - "GDPR"
-# Source: EXAM-DTI p.5-6 (Konklusion: "øgede omkostninger og potentielt reduceret systemhastighed";
-# Diskussion: cross-functional collaboration between IT, HR and legal teams). Grade: OWNER-PDF p.15
-# ("Valgfag: Teknologi- og Dataintegration: 10") and owner 2026-10-11, second round: the elective is "Teknologi- og
-# dataintegration", and Enhanced Security is the topic he wrote his exam paper on; the grade was
-# checked against his diplomas. Two sentences, as the owner asked.
+# Source: EXAM-DTI p.5-6 (Konklusion: "styrker datasikkerheden, øger kundetilliden og sikrer
+# overholdelse af GDPR"; "øgede omkostninger og potentielt reduceret systemhastighed"; Diskussion:
+# cross-functional collaboration between IT, HR and legal teams). Grade: OWNER-PDF p.15
+# ("Valgfag: Teknologi- og Dataintegration: 10") and owner 2026-10-11, second round: the elective
+# is "Teknologi- og dataintegration", and Enhanced Security is the topic he wrote his exam paper
+# on; the grade was checked against his diplomas. Two sentences, as the owner asked.
 result:
-  en: "The paper concludes that encryption, access control and network segmentation strengthen data security, customer trust and GDPR compliance but bring higher costs and can slow systems down, so companies must balance security and efficiency together across IT, HR and legal. The elective exam was graded 10 on the Danish 7-point scale."
-  da: "Synopsen konkluderer, at kryptering, adgangskontrol og netværkssegmentering styrker datasikkerheden, kundetilliden og overholdelsen af GDPR, men medfører øgede omkostninger og kan sænke systemhastigheden, så virksomheder skal finde balancen mellem sikkerhed og effektivitet i samarbejde på tværs af IT, HR og jura. Valgfagseksamen blev bedømt til 10 på 7-trinsskalaen."
+  en: "The paper concludes that encryption, access control and network segmentation strengthen data security, increase customer trust and ensure GDPR compliance, but bring higher costs and can slow systems down, so companies must strike a balance between security and efficiency, with IT, HR and legal working together. The elective exam was graded 10 on the Danish 7-point scale (grades run from -3 to 12; 12 is the top grade)."
+  da: "Synopsen konkluderer, at kryptering, adgangskontrol og netværkssegmentering styrker datasikkerheden, øger kundetilliden og sikrer overholdelse af GDPR, men medfører øgede omkostninger og kan sænke systemhastigheden, så virksomheder skal finde balancen mellem sikkerhed og effektivitet i samarbejde på tværs af IT, HR og jura. Valgfagseksamen blev bedømt til 10 på 7-trinsskalaen."
 # Source: EXAM-DTI cover (Økonomi & IT, 5th semester, Zealand)
 timeline: "zealand-professionsbachelor"
 featured: false
