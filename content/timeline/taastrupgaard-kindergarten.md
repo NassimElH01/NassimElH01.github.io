@@ -10,13 +10,10 @@ kind: "work"
 title:
   en: "On-call substitute / pedagogical assistant"
   da: "Tilkaldevikar / pædagogmedhjælper"
-# Source: OWNER-PDF p.13 (Tidligere Erhvervserfaring: "Børnehuset Lindegaarden / Børne- og
-# Kulturhuset"), read as the name of the institution the CVs call "Daginstitution (Børne- og
-# Kulturhuset)" (CV-2 and CV-CBS), kept in the CVs' "name (Børne- og Kulturhuset)" form.
-# Owner: confirm that Børnehuset Lindegaarden is part of Børne- og Kulturhuset (the PDF's
-# slash could also mean two workplaces). Conflict noted: the old site said "Børnehave i
-# Taastrupgaard"; the CVs and the PDF win.
-organization: "Børnehuset Lindegaarden (Børne- og Kulturhuset)"
+# Source: owner 2026-10-12 ("jeg har arbejdet i børne og kulturhuset i taastrupgaard"),
+# matching the old site ("Børnehave i Taastrupgaard") and the CVs ("Daginstitution (Børne- og
+# Kulturhuset)"). OWNER-PDF p.13 ("Børnehuset Lindegaarden") is wrong and is not used.
+organization: "Børne- og Kulturhuset Taastrupgaard"
 # Source: CV-2 and CV-CBS list this under "Øvrig erhvervserfaring" without dates, and no other
 # source dates it, so it is shown undated, as in the CVs (owner's answers, 2026-10-05).
 # OWNER-PDF p.13 groups it under "Tidligere Erhvervserfaring (2020 – 2024)" with no dates
