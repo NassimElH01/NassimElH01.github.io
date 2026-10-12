@@ -52,6 +52,16 @@ for (const { path, lang } of PAGES) {
         await context.close();
       });
     }
+
+    test("has no horizontal scroll at 320px with text at 200%", async ({ browser }) => {
+      const context = await browser.newContext({ viewport: { width: 320, height: 800 } });
+      const page = await context.newPage();
+      await page.goto(path);
+      await page.evaluate(() => (document.documentElement.style.fontSize = "200%"));
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      expect(overflow).toBeLessThanOrEqual(0);
+      await context.close();
+    });
   });
 }
 

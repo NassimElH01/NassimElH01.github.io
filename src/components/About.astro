@@ -189,6 +189,8 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
      Desktop: text and languages on the left; portrait and certifications on the right. */
   .about-grid {
     display: grid;
+    /* At very large text on a phone, long words wrap instead of widening the page. */
+    overflow-wrap: break-word;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
       "head photo"

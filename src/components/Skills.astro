@@ -1,8 +1,23 @@
 ---
+// Skills: "The Proof Index", a dictionary of skills read from content/skills. Every skill
+// is a headword followed by where it was used, one register line per place: context,
+// place, year and, where the note carries one, its qualifier ("Group project (not
+// finished)"). No levels, no percentages.
+// A CSS-only filter (radio buttons and :has(), like the Projects switch) picks a context:
+// "All" is the index; a context is the report, which shows only what was used there, each
+// with its note and links to the proof further down the page (a project or an Experience
+// entry). A deep link to #skill-<id> shows that skill's evidence. Browsers without :has()
+// show the whole dictionary with all its evidence. No client JS.
+// Skills without evidence (usedIn is still "TODO:") and items awaiting the owner's
+// confirmation are left out; content:todos lists them.
 import { getCollection } from "astro:content";
 import type { Lang } from "@/i18n/config";
 import type { UiKey } from "@/i18n/ui";
-import { pick, t } from "@/i18n/utils";
+import { localize, pick, t } from "@/i18n/utils";
+import { getPublished, getRenderedTimeline } from "@/lib/content";
+import { isTodo } from "@/lib/todo";
+import { formatPeriod } from "@/lib/dates";
+import { projectAnchor, skillAnchor, skillGroupAnchor, timelineAnchor } from "@/lib/anchors";
 
 interface Props {
   lang: Lang;
@@ -10,93 +25,789 @@ interface Props {
 
 const { lang } = Astro.props;
 const tr = t(lang);
+
+// The display order of contexts: paid work first. It is also the order of the senses.
+const CONTEXTS = ["internship", "work", "freelance", "study", "personal"] as const;
+type Context = (typeof CONTEXTS)[number];
+const contextLabel = (context: Context) => tr(`projects.context.${context}` as UiKey);
+
+type Localized = Record<Lang, string>;
+const shown = (field: Localized) => !isTodo(field.en) || !isTodo(field.da);
+/** A picked value and the lang attribute it needs when it fell back to the other language. */
+const text = (field: Localized) => {
+  const picked = pick(field, lang);
+  return { value: picked.value, lang: picked.isFallback ? picked.lang : undefined };
+};
+
+// Link targets: only what Projects and Experience actually render, so a link always lands.
+const projects = new Map(
+  (await getPublished("projects")).filter(({ data }) => shown(data.title)).map((entry) => [entry.id, entry.data]),
+);
+const timeline = new Map((await getRenderedTimeline()).map((entry) => [entry.id, entry.data]));
+const certificates = new Map((await getCollection("certifications")).map((entry) => [entry.id, entry.data]));
+
+const present = tr("projects.present");
+const yearsOf = (entry: { start?: string; end?: string; expected?: boolean }) =>
+  formatPeriod(entry, lang, { months: false, presentLabel: present });
+// Places are named as Projects and Experience name them, cut to their short form.
+const organizationOf = (organization: string) => organization.split(" – ")[0];
+const projectTitle = (title: Localized) => {
+  const picked = text(title);
+  return { ...picked, value: picked.value.split(": ")[0] };
+};
+
+interface Proof {
+  href: string;
+  label: string;
+  lang?: string;
+}
+interface Note {
+  value: string;
+  lang?: string;
+}
+interface Sense {
+  key: string;
+  context: Context;
+  first: number;
+  place?: { value: string; lang?: string };
+  period?: string;
+  scopes: Note[];
+  notes: Note[];
+  proofs: Proof[];
+}
+
+const hidden: string[] = [];
+
 const groups = (await getCollection("skills"))
   .sort((a, b) => a.data.order - b.data.order)
-  .map(({ data }) => {
-    const group = pick(data.group, lang);
-    const items = data.items
-      .filter((item) => !item.confirm)
-      .map((item) => {
-        const name = pick(item.name, lang);
-        const usage = Array.isArray(item.usedIn)
-          ? item.usedIn.flatMap((entry) => {
-              if (!entry.note) return [];
-              const note = pick(entry.note, lang);
-              if (note.isTodo) return [];
-              return [{ context: tr(`projects.context.${entry.context}` as UiKey), note: note.value }];
-            })
-          : [];
-        return { name, usage };
-      })
-      .filter(({ name }) => !name.isTodo);
-    return { group, items };
+  .map(({ id: groupId, data: group }) => {
+    const entries = group.items.flatMap((item) => {
+      if (item.confirm || !Array.isArray(item.usedIn) || !shown(item.name)) {
+        hidden.push(pick(item.name, lang).value);
+        return [];
+      }
+      const senses = new Map<string, Sense>();
+      item.usedIn.forEach((usage, index) => {
+        const context = usage.context as Context;
+        const project = usage.project && projects.get(usage.project.id);
+        const projectId = project ? usage.project!.id : undefined;
+        // Jobs are told by employer: the timeline entry, or the one the project belongs to.
+        const employerId =
+          context === "internship" || context === "work"
+            ? [usage.timeline?.id, project?.timeline?.id].find((id) => id && timeline.has(id))
+            : undefined;
+        const ownTimelineId = usage.timeline && timeline.has(usage.timeline.id) ? usage.timeline.id : undefined;
+
+        let key: string;
+        let place: Sense["place"];
+        let period: string | undefined;
+        if (employerId) {
+          const employer = timeline.get(employerId)!;
+          key = `${context}|t:${employerId}`;
+          place = { value: organizationOf(employer.organization) };
+          period = yearsOf(employer);
+        } else if (project && projectId) {
+          key = `${context}|p:${projectId}`;
+          place = projectTitle(project.title);
+          const year = project.year !== undefined && !isTodo(String(project.year)) ? String(project.year) : undefined;
+          const parent = project.timeline && timeline.get(project.timeline.id);
+          period = year ?? (parent ? yearsOf(parent) : undefined);
+        } else if (ownTimelineId) {
+          const entry = timeline.get(ownTimelineId)!;
+          key = `${context}|t:${ownTimelineId}`;
+          place = { value: organizationOf(entry.organization) };
+          period = yearsOf(entry);
+        } else {
+          key = `${context}|n:${index}`;
+        }
+        // No repeated year when the place already names it ("… Christmas Calendar 2026").
+        if (period && place?.value.includes(period)) period = undefined;
+
+        const sense: Sense = senses.get(key) ?? { key, context, first: index, place, period, scopes: [], notes: [], proofs: [] };
+        senses.set(key, sense);
+
+        const note = usage.note && shown(usage.note) ? text(usage.note) : undefined;
+        if (note) sense.notes.push(note);
+        if (note && usage.scope && shown(usage.scope)) {
+          const scope = text(usage.scope);
+          if (!sense.scopes.some((known) => known.value === scope.value)) sense.scopes.push(scope);
+        }
+
+        const addProof = (proof: Proof) => {
+          if (!sense.proofs.some((known) => known.href === proof.href)) sense.proofs.push(proof);
+        };
+        if (project && projectId) {
+          const title = projectTitle(project.title);
+          addProof({ href: `#${projectAnchor(projectId)}`, label: `${tr("skills.proof.project")}: ${title.value}`, lang: title.lang });
+        }
+        for (const timelineId of [employerId, ownTimelineId]) {
+          if (!timelineId) continue;
+          const entry = timeline.get(timelineId)!;
+          const heading = entry.kind === "education" ? tr("experience.educationHeading") : tr("experience.workHeading");
+          const title = text(entry.title);
+          addProof({ href: `#${timelineAnchor(timelineId)}`, label: `${heading}: ${title.value}`, lang: title.lang });
+        }
+      });
+
+      const list = [...senses.values()]
+        .filter((sense) => sense.place || sense.notes.length > 0 || sense.proofs.length > 0)
+        .sort((a, b) => CONTEXTS.indexOf(a.context) - CONTEXTS.indexOf(b.context) || a.first - b.first);
+      if (list.length === 0) {
+        hidden.push(pick(item.name, lang).value);
+        return [];
+      }
+      const contexts = CONTEXTS.filter((context) => list.some((sense) => sense.context === context));
+      // The headword: the term in serif, a qualifier in brackets in mono (the tech voice).
+      const name = text(item.name);
+      const cut = name.value.indexOf(" (");
+      return [
+        {
+          id: item.id,
+          name,
+          term: cut > 0 ? name.value.slice(0, cut) : name.value,
+          qualifier: cut > 0 ? name.value.slice(cut + 1) : undefined,
+          senses: list,
+          contexts,
+          certificates: item.certifications
+            .map((reference) => certificates.get(reference.id))
+            .filter((certificate) => certificate !== undefined)
+            .map((certificate) => localize(certificate.name, lang))
+            .filter((name) => !isTodo(name)),
+        },
+      ];
+    });
+    const title = pick(group.group, lang);
+    return {
+      id: groupId,
+      title: { value: title.value, lang: title.isFallback ? title.lang : undefined },
+      entries,
+      contexts: CONTEXTS.filter((context) => entries.some((entry) => entry.contexts.includes(context))),
+      todo: title.isTodo,
+    };
   })
-  .filter(({ group, items }) => !group.isTodo && items.length > 0);
+  .filter((group) => !group.todo && group.entries.length > 0);
+
+const entryCount = groups.reduce((sum, group) => sum + group.entries.length, 0);
+const unit = (count: number) => tr(count === 1 ? "skills.unit.one" : "skills.unit.other");
+const options = [
+  { value: "all", label: tr("skills.filter.all"), count: entryCount },
+  ...CONTEXTS.map((context) => ({
+    value: context,
+    label: contextLabel(context),
+    count: groups.reduce((sum, group) => sum + group.entries.filter((entry) => entry.contexts.includes(context)).length, 0),
+  })),
+].filter((option) => option.count > 0);
 ---
 
-<section id="skills" aria-labelledby="skills-title" class="border-t border-rule py-20 sm:py-28">
+<section id="skills" aria-labelledby="skills-title" class="skills border-t border-rule py-20 sm:py-28">
   <div class="mx-auto max-w-6xl px-4 sm:px-6">
-    <h2 id="skills-title" class="font-display text-4xl sm:text-5xl">{tr("section.skills")}</h2>
+    <div class="grid grid-cols-[minmax(0,1fr)] items-end gap-y-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-x-16">
+      <div>
+        <h2 id="skills-title" class="font-display text-4xl hyphens-auto [overflow-wrap:break-word] sm:text-5xl">
+          {tr("section.skills")}
+        </h2>
+        <p class="skills-deck">{tr("skills.deck")}</p>
+      </div>
+      <fieldset id="skills-filter" class="skills-filter" aria-describedby="skills-filter-hint">
+        <legend class="skills-label">{tr("skills.filter.legend")}</legend>
+        <div class="ctx-options">
+          {
+            options.map((option) => (
+              <div class="ctx-opt">
+                <input
+                  class="ctx-input"
+                  type="radio"
+                  name="skills-ctx"
+                  id={`skills-ctx-${option.value}`}
+                  value={option.value}
+                  checked={option.value === "all"}
+                />
+                <label class="ctx-label" for={`skills-ctx-${option.value}`}>
+                  <span class="ctx-name">{option.label}</span>
+                  <span class="sr-only">,</span>{" "}
+                  <span class="ctx-count">
+                    {option.count}
+                    <span class="sr-only"> {unit(option.count)}</span>
+                  </span>
+                </label>
+              </div>
+            ))
+          }
+        </div>
+        <p id="skills-filter-hint" class="mt-3 font-mono text-[0.8125rem] text-balance text-steel-text">
+          {tr("skills.filter.hint")}
+        </p>
+      </fieldset>
+    </div>
 
-    <div class="skills-grid mt-12 sm:mt-16">
+    <div class="skills-list mt-12 sm:mt-16">
       {
-        groups.map(({ group, items }) => (
-          <article class="skill-group" aria-labelledby={`skills-${group.value.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
-            <h3
-              id={`skills-${group.value.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-              class="font-display text-2xl leading-tight"
-            >
-              {group.value}
+        groups.map((group) => (
+          <div class="skill-group" data-ctx={group.contexts.join(" ")}>
+            <h3 id={skillGroupAnchor(group.id)} class="skills-label" lang={group.title.lang}>
+              {group.title.value}
             </h3>
-            <ul role="list" class="mt-4 divide-y divide-rule border-y border-rule">
-              {items.map(({ name, usage }) => (
-                <li class="py-3">
-                  <p class="font-medium leading-snug" lang={name.isFallback ? name.lang : undefined}>
-                    {name.value}
-                  </p>
-                  {usage.length > 0 && (
-                    <ul role="list" class="mt-1.5 grid gap-1">
-                      {usage.map((entry) => (
-                        <li class="text-sm leading-relaxed text-steel-text">
-                          <span class="font-mono text-xs uppercase tracking-wide">{entry.context}</span>
-                          <span aria-hidden="true"> · </span>
-                          {entry.note}
+            <ul role="list" class="entries" aria-labelledby={skillGroupAnchor(group.id)}>
+              {group.entries.map((entry) => (
+                <li class="entry" data-ctx={entry.contexts.join(" ")}>
+                  <h4 id={skillAnchor(entry.id)} class="headword" tabindex="-1" lang={entry.name.lang}>
+                    <span class="hw-term">{entry.term}</span>
+                    {entry.qualifier && (
+                      <>
+                        {" "}
+                        <span class="hw-qual">{entry.qualifier}</span>
+                      </>
+                    )}
+                  </h4>
+                  <div class="entry-body">
+                    <ul role="list" class="senses">
+                      {entry.senses.map((sense) => (
+                        <li class="sense" data-ctx={sense.context}>
+                          <p class="sense-meta">
+                            <span class="sense-ctx">
+                              {contextLabel(sense.context)}
+                              <span class="sr-only">:</span>
+                            </span>{" "}
+                            {sense.place && (
+                              <span class="sense-place" lang={sense.place.lang}>
+                                {sense.place.value}
+                              </span>
+                            )}
+                            {sense.period && (
+                              <>
+                                <span class="sr-only">,</span> <span aria-hidden="true">·</span>{" "}
+                                <span class="sense-year">{sense.period}</span>
+                              </>
+                            )}
+                            {sense.scopes.map((scope) => (
+                              <span class="sense-scope" lang={scope.lang}>
+                                <span class="sr-only">,</span> <span aria-hidden="true">·</span> {scope.value}
+                              </span>
+                            ))}
+                          </p>
+                          {(sense.notes.length > 0 || sense.proofs.length > 0) && (
+                            <div class="sense-evidence">
+                              {sense.notes.map((note) => (
+                                <p class="sense-note" lang={note.lang}>
+                                  {note.value}
+                                </p>
+                              ))}
+                              {sense.proofs.length > 0 && (
+                                <ul role="list" class="proofs">
+                                  {sense.proofs.map((proof) => (
+                                    <li>
+                                      <a class="proof-link" href={proof.href} lang={proof.lang}>
+                                        {/* One flex item, so the arrow follows the last word when the label wraps. */}
+                                        <span>
+                                          {proof.label}
+                                          <span aria-hidden="true">&nbsp;↓</span>
+                                        </span>
+                                      </a>
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          )}
                         </li>
                       ))}
                     </ul>
-                  )}
+                    {entry.certificates.length > 0 && (
+                      <p class="entry-certs">
+                        <span class="certs-label">
+                          {tr("skills.certificates")}
+                          <span class="sr-only">:</span>
+                        </span>{" "}
+                        {entry.certificates.map((name, index) => (
+                          <>
+                            {index > 0 && (
+                              <>
+                                <span class="sr-only">,</span> <span aria-hidden="true">·</span>{" "}
+                              </>
+                            )}
+                            <span class="cert-name">{name}</span>
+                          </>
+                        ))}
+                      </p>
+                    )}
+                    {entry.contexts.length > 1 &&
+                      entry.contexts.map((context) => (
+                        <p class="entry-also" data-for={context}>
+                          {tr("skills.also")}:{" "}
+                          {entry.contexts
+                            .filter((other) => other !== context)
+                            .map((other, index) => (
+                              <>
+                                {index > 0 && (
+                                  <>
+                                    <span class="sr-only">,</span> <span aria-hidden="true">·</span>{" "}
+                                  </>
+                                )}
+                                {contextLabel(other)}
+                              </>
+                            ))}
+                        </p>
+                      ))}
+                  </div>
                 </li>
               ))}
             </ul>
-          </article>
+          </div>
         ))
       }
     </div>
+
+    <a class="to-filter" href="#skills-filter"><span aria-hidden="true">↑&nbsp;</span>{tr("skills.filter.back")}</a>
+
+    {
+      import.meta.env.DEV && hidden.length > 0 && (
+        <p class="todo-badge mt-6" data-todo>
+          TODO: hidden until there is evidence: {hidden.join(", ")}
+        </p>
+      )
+    }
   </div>
 </section>
 
 <style>
-  .skills-grid {
+  /* ── Head ─────────────────────────────────────────────────────────── */
+  .skills-deck {
+    margin-top: 1rem;
+    max-width: 30rem;
+    color: var(--steel-text);
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
+
+  .skills-label {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* ── Filter: a row of tiles, each a small hero fact (name over a serif count). The
+     chosen tile is ink with the hero's orange pillar; it never relies on colour alone
+     (inverted, and the name is underlined). Hidden without :has(), see below. ── */
+  .skills-filter {
+    display: none;
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .skills-filter legend {
+    margin-bottom: 0.75rem;
+    padding: 0;
+  }
+
+  .ctx-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    border: 1px solid var(--ink);
+    background: var(--rule);
+  }
+
+  /* At most three per row; one per row at very large text. Rows always fill up. */
+  .ctx-opt {
+    position: relative;
+    flex: 1 1 max(9.5rem, calc((100% - 2px) / 3));
+    background: var(--paper);
+  }
+
+  /* The real control covers its whole tile, so touch, screen-reader touch exploration and
+     voice control all hit it. */
+  .ctx-input {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .ctx-opt:has(> .ctx-input:focus-visible) {
+    z-index: 2;
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .ctx-label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-height: 4.25rem;
+    padding: 0.625rem 0.75rem 0.625rem 1rem;
+  }
+
+  .ctx-label::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 4px;
+    background: var(--signal);
+    transform-origin: top;
+    scale: 1 0;
+  }
+
+  .ctx-name {
+    color: var(--steel-text);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-underline-offset: 0.35em;
+  }
+
+  /* Mono, not the serif: Instrument Serif's 1 reads as an l ("11" as "ll"). */
+  .ctx-count {
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 1.375rem;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ctx-opt:hover .ctx-label {
+    background: color-mix(in srgb, var(--ink) 6%, var(--paper));
+  }
+
+  .ctx-opt:hover .ctx-name {
+    text-decoration: underline 1px;
+  }
+
+  .ctx-input:checked + .ctx-label {
+    background: var(--ink);
+  }
+
+  .ctx-input:checked + .ctx-label::before {
+    scale: 1 1;
+  }
+
+  .ctx-input:checked + .ctx-label .ctx-name {
+    color: var(--paper);
+    text-decoration: underline 2px;
+  }
+
+  .ctx-input:checked + .ctx-label .ctx-count {
+    color: var(--paper);
+  }
+
+  /* ── The dictionary ───────────────────────────────────────────────── */
+  /* minmax(0, …) everywhere: at very large text a long word wraps instead of widening
+     the column past the screen. */
+  .skills-list {
     display: grid;
-    gap: 2.75rem 2rem;
-  }
-
-  @media (min-width: 768px) {
-    .skills-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 3rem;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .skills-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      column-gap: 2.5rem;
-    }
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+    container-type: inline-size;
   }
 
   .skill-group {
     border-top: 1px solid var(--ink);
-    padding-top: 1rem;
+    padding-top: 0.75rem;
+  }
+
+  .entries {
+    margin-top: 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .headword {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 400;
+    line-height: 1.15;
+    font-synthesis: none;
+    text-wrap: balance;
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+  .hw-qual {
+    color: var(--steel-text);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+
+  .entry-body,
+  .senses {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .sense-meta,
+  .entry-certs {
+    color: var(--steel-text);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: break-word;
+  }
+
+  .sense-ctx,
+  .certs-label {
+    color: var(--steel-text);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .sense-place,
+  .cert-name {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .sense-evidence {
+    margin-top: 0.375rem;
+  }
+
+  .sense-note {
+    max-width: 40rem;
+    color: var(--ink);
+    line-height: 1.55;
+    text-wrap: pretty;
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+  .sense-note + .sense-note {
+    margin-top: 0.375rem;
+  }
+
+  .proofs {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1.5rem;
+  }
+
+  .proof-link {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    min-height: 2.75rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: underline 1px;
+    text-underline-offset: 0.3em;
+    overflow-wrap: anywhere;
+  }
+
+  @media (hover: hover) {
+    .proof-link:hover {
+      text-decoration-color: var(--signal);
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  .entry-also {
+    color: var(--steel-text);
+    font-size: 0.875rem;
+    overflow-wrap: break-word;
+  }
+
+  .to-filter {
+    display: none;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-top: 2rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: underline 1px;
+    text-underline-offset: 0.3em;
+  }
+
+  /* Wide enough for two columns: headword left, register right, with a hanging label
+     column so places line up. Measured on the list itself, so it also switches off at
+     very large text. */
+  @container (min-width: 44rem) {
+    .entry {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      column-gap: 2rem;
+      align-items: first baseline;
+    }
+
+    .sense-meta,
+    .entry-certs {
+      padding-inline-start: 7rem;
+      text-indent: -7rem;
+    }
+
+    .sense-ctx,
+    .certs-label {
+      display: inline-block;
+      width: 7rem;
+      text-indent: 0;
+    }
+
+    .sense-evidence,
+    .entry-also {
+      margin-inline-start: 7rem;
+    }
+  }
+
+  /* ── Filter states (CSS only). Without :has() the filter stays hidden and everything
+     shows, with all the evidence. ─────────────────────────────────── */
+  .entry-also,
+  .sense-scope {
+    display: none;
+  }
+
+  @supports selector(:has(*)) {
+    .skills-filter {
+      display: block;
+    }
+
+    .to-filter {
+      display: inline-flex;
+    }
+
+    /* All: the index. Notes wait for a context (or a deep link); the qualifier stays. */
+    .skills:has(#skills-ctx-all:checked) .sense-evidence {
+      display: none;
+    }
+
+    .skills:has(#skills-ctx-all:checked) .sense-scope {
+      display: inline;
+    }
+
+    .skills:has(#skills-ctx-all:checked) .entry:has(> .headword:target) .sense-evidence {
+      display: block;
+    }
+
+    .skills:has(#skills-ctx-all:checked) .entry:has(> .headword:target) .sense-scope {
+      display: none;
+    }
+
+    /* A context: the report. Two rules per context in the schema's enum. */
+    .skills:has(#skills-ctx-internship:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="internship"]),
+    .skills:has(#skills-ctx-work:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="work"]),
+    .skills:has(#skills-ctx-freelance:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="freelance"]),
+    .skills:has(#skills-ctx-study:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="study"]),
+    .skills:has(#skills-ctx-personal:checked) :is(.skill-group, .entry, .sense):not([data-ctx~="personal"]) {
+      display: none;
+    }
+
+    .skills:has(#skills-ctx-internship:checked) .entry-also[data-for="internship"],
+    .skills:has(#skills-ctx-work:checked) .entry-also[data-for="work"],
+    .skills:has(#skills-ctx-freelance:checked) .entry-also[data-for="freelance"],
+    .skills:has(#skills-ctx-study:checked) .entry-also[data-for="study"],
+    .skills:has(#skills-ctx-personal:checked) .entry-also[data-for="personal"] {
+      display: block;
+    }
+  }
+
+  /* Landing cue on a deep-linked skill: the same ink bar as in Projects and Experience. */
+  .entry {
+    position: relative;
+  }
+
+  .entry:has(> .headword:target)::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: -0.75rem;
+    width: 3px;
+    background: var(--ink);
+    transform-origin: top;
+  }
+
+  /* ── Motion: only on change, never at load. ─────────────────────── */
+  @media (prefers-reduced-motion: no-preference) {
+    .ctx-label,
+    .ctx-name,
+    .ctx-count {
+      transition:
+        background-color 150ms cubic-bezier(0.2, 0.7, 0.2, 1),
+        color 150ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .ctx-label::before {
+      transition: scale 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .skills:has(.ctx-input:not([value="all"]):checked) .sense-evidence {
+      animation: evidence-in 200ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+
+    .entry:has(> .headword:target)::before {
+      animation: landing 300ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+  }
+
+  @keyframes evidence-in {
+    from {
+      opacity: 0;
+      translate: 0 0.25rem;
+    }
+  }
+
+  @keyframes landing {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  /* ── Forced colours: the rule gaps vanish, so tiles get borders; the chosen tile is
+     Highlight with an underlined name. ─────────────────────────────── */
+  @media (forced-colors: active) {
+    .ctx-label {
+      border: 1px solid CanvasText;
+    }
+
+    .ctx-input:checked + .ctx-label {
+      forced-color-adjust: none;
+      background: Highlight;
+    }
+
+    .ctx-input:checked + .ctx-label :is(.ctx-name, .ctx-count) {
+      color: HighlightText;
+    }
+
+    .ctx-input:checked + .ctx-label .ctx-name {
+      text-decoration-thickness: 3px;
+    }
+
+    .ctx-input:checked + .ctx-label::before {
+      background: HighlightText;
+    }
+
+    .entry:has(> .headword:target)::before {
+      forced-color-adjust: none;
+      background: Highlight;
+    }
+  }
+
+  /* ── Print: the whole dictionary, whatever the filter. ─────────────── */
+  @media print {
+    .skills-filter,
+    .to-filter,
+    .entry-also,
+    .sense-scope {
+      display: none !important;
+    }
+
+    .skills :is(.skill-group, .entry, .sense, .sense-evidence) {
+      display: revert !important;
+    }
   }
 </style>

@@ -25,7 +25,7 @@ const year = new Date().getFullYear();
         <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={profile.links.linkedin} rel="me noopener">LinkedIn</a></li>
         <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={profile.links.github} rel="me noopener">GitHub</a></li>
         {email && (
-          <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={`mailto:${email}`}>{email}</a></li>
+          <li class="min-w-0"><a class="inline-flex min-h-11 max-w-full items-center px-3 [overflow-wrap:anywhere] underline-offset-4 hover:underline" href={`mailto:${email}`}>{email}</a></li>
         )}
         {phone && (
           <li><a class="inline-flex min-h-11 items-center px-3 underline-offset-4 hover:underline" href={`tel:${phone.replace(/\s+/g, "")}`}>{phone}</a></li>

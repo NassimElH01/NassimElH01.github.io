@@ -60,7 +60,7 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
                     {responsibilities.length > 0 && (
                       <details class="responsibilities">
                         <summary>{tr("experience.details")}</summary>
-                        <ul role="list" class="mt-3 grid gap-2">
+                        <ul role="list" class="mt-3 grid grid-cols-[minmax(0,1fr)] gap-2">
                           {responsibilities.map((item) => (
                             <li class="max-w-3xl text-sm leading-relaxed text-steel-text">{item}</li>
                           ))}
@@ -105,7 +105,7 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
                     {responsibilities.length > 0 && (
                       <details class="responsibilities">
                         <summary>{tr("experience.details")}</summary>
-                        <ul role="list" class="mt-3 grid gap-2">
+                        <ul role="list" class="mt-3 grid grid-cols-[minmax(0,1fr)] gap-2">
                           {responsibilities.map((item) => (
                             <li class="max-w-3xl text-sm leading-relaxed text-steel-text">{item}</li>
                           ))}
@@ -155,6 +155,9 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
   .timeline-entry {
     position: relative;
     display: grid;
+    /* minmax(0, …): at very large text a long word wraps instead of widening the page. */
+    grid-template-columns: minmax(0, 1fr);
+    overflow-wrap: break-word;
     gap: 0.75rem;
     padding: 1.5rem 0;
   }
