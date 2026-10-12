@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { load } from "js-yaml";
-import { axe, frontmatter, isTodo } from "./helpers";
+import { axe, expectClearOfHeader, frontmatter, isTodo, LANDED, landingBars } from "./helpers";
 
 type Localized = Record<"en" | "da", string>;
 interface Entry {
@@ -90,6 +90,22 @@ for (const lang of ["en", "da"] as const) {
         else await expect(meta).toHaveText(/\d{4}/);
       }
     });
+
+    for (const width of [375, 1280]) {
+      test(`a deep link to any entry lands on it, marked, below the header with its period in view (${width}px)`, async ({ page }) => {
+        await page.setViewportSize({ width, height: 800 });
+        // Instant scrolling, as this is about where each one lands; the Skills landing tests scroll smoothly.
+        await page.emulateMedia({ reducedMotion: "reduce" });
+        for (const entry of entries) {
+          // about:blank first, so each one loads a new page, as a link from the CV would.
+          await page.goto("about:blank");
+          await page.goto(`${item.path}#timeline-${entry.id}`);
+          // On phones the period sits above the heading, so it must clear the header too.
+          await expectClearOfHeader(page.locator(`#timeline-${entry.id}`), page.locator(`${article(entry.id)} .timeline-meta`));
+          expect(await landingBars(page), entry.id).toEqual([[`timeline-${entry.id}`, ...LANDED]]);
+        }
+      });
+    }
 
     test("lists each education's grades from content/, label then grade", async ({ page }) => {
       await page.goto(item.path);
