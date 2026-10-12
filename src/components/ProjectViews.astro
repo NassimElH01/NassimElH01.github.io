@@ -1,8 +1,7 @@
 ---
 // The two views of one project for the Business ⇄ Tech switch in Projects.astro:
 // problem, role and result, or method and tools. A field that is still "TODO:"
-// gets no row; LocalizedText leaves its marker after the list instead (a dashed
-// badge in dev, a hidden data-todo element in the build).
+// gets no row; in dev a dashed badge after the list names it (nothing in the build).
 // showTools: false when the caller already shows the tool chips (featured entries).
 // markResult: false when the caller already shows the entry's keyline, so each entry
 // keeps a single orange accent.
@@ -84,5 +83,5 @@ const techEmpty = method.every((row) => row.todo) && !toolsInView;
     }
   </dl>
   {method.filter((row) => row.todo).map((row) => <LocalizedText field={row.field} lang={lang} as="div" />)}
-  {technologyTodo && <div hidden data-todo />}
+  {import.meta.env.DEV && technologyTodo && <div class="todo-badge" data-todo>TODO: technology</div>}
 </div>

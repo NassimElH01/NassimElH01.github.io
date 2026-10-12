@@ -1,4 +1,5 @@
-// Deploy gate: fails if the built site contains a "TODO:" or a data-todo marker.
+// Deploy gate (CLAUDE.md, rule 4: no TODO in production): fails if the built site contains a
+// "TODO:" or a data-todo marker. Missing content is left out of the build, never marked.
 //   npm run verify:no-todo               exit 1 on any hit (used on main)
 //   npm run verify:no-todo -- --report   list hits, always exit 0 (used on PRs)
 // Files copied unchanged from public/ (for example the freelance demo) are skipped.

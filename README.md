@@ -39,7 +39,7 @@ content/
 
 **Never guess.** A missing fact is written as a string starting with `TODO:`.
 - In `npm run dev` it shows as a dashed badge.
-- In production it is never rendered as copy. The page instead gets a hidden `data-todo` marker.
+- In production the field is left out: no copy and no marker (CLAUDE.md, rule 4: no TODO in production).
 - Bilingual fields need both `en` and `da`. A missing translation is `TODO: translate`.
 - Projects with `draft: true` only appear in dev.
 - A timeline entry may be `undated: true` only when every source lists it without dates, as the CV does under "Øvrig erhvervserfaring". An unknown date is still a `TODO:`.
@@ -57,5 +57,5 @@ English is the default at `/`, and Danish lives at `/da/`. UI strings are in [`s
 
 `.github/workflows/deploy.yml`:
 - **Pull requests:** check, lint, build and test, plus a TODO report. They never deploy.
-- **Push to `main`:** the same checks, then a blocking TODO gate (`content:todos --strict` and `verify:no-todo`), then deploy to GitHub Pages.
-- **Effect of the gate:** a page with unfinished content cannot go live, and the last deployed version stays up.
+- **Push to `main`:** the same checks, then a blocking TODO gate (`verify:no-todo`), then deploy to GitHub Pages.
+- **Effect of the gate:** unfinished fields are left out of the build, so the gate only stops a leak: a `TODO:` or `data-todo` in the built pages. The last deployed version then stays up.

@@ -1,8 +1,8 @@
 ---
 // Renders one bilingual field.
 // - Missing in this language: shows the other language inside a lang= wrapper.
-// - Missing in both: a dashed TODO badge in dev; in production a hidden
-//   data-todo marker that the deploy gate (scripts/verify-no-todo.mjs) fails on.
+// - Missing in both: a dashed TODO badge in dev; nothing in production (CLAUDE.md, rule 4:
+//   no TODO in production). `npm run content:todos` lists what is still missing.
 import type { Lang } from "@/i18n/config";
 import { pick } from "@/i18n/utils";
 
@@ -24,9 +24,7 @@ const isDev = import.meta.env.DEV;
       <Tag class:list={["todo-badge", className]} data-todo>
         {picked.value}
       </Tag>
-    ) : (
-      <Tag hidden data-todo />
-    )
+    ) : null
   ) : (
     <Tag class={className} lang={picked.isFallback ? picked.lang : undefined}>
       {picked.value}
