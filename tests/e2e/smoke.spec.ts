@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { axe } from "./helpers";
+import { axe, setDefaultFontSize } from "./helpers";
 
 const PAGES = [
   { path: "/", lang: "en" },
@@ -53,14 +53,14 @@ for (const { path, lang } of PAGES) {
       });
     }
 
-    test("has no horizontal scroll at 320px with text at 200%", async ({ browser }) => {
-      const context = await browser.newContext({ viewport: { width: 320, height: 800 } });
-      const page = await context.newPage();
+    test("has no horizontal scroll at 320px with text at 200%", async ({ page }) => {
+      await page.setViewportSize({ width: 320, height: 800 });
+      // 200% as the browser's default font size, so rem in media and container queries scales too.
+      await setDefaultFontSize(page, 32);
       await page.goto(path);
-      await page.evaluate(() => (document.documentElement.style.fontSize = "200%"));
+      expect(await page.evaluate(() => getComputedStyle(document.documentElement).fontSize)).toBe("32px");
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       expect(overflow).toBeLessThanOrEqual(0);
-      await context.close();
     });
   });
 }

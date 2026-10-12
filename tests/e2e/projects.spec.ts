@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { load } from "js-yaml";
+import { expectClearOfHeader, LANDED, landingBars } from "./helpers";
 
 type Localized = Record<"en" | "da", string>;
 interface Project {
@@ -29,6 +30,7 @@ const projects: Project[] = readdirSync("content/projects")
 const featured = projects.filter((project) => project.featured);
 const more = projects.filter((project) => !project.featured);
 const isTodo = (value: string) => value.trimStart().startsWith("TODO:");
+const row = (page: Page, id: string) => page.locator(`details.more:has(> summary#project-${id})`);
 
 for (const lang of ["en", "da"] as const) {
   const path = lang === "en" ? "/" : "/da/";
@@ -122,27 +124,44 @@ test("the planned projects lead, and their links work", async ({ page }) => {
   expect((await page.request.get("/budget-skabelon.xlsx")).ok()).toBe(true);
 });
 
-test("every project has one anchor, and a link to a list row opens it", async ({ page }) => {
+test("every project has one anchor, and a later jump to a list row opens it and moves the bar", async ({ page }) => {
   await page.goto("/");
   const section = page.locator("section#projects");
   for (const project of projects) await expect(section.locator(`#project-${project.id}`)).toHaveCount(1);
   for (const project of featured) await expect(section.locator(`h3#project-${project.id}`)).toHaveAttribute("tabindex", "-1");
 
-  // A deep link (e.g. from the CV or Skills) opens the closed row and lands on it, marked by an ink bar.
+  // A jump within the page (the hashchange path) opens the row, and the bar moves with it.
   const [first, second] = more;
-  await page.goto(`/#project-${first.id}`);
-  const row = (id: string) => page.locator(`details.more:has(> summary#project-${id})`);
-  await expect(row(first.id)).toHaveAttribute("open", "");
-  await expect(page.locator(`#project-${first.id}`)).toBeInViewport();
-  const cue = await page
-    .locator(`li.more-row:has(summary#project-${first.id})`)
-    .evaluate((li) => getComputedStyle(li, "::before").backgroundColor);
-  expect(cue).toBe("rgb(17, 17, 17)");
-
-  // A later jump within the page opens that row too.
-  await page.evaluate((id) => (location.hash = id), `project-${second.id}`);
-  await expect(row(second.id)).toHaveAttribute("open", "");
+  for (const { id } of [first, second]) {
+    await page.evaluate((hash) => (location.hash = hash), `project-${id}`);
+    await expect(row(page, id)).toHaveAttribute("open", "");
+    await expectClearOfHeader(page.locator(`#project-${id}`));
+    await expect.poll(() => landingBars(page)).toEqual([[`project-${id}`, ...LANDED]]);
+  }
 });
+
+for (const width of [375, 1280]) {
+  test(`a deep link to any project opens it on load and lands on it, marked, below the header (${width}px)`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 800 });
+    // Instant scrolling, as this is about where each one lands; the Skills landing tests scroll smoothly.
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    for (const project of projects) {
+      // about:blank first, so Playwright loads a new document, as a link from the CV would,
+      // instead of jumping within this one (which would only fire hashchange).
+      await page.goto("about:blank");
+      await page.goto(`/#project-${project.id}`);
+      const target = page.locator(`#project-${project.id}`);
+      if (project.featured) {
+        // A featured project keeps its "01 · year · context" line in view.
+        await expectClearOfHeader(target, page.locator(`article.featured:has(#project-${project.id}) .project-meta`));
+      } else {
+        await expect(row(page, project.id)).toHaveAttribute("open", "");
+        await expectClearOfHeader(target);
+      }
+      expect(await landingBars(page), project.id).toEqual([[`project-${project.id}`, ...LANDED]]);
+    }
+  });
+}
 
 test("the hero links to the projects", async ({ page }) => {
   await page.goto("/");

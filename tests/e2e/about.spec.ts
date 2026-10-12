@@ -101,7 +101,7 @@ test("the CV file is a PDF", async ({ request }) => {
   expect((await response.body()).subarray(0, 5).toString()).toBe("%PDF-");
 });
 
-test("the About link lands the section just under the sticky header on a phone", async ({ browser }) => {
+test("the About link lands the section's rule on the sticky header's rule on a phone", async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 375, height: 800 }, reducedMotion: "reduce" });
   const page = await context.newPage();
   await page.goto("/");
@@ -112,7 +112,9 @@ test("the About link lands the section just under the sticky header on a phone",
     const section = document.querySelector("#about")!.getBoundingClientRect();
     return section.top - header.bottom;
   });
-  expect(gap).toBeGreaterThanOrEqual(0);
-  expect(gap).toBeLessThanOrEqual(16);
+  // The section's border-t sits under the header's border-b (one hairline, not two),
+  // give or take a subpixel of scroll rounding; the section's content starts right below.
+  expect(gap).toBeGreaterThanOrEqual(-2);
+  expect(gap).toBeLessThanOrEqual(0);
   await context.close();
 });

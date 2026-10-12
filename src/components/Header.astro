@@ -51,3 +51,13 @@ const tr = t(lang);
     </div>
   </div>
 </header>
+<script is:inline>
+  // The header's real height for scroll-padding (global.css): it grows when its first row
+  // wraps at large text. Set at once, so the first fragment jump already uses it.
+  (() => {
+    const header = document.currentScript.previousElementSibling;
+    const set = () => document.documentElement.style.setProperty("--header-h", `${header.getBoundingClientRect().height}px`);
+    set();
+    if ("ResizeObserver" in window) new ResizeObserver(set).observe(header);
+  })();
+</script>

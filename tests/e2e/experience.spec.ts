@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { load } from "js-yaml";
-import { axe, frontmatter, isTodo } from "./helpers";
+import { axe, expectClearOfHeader, frontmatter, isTodo, LANDED, landingBars } from "./helpers";
 
 type Localized = Record<"en" | "da", string>;
 interface Entry {
@@ -11,6 +11,7 @@ interface Entry {
   summary: Localized;
   organization: string;
   grades?: { label: Localized; grade: string }[];
+  undated?: boolean;
   draft?: boolean;
   order: number;
 }
@@ -34,7 +35,6 @@ const CASES = {
     path: "/",
     heading: "Experience & education",
     grades: "Grades",
-    undated: "Work",
     periods: {
       "ruc-master-digital-transformation": "Sep 2026 – expected Jun 2028",
       "zealand-professionsbachelor": "2022 – Jan 2026",
@@ -46,7 +46,6 @@ const CASES = {
     path: "/da/",
     heading: "Erfaring & uddannelse",
     grades: "Karakterer",
-    undated: "Arbejde",
     periods: {
       "ruc-master-digital-transformation": "sep. 2026 – forventet jun. 2028",
       "zealand-professionsbachelor": "2022 – jan. 2026",
@@ -83,9 +82,30 @@ for (const lang of ["en", "da"] as const) {
       for (const [id, period] of Object.entries(item.periods)) {
         await expect(page.locator(`${article(id)} .timeline-meta`)).toHaveText(new RegExp(`^${period}`));
       }
-      // An undated job shows its kind only, no empty period.
-      await expect(page.locator(`${article("ab-catering-warehouse")} .timeline-meta`)).toHaveText(item.undated);
+      // Every dated entry shows a year; an undated one (the CVs list some without dates) shows
+      // its kind only, never an empty period.
+      for (const entry of entries) {
+        const meta = page.locator(`${article(entry.id)} .timeline-meta`);
+        if (entry.undated) await expect(meta).not.toHaveText(/\d/);
+        else await expect(meta).toHaveText(/\d{4}/);
+      }
     });
+
+    for (const width of [375, 1280]) {
+      test(`a deep link to any entry lands on it, marked, below the header with its period in view (${width}px)`, async ({ page }) => {
+        await page.setViewportSize({ width, height: 800 });
+        // Instant scrolling, as this is about where each one lands; the Skills landing tests scroll smoothly.
+        await page.emulateMedia({ reducedMotion: "reduce" });
+        for (const entry of entries) {
+          // about:blank first, so each one loads a new page, as a link from the CV would.
+          await page.goto("about:blank");
+          await page.goto(`${item.path}#timeline-${entry.id}`);
+          // On phones the period sits above the heading, so it must clear the header too.
+          await expectClearOfHeader(page.locator(`#timeline-${entry.id}`), page.locator(`${article(entry.id)} .timeline-meta`));
+          expect(await landingBars(page), entry.id).toEqual([[`timeline-${entry.id}`, ...LANDED]]);
+        }
+      });
+    }
 
     test("lists each education's grades from content/, label then grade", async ({ page }) => {
       await page.goto(item.path);
