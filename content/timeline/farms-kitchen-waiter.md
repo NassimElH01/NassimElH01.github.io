@@ -11,9 +11,9 @@ title:
   da: "Tjener"
 # Source: CV-2, CV-CBS and OWNER-PDF p.14 ("Farms Kitchen")
 organization: "Farms Kitchen"
-# Source: OWNER-PDF p.13 gives only the group period "2020 – 2024", no dates for this job,
-# and the CVs list it without dates, so it is shown undated.
-undated: true
+# Source: CV-version0 (owner, shared 2026-10-12: "2021"; earlier sources gave no dates).
+start: "2021"
+end: "2021"
 # Source: OWNER-PDF p.14 ("Kundeservice & Logistik: Erfaring med drift og varedistribution")
 summary:
   en: "Worked as a waiter with customer service and day-to-day operations."
