@@ -29,3 +29,8 @@ test-results/
 playwright-report/
 screenshots/
 .lighthouse/
+
+# Local tool state (claude-flow / ruflo) and the owner's private source documents:
+# never committed (CLAUDE.md, rule 2).
+.claude-flow/
+_kilder/

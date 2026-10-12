@@ -73,10 +73,24 @@ test("the first Tab reaches the skip link, which moves focus to main", async ({ 
   await expect(page.locator("main#main")).toBeFocused();
 });
 
-test("the footer offers the confirmed email and phone", async ({ page }) => {
-  await page.goto("/");
-  await expect(page.locator('footer a[href="mailto:naselh01@gmail.com"]')).toHaveText("naselh01@gmail.com");
-  await expect(page.locator('footer a[href="tel:+4524770784"]')).toHaveText("+45 24 77 07 84");
+test("the footer offers the confirmed email, and no page shows a phone number", async ({ page }) => {
+  for (const path of ["/", "/da/"]) {
+    await page.goto(path);
+    await expect(page.locator('footer a[href="mailto:naselh01@gmail.com"]')).toHaveText("naselh01@gmail.com");
+    // CLAUDE.md, rule 4: no phone number anywhere, in the text, a tel: link or the JSON-LD.
+    await expect(page.locator('a[href^="tel:"]')).toHaveCount(0);
+    expect(await page.content()).not.toMatch(/\+45[\s\d]{8,}|24\s?77\s?07\s?84|"telephone"/);
+  }
+});
+
+test("no page shows a TODO, and every nav link has its section", async ({ page }) => {
+  for (const path of ["/", "/da/"]) {
+    await page.goto(path);
+    // CLAUDE.md, rule 4: unfinished sections are left out, not shown as placeholders.
+    expect(await page.locator("body").innerText()).not.toContain("TODO");
+    const targets = await page.locator("header nav a").evaluateAll((links) => links.map((link) => link.getAttribute("href")!));
+    for (const href of targets) await expect(page.locator(href), href).toHaveCount(1);
+  }
 });
 
 test("the language link points at the same page in the other language", async ({ page }) => {
@@ -193,10 +207,11 @@ test("header tab order follows the visual order on desktop", async ({ browser })
   const page = await context.newPage();
   await page.goto("/");
   const order: string[] = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 8; i++) {
     await page.keyboard.press("Tab");
     order.push(await page.evaluate(() => document.activeElement?.textContent?.trim() ?? ""));
   }
+  // Only built sections are in the nav (no TODO placeholders in production).
   expect(order).toEqual([
     "Skip to content",
     "Nassim Hassani",
@@ -204,8 +219,6 @@ test("header tab order follows the visual order on desktop", async ({ browser })
     "Skills",
     "Projects",
     "Experience & education",
-    "Playground",
-    "Contact",
     "Dansk",
     "Dark theme",
   ]);

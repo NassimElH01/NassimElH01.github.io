@@ -3,7 +3,6 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import SectionPlaceholder from "@/components/SectionPlaceholder.astro";
 import Skills from "@/components/Skills.astro";
 import Experience from "@/components/Experience.astro";
 import Hero from "@/components/hero/Hero.astro";
@@ -30,16 +29,16 @@ const person = {
   url: Astro.site?.href,
   sameAs: [profile.links.linkedin, profile.links.github],
   ...(isTodo(profile.contact.email) ? {} : { email: `mailto:${profile.contact.email}` }),
-  ...(!profile.contact.phone || isTodo(profile.contact.phone) ? {} : { telephone: profile.contact.phone }),
 };
 
-const sections = [
+// Only built sections are rendered and listed in the nav: no "TODO" in production (CLAUDE.md,
+// rule 4). The Flex-zone (playground) and Contact come back, with their nav links, once built;
+// until then the footer carries the email, LinkedIn and GitHub.
+const sections: { id: "about" | "skills" | "projects" | "experience"; label: string }[] = [
   { id: "about", label: tr("section.about") },
   { id: "skills", label: tr("section.skills") },
   { id: "projects", label: tr("section.projects") },
   { id: "experience", label: tr("section.experience") },
-  { id: "playground", label: tr("section.playground") },
-  { id: "contact", label: tr("section.contact") },
 ];
 ---
 
@@ -56,10 +55,8 @@ const sections = [
           <Skills lang={lang} />
         ) : section.id === "projects" ? (
           <Projects lang={lang} />
-        ) : section.id === "experience" ? (
-          <Experience lang={lang} />
         ) : (
-          <SectionPlaceholder id={section.id} label={section.label} />
+          <Experience lang={lang} />
         ),
       )
     }
