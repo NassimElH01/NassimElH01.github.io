@@ -1,6 +1,7 @@
 ---
-// About: who Nassim is (the owner-approved summary), his portrait and three short
-// lists read from content/: courses & certifications, and languages.
+// About: who Nassim is (the owner-approved summary), his portrait and two short
+// lists read from content/: courses & certifications, and languages (education
+// lives in Experience).
 // The summary's last paragraph is the offer, followed by the next step. Unknown
 // values (e.g. a certification year still "TODO:") are left out. No client JS.
 import { getCollection } from "astro:content";
@@ -48,9 +49,12 @@ const certifications = (await getCollection("certifications"))
     const showIssuer = issuer && !name.toLowerCase().startsWith(issuer.split(/\s/)[0].toLowerCase());
     return {
       name,
-      details: [showIssuer ? issuer : undefined, known(data.year), data.credentialId && `ID ${data.credentialId}`].filter(
-        (part): part is string => Boolean(part),
-      ),
+      details: [
+        showIssuer ? issuer : undefined,
+        known(data.year),
+        data.credentialId && `ID ${data.credentialId}`,
+        data.result && pick(data.result, lang).value,
+      ].filter((part): part is string => Boolean(part)),
     };
   });
 
@@ -185,6 +189,8 @@ const certificatesUrl = `${profile.links.linkedin.replace(/\/$/, "")}/details/ce
      Desktop: text and languages on the left; portrait and certifications on the right. */
   .about-grid {
     display: grid;
+    /* At very large text on a phone, long words wrap instead of widening the page. */
+    overflow-wrap: break-word;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
       "head photo"

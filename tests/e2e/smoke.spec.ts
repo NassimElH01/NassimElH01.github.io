@@ -1,21 +1,10 @@
-import { expect, test, type Page } from "@playwright/test";
-import AxeBuilder from "@axe-core/playwright";
+import { expect, test } from "@playwright/test";
+import { axe } from "./helpers";
 
 const PAGES = [
   { path: "/", lang: "en" },
   { path: "/da/", lang: "da" },
 ] as const;
-
-const WCAG = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
-
-/** The decode intro hides letters for up to 1.6 s; audit the settled page. */
-async function axe(page: Page) {
-  await page.waitForFunction(
-    () => !document.documentElement.classList.contains("intro") && !document.querySelector(".intro-skip"),
-  );
-  const results = await new AxeBuilder({ page }).withTags(WCAG).analyze();
-  return results.violations.map((v) => `${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`);
-}
 
 for (const { path, lang } of PAGES) {
   test.describe(`page ${path}`, () => {
@@ -63,6 +52,16 @@ for (const { path, lang } of PAGES) {
         await context.close();
       });
     }
+
+    test("has no horizontal scroll at 320px with text at 200%", async ({ browser }) => {
+      const context = await browser.newContext({ viewport: { width: 320, height: 800 } });
+      const page = await context.newPage();
+      await page.goto(path);
+      await page.evaluate(() => (document.documentElement.style.fontSize = "200%"));
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+      expect(overflow).toBeLessThanOrEqual(0);
+      await context.close();
+    });
   });
 }
 

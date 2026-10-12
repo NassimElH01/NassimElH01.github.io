@@ -5,10 +5,15 @@
 # The [BEKRÆFT] placeholder "other-tools" is replaced by the concrete tools the CVs
 # and the REPORT list (Microsoft 365, ticket systems, SharePoint, Excel, Windows,
 # ProjectFlow 365).
+# OWNER-PDF (the owner's 18-page text pack, shared 2026-10-11; written with an AI
+# assistant, so used for facts only) adds no usage here: it names WordPress (p.3,
+# Kernekompetencer: "CMS-konfiguration (WordPress)") but ties it to no project; its
+# freelance section (p.11-12) does not name WordPress. So no WordPress item is added.
 group:
   en: "Platforms & tools"
   da: "Platforme & værktøjer"
-order: 4
+# Presentation only: 2nd (the owner may change the order; see project-and-business.yaml).
+order: 2
 items:
   - id: power-bi
     name:
@@ -22,9 +27,22 @@ items:
         note:
           en: "Dashboards on ProjectFlow 365 data for management reporting and portfolio overview"
           da: "Dashboards baseret på ProjectFlow 365-data til ledelsesrapportering og porteføljeoverblik"
-      # Source: REPORT (p.6: "integrere data fra ProjectFlow 365 i Power BI"; p.15, p.17)
+      # Source: REPORT (p.6: "integrere data fra ProjectFlow 365 i Power BI"; p.15, p.17).
+      # Note: REPORT PDF p.15 ("udviklet datamodeller, opsat API-forbindelser og skabt dashboards,
+      # som faktisk blev brugt til ledelsesrapportering").
       - context: internship
         project: royal-unibrew-projectflow-power-bi
+        note:
+          en: "Built data models, set up API connections and created dashboards that were used for management reporting"
+          da: "Udviklede datamodeller, opsatte API-forbindelser og skabte dashboards, der blev brugt til ledelsesrapportering"
+      # Source: BACHELOR p.32 (5.3, "Kvantitativ analyse – KPI'er fra Power BI-prototypen": lead
+      # time, throughput, work in progress (WIP) and plan vs. faktisk, from ProjectFlow 365 and
+      # Power BI data). The project does not say who built the prototype, so the note says analysed.
+      - context: study
+        project: royal-unibrew-hybrid-pmo-bachelor-project
+        note:
+          en: "Bachelor project: analysed lead time, throughput, WIP and plan versus actual from a Power BI prototype"
+          da: "Bachelorprojekt: analyserede lead time, throughput, WIP og plan vs. faktisk fra en Power BI-prototype"
 
   - id: azure-devops
     name:
@@ -33,11 +51,20 @@ items:
     usedIn:
       # Source: CV-2 (Royal Unibrew: "Arbejde med projektstyring, governance og fremdrift i
       # Azure DevOps"); REPORT (p.5: planning via Azure DevOps)
+      # OWNER-PDF p.12 adds "sprint-kadencer"; not used, as REPORT p.19 says agile/Scrum was not
+      # applied at Royal Unibrew (see project-and-business.yaml).
       - context: internship
         timeline: royal-unibrew-pmo
         note:
           en: "Project management, governance and progress tracking"
           da: "Projektstyring, governance og fremdrift"
+      # Source: REPORT PDF p.9 (journal, 30/1: "mit første DevOps-udkast til OT Cyber
+      # Security-projektet ... tydelige beskrivelser af epics og features").
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Drafted the OT Cyber Security project in Azure DevOps, with epics and features"
+          da: "Lavede udkastet til OT Cyber Security-projektet i Azure DevOps med epics og features"
       # Source: REPORT (p.5: Azure DevOps and ProjectFlow 365 "som netop var blevet implementeret i
       # PMO/Group IT"); the project file lists Azure DevOps in technology. The REPORT does not say
       # Azure DevOps was part of the Power BI integration itself.

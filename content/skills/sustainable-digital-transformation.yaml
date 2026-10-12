@@ -2,6 +2,15 @@
 # CV-2 lists "IT-arkitektur" as a focus area of the Zealand PBA; that is cited for
 # enterprise architecture. No source says where the other items were used. The RUC
 # MSc started in 2026, so nothing from it is cited as usage until the owner confirms.
+# OWNER-PDF (the owner's 18-page text pack, shared 2026-10-11; used for facts only)
+# p.14 lists the RUC programme's core areas (enterprise architecture, business models,
+# IT governance, digital leadership, systems engineering). A programme description is
+# not usage, and the PDF ties none of these items to a project, so nothing changes here.
+# 2026-10-12: the owner confirmed the RUC course "Digitale Transformationer og Bæredygtighed"
+# (10 ECTS, autumn 2026; named in his portfolio PDF of 2026-10-12, p.7, under the first
+# semester's modules, E2026) and agreed that it may stand as evidence, with the note that the
+# course is in progress. It is cited for a new item named after the course itself;
+# digitalization-strategy, sustainable-business-models and sdgs-and-csr stay TODO.
 group:
   en: "Sustainable digital transformation"
   da: "Bæredygtig digital transformation"
@@ -18,6 +27,25 @@ items:
         note:
           en: "Focus area in the programme: IT architecture"
           da: "Fokusområde på uddannelsen: IT-arkitektur"
+        # The whole note: CV-2 names IT architecture, not enterprise architecture.
+        scope:
+          en: "Focus area in the programme: IT architecture"
+          da: "Fokusområde på uddannelsen: IT-arkitektur"
+
+  - id: digital-transformation-and-sustainability
+    name:
+      en: "Digital transformation and sustainability"
+      da: "Digital transformation og bæredygtighed"
+    usedIn:
+      # Source: owner 2026-10-12 ("Ja, det stemmer"); see the top comment.
+      - context: study
+        timeline: ruc-master-digital-transformation
+        note:
+          en: "Course in progress: “Digitale Transformationer og Bæredygtighed” (10 ECTS), autumn 2026"
+          da: "Igangværende kursus: “Digitale Transformationer og Bæredygtighed” (10 ECTS), efteråret 2026"
+        scope:
+          en: "Course in progress"
+          da: "Igangværende kursus"
 
   - id: digitalization-strategy
     name:

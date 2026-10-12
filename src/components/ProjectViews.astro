@@ -35,6 +35,9 @@ const business = rows([
 const method = rows([["method", "projects.method"]]);
 const technology = project.technology.filter((item) => !isTodo(item));
 const technologyTodo = project.technology.some((item) => isTodo(item));
+// Without a known method, the tools are the Tech view, even where the caller shows them too.
+const toolsInView = (showTools || method.every((row) => row.todo)) && technology.length > 0;
+const techEmpty = method.every((row) => row.todo) && !toolsInView;
 ---
 
 <div class="view-business">
@@ -53,7 +56,7 @@ const technologyTodo = project.technology.some((item) => isTodo(item));
   {business.filter((row) => row.todo).map((row) => <LocalizedText field={row.field} lang={lang} as="div" />)}
 </div>
 
-<div class="view-tech">
+<div class="view-tech" data-empty={techEmpty || undefined}>
   <dl class="project-rows">
     {
       method
@@ -66,7 +69,7 @@ const technologyTodo = project.technology.some((item) => isTodo(item));
         ))
     }
     {
-      showTools && technology.length > 0 && (
+      toolsInView && (
         <div>
           <dt class="project-label">{tr("projects.technology")}</dt>
           <dd>

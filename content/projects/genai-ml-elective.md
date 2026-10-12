@@ -48,9 +48,11 @@ technology:
   - "InVideo"
   - "Python"
   - "Google Colab"
+# Source: OWNER-PDF p.15 ("Valgfag: Generativ AI & Machine Learning: 10"), checked by the owner
+# against his diplomas (owner 2026-10-11, second round). The exam paper itself states no grade.
 result:
-  en: "TODO: grade or outcome — the exam paper states none"
-  da: "TODO: karakter eller resultat — eksamensopgaven nævner ingen"
+  en: "The elective exam was graded 10 on the Danish 7-point scale (grades run from -3 to 12; 12 is the top grade)."
+  da: "Valgfagseksamen blev bedømt til 10 på 7-trinsskalaen."
 # Source: EXAM (p.21, "Machine-learning": five gists under NassimElH01, labelled by task) and the
 # owner's answers (2026-10-05: publish them). In the PDF text two IDs read "…686t78…" and "…5e6t76…":
 # the "ff" ligature was extracted as "t". The IDs below come from gist.github.com/NassimElH01, and all
@@ -79,5 +81,5 @@ links:
 # Source: EXAM (p.2: Økonomi & IT, Zealand) and CV-2 (Zealand PBA 2022–2026)
 timeline: "zealand-professionsbachelor"
 featured: false
-order: 7
+order: 9
 ---

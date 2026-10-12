@@ -11,9 +11,9 @@
 title:
   en: "Femtech 65+ Surveillance Mirror (posture checker)"
   da: "Femtech 65+ Surveillance Mirror (holdningstjek)"
-# Not dated: git history has a single upload of the finished sketch (a29d69b, 2026-09-14), with no
-# development history. That shows only when it was added, not when it was built. The owner gave no year.
-year: "TODO: year — owner to confirm (uploaded to the repo in September 2026; build year unknown)"
+# Source: owner 2026-10-11, second round (2026). Git history has a single upload of the
+# finished sketch (a29d69b, 2026-09-14) with no development history, so it does not date the build.
+year: 2026
 # Source: the owner's answers (2026-10-05): the four confirmed projects are personal projects.
 context: "personal"
 problem:
@@ -44,5 +44,5 @@ result:
   en: "TODO: outcome — owner to confirm (was it presented, tested or used?)"
   da: "TODO: resultat — ejer bekræfter (blev den præsenteret, testet eller brugt?)"
 featured: false
-order: 11
+order: 15
 ---

@@ -62,13 +62,18 @@ for (const lang of ["en", "da"] as const) {
       await page.locator("#projects-lens-business").focus();
       await page.keyboard.press("ArrowRight");
       await expect(page.locator("#projects-lens-tech")).toBeChecked();
-      // Colours ease for 150 ms, so wait for the end state.
+      // Colours ease for 150 ms, so wait for the end state: Tech at full contrast,
+      // Business back to steel.
       await expect.poll(() => color(".lens-tech")).toBe("rgb(243, 240, 232)");
-      await expect.poll(() => color("article.featured .view-tech", "background-color")).toBe("rgb(17, 17, 17)");
+      await expect.poll(() => color(".lens-business")).toBe("rgb(104, 108, 115)");
       await expect(first.locator(".view-business")).toBeHidden();
       await expect(first.locator(".view-tech")).toBeVisible();
       if (!isTodo(project.method[lang])) await expect(first.locator(".view-tech dd").first()).toHaveText(project.method[lang]);
-      await expect(first.locator(".chips li").first()).toBeVisible();
+      // Featured entries show their tools under the title, so the Tech view holds the method only.
+      await expect(first.locator(".view-tech dt")).toHaveText([lang === "en" ? "Method" : "Metode"]);
+      await expect(first.locator(".view-tech .chips")).toHaveCount(0);
+      // Panel style: the hero's ink panel.
+      await expect.poll(() => color("article.featured .view-tech", "background-color")).toBe("rgb(17, 17, 17)");
     });
 
     test("each featured project shows its keyline and tools in the default view", async ({ page }) => {
@@ -117,6 +122,28 @@ test("the planned projects lead, and their links work", async ({ page }) => {
   expect((await page.request.get("/budget-skabelon.xlsx")).ok()).toBe(true);
 });
 
+test("every project has one anchor, and a link to a list row opens it", async ({ page }) => {
+  await page.goto("/");
+  const section = page.locator("section#projects");
+  for (const project of projects) await expect(section.locator(`#project-${project.id}`)).toHaveCount(1);
+  for (const project of featured) await expect(section.locator(`h3#project-${project.id}`)).toHaveAttribute("tabindex", "-1");
+
+  // A deep link (e.g. from the CV or Skills) opens the closed row and lands on it, marked by an ink bar.
+  const [first, second] = more;
+  await page.goto(`/#project-${first.id}`);
+  const row = (id: string) => page.locator(`details.more:has(> summary#project-${id})`);
+  await expect(row(first.id)).toHaveAttribute("open", "");
+  await expect(page.locator(`#project-${first.id}`)).toBeInViewport();
+  const cue = await page
+    .locator(`li.more-row:has(summary#project-${first.id})`)
+    .evaluate((li) => getComputedStyle(li, "::before").backgroundColor);
+  expect(cue).toBe("rgb(17, 17, 17)");
+
+  // A later jump within the page opens that row too.
+  await page.evaluate((id) => (location.hash = id), `project-${second.id}`);
+  await expect(row(second.id)).toHaveAttribute("open", "");
+});
+
 test("the hero links to the projects", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("section").first().getByRole("link", { name: "See projects" })).toHaveAttribute("href", "#projects");
@@ -128,10 +155,13 @@ test("list rows show year, context and tools on a phone, and screen readers get 
   await page.goto("/");
   const row = page.locator("details.more").filter({ hasText: "S&S Rengøringsservice website" });
   await expect(row.locator(".more-meta")).toBeVisible();
-  await expect(row.locator(".more-meta")).toContainText("Work");
+  // The year comes from the timeline entry (the project has none), then the context.
+  await expect(row.locator(".more-meta > span:not([aria-hidden]):not(.sr-only)")).toHaveText(["2023–now", "Work"]);
   await expect(row.locator(".more-tools")).toContainText("HTML");
+  // The row's name keeps its parts apart for screen readers.
+  // (sr-only commas are positioned boxes, so Chromium puts a space before each one.)
+  expect(await row.locator("summary").ariaSnapshot()).toMatch(/S&S Rengøringsservice website ?, 2023–now ?, Work ?, HTML ?, CSS/);
   // aria-hidden dots must not glue the words together for screen readers.
   expect(await page.locator("article.featured .project-meta").first().ariaSnapshot()).toContain("2025 Internship");
-  expect(await page.locator("section#about .about-edu li").first().ariaSnapshot()).toMatch(/\(RUC\) 2026/);
   await context.close();
 });

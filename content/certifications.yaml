@@ -2,6 +2,12 @@
 # "Licenser og certificeringer" (screenshots he shared on 2026-10-05: issuer, month
 # and year, and the certificate PDFs attached there). Issuer is only filled where a
 # source names it or it is part of the certificate's own name.
+# OWNER-PDF p.16-17 (Certificeringer & Kursusforløb, sent 2026-10-11) lists the same
+# certifications and agrees with the years below for PRINCE2, Agile, PwC and McKinsey; it gives no
+# year for the two IBM certificates. Where its names or issuers differ from the
+# certificates or the owner's earlier answers, those win and the PDF wording is noted at the
+# entry. Its "12" for the IBM capstones is not used: `result` keeps the terms of IBM's own
+# evaluation, as the owner chose (2026-10-11), and names the capstone that was graded.
 # No credentialUrl: the certificates are PDFs attached on LinkedIn, not public
 # verification pages; About links to the LinkedIn certifications list instead. The
 # PRINCE2 certificates went to the owner's Royal Unibrew mail and are not available.
@@ -11,52 +17,91 @@
   name: PRINCE2 Foundation
   # Source: REPORT (p.13: completed as an online course via Mentorix; p.8 says the same) and the
   # owner's answers (2026-10-05: Mentorix is the issuer to show).
+  # OWNER-PDF p.16 (Certificeringer & Kursusforløb) writes "Mentorix / PeopleCert", adding the
+  # PRINCE2 exam body. Kept as Mentorix: the owner chose it on 2026-10-05 when asked about the exam body.
   issuer: Mentorix
   # Source: REPORT (p.13: completed during the internship; p.1 report dated 04-07-2025;
-  # p.21 cites the spring-2025 internship guide)
+  # p.21 cites the spring-2025 internship guide) and OWNER-PDF p.16 (Certificeringer &
+  # Kursusforløb: "PRINCE2® Foundation & Practitioner | Mentorix / PeopleCert (Marts 2025)")
   year: 2025
 - id: prince2-practitioner
   order: 2
   name: PRINCE2 Practitioner
   # Source: REPORT (p.13: completed as an online course via Mentorix; p.8 says the same) and the
   # owner's answers (2026-10-05: Mentorix is the issuer to show).
+  # OWNER-PDF p.16 (Certificeringer & Kursusforløb) writes "Mentorix / PeopleCert", adding the
+  # PRINCE2 exam body. Kept as Mentorix: the owner chose it on 2026-10-05 when asked about the exam body.
   issuer: Mentorix
   # Source: REPORT (p.13: completed during the internship; p.1 report dated 04-07-2025;
-  # p.21 cites the spring-2025 internship guide)
+  # p.21 cites the spring-2025 internship guide) and OWNER-PDF p.16 (Certificeringer &
+  # Kursusforløb: "PRINCE2® Foundation & Practitioner | Mentorix / PeopleCert (Marts 2025)")
   year: 2025
 - id: agile-project-management
   order: 3
   # Name as in the brief; the certificate reads "Certificering i Agil Projektledelse".
+  # OWNER-PDF p.17 (Certificeringer & Kursusforløb) calls it "Diplomuddannelse i Agile
+  # Projektledelse"; the certificate does not say "Diplomuddannelse", so that name is not used.
   name: Agile Project Management
-  # Source: CV-2 (Certificeringer: "Agile Projektledelse (BlivProjektleder.dk)") and LinkedIn
+  # Source: CV-2 (Certificeringer: "Agile Projektledelse (BlivProjektleder.dk)") and LinkedIn;
+  # OWNER-PDF p.17 (Certificeringer & Kursusforløb: "Blivprojektleder.dk") agrees
   issuer: BlivProjektleder.dk
-  # Source: LinkedIn (certificate: "Dato: 19 marts 2024", "Certifikat ID: A4291-172")
+  # Source: LinkedIn (certificate: "Dato: 19 marts 2024", "Certifikat ID: A4291-172");
+  # OWNER-PDF p.17 (Certificeringer & Kursusforløb: "Marts 2024") agrees
   year: 2024
   credentialId: A4291-172
 - id: ibm-data-analytics
   order: 4
+  # OWNER-PDF p.16 (Certificeringer & Kursusforløb) calls it "IBM Data Analyst Professional
+  # Certificate | IBM SkillsBuild". Name and issuer stay as on LinkedIn and the certificate.
+  # CONFLICT (name): the Airbnb capstone whose result is shown below belongs to that "Professional
+  # Certificate" (OWNER-PDF p.9, p.16); LinkedIn's certificate is for the SkillsBuild "Programme in
+  # Data Analytics". Owner to confirm they are the same (as in content/projects/airbnb-eda.md).
   name: IBM Data Analytics
   # Source: LinkedIn ("Data Analytics", IBM; the certificate is an IBM SkillsBuild completion
   # certificate for the "Programme in Data Analytics")
   issuer: IBM
   # Source: LinkedIn ("Udstedt okt. 2023")
   year: 2023
+  # Source: owner 2026-10-11 (the capstone, the Airbnb analysis: "Ja, også fuld score", recorded
+  # as Grade A, full score, the same terms as IBM's evaluation of the cybersecurity capstone) and
+  # OWNER-PDF p.16 (the result is "for det afsluttende capstone-projekt", so the text names the
+  # capstone and does not read as a grade for the whole certificate). OWNER-PDF p.9
+  # ("Karakter: 12") and p.16 ("karakteren 12") are not used.
+  result:
+    en: "Capstone: Grade A, full score"
+    da: "Afsluttende projekt: Grade A, fuld score"
 - id: ibm-cybersecurity
   order: 5
+  # OWNER-PDF p.16 (Certificeringer & Kursusforløb) calls it "IBM Cybersecurity Analyst
+  # Professional Certificate | IBM SkillsBuild". Name and issuer stay as on LinkedIn.
   name: IBM Cybersecurity
   # Source: LinkedIn ("Cybersecurity", IBM)
   issuer: IBM
-  # Source: LinkedIn ("Udstedt okt. 2023")
+  # Source: LinkedIn ("Udstedt okt. 2023").
+  # IBM's evaluation of the capstone is dated 2 January 2024 (owner 2026-10-11), after this issue
+  # date; the owner confirmed on 2026-10-11 (second round: "ja for fik den leveret der") that the
+  # capstone belongs to this certificate. The year stays 2023, as LinkedIn shows.
   year: 2023
+  # Source: owner 2026-10-11 (IBM's evaluation of the capstone, dated 2 January 2024: rubric
+  # 50/50, "Grade: A"; the owner chose "Grade A, fuld score" for the site) and OWNER-PDF p.16
+  # (the result is "for den afsluttende eksamen"), so the text names the final project.
+  # OWNER-PDF p.10 ("Karakter: 12") and p.16 ("karakteren 12") are not used.
+  result:
+    en: "Capstone: Grade A, full score"
+    da: "Afsluttende projekt: Grade A, fuld score"
 - id: pwc-security-awareness
   order: 6
   # Source: LinkedIn ("Praktiserende i cybersikkerhed", PwC Danmark; the diploma says the holder
   # "har deltaget i programmet PwC Security Awareness", 24 February 2024). Not in the brief or the CVs.
+  # OWNER-PDF p.17 (Certificeringer & Kursusforløb) lists it together with PwC Hackschool as one
+  # line; the two LinkedIn certificates stay separate entries.
   name:
     en: "PwC Security Awareness: Cybersecurity Practitioner"
     da: "PwC Security Awareness: Praktiserende i cybersikkerhed"
   issuer: PwC
-  # Source: LinkedIn ("Udstedt feb. 2024"; diploma dated 24 February 2024)
+  # Source: LinkedIn ("Udstedt feb. 2024"; diploma dated 24 February 2024); OWNER-PDF p.17
+  # (Certificeringer & Kursusforløb: "PwC Hackschool & Praktiserende Cybersikkerhed | PwC Danmark
+  # (Februar – Marts 2024)") agrees
   year: 2024
 # Source: CV-2 (Certificeringer: "PwC HackSchool"). Not in the brief or CV-CBS.
 - id: pwc-hackschool
@@ -64,12 +109,15 @@
   name: PwC HackSchool
   # Source: CV-2 (Certificeringer; issuer is part of the name) and LinkedIn ("Hackschool forløb", PwC Danmark)
   issuer: PwC
-  # Source: LinkedIn ("Udstedt mar. 2024"; certificate "Deltagerbevis PwC Hackschool 2024")
+  # Source: LinkedIn ("Udstedt mar. 2024"; certificate "Deltagerbevis PwC Hackschool 2024");
+  # OWNER-PDF p.17 (Certificeringer & Kursusforløb: "PwC Hackschool & Praktiserende
+  # Cybersikkerhed | PwC Danmark (Februar – Marts 2024)") agrees
   year: 2024
 - id: mckinsey-forward
   order: 8
   # Source: LinkedIn ("McKinsey Forward Program", McKinsey & Company)
   name: McKinsey Forward
   issuer: McKinsey & Company
-  # Source: LinkedIn ("Udstedt maj 2024")
+  # Source: LinkedIn ("Udstedt maj 2024"); OWNER-PDF p.17 (Certificeringer & Kursusforløb:
+  # "McKinsey Forward Program | McKinsey & Company (Maj 2024)") agrees
   year: 2024

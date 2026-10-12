@@ -3,10 +3,17 @@
 # internship report (REPORT), the Gen AI & ML elective exam (EXAM) and CV-2.
 # Agile methods are NOT cited for Royal Unibrew: REPORT p.8 says it works mainly
 # with the waterfall model, and p.19 says agile/Scrum was not applied there.
+# OWNER-PDF is the owner's 18-page text pack ("Her er en komplet ... tekstpakke", shared
+# 2026-10-11; written with an AI assistant, so used for facts only; PDF page numbers).
+# Earlier sources win where they conflict. Tjekkit is a group project (owner 2026-10-11); his
+# own part was the wireframes and the prototype (second round), so entries that describe the
+# group's work say "group project".
 group:
   en: "Projects & business"
   da: "Projekt & forretning"
-order: 3
+# Presentation only: first, for the roles his newest CV's headline names ("PMO |
+# Projektkoordinering | Business Analysis | Dataanalyse"). The owner may change it.
+order: 1
 items:
   - id: prince2
     name:
@@ -23,6 +30,15 @@ items:
         note:
           en: "Applied PRINCE2 phase division and risk management to the OT Cyber Security project plan"
           da: "Anvendte PRINCE2's faseopdeling og risikostyring i projektplanen for OT Cyber Security-projektet"
+      # Source: OWNER-PDF p.8 (Hybrid PMO: PRINCE2 Agile among the theoretical frameworks) and
+      # p.5 (PRINCE2 & Hybrid Governance: classic governance at decision level, agile iterations at
+      # execution level); BACHELOR p.34 (6.1: the solution design builds on "PRINCE2's governance-
+      # og beslutningslogik") and p.35 (6.3.1: "Beslutningsgates videreføres fra PRINCE2")
+      - context: study
+        project: royal-unibrew-hybrid-pmo-bachelor-project
+        note:
+          en: "Hybrid PMO design that keeps PRINCE2's decision gates"
+          da: "Design af et hybridt PMO, der viderefører PRINCE2's beslutningsgates"
 
   - id: agile-methods
     name:
@@ -32,6 +48,10 @@ items:
     # Agile Project Management certification belongs with this skill.
     certifications:
       - agile-project-management
+    # CONFLICT: OWNER-PDF p.12 (4. Erhvervserfaring, Royal Unibrew) says he planned "backlogs,
+    # sprint-kadencer og fremdriftsopfølgning i Azure DevOps", and p.5 lists sprint planning,
+    # stand-ups and retrospectives. REPORT p.19 says agile/Scrum was not applied at Royal
+    # Unibrew; the REPORT is the earlier source and wins, so the internship is still not cited.
     usedIn:
       # Source: REPORT (p.8: "På Zealand har jeg arbejdet meget med agile metoder og Scrum")
       - context: study
@@ -92,6 +112,16 @@ items:
         note:
           en: "Monthly budget tracking: budget, actual and difference per category"
           da: "Månedlig budgetopfølgning: budget, faktisk og difference pr. kategori"
+      # Source: OWNER-PDF p.8 (3. Udvalgte Projekter, Tjekkit: "cost-benefit analyse over en
+      # 5-årig horisont med en fastlagt diskonteringsrente på 6 %"); owner 2026-10-11 (group project)
+      - context: study
+        project: tjekkit
+        note:
+          en: "Group project: cost-benefit analysis over five years with a 6% discount rate"
+          da: "Gruppeprojekt: cost-benefit-analyse over fem år med en diskonteringsrente på 6 %"
+        scope:
+          en: "Group project"
+          da: "Gruppeprojekt"
 
   - id: supply-chain
     name:
@@ -103,6 +133,9 @@ items:
     name:
       en: "Change management"
       da: "Forandringsledelse"
+    # The bachelor project is not cited: BACHELOR names Lewin, Kotter and ADKAR only in its
+    # literature list and applies no change model. OWNER-PDF p.6 lists Kotter and Leavitt-Ry
+    # as knowledge ("Kendskab til"), which is not usage.
     usedIn:
       # Source: REPORT (p.10: "modstand eller usikkerhed blandt kolleger i forbindelse med
       # implementeringen af nye Power BI-rapporter"; "brugte tid på at lave brugerdokumentation og
@@ -112,3 +145,14 @@ items:
         note:
           en: "Met colleagues' resistance or uncertainty about new Power BI reports with user documentation and training"
           da: "Mødte kollegers modstand eller usikkerhed over for nye Power BI-rapporter med brugerdokumentation og undervisning"
+      # Source: OWNER-PDF p.8 (3. Udvalgte Projekter, Tjekkit: "Implementeringsplan forankret i
+      # Lewins forandringsteori for at sikre ejerskab blandt medarbejderne før og under udrulning");
+      # owner 2026-10-11 (group project)
+      - context: study
+        project: tjekkit
+        note:
+          en: "Group project: implementation plan based on Lewin's change theory, to build staff ownership before and during the roll-out"
+          da: "Gruppeprojekt: implementeringsplan baseret på Lewins forandringsteori, der skal skabe ejerskab blandt medarbejderne før og under udrulningen"
+        scope:
+          en: "Group project"
+          da: "Gruppeprojekt"

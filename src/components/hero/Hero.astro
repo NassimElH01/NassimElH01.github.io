@@ -10,6 +10,7 @@ import type { Lang } from "@/i18n/config";
 import { localize, pick, t } from "@/i18n/utils";
 import { getProfile } from "@/lib/content";
 import { isTodo } from "@/lib/todo";
+import { formatPeriod, yearOf } from "@/lib/dates";
 import LocalizedText from "@/components/LocalizedText.astro";
 
 interface Props {
@@ -34,20 +35,20 @@ const internship = await getEntry("timeline", "royal-unibrew-pmo");
 const prince2 = await getEntry("certifications", "prince2-practitioner");
 const languages = (await getCollection("languages")).sort((a, b) => a.data.order - b.data.order);
 
-const period = (start?: string, end?: string) => [start, end].filter((v) => v && !isTodo(v)).join("–");
 const line = (...parts: (string | undefined)[]) => parts.filter(Boolean).join(" · ");
 
 const candidates: (Fact | false | undefined)[] = [
   now && {
     label: tr("hero.now"),
     value: pick(now.data.title, lang).value,
-    detail: line(now.data.organization, period(now.data.start, now.data.end)),
+    // Years only: the facts row stays one short line.
+    detail: line(now.data.organization, formatPeriod(now.data, lang, { months: false })),
     live: true,
   },
   internship && {
     label: tr("hero.facts.experience"),
     value: internship.data.organization,
-    detail: line(pick(internship.data.title, lang).value, period(internship.data.start)),
+    detail: line(pick(internship.data.title, lang).value, yearOf(internship.data.start)),
   },
   prince2 && { label: tr("hero.facts.certified"), value: localize(prince2.data.name, lang) },
   languages.length > 0 && {

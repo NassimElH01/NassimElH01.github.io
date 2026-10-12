@@ -6,7 +6,9 @@
 # Source: CV-2 and CV-CBS (Øvrig erhvervserfaring: "CNS Security – Frivillig brandvagt";
 # the title says "Frivillig", so kind stays volunteer)
 kind: "volunteer"
-# Source: CV-2 and CV-CBS ("Frivillig brandvagt"); English is a faithful translation
+# Source: CV-2 and CV-CBS ("Frivillig brandvagt"); English is a faithful translation.
+# OWNER-PDF p.13 confirms it ("CNS Security: Frivillig brandvagt (sikkerhedsprocedurer
+# og situationsberedskab)").
 title:
   en: "Volunteer fire watch"
   da: "Frivillig brandvagt"
@@ -14,6 +16,8 @@ title:
 organization: "CNS Security"
 # Source: CV-2 and CV-CBS list this under "Øvrig erhvervserfaring" without dates, and no other
 # source dates it, so it is shown undated, as in the CVs (owner's answers, 2026-10-05).
+# OWNER-PDF p.13 groups it under "Tidligere Erhvervserfaring (2020 – 2024)" with no dates
+# for the job itself, so it stays undated.
 undated: true
 summary:
   en: "Volunteer support in a safety-focused environment requiring vigilance, coordination, and professionalism under operational conditions."

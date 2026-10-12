@@ -16,6 +16,8 @@ title:
 organization: "Royal Unibrew"
 # Source: CV-2 and CV-CBS ("2025"). REPORT gives six months in spring 2025 but
 # no start or end month (p.15, p.21), so no months are stated.
+# Conflict noted: OWNER-PDF p.12 says "Royal Unibrew A/S | 2024 – 2025".
+# Source: owner 2026-10-11 ("Behold det nuværende": keep 2025).
 start: "2025"
 end: "2025"
 # Source: REPORT p.15 (six months), REPORT p.3 (PMO), REPORT p.8 (PMO team of
@@ -25,10 +27,10 @@ summary:
   da: "Seks måneders praktik i Royal Unibrews Project Management Office i et PMO-team på seks medarbejdere (inklusive ham selv). Understøttede projektledelsen på tværgående IT- og OT-projekter, bl.a. Cyber Security, og bidrog til øget gennemsigtighed i projektporteføljen med bedre overblik, bedre rapportering og et styrket datadrevet beslutningsgrundlag."
 responsibilities:
   en:
-    # Source: REPORT p.5 (Projektledelsessupport)
-    - "Supported project management and led parts of selected projects himself, including OT Cyber Security and Choose Your Own Device."
-    # Source: REPORT p.6 (Power BI-rapporter), p.15 (data models, API connections), p.17 (used by PMO and management); CV-2 (Power BI dashboards on ProjectFlow data)
-    - "Integrated ProjectFlow 365 data into Power BI: built data models, set up API connections and developed dashboards for management reporting and portfolio overview, used by the PMO and management."
+    # Source: REPORT p.5 (Projektledelsessupport); OWNER-PDF p.12 (the abbreviation CYOD)
+    - "Supported project management and led parts of selected projects himself, including OT Cyber Security and Choose Your Own Device (CYOD)."
+    # Source: REPORT p.6 ("ansvar for at integrere data fra ProjectFlow 365 i Power BI"), p.15 (data models, API connections), p.17 (used by PMO and management); CV-2 (Power BI dashboards on ProjectFlow data); OWNER-PDF p.12 (REST API calls to ProjectFlow 365; its "Hovedansvarlig" and "automatiserede" are left out)
+    - "Was responsible for integrating ProjectFlow 365 data into Power BI: set up REST API connections to ProjectFlow 365, built data models and developed dashboards for management reporting and portfolio overview, used by the PMO and management."
     # Source: REPORT p.6 (Cybersikkerhedsprojekter)
     - "Contributed to the OT Cyber Security project: planned workshops, developed use cases, wrote stakeholder analyses, followed up on compliance requirements and built dashboards for monitoring security KPIs."
     # Source: CV (newest, Nassim_Hassani_CV.docx shared 2026-10-05: "Koordinerede interessenter på tværs af IT, OT, compliance og forretningen")
@@ -40,10 +42,10 @@ responsibilities:
     # Source: REPORT p.22 (Bilag 2 and 3), p.17 (guides, workshops and teaching colleagues the new tools: Azure DevOps, ProjectFlow 365 and AI tools such as Copilot and ChatGPT), p.6 (documentation and onboarding material "ofte ved brug af AI"; no tools named there)
     - "Wrote a Power BI Super User Guide and a ProjectFlow 365 user and onboarding guide, ran workshops and taught colleagues the new tools (Azure DevOps, ProjectFlow 365 and AI tools such as Copilot and ChatGPT); documentation and onboarding material were often made with AI."
   da:
-    # Source: REPORT p.5 (Projektledelsessupport)
-    - "Fungerede som støtte til projektledelsen og stod selv for dele af udvalgte projekter, herunder OT Cyber Security og Choose Your Own Device."
-    # Source: REPORT p.6, p.15, p.17; CV-2 (Power BI-dashboards baseret på ProjectFlow-data)
-    - "Integrerede data fra ProjectFlow 365 i Power BI: udviklede datamodeller, opsatte API-forbindelser og byggede dashboards til ledelsesrapportering og porteføljeoverblik, som PMO og ledelsen benyttede."
+    # Source: REPORT p.5 (Projektledelsessupport); OWNER-PDF p.12 (CYOD)
+    - "Fungerede som støtte til projektledelsen og stod selv for dele af udvalgte projekter, herunder OT Cyber Security og Choose Your Own Device (CYOD)."
+    # Source: REPORT p.6, p.15, p.17; CV-2 (Power BI-dashboards baseret på ProjectFlow-data); OWNER-PDF p.12 (REST API-kald mod ProjectFlow 365)
+    - "Havde ansvaret for at integrere data fra ProjectFlow 365 i Power BI: opsatte REST API-forbindelser til ProjectFlow 365, udviklede datamodeller og byggede dashboards til ledelsesrapportering og porteføljeoverblik, som PMO og ledelsen benyttede."
     # Source: REPORT p.6 (Cybersikkerhedsprojekter)
     - "Bidrog til OT Cyber Security-projektet: planlagde workshops, udviklede use cases, udarbejdede stakeholderanalyser, fulgte op på compliance-krav og byggede dashboards til monitorering af sikkerhedsnøgletal."
     # Source: CV (newest, 2026-10-05)

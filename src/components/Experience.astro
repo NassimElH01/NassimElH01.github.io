@@ -1,10 +1,14 @@
 ---
+// Experience: work, then education, read from content/timeline. Each entry's heading is
+// an anchor (#timeline-<id>) that Skills links to. Unknown values are left out.
 import type { CollectionEntry } from "astro:content";
 import type { Lang } from "@/i18n/config";
 import type { UiKey } from "@/i18n/ui";
 import { pick, t } from "@/i18n/utils";
-import { getPublished } from "@/lib/content";
+import { getRenderedTimeline } from "@/lib/content";
 import { isTodo } from "@/lib/todo";
+import { formatPeriod } from "@/lib/dates";
+import { timelineAnchor } from "@/lib/anchors";
 
 interface Props {
   lang: Lang;
@@ -13,18 +17,17 @@ interface Props {
 const { lang } = Astro.props;
 const tr = t(lang);
 type Entry = CollectionEntry<"timeline">["data"];
-const entries = (await getPublished("timeline"))
-  .filter(({ data }) => !data.draft && !isTodo(data.kind))
-  .map(({ data }) => {
-    const title = pick(data.title, lang);
-    const summary = pick(data.summary, lang);
-    const responsibilities = (data.responsibilities[lang] ?? []).filter((item) => !isTodo(item));
-    const start = data.start && !isTodo(data.start) ? data.start : undefined;
-    const end = data.end === "present" ? tr("experience.current") : data.end && !isTodo(data.end) ? data.end : undefined;
-    const period = start && end ? `${start}–${end}` : (start ?? end);
-    return { data, title, summary, responsibilities, period };
-  })
-  .filter(({ title, summary }) => !title.isTodo && !summary.isTodo);
+const entries = (await getRenderedTimeline()).map(({ id, data }) => {
+  const title = pick(data.title, lang);
+  const summary = pick(data.summary, lang);
+  const responsibilities = (data.responsibilities[lang] ?? []).filter((item) => !isTodo(item));
+  const period = formatPeriod(data, lang, {
+    expectedLabel: tr("about.expected"),
+    presentLabel: tr("experience.current"),
+  });
+  const grades = (data.grades ?? []).map((item) => ({ label: pick(item.label, lang).value, grade: item.grade }));
+  return { anchor: timelineAnchor(id), data, title, summary, responsibilities, period, grades };
+});
 const kindLabel = (kind: Entry["kind"]) => tr(`experience.kind.${kind}` as UiKey);
 const education = entries.filter(({ data }) => data.kind === "education");
 const experience = entries.filter(({ data }) => data.kind !== "education");
@@ -39,9 +42,9 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
         <div class="mt-12 sm:mt-16">
           <h3 class="section-label">{tr("experience.workHeading")}</h3>
           <ol role="list" class="mt-4 border-b border-rule">
-            {experience.map(({ data, title, summary, responsibilities, period }) => (
+            {experience.map(({ anchor, data, title, summary, responsibilities, period }) => (
               <li class="timeline-row">
-                <article class="timeline-entry" aria-labelledby={`experience-${data.order}`}>
+                <article class="timeline-entry" aria-labelledby={anchor}>
                   <div class="timeline-meta">
                     {period && <p class="font-mono text-sm text-steel-text">{period}</p>}
                     <p class="mt-1 font-mono text-xs uppercase tracking-wide text-steel-text">
@@ -49,7 +52,7 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
                     </p>
                   </div>
                   <div>
-                    <h4 id={`experience-${data.order}`} class="font-display text-2xl leading-tight">
+                    <h4 id={anchor} tabindex="-1" class="font-display text-2xl leading-tight">
                       {title.value}
                     </h4>
                     <p class="mt-1 text-sm text-steel-text">{data.organization}</p>
@@ -57,7 +60,7 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
                     {responsibilities.length > 0 && (
                       <details class="responsibilities">
                         <summary>{tr("experience.details")}</summary>
-                        <ul role="list" class="mt-3 grid gap-2">
+                        <ul role="list" class="mt-3 grid grid-cols-[minmax(0,1fr)] gap-2">
                           {responsibilities.map((item) => (
                             <li class="max-w-3xl text-sm leading-relaxed text-steel-text">{item}</li>
                           ))}
@@ -78,27 +81,31 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
         <div class="mt-16 sm:mt-20">
           <h3 class="section-label">{tr("experience.educationHeading")}</h3>
           <ol role="list" class="mt-4 border-b border-rule">
-            {education.map(({ data, title, summary, responsibilities, period }) => (
+            {education.map(({ anchor, title, summary, responsibilities, period, grades, data }) => (
               <li class="timeline-row">
-                <article class="timeline-entry" aria-labelledby={`education-${data.order}`}>
+                <article class="timeline-entry" aria-labelledby={anchor}>
                   <div class="timeline-meta">
                     {period && <p class="font-mono text-sm text-steel-text">{period}</p>}
-                    {data.expected && (
-                      <p class="mt-1 font-mono text-xs uppercase tracking-wide text-steel-text">
-                        {tr("about.expected")}
-                      </p>
-                    )}
                   </div>
                   <div>
-                    <h4 id={`education-${data.order}`} class="font-display text-2xl leading-tight">
+                    <h4 id={anchor} tabindex="-1" class="font-display text-2xl leading-tight">
                       {title.value}
                     </h4>
                     <p class="mt-1 text-sm text-steel-text">{data.organization}</p>
                     <p class="mt-4 max-w-3xl text-base leading-relaxed [text-wrap:pretty]">{summary.value}</p>
+                    {grades.length > 0 && (
+                      <ul role="list" class="grades" aria-label={tr("experience.grades")}>
+                        {grades.map((item) => (
+                          <li>
+                            {item.label} <span class="grade">{item.grade}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     {responsibilities.length > 0 && (
                       <details class="responsibilities">
                         <summary>{tr("experience.details")}</summary>
-                        <ul role="list" class="mt-3 grid gap-2">
+                        <ul role="list" class="mt-3 grid grid-cols-[minmax(0,1fr)] gap-2">
                           {responsibilities.map((item) => (
                             <li class="max-w-3xl text-sm leading-relaxed text-steel-text">{item}</li>
                           ))}
@@ -117,6 +124,22 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
 </section>
 
 <style>
+  /* Grades: label in steel, the grade itself in mono ink, so the numbers scan. */
+  .grades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin-top: 0.75rem;
+    color: var(--steel-text);
+    font-size: 0.875rem;
+  }
+
+  .grade {
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+
   .section-label {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
@@ -130,7 +153,11 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
   }
 
   .timeline-entry {
+    position: relative;
     display: grid;
+    /* minmax(0, …): at very large text a long word wraps instead of widening the page. */
+    grid-template-columns: minmax(0, 1fr);
+    overflow-wrap: break-word;
     gap: 0.75rem;
     padding: 1.5rem 0;
   }
@@ -145,6 +172,48 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
 
   .responsibilities {
     margin-top: 1rem;
+  }
+
+  /* A link from Skills lands on an entry's heading. On phones the period sits above the
+     heading, so keep it in view. A 3px ink bar in the gutter marks the entry (see the same
+     cue in Projects.astro). */
+  .timeline-entry h4 {
+    scroll-margin-top: 3.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-entry h4 {
+      scroll-margin-top: 0;
+    }
+  }
+
+  .timeline-entry:has(h4:target)::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: -0.75rem;
+    width: 3px;
+    background: var(--ink);
+    transform-origin: top;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline-entry:has(h4:target)::before {
+      animation: landing 300ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+  }
+
+  @keyframes landing {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .timeline-entry:has(h4:target)::before {
+      forced-color-adjust: none;
+      background: Highlight;
+    }
   }
 
   .responsibilities summary {

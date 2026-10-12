@@ -5,8 +5,9 @@
 title:
   en: "Strength & Conditioning Tracking (SCT)"
   da: "Strength & Conditioning Tracking (SCT)"
-year: "TODO: year — owner to confirm (added to the old portfolio in 2026-10; build year unknown)"
-context: "TODO: confirm — personal (the schema now allows study, work, freelance or personal)"
+# Source: owner 2026-10-11, second round ("2026, personligt projekt").
+year: 2026
+context: "personal"
 problem:
   en: "TODO: which need or user problem motivated SCT — owner to confirm"
   da: "TODO: hvilket behov eller brugerproblem førte til SCT — ejer bekræfter"
@@ -33,5 +34,5 @@ linkLabel:
 # Order and featured: presentation only (Projects section, 2026-10-06): the three projects that
 # best show the student-job profile lead.
 featured: false
-order: 5
+order: 10
 ---

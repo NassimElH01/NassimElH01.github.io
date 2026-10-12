@@ -95,6 +95,8 @@ const certifications = defineCollection({
     year: orTodo(year),
     credentialUrl: orTodo(z.url({ protocol: /^https$/ })).optional(),
     credentialId: text.optional(),
+    // The assessment's own result, in its own terms (e.g. "Grade A, full score"); never converted.
+    result: localized.optional(),
     order: z.number().int(),
   }),
 });
@@ -118,6 +120,8 @@ const timeline = defineCollection({
       responsibilities: localizedList.default({ en: [], da: [] }),
       strengths: localizedList.optional(),
       tags: z.array(text).default([]),
+      // Exam results as the source states them, in the order to show them.
+      grades: z.array(z.object({ label: localized, grade: text })).optional(),
       showOnPrintCv: z.boolean().default(true),
       order: z.number().int(),
       draft: z.boolean().default(false),
@@ -200,8 +204,22 @@ const usage = z
     timeline: reference("timeline").optional(),
     project: reference("projects").optional(),
     note: localized.optional(),
+    // The note's qualifier (e.g. "Group project (not finished)"), shown next to the place
+    // when the note itself is not, so a claim never loses its qualifier. Selection only:
+    // it must be the verbatim start of the note (checked below), so it adds no new copy.
+    scope: localized.optional(),
   })
-  .refine((entry) => entry.timeline || entry.project || entry.note, "say where: timeline, project or note");
+  .refine((entry) => entry.timeline || entry.project || entry.note, "say where: timeline, project or note")
+  .superRefine((entry, ctx) => {
+    if (!entry.scope) return;
+    for (const lang of ["en", "da"] as const) {
+      const scope = entry.scope[lang];
+      const note = entry.note?.[lang];
+      if (isTodo(scope) ? !note || !isTodo(note) : !note?.startsWith(scope)) {
+        ctx.addIssue({ code: "custom", path: ["scope", lang], message: `"${scope}" is not the start of note.${lang}` });
+      }
+    }
+  });
 
 const skills = defineCollection({
   loader: glob({ base: "./content/skills", pattern: "[^_]*.yaml" }),
