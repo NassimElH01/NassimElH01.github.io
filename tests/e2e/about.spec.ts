@@ -15,7 +15,7 @@ const CASES = [
     offer: "In a student job, I'd bring structure, follow-up and data that people can act on.",
     role: "junior project manager and PMO intern",
     across: "I planned work in Azure DevOps, built Power BI dashboards that management used",
-    education: ["MSc in Digital Transformation", "Roskilde University (RUC) · Sep 2026 – expected Jun 2028", "Professional Bachelor's in Business Economics & IT"],
+    education: ["MSc in Digital Transformation", "Roskilde University (RUC)", "Sep 2026 – Jun 2028", "Professional Bachelor's in Business Economics & IT"],
     cv: "CV (Danish, PDF)",
     grades: ["Internship exam (PMO) 12", "Bachelor project (From Waterfall to Hybrid PMO) 10", "Overall exam result (grade average) 9,2"],
     ibm: "IBM Data Analytics · 2023 · Capstone: Grade A, full score",
@@ -31,7 +31,7 @@ const CASES = [
     offer: "I et studiejob kan jeg bidrage med struktur, opfølgning og data, der er til at handle på.",
     role: "junior projektleder og PMO-praktikant",
     across: "Jeg planlagde arbejdet i Azure DevOps, byggede Power BI-dashboards, som ledelsen brugte",
-    education: ["Cand.it. i Digital Transformation", "Roskilde University (RUC) · sep. 2026 – forventet jun. 2028", "Professionsbachelor i Økonomi & IT"],
+    education: ["Cand.it. i Digital Transformation", "Roskilde University (RUC)", "sep. 2026 – jun. 2028", "Professionsbachelor i Økonomi & IT"],
     cv: "Hent CV",
     grades: ["Praktikeksamen (PMO) 12", "Bachelorprojekt (Fra vandfald til hybrid PMO) 10", "Eksamensresultat (karaktergennemsnit) 9,2"],
     ibm: "IBM Data Analytics · 2023 · Afsluttende projekt: Grade A, fuld score",
@@ -71,19 +71,24 @@ for (const item of CASES) {
       await expect(actions.getByRole("link", { name: "LinkedIn" })).toHaveAttribute("href", /linkedin\.com\/in\//);
     });
 
-    test("lists education, certifications with years, and languages from content/", async ({ page }) => {
+    test("lists education with periods and grades in Experience", async ({ page }) => {
+      await page.goto(item.path);
+      const experience = page.locator("section#experience");
+      for (const text of item.education) await expect(experience).toContainText(text);
+      // Grades sit under their education, label then grade.
+      const grades = experience.locator(".grades li");
+      for (const grade of item.grades) await expect(grades.filter({ hasText: grade })).toHaveCount(1);
+    });
+
+    test("lists certifications with years, and languages from content/", async ({ page }) => {
       await page.goto(item.path);
       const about = page.locator("section#about");
-      for (const text of item.education) await expect(about).toContainText(text);
       const certifications = about.locator(".about-certs ul > li");
       await expect(certifications).toHaveCount(8);
       await expect(certifications.nth(0)).toHaveText("PRINCE2 Foundation · Mentorix · 2025");
       await expect(certifications.nth(2)).toHaveText("Agile Project Management · BlivProjektleder.dk · 2024 · ID A4291-172");
       // The issuer is not repeated when the name already starts with it.
       await expect(certifications.nth(3)).toHaveText(item.ibm);
-      // Grades sit under their education, label then grade.
-      const grades = about.locator(".about-edu .grades li");
-      for (const grade of item.grades) await expect(grades.filter({ hasText: grade })).toHaveCount(1);
       await expect(certifications.nth(5)).toHaveText(item.security);
       await expect(about.getByRole("link", { name: /LinkedIn$/ }).last()).toHaveAttribute(
         "href",

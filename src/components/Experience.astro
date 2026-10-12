@@ -1,0 +1,195 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { Lang } from "@/i18n/config";
+import type { UiKey } from "@/i18n/ui";
+import { pick, t } from "@/i18n/utils";
+import { getPublished } from "@/lib/content";
+import { isTodo } from "@/lib/todo";
+import { formatPeriod } from "@/lib/dates";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const tr = t(lang);
+type Entry = CollectionEntry<"timeline">["data"];
+const entries = (await getPublished("timeline"))
+  .filter(({ data }) => !data.draft && !isTodo(data.kind))
+  .map(({ data }) => {
+    const title = pick(data.title, lang);
+    const summary = pick(data.summary, lang);
+    const responsibilities = (data.responsibilities[lang] ?? []).filter((item) => !isTodo(item));
+    const period = formatPeriod(data, lang, { presentLabel: tr("experience.current") });
+    const grades = (data.grades ?? []).map((item) => ({ label: pick(item.label, lang).value, grade: item.grade }));
+    return { data, title, summary, responsibilities, period, grades };
+  })
+  .filter(({ title, summary }) => !title.isTodo && !summary.isTodo);
+const kindLabel = (kind: Entry["kind"]) => tr(`experience.kind.${kind}` as UiKey);
+const education = entries.filter(({ data }) => data.kind === "education");
+const experience = entries.filter(({ data }) => data.kind !== "education");
+---
+
+<section id="experience" aria-labelledby="experience-title" class="border-t border-rule py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <h2 id="experience-title" class="font-display text-4xl sm:text-5xl">{tr("section.experience")}</h2>
+
+    {
+      experience.length > 0 && (
+        <div class="mt-12 sm:mt-16">
+          <h3 class="section-label">{tr("experience.workHeading")}</h3>
+          <ol role="list" class="mt-4 border-b border-rule">
+            {experience.map(({ data, title, summary, responsibilities, period }) => (
+              <li class="timeline-row">
+                <article class="timeline-entry" aria-labelledby={`experience-${data.order}`}>
+                  <div class="timeline-meta">
+                    {period && <p class="font-mono text-sm text-steel-text">{period}</p>}
+                    <p class="mt-1 font-mono text-xs uppercase tracking-wide text-steel-text">
+                      {kindLabel(data.kind)}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 id={`experience-${data.order}`} class="font-display text-2xl leading-tight">
+                      {title.value}
+                    </h4>
+                    <p class="mt-1 text-sm text-steel-text">{data.organization}</p>
+                    <p class="mt-4 max-w-3xl text-base leading-relaxed [text-wrap:pretty]">{summary.value}</p>
+                    {responsibilities.length > 0 && (
+                      <details class="responsibilities">
+                        <summary>{tr("experience.details")}</summary>
+                        <ul role="list" class="mt-3 grid gap-2">
+                          {responsibilities.map((item) => (
+                            <li class="max-w-3xl text-sm leading-relaxed text-steel-text">{item}</li>
+                          ))}
+                        </ul>
+                      </details>
+                    )}
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )
+    }
+
+    {
+      education.length > 0 && (
+        <div class="mt-16 sm:mt-20">
+          <h3 class="section-label">{tr("experience.educationHeading")}</h3>
+          <ol role="list" class="mt-4 border-b border-rule">
+            {education.map(({ data, title, summary, responsibilities, period, grades }) => (
+              <li class="timeline-row">
+                <article class="timeline-entry" aria-labelledby={`education-${data.order}`}>
+                  <div class="timeline-meta">
+                    {period && <p class="font-mono text-sm text-steel-text">{period}</p>}
+                    {data.expected && (
+                      <p class="mt-1 font-mono text-xs uppercase tracking-wide text-steel-text">
+                        {tr("about.expected")}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <h4 id={`education-${data.order}`} class="font-display text-2xl leading-tight">
+                      {title.value}
+                    </h4>
+                    <p class="mt-1 text-sm text-steel-text">{data.organization}</p>
+                    <p class="mt-4 max-w-3xl text-base leading-relaxed [text-wrap:pretty]">{summary.value}</p>
+                    {grades.length > 0 && (
+                      <ul role="list" class="grades" aria-label={tr("about.grades")}>
+                        {grades.map((item) => (
+                          <li>
+                            {item.label} <span class="grade">{item.grade}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {responsibilities.length > 0 && (
+                      <details class="responsibilities">
+                        <summary>{tr("experience.details")}</summary>
+                        <ul role="list" class="mt-3 grid gap-2">
+                          {responsibilities.map((item) => (
+                            <li class="max-w-3xl text-sm leading-relaxed text-steel-text">{item}</li>
+                          ))}
+                        </ul>
+                      </details>
+                    )}
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  /* Grades: label in steel, the grade itself in mono ink, so the numbers scan. */
+  .grades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    margin-top: 0.75rem;
+    color: var(--steel-text);
+    font-size: 0.875rem;
+  }
+
+  .grade {
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .timeline-row {
+    border-top: 1px solid var(--rule);
+  }
+
+  .timeline-entry {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.5rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-entry {
+      grid-template-columns: minmax(8rem, 3fr) minmax(0, 9fr);
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+  }
+
+  .responsibilities {
+    margin-top: 1rem;
+  }
+
+  .responsibilities summary {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+
+  .responsibilities summary:hover {
+    text-decoration-color: var(--signal);
+  }
+
+  @media (forced-colors: active) {
+    .responsibilities summary {
+      outline-offset: 3px;
+    }
+  }
+</style>

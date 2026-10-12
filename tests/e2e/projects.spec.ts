@@ -141,6 +141,5 @@ test("list rows show year, context and tools on a phone, and screen readers get 
   expect(await row.locator("summary").ariaSnapshot()).toMatch(/S&S Rengøringsservice website ?, 2023–now ?, Work ?, HTML ?, CSS/);
   // aria-hidden dots must not glue the words together for screen readers.
   expect(await page.locator("article.featured .project-meta").first().ariaSnapshot()).toContain("2025 Internship");
-  expect(await page.locator("section#about .about-edu li").first().ariaSnapshot()).toMatch(/\(RUC\) Sep 2026/);
   await context.close();
 });
