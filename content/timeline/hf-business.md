@@ -27,6 +27,7 @@ summary:
 # Source: OWNER-PDF p.15, in the PDF's order. The PDF calls the subjects "Hovedfag";
 # they are listed as given, not as a complete list. Grades are on the Danish 7-point
 # scale (-3 to 12).
+# The owner checked these grades against his diplomas (owner 2026-10-11, second round).
 grades:
   # Source: OWNER-PDF p.15 ("Eksamensresultat på 9,2"); also p.1 ("(9,2)"). The
   # eksamensresultat is the diploma's grade average. `grade` is one plain string for

@@ -12,9 +12,11 @@ title:
 # 0128be1 and 0f707c3) and the title (the 2026 edition).
 year: 2026
 context: "freelance"
+# Source: owner 2026-10-11, second round ("en julekalender som jeg skulle udarbejdet og admin hvor man skrive [spørgsmål]
+# og lave den som en konkurrence til medarbejder som skulle [have] forskellige it [spørgsmål]").
 problem:
-  en: "TODO: what 24Support needed — owner to confirm"
-  da: "TODO: hvad 24Support havde brug for — ejer bekræfter"
+  en: "24Support wanted a Christmas calendar run as a competition for its employees, who answer a different IT question behind each door, and an admin tool where the questions are written."
+  da: "24Support ville have en julekalender som en konkurrence for medarbejderne, hvor de svarer på et nyt IT-spørgsmål bag hver låge, og et adminværktøj, hvor spørgsmålene skrives."
 # Source: the owner's answer (2026-10-06, quoted above) and OLD-SITE (projectsData.ts
 # "24support-julekalender": "en separat Node.js-server til datostyring og et loginbeskyttet
 # adminværktøj"). The question was about the server and the admin tool, so Claude and Copilot are
@@ -23,9 +25,11 @@ problem:
 role:
   en: "Nassim built the whole solution himself. He designed the calendar, and he programmed the server that controls when each door opens and the login-protected admin tool with Claude and Copilot, based on use cases he collected. He also set the site up on its own domain with HTTPS."
   da: "Nassim byggede hele løsningen selv. Han designede kalenderen og programmerede serveren, der styrer, hvornår hver låge åbner, og det loginbeskyttede adminværktøj med Claude og Copilot ud fra use cases, han selv indsamlede. Han satte også siden op på eget domæne med HTTPS."
+# Source: OLD-SITE highlights (design and doors) and owner 2026-10-11, second round ("en excel ark knyttet til
+# medarbejdernes email for det til at virke").
 method:
-  en: "Designed a responsive 16:9 experience with Danish townhouses, animation, snowfall and interactions, and built 24 interactive doors with keyboard support and saved demo progress. The public portfolio demo uses sample content only."
-  da: "Designede en responsiv 16:9-oplevelse med danske byhuse, animationer, snefald og interaktioner og udviklede 24 interaktive låger med tastaturbetjening og gemt demo-fremdrift. Den offentlige portfolio-demo bruger kun eksempelindhold."
+  en: "Designed a responsive 16:9 experience with Danish townhouses, animation, snowfall and interactions, and built 24 interactive doors with keyboard support and saved demo progress. An Excel sheet linked to the employees' email addresses makes the competition work. The public portfolio demo uses sample content only."
+  da: "Designede en responsiv 16:9-oplevelse med danske byhuse, animationer, snefald og interaktioner og udviklede 24 interaktive låger med tastaturbetjening og gemt demo-fremdrift. Et Excel-ark knyttet til medarbejdernes e-mailadresser får konkurrencen til at fungere. Den offentlige portfolio-demo bruger kun eksempelindhold."
 technology:
   - "HTML"
   - "CSS"
@@ -33,6 +37,8 @@ technology:
   # Source: OLD-SITE (Node.js server, see role) and the owner's answer (domain and HTTPS)
   - "Node.js"
   - "HTTPS"
+  # Source: owner 2026-10-11, second round (the Excel sheet tied to the employees' email addresses)
+  - "Excel"
 # Source: the title (the 2026 edition), the owner's answer (2026-10-06: domain and HTTPS set up) and
 # the demo in public/freelance/24support-julekalender/ (OLD-SITE: "Den offentlige portfolio-demo
 # bruger kun eksempelindhold"). No claim about 24Support's use or approval: no source gives one.

@@ -20,12 +20,11 @@ context: "study"
 problem:
   en: "In the Coop 365 case, manual routines, pay discrepancies and a lack of overview of employees' attendance and breaks put an unnecessary administrative burden on the store manager."
   da: "I Coop 365-casen gav manuelle arbejdsgange, uoverensstemmelser i lønnen og manglende overblik over medarbejdernes fremmøde og pauser en unødig administrativ byrde for butikschefen."
-# Source: owner 2026-10-11 (group project; his own part in the group is not known). The whole
-# value is a TODO, because a mixed string would show the TODO text in production; the known
-# part ("the group") is stated in method instead.
+# Source: owner 2026-10-11 (group project, 2nd semester) and owner 2026-10-11, second round ("jeg tog mig af wireframes
+# og prototypen").
 role:
-  en: "TODO: his own part in the group — owner to confirm (group project, 2nd semester, handed in 26 May 2023)"
-  da: "TODO: hans egen del i gruppen — ejer bekræfter (gruppeprojekt, 2. semester, afleveret 26. maj 2023)"
+  en: "Group project on the 2nd semester, where Nassim was responsible for the wireframes and the prototype."
+  da: "Gruppeprojekt på 2. semester, hvor Nassim stod for wireframes og prototypen."
 # Source: owner 2026-10-11 (group project); OWNER-PDF p.7 ("Use Case-diagrammer, domænemodeller,
 # sekvensdiagrammer (SSD) og klassediagrammer"; "Python med modulariseret OOP-struktur ... App,
 # Menu, LogIn og Ansat"; "relationel MySQL-database: Tabeller til medarbejderstamdata (ansat) og
@@ -35,18 +34,20 @@ role:
 # "Implementeringsplan forankret i Lewins forandringsteori for at sikre ejerskab blandt
 # medarbejderne før og under udrulning")
 method:
-  en: "The group modelled the system with use case diagrams, a domain model, system sequence diagrams and class diagrams, and built it in Python with a modular object-oriented structure (App, Menu, LogIn and Ansat). A MySQL database holds employee master data (the ansat table) and time registration (the Vagt table), linked with primary and foreign keys. The project also includes a cost-benefit analysis over five years with a 6% discount rate, based on estimated savings in administration and a better contribution margin from a higher service level, and an implementation plan based on Lewin's change theory to build ownership among the employees before and during the roll-out."
-  da: "Gruppen modellerede systemet med use case-diagrammer, en domænemodel, systemsekvensdiagrammer og klassediagrammer og byggede det i Python med en modulopdelt objektorienteret struktur (App, Menu, LogIn og Ansat). En MySQL-database rummer medarbejderstamdata (tabellen ansat) og tidsregistrering (tabellen Vagt), forbundet med primær- og fremmednøgler. Projektet omfatter også en cost-benefit-analyse over fem år med en diskonteringsrente på 6 %, baseret på estimerede besparelser i administrationen og et bedre dækningsbidrag via en højere servicegrad, og en implementeringsplan bygget på Lewins forandringsteori, så medarbejderne får ejerskab før og under udrulningen."
+  en: "The group modelled the system with use case diagrams, a domain model, system sequence diagrams and class diagrams. The design covers a Python program with a modular object-oriented structure (App, Menu, LogIn and Ansat) and a MySQL database with employee master data (the ansat table) and time registration (the Vagt table), linked with primary and foreign keys. The project also includes a cost-benefit analysis over five years with a 6% discount rate, based on estimated savings in administration and a better contribution margin from a higher service level, and an implementation plan based on Lewin's change theory to build ownership among the employees before and during the roll-out."
+  da: "Gruppen modellerede systemet med use case-diagrammer, en domænemodel, systemsekvensdiagrammer og klassediagrammer. Designet omfatter et Python-program med en modulopdelt objektorienteret struktur (App, Menu, LogIn og Ansat) og en MySQL-database med medarbejderstamdata (tabellen ansat) og tidsregistrering (tabellen Vagt), forbundet med primær- og fremmednøgler. Projektet omfatter også en cost-benefit-analyse over fem år med en diskonteringsrente på 6 %, baseret på estimerede besparelser i administrationen og et bedre dækningsbidrag via en højere servicegrad, og en implementeringsplan bygget på Lewins forandringsteori, så medarbejderne får ejerskab før og under udrulningen."
 # Source: OWNER-PDF p.7 (Python, MySQL; use case, sequence and class diagrams, which are UML
 # diagram types; the PDF does not use the word "UML")
 technology:
   - "Python"
   - "MySQL"
   - "UML"
-# Source: none. Neither the PDF nor the owner's answers give a grade or an outcome.
+# Source: owner 2026-10-11 (handed in 26 May 2023) and owner 2026-10-11, second round ("Der ikke lavet færdiggjort
+# projekt"): the system was not finished. "The design covers" in method, not "built", for the
+# same reason; the PDF's "Udviklet i Python" is not repeated as a finished build. No grade given.
 result:
-  en: "TODO: outcome or grade — owner to confirm"
-  da: "TODO: resultat eller karakter — ejer bekræfter"
+  en: "The group handed in the project on 26 May 2023 at the prototype stage; the system was not developed into a finished product."
+  da: "Gruppen afleverede projektet den 26. maj 2023 på prototypestadiet; systemet blev ikke udviklet til et færdigt produkt."
 # Source: owner 2026-10-11 (2nd semester; the Zealand PBA, 2022–2026 in CV-2)
 timeline: "zealand-professionsbachelor"
 # Order and featured: presentation only (Projects section, 2026-10-11, set by the lead's brief).

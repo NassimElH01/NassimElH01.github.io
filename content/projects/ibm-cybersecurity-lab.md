@@ -9,9 +9,9 @@
 # name and the names of the test sites in the PDF (p.10-11).
 # CONFLICT: the PDF says "Karakteren 12" (p.10 and p.16); the evaluation says "Grade: A", 50/50,
 # and the owner chose "Grade A, fuld score" (2026-10-11). The evaluation and the owner win.
-# CONFLICT (date): content/certifications.yaml dates IBM Cybersecurity October 2023 (LinkedIn);
-# this capstone was evaluated on 2 January 2024. Owner to confirm whether the capstone belongs to
-# that certificate or to a later "Professional Certificate" (PDF p.16).
+# content/certifications.yaml dates IBM Cybersecurity October 2023 (LinkedIn); this capstone was
+# evaluated on 2 January 2024. The owner confirmed on 2026-10-11 (second round) that the capstone
+# belongs to that certificate.
 # Left out, unconfirmed: SQL injection countermeasures. The PDF says they were "implemented"
 # (p.7) and "documented" (p.11), and the evaluation's task list does not mention them.
 # Source: owner 2026-10-11 (project title: "assess your proficiency in utilizing popular

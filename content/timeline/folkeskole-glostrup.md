@@ -15,7 +15,8 @@ title:
   da: "Folkeskolens afgangsprøve (9. klasse)"
 # Source: OWNER-PDF p.16 ("Glostrup Skole, Vestervang")
 organization: "Glostrup Skole, Vestervang"
-# Source: OWNER-PDF p.16 ("Afsluttet 2017"). Only the completion year is known, so the
+# Source: OWNER-PDF p.16 ("Afsluttet 2017"), confirmed by the owner's leaving certificate
+# (dated June 2017). Only the completion year is shown, so the
 # entry is dated as the exam itself: start and end are both 2017.
 start: "2017"
 end: "2017"
@@ -23,40 +24,10 @@ end: "2017"
 summary:
   en: "Completed lower secondary school (folkeskole) with the leaving examination in 2017."
   da: "Afsluttede folkeskolen med afgangsprøven i 2017."
-# Source: OWNER-PDF p.16, in the PDF's order. Grades are on the Danish 7-point scale
-# (-3 to 12).
-# TODO (owner): OWNER-PDF p.16 also says "samt karakteren 12 i begge skriftlige
-# eksamener" without naming the two exams. Both mathematics exams below are written and
-# graded 10, so the line cannot be placed without a guess. (The "12 i de skriftlige
-# eksamener" on p.1 is about the IBM certificates, not this school.) It is kept out of
-# `grades` because About shows every grade label as it is, so a "TODO:" label would
-# appear on the page; add the two exams here, each graded 12, once the owner names them.
-grades:
-  # Source: OWNER-PDF p.16 ("Matematik med hjælpemidler (10)")
-  - label:
-      en: "Mathematics, with aids"
-      da: "Matematik med hjælpemidler"
-    grade: "10"
-  # Source: OWNER-PDF p.16 ("Matematik uden hjælpemidler (10)")
-  - label:
-      en: "Mathematics, without aids"
-      da: "Matematik uden hjælpemidler"
-    grade: "10"
-  # Source: OWNER-PDF p.16 ("Fysik/Kemi/Biologi/Geografi (10)")
-  - label:
-      en: "Physics/chemistry/biology/geography"
-      da: "Fysik/kemi/biologi/geografi"
-    grade: "10"
-  # Source: OWNER-PDF p.16 ("Historie (10)")
-  - label:
-      en: "History"
-      da: "Historie"
-    grade: "10"
-  # Source: OWNER-PDF p.16 ("Engelsk mundtlig (12)")
-  - label:
-      en: "English, oral"
-      da: "Engelsk, mundtlig"
-    grade: "12"
+# No grades, by the owner's choice (owner 2026-10-11, second round). His leaving certificate (shared the same day;
+# not stored, as it carries personal data) showed that the PDF's folkeskole grades were wrong:
+# the PDF's 10s in mathematics are year marks, and the examination results differ. Only the
+# school and the year are shown.
 # Presentation choice, not a sourced fact: a lower secondary school exam is usually left
 # off a graduate's CV, so it stays on the site only. Owner: set true to print it.
 showOnPrintCv: false

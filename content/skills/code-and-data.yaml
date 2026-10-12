@@ -68,6 +68,19 @@ items:
       # Old projectsData tags (NassimElH01): "HTML", "CSS", "JavaScript".
       - context: freelance
         project: 24support-christmas-calendar
+      # Source: owner 2026-10-11, second round (JavaScript was taught in his bachelor programme)
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Taught in the programme"
+          da: "Undervist på uddannelsen"
+      # Source: owner 2026-10-11, second round ("p5.js"); p5.js sketches are JavaScript
+      # (legacy/posture-checker/index.html loads p5.js)
+      - context: personal
+        project: posture-checker
+        note:
+          en: "p5.js sketch"
+          da: "p5.js-skitse"
       # Old projectsData tags (NassimElH01): "HTML/CSS" only, no JavaScript.
       # Source: CV-2 (ERHVERVSERFARING, S&S Rengøringsservice | IT-support & Webdesigner:
       # "vedligeholdt virksomhedens hjemmeside")
@@ -112,16 +125,10 @@ items:
           en: "Node.js server that controls when each door opens, and a login-protected admin tool"
           da: "Node.js-server, der styrer, hvornår hver låge åbner, og et loginbeskyttet adminværktøj"
 
-  # [BEKRÆFT] in the brief: hidden until the owner confirms where it was used.
-  # The id is kept from the brief's "C#/Java" so nothing that refers to it breaks.
-  - id: c-sharp-java
-    # Source: OWNER-PDF p.2 (Kernekompetencer: "Objektorienteret Programmering (Python & Java)").
-    # The PDF names no C#. It ties Java to no project or course (Tjekkit, p.7, is in Python).
-    name:
-      en: "Java"
-      da: "Java"
-    confirm: true
-    usedIn: "TODO: where used — the Softwarekonstruktion course (which programme?) or another project; owner to confirm"
+  # The brief's "[BEKRÆFT] C#/Java/andet sprog" item is removed: the owner meant JavaScript
+  # (owner 2026-10-11, second round: "p5.js og også i min bachelor"; p5.js is JavaScript),
+  # which html-css-javascript above covers.
+
 
   # The next two items are NOT in the original brief. They were added from the EXAM
   # and REPORT evidence below; the owner may remove them.

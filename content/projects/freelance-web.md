@@ -12,8 +12,8 @@
 title:
   en: "Freelance web and IT work"
   da: "Freelance web- og IT-opgaver"
-# No source dates the freelance work.
-year: "TODO: years — owner to confirm"
+# Source: owner 2026-10-11, second round ("2023").
+year: 2023
 # Source: OWNER-PDF p.11 and owner 2026-10-11
 context: "freelance"
 # Source: OWNER-PDF p.11 ("webløsninger og landing pages til mindre virksomheder og klienter";

@@ -55,6 +55,7 @@ tags:
 # Source: OWNER-PDF p.14-15 (5. Uddannelse & Eksamensresultater), in the PDF's order;
 # owner 2026-10-11 (answer 1: higher-education grades may be shown). Grades are on
 # the Danish 7-point scale (-3 to 12).
+# The owner checked these grades against his diplomas (owner 2026-10-11, second round).
 grades:
   # Source: OWNER-PDF p.14 ("Praktikeksamen (Royal Unibrew PMO): 12"); also p.8. The label
   # leaves out the company: About shows these grades, and the owner asked on 2026-10-05 for
@@ -86,11 +87,12 @@ grades:
   # Course name per the EXAM-DTI cover ("Valgfags eksamen – Data og teknologi integration",
   # 5th semester), the earlier source and the name used in
   # content/projects/enhanced-security-synopsis.md. The PDF's "Teknologi- og
-  # Dataintegration" (also used in the synopsis' own text) is taken to be the same course.
-  # Owner: confirm.
+  # Dataintegration" (also used in the synopsis' own text) is the same course: the owner
+  # confirmed on 2026-10-11 (second round) that Enhanced Security is the topic he wrote his
+  # exam paper on in this elective, hence the topic in brackets.
   - label:
-      en: "Elective: Data and technology integration"
-      da: "Valgfag: Data- og teknologiintegration"
+      en: "Elective: Data and technology integration (Enhanced Security)"
+      da: "Valgfag: Data- og teknologiintegration (Enhanced Security)"
     grade: "10"
   # Source: OWNER-PDF p.15 ("Valgfag: Webudvikling & Personligt Salg: 7"); no other source
   - label:

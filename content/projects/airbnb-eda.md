@@ -20,7 +20,8 @@ title:
 # 2023 (content/certifications.yaml), but the IBM Cybersecurity capstone was evaluated on
 # 2 January 2024 although that certificate is also dated October 2023, so the certificate's
 # year does not reliably date the capstone.
-year: "TODO: year — owner to confirm (the IBM Data Analytics certificate on LinkedIn is dated October 2023)"
+# Source: owner 2026-10-11, second round ("2023").
+year: 2023
 # Source: OWNER-PDF p.16 (a capstone in an IBM professional certificate course, not the PBA).
 # "study" is the closest context in the enum.
 context: "study"
