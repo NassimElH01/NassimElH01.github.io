@@ -5,7 +5,9 @@
 // view on the right. The rest are a compact list that opens with <details>.
 // A CSS-only Business ⇄ Tech switch, drawn as a small copy of the hero's bridge
 // (radio buttons, :has() and the registered --split), picks problem, role and
-// result, or method and tools. Browsers without :has() show both views. No client JS.
+// result, or method and tools. Browsers without :has() show both views.
+// Every project has an anchor, #project-<id> (src/lib/anchors.ts), that Skills links to.
+// The only script is a tiny inline one that opens a list row when a link lands on it.
 // Unknown values ("TODO:") are left out; see ProjectViews.astro for the markers
 // that keep the deploy gate aware of them.
 import type { CollectionEntry } from "astro:content";
@@ -15,6 +17,7 @@ import { pick, t } from "@/i18n/utils";
 import { getPublished } from "@/lib/content";
 import { isTodo } from "@/lib/todo";
 import { formatPeriod } from "@/lib/dates";
+import { projectAnchor } from "@/lib/anchors";
 import LocalizedText from "@/components/LocalizedText.astro";
 import ProjectViews from "@/components/ProjectViews.astro";
 
@@ -94,7 +97,7 @@ const more = projects.filter((project) => !project.data.featured);
       {
         featured.map((project, index) => (
           <li>
-            <article class="featured" aria-labelledby={`project-${project.id}`}>
+            <article class="featured" aria-labelledby={projectAnchor(project.id)}>
               <header class="featured-head">
                 <p class="project-meta">
                   <span class="text-signal-text" aria-hidden="true">
@@ -108,7 +111,8 @@ const more = projects.filter((project) => !project.data.featured);
                   ))}
                 </p>
                 <h3
-                  id={`project-${project.id}`}
+                  id={projectAnchor(project.id)}
+                  tabindex="-1"
                   class="featured-title"
                   lang={project.title.isFallback ? project.title.lang : undefined}
                 >
@@ -163,9 +167,9 @@ const more = projects.filter((project) => !project.data.featured);
           <h3 class="project-label">{tr("projects.more")}</h3>
           <ul role="list" class="mt-4 border-b border-rule">
             {more.map((project) => (
-              <li class="border-t border-rule">
+              <li class="more-row border-t border-rule">
                 <details class="more">
-                  <summary>
+                  <summary id={projectAnchor(project.id)}>
                     {/* The dots are for the eye; screen readers get commas, so the parts of the
                         row's name stay apart ("…Machines, 2026, Personal, TypeScript, …"). */}
                     <LocalizedText field={project.data.title} lang={lang} class="more-title" />
@@ -227,6 +231,32 @@ const more = projects.filter((project) => !project.data.featured);
               </li>
             ))}
           </ul>
+          {/* Opens a closed row when a link, or the address, points at it, so the reader lands
+              on the open row. Inline and right after the rows, so it also handles a deep link
+              while the page is still loading. Without JS the row is reached, just closed. */}
+          <script is:inline>
+            (() => {
+              const reveal = (hash) => {
+                if (!hash || hash.length < 2) return;
+                let target;
+                try {
+                  target = document.getElementById(decodeURIComponent(hash.slice(1)));
+                } catch {
+                  return;
+                }
+                const details = target && target.closest("details");
+                if (details && !details.open) details.open = true;
+              };
+              // A click runs before the jump (and also covers a second click on the same link,
+              // which fires no hashchange).
+              document.addEventListener("click", (event) => {
+                const link = event.target instanceof Element && event.target.closest('a[href^="#"]');
+                if (link) reveal(link.hash);
+              });
+              addEventListener("hashchange", () => reveal(location.hash));
+              reveal(location.hash);
+            })();
+          </script>
         </div>
       )
     }
@@ -374,6 +404,7 @@ const more = projects.filter((project) => !project.data.featured);
 
   /* Featured: title, keyline, tools and demo on the left; the chosen view on the right. */
   .featured {
+    position: relative;
     display: grid;
     /* minmax(0, …): long Danish words wrap instead of widening the column. */
     grid-template-columns: minmax(0, 1fr);
@@ -391,6 +422,8 @@ const more = projects.filter((project) => !project.data.featured);
 
   .featured-title {
     margin-top: 0.75rem;
+    /* A link lands on the title; keep the "01 · year · context" line above it in view. */
+    scroll-margin-top: 2.5rem;
     font-family: var(--font-display);
     font-size: 1.875rem;
     line-height: 1.08;
@@ -555,6 +588,45 @@ const more = projects.filter((project) => !project.data.featured);
     padding: 0.25rem 0.625rem;
     font-family: var(--font-mono);
     font-size: 0.8125rem;
+  }
+
+  /* Landing cue: a link from Skills (or a deep link) lands on a project; a 3px ink bar in
+     the gutter marks it. Ink, not orange, so each entry keeps its single orange accent. It
+     is absolutely positioned, so it never takes part in the layout. */
+  .more-row {
+    position: relative;
+  }
+
+  .featured:has(.featured-title:target)::before,
+  .more-row:has(summary:target)::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: -0.75rem;
+    width: 3px;
+    background: var(--ink);
+    transform-origin: top;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .featured:has(.featured-title:target)::before,
+    .more-row:has(summary:target)::before {
+      animation: landing 300ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+  }
+
+  @keyframes landing {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .featured:has(.featured-title:target)::before,
+    .more-row:has(summary:target)::before {
+      forced-color-adjust: none;
+      background: Highlight;
+    }
   }
 
   /* More projects: title first, then year · context and the first three tools,

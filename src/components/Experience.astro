@@ -153,6 +153,7 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
   }
 
   .timeline-entry {
+    position: relative;
     display: grid;
     gap: 0.75rem;
     padding: 1.5rem 0;
@@ -168,6 +169,48 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
 
   .responsibilities {
     margin-top: 1rem;
+  }
+
+  /* A link from Skills lands on an entry's heading. On phones the period sits above the
+     heading, so keep it in view. A 3px ink bar in the gutter marks the entry (see the same
+     cue in Projects.astro). */
+  .timeline-entry h4 {
+    scroll-margin-top: 3.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-entry h4 {
+      scroll-margin-top: 0;
+    }
+  }
+
+  .timeline-entry:has(h4:target)::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: -0.75rem;
+    width: 3px;
+    background: var(--ink);
+    transform-origin: top;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .timeline-entry:has(h4:target)::before {
+      animation: landing 300ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+  }
+
+  @keyframes landing {
+    from {
+      transform: scaleY(0);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .timeline-entry:has(h4:target)::before {
+      forced-color-adjust: none;
+      background: Highlight;
+    }
   }
 
   .responsibilities summary {

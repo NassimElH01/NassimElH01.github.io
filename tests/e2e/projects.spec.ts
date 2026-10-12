@@ -122,6 +122,28 @@ test("the planned projects lead, and their links work", async ({ page }) => {
   expect((await page.request.get("/budget-skabelon.xlsx")).ok()).toBe(true);
 });
 
+test("every project has one anchor, and a link to a list row opens it", async ({ page }) => {
+  await page.goto("/");
+  const section = page.locator("section#projects");
+  for (const project of projects) await expect(section.locator(`#project-${project.id}`)).toHaveCount(1);
+  for (const project of featured) await expect(section.locator(`h3#project-${project.id}`)).toHaveAttribute("tabindex", "-1");
+
+  // A deep link (e.g. from the CV or Skills) opens the closed row and lands on it, marked by an ink bar.
+  const [first, second] = more;
+  await page.goto(`/#project-${first.id}`);
+  const row = (id: string) => page.locator(`details.more:has(> summary#project-${id})`);
+  await expect(row(first.id)).toHaveAttribute("open", "");
+  await expect(page.locator(`#project-${first.id}`)).toBeInViewport();
+  const cue = await page
+    .locator(`li.more-row:has(summary#project-${first.id})`)
+    .evaluate((li) => getComputedStyle(li, "::before").backgroundColor);
+  expect(cue).toBe("rgb(17, 17, 17)");
+
+  // A later jump within the page opens that row too.
+  await page.evaluate((id) => (location.hash = id), `project-${second.id}`);
+  await expect(row(second.id)).toHaveAttribute("open", "");
+});
+
 test("the hero links to the projects", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("section").first().getByRole("link", { name: "See projects" })).toHaveAttribute("href", "#projects");
