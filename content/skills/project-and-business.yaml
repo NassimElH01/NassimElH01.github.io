@@ -11,7 +11,9 @@
 group:
   en: "Projects & business"
   da: "Projekt & forretning"
-order: 3
+# Presentation only: first, for the roles his newest CV's headline names ("PMO |
+# Projektkoordinering | Business Analysis | Dataanalyse"). The owner may change it.
+order: 1
 items:
   - id: prince2
     name:
@@ -117,6 +119,9 @@ items:
         note:
           en: "Group project: cost-benefit analysis over five years with a 6% discount rate"
           da: "Gruppeprojekt: cost-benefit-analyse over fem år med en diskonteringsrente på 6 %"
+        scope:
+          en: "Group project"
+          da: "Gruppeprojekt"
 
   - id: supply-chain
     name:
@@ -148,3 +153,6 @@ items:
         note:
           en: "Group project: implementation plan based on Lewin's change theory, to build staff ownership before and during the roll-out"
           da: "Gruppeprojekt: implementeringsplan baseret på Lewins forandringsteori, der skal skabe ejerskab blandt medarbejderne før og under udrulningen"
+        scope:
+          en: "Group project"
+          da: "Gruppeprojekt"

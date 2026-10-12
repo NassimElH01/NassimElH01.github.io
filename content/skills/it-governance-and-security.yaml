@@ -20,7 +20,8 @@
 group:
   en: "IT governance & security"
   da: "IT-governance & sikkerhed"
-order: 5
+# Presentation only: 3rd (the owner may change the order; see project-and-business.yaml).
+order: 3
 items:
   - id: it-governance
     name:
@@ -41,15 +42,22 @@ items:
         note:
           en: "Focus area in the programme"
           da: "Fokusområde på uddannelsen"
+        scope:
+          en: "Focus area in the programme"
+          da: "Fokusområde på uddannelsen"
       # Source: CV-2 (Uddannelse, bachelorprojekt: "analyse af systemintegration,
       # dataejerskab og rolleafklaring") and BACHELOR p.14-15 (dataejerskab), p.29 (4.6),
       # p.36 (6.4.3 Data Stewardship) and p.37 (6.5 Systemintegration, 6.6 Rolleafklaring).
       # Conflicts with OLD-SITE, see the top comment.
+      # Second sentence. Source: BACHELOR p.35 (6.3 Hybrid governance-model: "Den foreslåede
+      # governance-model består af tre integrerede niveauer: beslutningsniveau,
+      # eksekveringsniveau og læringsniveau"). A proposal, tested as a prototype only (p.40),
+      # so the note says proposed.
       - context: study
         project: royal-unibrew-hybrid-pmo-bachelor-project
         note:
-          en: "Analysis of system integration, data ownership and role clarification"
-          da: "Analyse af systemintegration, dataejerskab og rolleafklaring"
+          en: "Analysis of system integration, data ownership and role clarification. Proposed a hybrid governance model on three levels: decision, execution and learning"
+          da: "Analyse af systemintegration, dataejerskab og rolleafklaring. Foreslog en hybrid governance-model på tre niveauer: beslutning, eksekvering og læring"
 
   - id: networks-and-computer-architecture
     name:

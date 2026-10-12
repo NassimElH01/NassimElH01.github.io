@@ -13,7 +13,9 @@
 group:
   en: "Code & data"
   da: "Kode & data"
-order: 1
+# Presentation only: 4th, after the groups closest to the roles his newest CV's headline names
+# ("PMO | Projektkoordinering | Business Analysis | Dataanalyse"). The owner may change it.
+order: 4
 items:
   - id: python
     name:
@@ -35,6 +37,9 @@ items:
         note:
           en: "Group project (not finished): object-oriented structure split into App, Menu, LogIn and Ansat"
           da: "Gruppeprojekt (ikke færdigt): objektorienteret struktur opdelt i App, Menu, LogIn og Ansat"
+        scope:
+          en: "Group project (not finished)"
+          da: "Gruppeprojekt (ikke færdigt)"
       # Source: OWNER-PDF p.9-10 (3. Udvalgte Projekter, Airbnb, "Metode & Eksekvering i Python":
       # loading with Pandas and NumPy, cleaning, lambda functions, Seaborn and Matplotlib)
       - context: study
@@ -60,6 +65,9 @@ items:
         note:
           en: "Group project (not finished): MySQL database design with tables for employee data and time registration, linked by primary and foreign keys"
           da: "Gruppeprojekt (ikke færdigt): MySQL-databasedesign med tabeller til medarbejderdata og tidsregistrering, forbundet med primær- og fremmednøgler"
+        scope:
+          en: "Group project (not finished)"
+          da: "Gruppeprojekt (ikke færdigt)"
 
   - id: html-css-javascript
     name:
@@ -75,6 +83,9 @@ items:
       - context: study
         timeline: zealand-professionsbachelor
         note:
+          en: "Taught in the programme"
+          da: "Undervist på uddannelsen"
+        scope:
           en: "Taught in the programme"
           da: "Undervist på uddannelsen"
       # Source: owner 2026-10-11, second round ("p5.js"); p5.js sketches are JavaScript

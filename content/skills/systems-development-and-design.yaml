@@ -8,7 +8,8 @@
 group:
   en: "Systems development & design"
   da: "Systemudvikling & design"
-order: 2
+# Presentation only: 5th (the owner may change the order; see project-and-business.yaml).
+order: 5
 items:
   - id: uml-system-modeling
     name:
@@ -22,6 +23,9 @@ items:
         note:
           en: "Focus area in the programme: systems development and IT architecture"
           da: "Fokusområde på uddannelsen: systemudvikling og IT-arkitektur"
+        scope:
+          en: "Focus area in the programme"
+          da: "Fokusområde på uddannelsen"
       # Source: OWNER-PDF p.7 (3. Udvalgte Projekter, Tjekkit, Systemdesign & Arkitektur:
       # "Use Case-diagrammer, domænemodeller, sekvensdiagrammer (SSD) og klassediagrammer");
       # owner 2026-10-11 (group project)
@@ -30,12 +34,24 @@ items:
         note:
           en: "Group project: use case diagrams, domain model, system sequence diagrams and class diagrams"
           da: "Gruppeprojekt: use case-diagrammer, domænemodel, systemsekvensdiagrammer og klassediagrammer"
+        scope:
+          en: "Group project"
+          da: "Gruppeprojekt"
 
   - id: requirements-specification
     name:
       en: "Requirements specification"
       da: "Kravspecifikation"
-    usedIn: "TODO: where used — study coursework or freelance? Owner to confirm"
+    usedIn:
+      # Source: REPORT PDF p.13 ("OT Cyber Security-projektet, hvor jeg selv bidrog til
+      # udarbejdelse af use cases og stakeholderanalyser"); p.6 lists "udvikling af use cases"
+      # among the project's tasks. Use cases are how the requirements were written down; no
+      # source names a requirements specification document as such.
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Contributed use cases to the OT Cyber Security project"
+          da: "Bidrog med use cases til OT Cyber Security-projektet"
 
   - id: ux-usability-testing
     name:
@@ -56,12 +72,27 @@ items:
         note:
           en: "Group project: Nassim made the wireframes and the prototype"
           da: "Gruppeprojekt: Nassim lavede wireframes og prototypen"
+        scope:
+          en: "Group project"
+          da: "Gruppeprojekt"
 
   - id: user-driven-design
     name:
       en: "User-driven design"
       da: "Brugerdrevet design"
-    usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
+    usedIn:
+      # Source: owner 2026-10-12. Asked whether he follows the RUC course "Designmetoder og
+      # Teknologier" (20 ECTS) now, and whether it may stand as evidence for e.g. user-driven
+      # design with the note that the course is in progress: "Ja, det stemmer". The course is
+      # named in his portfolio PDF (2026-10-12), p.1 and p.7. UX testing and HCI stay TODO.
+      - context: study
+        timeline: ruc-master-digital-transformation
+        note:
+          en: "Course in progress: “Designmetoder og Teknologier” (20 ECTS), autumn 2026"
+          da: "Igangværende kursus: “Designmetoder og Teknologier” (20 ECTS), efteråret 2026"
+        scope:
+          en: "Course in progress"
+          da: "Igangværende kursus"
 
   - id: hci
     name:

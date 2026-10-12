@@ -204,8 +204,22 @@ const usage = z
     timeline: reference("timeline").optional(),
     project: reference("projects").optional(),
     note: localized.optional(),
+    // The note's qualifier (e.g. "Group project (not finished)"), shown next to the place
+    // when the note itself is not, so a claim never loses its qualifier. Selection only:
+    // it must be the verbatim start of the note (checked below), so it adds no new copy.
+    scope: localized.optional(),
   })
-  .refine((entry) => entry.timeline || entry.project || entry.note, "say where: timeline, project or note");
+  .refine((entry) => entry.timeline || entry.project || entry.note, "say where: timeline, project or note")
+  .superRefine((entry, ctx) => {
+    if (!entry.scope) return;
+    for (const lang of ["en", "da"] as const) {
+      const scope = entry.scope[lang];
+      const note = entry.note?.[lang];
+      if (isTodo(scope) ? !note || !isTodo(note) : !note?.startsWith(scope)) {
+        ctx.addIssue({ code: "custom", path: ["scope", lang], message: `"${scope}" is not the start of note.${lang}` });
+      }
+    }
+  });
 
 const skills = defineCollection({
   loader: glob({ base: "./content/skills", pattern: "[^_]*.yaml" }),
