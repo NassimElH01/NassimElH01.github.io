@@ -49,15 +49,15 @@ items:
       # dataejerskab og rolleafklaring") and BACHELOR p.14-15 (dataejerskab), p.29 (4.6),
       # p.36 (6.4.3 Data Stewardship) and p.37 (6.5 Systemintegration, 6.6 Rolleafklaring).
       # Conflicts with OLD-SITE, see the top comment.
-      # Second sentence. Source: BACHELOR p.35 (6.3 Hybrid governance-model: "Den foreslåede
+      # Second part (after the semicolon). Source: BACHELOR p.35 (6.3 Hybrid governance-model: "Den foreslåede
       # governance-model består af tre integrerede niveauer: beslutningsniveau,
       # eksekveringsniveau og læringsniveau"). A proposal, tested as a prototype only (p.40),
       # so the note says proposed.
       - context: study
         project: royal-unibrew-hybrid-pmo-bachelor-project
         note:
-          en: "Analysis of system integration, data ownership and role clarification. Proposed a hybrid governance model on three levels: decision, execution and learning"
-          da: "Analyse af systemintegration, dataejerskab og rolleafklaring. Foreslog en hybrid governance-model på tre niveauer: beslutning, eksekvering og læring"
+          en: "Analysis of system integration, data ownership and role clarification; proposed a hybrid governance model on three levels: decision, execution and learning"
+          da: "Analyse af systemintegration, dataejerskab og rolleafklaring; foreslog en hybrid governance-model på tre niveauer: beslutning, eksekvering og læring"
 
   - id: networks-and-computer-architecture
     name:

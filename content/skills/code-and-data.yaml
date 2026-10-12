@@ -79,15 +79,16 @@ items:
       # Old projectsData tags (NassimElH01): "HTML", "CSS", "JavaScript".
       - context: freelance
         project: 24support-christmas-calendar
-      # Source: owner 2026-10-11, second round (JavaScript was taught in his bachelor programme)
+      # Source: owner 2026-10-11, second round (JavaScript was taught in his bachelor programme;
+      # no source says HTML or CSS was, so the note names JavaScript)
       - context: study
         timeline: zealand-professionsbachelor
         note:
-          en: "Taught in the programme"
-          da: "Undervist på uddannelsen"
+          en: "JavaScript taught in the programme"
+          da: "JavaScript undervist på uddannelsen"
         scope:
-          en: "Taught in the programme"
-          da: "Undervist på uddannelsen"
+          en: "JavaScript taught in the programme"
+          da: "JavaScript undervist på uddannelsen"
       # Source: owner 2026-10-11, second round ("p5.js"); p5.js sketches are JavaScript
       # (legacy/posture-checker/index.html loads p5.js)
       - context: personal
@@ -106,6 +107,10 @@ items:
         note:
           en: "HTML and CSS; maintenance of the company website"
           da: "HTML og CSS; vedligeholdelse af virksomhedens hjemmeside"
+        # The index shows this next to "HTML/CSS/JavaScript": no JavaScript at this job.
+        scope:
+          en: "HTML and CSS"
+          da: "HTML og CSS"
 
   - id: p5js
     name:

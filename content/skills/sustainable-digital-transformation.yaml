@@ -7,9 +7,10 @@
 # IT governance, digital leadership, systems engineering). A programme description is
 # not usage, and the PDF ties none of these items to a project, so nothing changes here.
 # 2026-10-12: the owner confirmed the RUC course "Digitale Transformationer og Bæredygtighed"
-# (10 ECTS, autumn 2026; named in his portfolio PDF of 2026-10-12, p.1 and p.7) and agreed that
-# it may stand as evidence, with the note that the course is in progress. It is cited for a
-# new item named after the course itself; the items below stay TODO.
+# (10 ECTS, autumn 2026; named in his portfolio PDF of 2026-10-12, p.7, under the first
+# semester's modules, E2026) and agreed that it may stand as evidence, with the note that the
+# course is in progress. It is cited for a new item named after the course itself;
+# digitalization-strategy, sustainable-business-models and sdgs-and-csr stay TODO.
 group:
   en: "Sustainable digital transformation"
   da: "Bæredygtig digital transformation"
@@ -26,9 +27,10 @@ items:
         note:
           en: "Focus area in the programme: IT architecture"
           da: "Fokusområde på uddannelsen: IT-arkitektur"
+        # The whole note: CV-2 names IT architecture, not enterprise architecture.
         scope:
-          en: "Focus area in the programme"
-          da: "Fokusområde på uddannelsen"
+          en: "Focus area in the programme: IT architecture"
+          da: "Fokusområde på uddannelsen: IT-arkitektur"
 
   - id: digital-transformation-and-sustainability
     name:

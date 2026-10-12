@@ -33,8 +33,8 @@ items:
       - context: internship
         project: royal-unibrew-projectflow-power-bi
         note:
-          en: "Built the data models, API connections and dashboards that were used for management reporting"
-          da: "Udviklede datamodeller, API-forbindelser og dashboards, der blev brugt til ledelsesrapportering"
+          en: "Built data models, set up API connections and created dashboards that were used for management reporting"
+          da: "Udviklede datamodeller, opsatte API-forbindelser og skabte dashboards, der blev brugt til ledelsesrapportering"
       # Source: BACHELOR p.32 (5.3, "Kvantitativ analyse – KPI'er fra Power BI-prototypen": lead
       # time, throughput, work in progress (WIP) and plan vs. faktisk, from ProjectFlow 365 and
       # Power BI data). The project does not say who built the prototype, so the note says analysed.

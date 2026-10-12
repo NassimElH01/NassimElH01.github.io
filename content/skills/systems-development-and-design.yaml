@@ -3,8 +3,10 @@
 # that is cited for UML and system modeling only. OWNER-PDF (the owner's 18-page text
 # pack, shared 2026-10-11; written with an AI assistant, so used for facts only; PDF
 # page numbers) adds the Tjekkit group project for UML and prototyping (owner 2026-10-11:
-# group project; his own part was the wireframes and the prototype, second round). No source
-# says where the other items were used, so their usedIn stays a TODO for the owner.
+# group project; his own part was the wireframes and the prototype, second round).
+# 2026-10-12: the owner confirmed the RUC course "Designmetoder og Teknologier" (20 ECTS, autumn
+# 2026) and agreed that it may stand as evidence for user-driven design, marked as in progress.
+# No source says where the other items were used, so their usedIn stays a TODO for the owner.
 group:
   en: "Systems development & design"
   da: "Systemudvikling & design"
@@ -23,9 +25,10 @@ items:
         note:
           en: "Focus area in the programme: systems development and IT architecture"
           da: "Fokusområde på uddannelsen: systemudvikling og IT-arkitektur"
+        # The whole note: CV-2 names systems development, not UML.
         scope:
-          en: "Focus area in the programme"
-          da: "Fokusområde på uddannelsen"
+          en: "Focus area in the programme: systems development and IT architecture"
+          da: "Fokusområde på uddannelsen: systemudvikling og IT-arkitektur"
       # Source: OWNER-PDF p.7 (3. Udvalgte Projekter, Tjekkit, Systemdesign & Arkitektur:
       # "Use Case-diagrammer, domænemodeller, sekvensdiagrammer (SSD) og klassediagrammer");
       # owner 2026-10-11 (group project)
@@ -42,16 +45,13 @@ items:
     name:
       en: "Requirements specification"
       da: "Kravspecifikation"
-    usedIn:
-      # Source: REPORT PDF p.13 ("OT Cyber Security-projektet, hvor jeg selv bidrog til
-      # udarbejdelse af use cases og stakeholderanalyser"); p.6 lists "udvikling af use cases"
-      # among the project's tasks. Use cases are how the requirements were written down; no
-      # source names a requirements specification document as such.
-      - context: internship
-        timeline: royal-unibrew-pmo
-        note:
-          en: "Contributed use cases to the OT Cyber Security project"
-          da: "Bidrog med use cases til OT Cyber Security-projektet"
+    # Open lead, not evidence: REPORT PDF p.13 ("hvor jeg selv bidrog til udarbejdelse af use
+    # cases og stakeholderanalyser", OT Cyber Security) and p.6 ("udvikling af use cases") do not
+    # say what the use cases described or that they specified requirements; the owner's
+    # 24Support answer (2026-10-06, "indsamle use case") does not either. If the owner confirms
+    # the internship, cite his answer, with the note "Contributed use cases to the OT Cyber
+    # Security project" and the scope "Contributed use cases" (da "Bidrog med use cases").
+    usedIn: "TODO: where used — the OT Cyber Security use cases at Royal Unibrew (REPORT PDF p.13), 24Support's use cases, a course? Owner to confirm"
 
   - id: ux-usability-testing
     name:
@@ -84,7 +84,7 @@ items:
       # Source: owner 2026-10-12. Asked whether he follows the RUC course "Designmetoder og
       # Teknologier" (20 ECTS) now, and whether it may stand as evidence for e.g. user-driven
       # design with the note that the course is in progress: "Ja, det stemmer". The course is
-      # named in his portfolio PDF (2026-10-12), p.1 and p.7. UX testing and HCI stay TODO.
+      # named in his portfolio PDF (2026-10-12), p.5 and p.7. UX testing and HCI stay TODO.
       - context: study
         timeline: ruc-master-digital-transformation
         note:

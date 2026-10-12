@@ -67,8 +67,9 @@
       da: ["Azure DevOps", "Power BI"]
   # Source: the owner's goal (2026-10-05: "mening med den er [at] lande et studiejob") and the RUC MSc.
   # Replaces the old site's unconfirmed "student jobs, part-time roles, or freelance work".
-  # Hours: owner 2026-10-12 (asked whether "15–20 timer om ugen", from his text pack, may be shown:
-  # "Ja, 15–20 timer"); the approved line is otherwise unchanged.
+  # Hours: the owner's portfolio PDF of 2026-10-12, p.8 ("Åben for studierelevant job (15–20 timer
+  # ugentligt)"; AI-written, facts only); owner 2026-10-12, asked whether it may be shown:
+  # "Ja, 15–20 timer". The approved line is otherwise unchanged.
   availability:
     en: "I'm looking for a student job (15–20 hours a week) alongside my MSc at RUC. Let's talk."
     da: "Jeg søger studiejob (15–20 timer om ugen) ved siden af kandidaten på RUC. Lad os tage en snak."
