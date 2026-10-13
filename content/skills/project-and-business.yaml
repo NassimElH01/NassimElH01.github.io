@@ -28,8 +28,9 @@ items:
       - context: internship
         timeline: royal-unibrew-pmo
         note:
-          en: "Applied PRINCE2 phase division and risk management to the OT Cyber Security project plan"
-          da: "Anvendte PRINCE2's faseopdeling og risikostyring i projektplanen for OT Cyber Security-projektet"
+          en: "Applied PRINCE2 phase division and risk management to a project plan and the task allocation in Azure DevOps"
+          da: "Anvendte PRINCE2's faseopdeling og risikostyring i en projektplan og opgavefordelingen i Azure DevOps"
+        # Phase C review 2026-10-13: not tied to the OT project (rule 3: the OT role as <facts> word it); the owner decides (rule 7).
       # Source: OWNER-PDF p.8 (Hybrid PMO: PRINCE2 Agile among the theoretical frameworks) and
       # p.5 (PRINCE2 & Hybrid Governance: classic governance at decision level, agile iterations at
       # execution level); BACHELOR p.34 (6.1: the solution design builds on "PRINCE2's governance-
@@ -87,8 +88,9 @@ items:
       - context: internship
         timeline: royal-unibrew-pmo
         note:
-          en: "Stakeholder analyses and PRINCE2 risk management for the OT Cyber Security project"
-          da: "Stakeholderanalyser og PRINCE2-risikostyring til OT Cyber Security-projektet"
+          en: "Stakeholder analyses for the OT Cyber Security project; PRINCE2 risk management in a project plan"
+          da: "Stakeholderanalyser til OT Cyber Security-projektet; PRINCE2-risikostyring i en projektplan"
+        # Phase C review 2026-10-13: stakeholder work is in the <facts> OT role; risk management is not tied to it (rule 3).
 
   - id: communication-plans
     name:

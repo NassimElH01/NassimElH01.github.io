@@ -27,11 +27,13 @@ responsibilities:
   en:
     # Source: REPORT p.5 (Projektledelsessupport); OWNER-PDF p.12 (the abbreviation CYOD)
     - "Supported project management and led parts of selected projects myself, including Choose Your Own Device."
-    # Phase C review 2026-10-13: REPORT p.4 also names OT Cyber Security here ("selv stået for dele af"), but
+    # Phase C review 2026-10-13: REPORT p.5 also names OT Cyber Security here ("selv stået for dele af"), but
     # <facts> and rule 3 describe the OT role as support only; the owner decides (rule 7).
-    # Source: REPORT p.5 (PRINCE2 phase division and risk management in the OT project plan and the
-    # task breakdown in DevOps) and p.13 (Foundation and Practitioner via Mentorix during the internship)
-    - "Completed PRINCE2 Foundation and Practitioner during the internship and used PRINCE2's phase division and risk management principles to structure the OT Cyber Security project plan and the task breakdown in Azure DevOps."
+    # Source: REPORT p.8 (PRINCE2 phase division and risk management "til både at strukturere
+    # dokumentationen og opgavefordelingen i DevOps", there for the OT project plan) and p.13
+    # (Foundation and Practitioner via Mentorix during the internship). Not tied to the OT project
+    # here: <facts> words the OT role without a project plan (rule 3); the owner decides (rule 7).
+    - "Completed PRINCE2 Foundation and Practitioner during the internship and used PRINCE2's phase division and risk management principles to structure a project plan and the task allocation in Azure DevOps."
     # Source: REPORT p.6 ("ansvar for at integrere data fra ProjectFlow 365 i Power BI"), p.15 ("udviklet datamodeller, opsat API-forbindelser og skabt dashboards"), p.17 (used by PMO and management); CV-2 (Power BI dashboards on ProjectFlow data). "REST" is left out: only the AI-written OWNER-PDF says it (CLAUDE.md, rule 1).
     - "Was responsible for integrating ProjectFlow 365 data into Power BI: set up API connections to ProjectFlow 365, built data models and developed dashboards for management reporting and portfolio overview, used by the PMO and management."
     # Source: CLAUDE.md <facts> (OT Cyber Security: the role as the owner describes it; rule 3: nothing
@@ -52,8 +54,8 @@ responsibilities:
   da:
     # Source: REPORT p.5 (Projektledelsessupport); OWNER-PDF p.12 (CYOD)
     - "Fungerede som støtte til projektledelsen og stod selv for dele af udvalgte projekter, herunder Choose Your Own Device."
-    # Source: REPORT p.5 and p.13 (see the English bullet)
-    - "Gennemførte PRINCE2 Foundation og Practitioner under praktikken og brugte PRINCE2's faseopdeling og risikostyringsprincipper til at strukturere projektplanen for OT Cyber Security og opgavefordelingen i Azure DevOps."
+    # Source: REPORT p.8 and p.13 (see the English bullet)
+    - "Gennemførte PRINCE2 Foundation og Practitioner under praktikken og brugte PRINCE2's faseopdeling og risikostyringsprincipper til at strukturere en projektplan og opgavefordelingen i Azure DevOps."
     # Source: REPORT p.6, p.15, p.17; CV-2 (Power BI-dashboards baseret på ProjectFlow-data); no "REST" (see the English bullet)
     - "Havde ansvaret for at integrere data fra ProjectFlow 365 i Power BI: opsatte API-forbindelser til ProjectFlow 365, udviklede datamodeller og byggede dashboards til ledelsesrapportering og porteføljeoverblik, som PMO og ledelsen benyttede."
     # Source: CLAUDE.md <facts> (see the English bullet)
