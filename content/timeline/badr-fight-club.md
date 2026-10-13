@@ -17,8 +17,8 @@ kind: "volunteer"
 # Source: OLD-SITE legacy cvData.ts ("Træner / Servicedesk-medarbejder") and the owner's commit
 # 1bdba07 (volunteer). Claim audit 2026-10-12 (CLAUDE.md, rule 1): "boxing" was OWNER-PDF only.
 title:
-  en: "Volunteer coach & service desk"
-  da: "Frivillig træner & service desk"
+  en: "Volunteer coach & service desk staff"
+  da: "Frivillig træner & servicedeskmedarbejder"
 organization: "Badr Fight Club"
 # Claim audit 2026-10-12 (CLAUDE.md, rule 1): undated again: only OWNER-PDF p.13 dated it ("2023 – Nu"); the old site lists it
 # without dates.
@@ -33,14 +33,14 @@ responsibilities:
     # Source: legacy cvData.ts ("Planlagde og gennemførte træning")
     - "Plan and run training."
     # Source: legacy cvData.ts ("Sikrede service desk-support, besvarede spørgsmål og hjalp med praktiske klubopgaver")
-    - "Handle the front desk and help with questions and practical club tasks."
+    - "Provide service desk support and help with questions and practical club tasks."
     # Source: legacy cvData.ts
     - "Contribute to a safe, positive and structured environment for members and activities."
   da:
     # Source: legacy cvData.ts
     - "Planlægger og afvikler træning."
     # Source: legacy cvData.ts
-    - "Står for skrankebetjening og hjælper med spørgsmål og praktiske klubopgaver."
+    - "Yder service desk-support og hjælper med spørgsmål og praktiske klubopgaver."
     # Source: legacy cvData.ts
     - "Bidrager til et trygt, positivt og struktureret miljø for medlemmer og aktiviteter."
 strengths:

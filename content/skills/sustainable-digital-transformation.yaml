@@ -67,6 +67,12 @@ items:
           da: "4. semester"
       - context: study
         timeline: ruc-master-digital-transformation
+        note:
+          en: "Programme in progress"
+          da: "Igangværende uddannelse"
+        scope:
+          en: "Programme in progress"
+          da: "Igangværende uddannelse"
 
   - id: sustainable-business-models
     name:
@@ -75,7 +81,7 @@ items:
     # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "Boozt, RUC DTB" (the course "Digitale Transformationer og
     # Bæredygtighed"); the text verbatim (Danish).
     gloss:
-      en: "Sustainability as added value in a business model; ESG fields in the domain model and the process"
+      en: "Sustainability as added value in a business model; ESG fields in a domain model and a process"
       da: "Bæredygtighed som merværdi i en forretningsmodel, ESG-felter i domænemodel og proces"
     usedIn:
       - context: study

@@ -12,8 +12,9 @@
 # No `repo`: the old githubUrl pointed at the bare GitHub profile.
 # Source: OLD-SITE (projectsData.ts "budget-model", title, line 220)
 title:
-  en: "Financial Budget Model"
-  da: "Finansiel budgetmodel"
+  en: "Personal budget template"
+  da: "Budgetskabelon til privatøkonomi"
+# Phase C review 2026-10-13: named for what the linked workbook is (a template; no formulas).
 # Claim audit 2026-10-12 (CLAUDE.md, rule 1): the linked workbook (public/budget-skabelon.xlsx) is a budget template with no
 # liquidity or cash-flow part, so the old site's "& Likviditetsmodel" is left out.
 # Source: the owner's answer (2026-10-05: 2026). The template's sheet is named "Privatøkonomi 2025".
@@ -25,8 +26,8 @@ problem:
   da: "TODO: hvilket behov modellen blev lavet til — ejer bekræfter"
 # Source: the owner's answers (2026-10-04: his work; 2026-10-05: personal)
 role:
-  en: "My own personal project."
-  da: "Mit eget personlige projekt."
+  en: "My own project."
+  da: "Mit eget projekt."
 # Source: OLD-SITE (projectsData.ts "budget-model", description, line 223: "udviklet i Microsoft
 # Excel", "månedlig opfølgning", "privatøkonomi") and the linked file public/budget-skabelon.xlsx
 # (columns Kategori, Type, Budget, Faktisk, Difference; rows Lønudbetaling, Husleje & Forbrug,

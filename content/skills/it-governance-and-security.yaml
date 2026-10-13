@@ -105,6 +105,11 @@ items:
       - ibm-cybersecurity
       - pwc-security-awareness
       - pwc-hackschool
+    # Phase C review 2026-10-13: the index gloss, made only from the notes below (no new fact), so the line under
+    # "Cybersecurity" names security work; the internship note keeps the <facts> OT wording.
+    gloss:
+      en: "Traffic analysis, password cracking, SQL injection and ZAP scans in an IBM capstone; an elective exam paper on encryption, access control and GDPR"
+      da: "Trafikanalyse, password-cracking, SQL-injection og ZAP-scanninger i en IBM-capstone; en valgfagssynopsis om kryptering, adgangskontrol og GDPR"
     usedIn:
       # Source: CLAUDE.md <facts> (the OT Cyber Security role, worded as the owner describes it;
       # rule 3: no sites, vendors, tools or network work); REPORT p.6 and p.13 agree.

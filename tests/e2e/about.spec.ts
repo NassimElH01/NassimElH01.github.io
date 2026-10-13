@@ -17,7 +17,8 @@ const CASES = [
     across: "I planned work in Azure DevOps, built Power BI dashboards that management used",
     lists: ["Courses & certifications", "Languages"],
     cv: "CV (Danish, PDF)",
-    ibm: "IBM Data Analytics · 2023 · Completed, including the final capstone project",
+    ibm: "IBM Data Analytics · 2023 · Completed, including the capstone project",
+    agile: "Certification in Agile Project Management · BlivProjektleder.dk · 2024 · ID A4291-172",
     security: "PwC Security Awareness: Cybersecurity Practitioner · 2024",
     languages: ["Danish", "Native", "German", "Intermediate"],
     portrait: "Portrait of Nassim Hassani",
@@ -33,6 +34,7 @@ const CASES = [
     lists: ["Kurser & certificeringer", "Sprog"],
     cv: "Hent CV",
     ibm: "IBM Data Analytics · 2023 · Gennemført, inkl. afsluttende capstone-projekt",
+    agile: "Certificering i Agil Projektledelse · BlivProjektleder.dk · 2024 · ID A4291-172",
     security: "PwC Security Awareness: Praktiserende i cybersikkerhed · 2024",
     languages: ["Dansk", "Modersmål", "Tysk", "Øvet"],
     portrait: "Portræt af Nassim Hassani",
@@ -77,7 +79,7 @@ for (const item of CASES) {
       const certifications = about.locator(".about-certs ul > li");
       await expect(certifications).toHaveCount(8);
       await expect(certifications.nth(0)).toHaveText("PRINCE2 Foundation · Mentorix · 2025");
-      await expect(certifications.nth(2)).toHaveText("Agile Project Management · BlivProjektleder.dk · 2024 · ID A4291-172");
+      await expect(certifications.nth(2)).toHaveText(item.agile);
       // The issuer is not repeated when the name already starts with it.
       await expect(certifications.nth(3)).toHaveText(item.ibm);
       await expect(certifications.nth(5)).toHaveText(item.security);

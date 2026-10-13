@@ -104,7 +104,7 @@ const experience = entries.filter(({ data }) => data.kind !== "education");
                     )}
                     {responsibilities.length > 0 && (
                       <details class="responsibilities">
-                        <summary>{tr("experience.details")}</summary>
+                        <summary>{tr("experience.focus")}</summary>
                         <ul role="list" class="mt-3 grid grid-cols-[minmax(0,1fr)] gap-2">
                           {responsibilities.map((item) => (
                             <li class="max-w-3xl text-sm leading-relaxed text-steel-text">{item}</li>

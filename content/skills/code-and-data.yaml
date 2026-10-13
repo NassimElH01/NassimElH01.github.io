@@ -44,8 +44,9 @@ items:
 
   - id: sql-relational-databases
     name:
-      en: "SQL and relational databases (normalization, data modeling)"
-      da: "SQL og relationelle databaser (normalisering, datamodellering)"
+      en: "SQL and relational databases"
+      da: "SQL og relationelle databaser"
+    # Phase C review 2026-10-13: the qualifier "(normalization, data modeling)" rested on OWNER-PDF p.2 only.
     # OWNER-PDF p.2 (Kernekompetencer, Relationelle Databaser & SQL) also names E/R modelling,
     # normalisation (1NF-3NF) and DDL/DML in MySQL, and p.16 lists SQL under the IBM Data Analyst
     # certificate, but neither ties them to a project, so only Tjekkit is cited.
@@ -123,8 +124,8 @@ items:
       - context: study
         project: p5js-face-tracking
         note:
-          en: "Course project: live webcam face tracking and real-time emotion classification that trigger graphic overlays"
-          da: "Kursusprojekt: live webcam med face tracking og real-time emotion classification, der udløser grafiske overlays"
+          en: "Course project: live webcam face tracking and real-time emotion classification that triggers graphic overlays when a threshold is exceeded"
+          da: "Kursusprojekt: live webcam med face tracking og real-time emotion classification, der udløser grafiske overlays, når en tærskel overskrides"
         scope:
           en: "Course project"
           da: "Kursusprojekt"
@@ -213,8 +214,9 @@ items:
     # Source: the new CV ("Dataanalyse"), CV-2 (Zealand "Business intelligence og dataanalyse") and
     # REPORT p.6 (datavisualisering). Claim audit 2026-10-12 (CLAUDE.md, rule 1): the four Python libraries were OWNER-PDF only.
     name:
-      en: "Data analysis and visualization"
-      da: "Dataanalyse og visualisering"
+      en: "Data analysis"
+      da: "Dataanalyse"
+    # Phase C review 2026-10-13: nothing on the page shows visualization, so the name says data analysis only.
     # Source: LinkedIn and the new CV (Certificeringer: "IBM Data Analytics", a data analytics
     # programme); owner 2026-10-11 (the Airbnb analysis is the "IBM Data Analyst" capstone).
     # CONFLICT (name): OWNER-PDF p.16 calls it "IBM Data Analyst Professional Certificate";
@@ -225,7 +227,4 @@ items:
       # Source: owner 2026-10-11 ("IBM Data Analyst capstone (the Airbnb analysis)")
       - context: study
         project: airbnb-eda
-        note:
-          en: "IBM capstone: Airbnb data analysis"
-          da: "IBM-capstone: Airbnb-dataanalyse"
         # Claim audit 2026-10-12 (CLAUDE.md, rule 1): the owner's own words; New York, the cleaning and the price comparison were OWNER-PDF only.

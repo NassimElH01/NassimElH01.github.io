@@ -21,7 +21,7 @@ end: "2026"
 # in the present tense to match CV-CBS profile ("Jeg arbejder i dag med IT-support
 # på Zealand") and the present-tense bullets below.
 summary:
-  en: "I deliver user support, digital systems operations, and documentation support across Microsoft 365 and administrative IT processes."
+  en: "I provide user support, run digital systems and help with documentation across Microsoft 365 and administrative IT processes."
   da: "Jeg leverer brugersupport, drift af digitale systemer og dokumentationssupport på tværs af Microsoft 365 og administrative IT-processer."
 responsibilities:
   en:

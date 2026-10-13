@@ -26,8 +26,8 @@ problem:
 # Source: the owner's answers (2026-10-04: his work; 2026-10-05: personal) and
 # legacy/ascensioncards/README.md (line 3: "This project was built with Lovable").
 role:
-  en: "My own personal project, built with the AI app builder Lovable."
-  da: "Mit eget personlige projekt, bygget med AI-appbyggeren Lovable."
+  en: "My own project, built with the AI app builder Lovable."
+  da: "Mit eget projekt, bygget med AI-appbyggeren Lovable."
 # Source: OLD-SITE (projectsData.ts "ascension-cards": description and highlights, lines 168-173;
 # "flight-world-3d": description and highlights, lines 205-209; screen and component names from
 # the file names in legacy/vite-spa/src/components/ascension/screens/ and ascension3d/).

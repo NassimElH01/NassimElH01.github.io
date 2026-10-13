@@ -19,15 +19,15 @@ context: "freelance"
 # Source: CLAUDE.md <facts> (landing pages and responsive websites, hosted)
 problem:
   en: "Clients need a landing page or a responsive website that is set up, hosted and easy to find."
-  da: "Kunder har brug for en landing page eller en responsiv hjemmeside, der er sat op, hostet og til at finde."
+  da: "Kunder har brug for en landing page eller en responsiv hjemmeside, der er sat op, hostet og nem at finde."
 # Source: CLAUDE.md <facts> (freelance work)
 role:
   en: "Freelancer, alongside my studies and jobs."
   da: "Freelancer ved siden af studier og job."
 # Source: CLAUDE.md <facts> (owner 2026-10-12)
 method:
-  en: "I build landing pages and responsive websites in WordPress, HTML and CSS, including setting up hosting and basic SEO. Examples: the 24Support Christmas calendar and the S&S Rengøringsservice website, which I maintain in my job there."
-  da: "Jeg bygger landing pages og responsive hjemmesider i WordPress, HTML og CSS, inklusive opsætning af hosting og basal SEO. Eksempler: 24Supports julekalender og S&S Rengøringsservices hjemmeside, som jeg vedligeholder i mit job dér."
+  en: "I build landing pages and responsive websites in WordPress, HTML and CSS, including setting up hosting and basic SEO. Examples: the 24Support Christmas calendar and the S&S Rengøringsservice website, which I maintain as part of my job at the company."
+  da: "Jeg bygger landing pages og responsive hjemmesider i WordPress, HTML og CSS, inklusive opsætning af hosting og basal SEO. Eksempler: 24Supports julekalender og S&S Rengøringsservices hjemmeside, som jeg vedligeholder som en del af mit job i virksomheden."
 # Source: CLAUDE.md <facts> (WordPress, HTML and CSS)
 technology:
   - "WordPress"

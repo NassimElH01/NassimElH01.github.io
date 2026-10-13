@@ -37,8 +37,8 @@ problem:
 # Professional Certificate" is not used; CLAUDE.md, the CVs and LinkedIn say "IBM Data Analytics"
 # (see the conflict note above).
 role:
-  en: "Capstone project: the final project of IBM's data analytics certificate course."
-  da: "Capstone-projekt: det afsluttende projekt i IBM's certificeringsforløb i dataanalyse."
+  en: "Capstone project in the IBM Data Analytics certificate course."
+  da: "Capstone-projekt i IBM Data Analytics-certificeringsforløbet."
 # Source: OWNER-PDF p.10 ("Data Loading og strukturanalyse via Pandas og NumPy"; "Frasortering af
 # irrelevante kolonner, eliminering af over 3.400 duplikerede rækker samt systematisk imputation
 # af manglende værdier (mode for kategoriske data, median for numeriske data)"; "Normalisering af
@@ -53,8 +53,8 @@ method:
   da: "TODO: analysens trin — fra IBM Data Analytics-notebooken"
 technology: []
 result:
-  en: "Completed as the final capstone project of the IBM Data Analytics certificate."
-  da: "Gennemført som afsluttende capstone-projekt i IBM Data Analytics-certificeringen."
+  en: "Completed."
+  da: "Gennemført."
 # Order and featured: presentation only (Projects section, 2026-10-11, set by the lead's brief).
 featured: false
 order: 7

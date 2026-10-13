@@ -38,10 +38,13 @@
   year: 2025
 - id: agile-project-management
   order: 3
-  # Name as in the brief; the certificate reads "Certificering i Agil Projektledelse".
+  # The certificate's own name (CLAUDE.md <facts>: "Certificering i Agil Projektledelse", not
+  # "Diplom"); the brief's "Agile Project Management" is its English form.
   # OWNER-PDF p.17 (Certificeringer & Kursusforløb) calls it "Diplomuddannelse i Agile
   # Projektledelse"; the certificate does not say "Diplomuddannelse", so that name is not used.
-  name: Agile Project Management
+  name:
+    en: "Certification in Agile Project Management"
+    da: "Certificering i Agil Projektledelse"
   # Source: CV-2 (Certificeringer: "Agile Projektledelse (BlivProjektleder.dk)") and LinkedIn;
   # OWNER-PDF p.17 (Certificeringer & Kursusforløb: "Blivprojektleder.dk") agrees
   issuer: BlivProjektleder.dk
@@ -67,7 +70,7 @@
   # "Ja, også fuld score" of 2026-10-11 is not a document; facts allow a designation only where
   # the certificate or a source shows it). OWNER-PDF p.9 and p.16 ("karakteren 12") are not used.
   result:
-    en: "Completed, including the final capstone project"
+    en: "Completed, including the capstone project"
     da: "Gennemført, inkl. afsluttende capstone-projekt"
 - id: ibm-cybersecurity
   order: 5
@@ -87,7 +90,7 @@
   # (_kilder/owner-answers-2026-10-11.txt: rubric 50/50, "Grade: A"; the owner chose "Grade A, fuld
   # score"). OWNER-PDF p.10 and p.16 ("karakteren 12") are not used.
   result:
-    en: "Completed, including the final capstone project: Grade A, full score"
+    en: "Completed, including the capstone project: Grade A, full score"
     da: "Gennemført, inkl. afsluttende capstone-projekt: Grade A, fuld score"
 - id: pwc-security-awareness
   order: 6

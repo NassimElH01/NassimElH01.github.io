@@ -129,8 +129,9 @@ items:
 
   - id: financial-management-and-financial-statement-analysis
     name:
-      en: "Financial management"
-      da: "Økonomistyring"
+      en: "Budgeting"
+      da: "Budgetlægning"
+    # Phase C review 2026-10-13: the only proof left is the personal budget template.
     # Claim audit 2026-10-12 (CLAUDE.md, rule 1): no source shows a financial statement analysis carried out (the GenAI exam only
     # prompted for one) or Tjekkit's cost-benefit analysis (OWNER-PDF only), so both usages and
     # "regnskabsanalyse" are left out.
