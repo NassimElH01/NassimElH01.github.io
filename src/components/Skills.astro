@@ -102,6 +102,9 @@ const groups = (await getCollection("skills"))
             ? [usage.timeline?.id, project?.timeline?.id].find((id) => id && timeline.has(id))
             : undefined;
         const ownTimelineId = usage.timeline && timeline.has(usage.timeline.id) ? usage.timeline.id : undefined;
+        // A usage whose only proof is a hidden project (a draft, e.g. awaiting the owner) is
+        // hidden with it, so no claim shows without its proof on the page.
+        if (usage.project && !project && !ownTimelineId) return;
 
         let key: string;
         let place: Sense["place"];
@@ -186,7 +189,8 @@ const groups = (await getCollection("skills"))
       const name = text(item.name);
       const cut = name.value.indexOf(" (");
       const term = cut > 0 ? name.value.slice(0, cut) : name.value;
-      // The gloss in the index: the first note (senses come paid work first) that says more than
+      // The gloss in the index: the skill's own gloss (the facts text for all its places), else
+      // the first note (senses come paid work first) that says more than
       // the term or its own qualifier. The qualifier is cut off only when the entry has one sense,
       // whose register line next to the gloss still shows it. With more senses the note stays
       // whole, so a group project's work (or HTML and CSS without JavaScript) never reads as the
@@ -200,10 +204,13 @@ const groups = (await getCollection("skills"))
         const value = prefix ? note.value.slice(prefix.length) : note.value;
         return { value: value.charAt(0).toLocaleUpperCase(note.lang ?? lang) + value.slice(1), lang: note.lang };
       };
-      const gloss = list
-        .flatMap((sense) => sense.notes)
-        .map(glossOf)
-        .find((note): note is Note => note !== undefined && !note.value.toLowerCase().startsWith(term.toLowerCase()));
+      const gloss =
+        item.gloss && shown(item.gloss)
+          ? text(item.gloss)
+          : list
+              .flatMap((sense) => sense.notes)
+              .map(glossOf)
+              .find((note): note is Note => note !== undefined && !note.value.toLowerCase().startsWith(term.toLowerCase()));
       return [
         {
           id: item.id,

@@ -1,11 +1,12 @@
 ---
 // The two views of one project for the Business ⇄ Tech switch in Projects.astro:
 // problem, role and result, or method and tools. A field that is still "TODO:"
-// gets no row; LocalizedText leaves its marker after the list instead (a dashed
-// badge in dev, a hidden data-todo element in the build).
+// gets no row; in dev a dashed badge after the list names it (nothing in the build).
 // showTools: false when the caller already shows the tool chips (featured entries).
 // markResult: false when the caller already shows the entry's keyline, so each entry
 // keeps a single orange accent.
+// A view with nothing known is marked data-empty and renders no list; Projects.astro then
+// shows the other view in its place, so an opened row is never blank.
 import type { CollectionEntry } from "astro:content";
 import type { Lang } from "@/i18n/config";
 import type { UiKey } from "@/i18n/ui";
@@ -38,51 +39,54 @@ const technologyTodo = project.technology.some((item) => isTodo(item));
 // Without a known method, the tools are the Tech view, even where the caller shows them too.
 const toolsInView = (showTools || method.every((row) => row.todo)) && technology.length > 0;
 const techEmpty = method.every((row) => row.todo) && !toolsInView;
+const businessEmpty = business.every((row) => row.todo);
 ---
 
-<div class="view-business">
-  <dl class="project-rows">
-    {
-      business
-        .filter((row) => !row.todo)
-        .map((row) => (
-          <div class:list={[row.key === "result" && ["result", markResult && "result-marked"]]}>
-            <dt class="project-label">{row.label}</dt>
-            <LocalizedText field={row.field} lang={lang} as="dd" class="project-text" />
-          </div>
-        ))
-    }
-  </dl>
+<div class="view-business" data-empty={businessEmpty || undefined}>
+  {
+    !businessEmpty && (
+      <dl class="project-rows">
+        {business
+          .filter((row) => !row.todo)
+          .map((row) => (
+            <div class:list={[row.key === "result" && ["result", markResult && "result-marked"]]}>
+              <dt class="project-label">{row.label}</dt>
+              <LocalizedText field={row.field} lang={lang} as="dd" class="project-text" />
+            </div>
+          ))}
+      </dl>
+    )
+  }
   {business.filter((row) => row.todo).map((row) => <LocalizedText field={row.field} lang={lang} as="div" />)}
 </div>
 
 <div class="view-tech" data-empty={techEmpty || undefined}>
-  <dl class="project-rows">
-    {
-      method
-        .filter((row) => !row.todo)
-        .map((row) => (
+  {
+    !techEmpty && (
+      <dl class="project-rows">
+        {method
+          .filter((row) => !row.todo)
+          .map((row) => (
+            <div>
+              <dt class="project-label">{row.label}</dt>
+              <LocalizedText field={row.field} lang={lang} as="dd" class="project-text" />
+            </div>
+          ))}
+        {toolsInView && (
           <div>
-            <dt class="project-label">{row.label}</dt>
-            <LocalizedText field={row.field} lang={lang} as="dd" class="project-text" />
+            <dt class="project-label">{tr("projects.technology")}</dt>
+            <dd>
+              <ul role="list" class="chips">
+                {technology.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </dd>
           </div>
-        ))
-    }
-    {
-      toolsInView && (
-        <div>
-          <dt class="project-label">{tr("projects.technology")}</dt>
-          <dd>
-            <ul role="list" class="chips">
-              {technology.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-          </dd>
-        </div>
-      )
-    }
-  </dl>
+        )}
+      </dl>
+    )
+  }
   {method.filter((row) => row.todo).map((row) => <LocalizedText field={row.field} lang={lang} as="div" />)}
-  {technologyTodo && <div hidden data-todo />}
+  {import.meta.env.DEV && technologyTodo && <div class="todo-badge" data-todo>TODO: technology</div>}
 </div>

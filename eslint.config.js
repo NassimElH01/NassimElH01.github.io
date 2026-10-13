@@ -24,7 +24,7 @@ export default [
   ...astro.configs["flat/jsx-a11y-recommended"],
   {
     // Node-side files: build scripts, configs and tests
-    files: ["scripts/**/*.{js,mjs,ts}", "*.config.{js,mjs,ts}", "tests/**/*.ts"],
+    files: ["scripts/**/*.{js,mjs,ts}", ".claude/skills/*/scripts/**/*.{js,mjs}", "*.config.{js,mjs,ts}", "tests/**/*.ts"],
     languageOptions: {
       globals: globals.node,
     },

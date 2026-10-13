@@ -26,6 +26,7 @@ interface Item {
   name: Localized;
   confirm?: boolean;
   usedIn: Usage[] | string;
+  gloss?: Localized;
   certifications?: string[];
 }
 interface Group {
@@ -54,27 +55,13 @@ interface Certification {
 }
 
 // The skills, read from content/skills the way Skills.astro reads them: an item shows when it
-// has evidence (usedIn is a list) and is not awaiting the owner's confirmation.
+// has evidence (usedIn is a list, with at least one register line) and is not awaiting the
+// owner's confirmation.
 const groups: Group[] = readdirSync("content/skills")
   .filter((file) => file.endsWith(".yaml") && !file.startsWith("_"))
   .map((file) => ({ id: file.replace(/\.yaml$/, ""), ...(load(readFileSync(`content/skills/${file}`, "utf8")) as Omit<Group, "id">) }))
   .sort((a, b) => a.order - b.order);
-const shown = (group: Group) => group.items.filter((item) => !item.confirm && Array.isArray(item.usedIn));
 const known = (field: Localized) => !isTodo(field.en) || !isTodo(field.da);
-// As Skills.astro uses them: a note (and its scope) only when one language is not a TODO.
-const usages = (item: Item) =>
-  (item.usedIn as Usage[]).map((usage) =>
-    usage.note && known(usage.note)
-      ? { ...usage, scope: usage.scope && known(usage.scope) ? usage.scope : undefined }
-      : { ...usage, note: undefined, scope: undefined },
-  );
-const items = groups.flatMap(shown);
-const hidden = groups.flatMap((group) => group.items).filter((item) => !items.includes(item));
-const CONTEXTS = ["internship", "work", "freelance", "study", "personal"] as const;
-const usedIn = (item: Item, context: string) => usages(item).some((usage) => usage.context === context);
-const rank = (context: string) => (CONTEXTS as readonly string[]).indexOf(context);
-// The contexts with a report, i.e. a tile in the filter after All.
-const REPORTS = CONTEXTS.filter((context) => items.some((item) => usedIn(item, context)));
 
 // What Skills links to: the projects and Experience entries the site renders.
 const read = <T>(dir: string) =>
@@ -86,6 +73,25 @@ const timeline = new Map(
   read<Entry>("timeline").filter(([, entry]) => !entry.draft && !isTodo(entry.kind) && known(entry.title) && known(entry.summary)),
 );
 const certifications = load(readFileSync("content/certifications.yaml", "utf8")) as Certification[];
+
+// As Skills.astro uses them: a note (and its scope) only when one language is not a TODO, and
+// never a usage whose only proof is a hidden project (a draft).
+const usages = (item: Item) =>
+  (item.usedIn as Usage[])
+    .filter((usage) => !usage.project || projects.has(usage.project) || (usage.timeline !== undefined && timeline.has(usage.timeline)))
+    .map((usage) =>
+      usage.note && known(usage.note)
+        ? { ...usage, scope: usage.scope && known(usage.scope) ? usage.scope : undefined }
+        : { ...usage, note: undefined, scope: undefined },
+    );
+const CONTEXTS = ["internship", "work", "freelance", "study", "personal"] as const;
+const rank = (context: string) => (CONTEXTS as readonly string[]).indexOf(context);
+const shown = (group: Group) => group.items.filter((item) => !item.confirm && Array.isArray(item.usedIn) && lines(item).length > 0);
+const items = groups.flatMap(shown);
+const hidden = groups.flatMap((group) => group.items).filter((item) => !items.includes(item));
+const usedIn = (item: Item, context: string) => usages(item).some((usage) => usage.context === context);
+// The contexts with a report, i.e. a tile in the filter after All.
+const REPORTS = CONTEXTS.filter((context) => items.some((item) => usedIn(item, context)));
 
 const LABELS = {
   en: {
@@ -174,11 +180,13 @@ const scopes = (line: Line, lang: Lang) => [
 ];
 
 /**
- * The gloss under a headword in the index: the first note, in register order, that says more
+ * The gloss under a headword in the index: the skill's own gloss, else the first note, in register order, that says more
  * than the term or its own qualifier. The qualifier is cut off only when the entry has one
  * line, which still shows it beside the gloss.
  */
 function glossOf(item: Item, lang: Lang): string | undefined {
+  // The skill's own gloss (the facts text for all its places) comes first.
+  if (item.gloss && known(item.gloss)) return pick(item.gloss, lang);
   const all = lines(item);
   const term = pick(item.name, lang).split(" (")[0].toLowerCase();
   for (const usage of all.flatMap((line) => line.usages).filter((usage) => usage.note)) {
@@ -553,12 +561,15 @@ test("glosses keep a group project's qualifier unless the register line beside t
   await page.goto("/");
   const gloss = (id: string) => page.locator(`.entry:has(#skill-${id}) .entry-gloss`);
   // One sense: the line beside it says "Tjekkit · 2023 · Group project", so the gloss can drop it.
-  await expect(gloss("prototyping")).toHaveText("Nassim made the wireframes and the prototype");
-  // Several senses: the note stays whole, so the group work never reads as the whole entry's.
-  await expect(gloss("uml-system-modeling")).toHaveText(/^Group project: /);
+  await expect(gloss("prototyping")).toHaveText("I took care of the wireframes and the prototype");
+  // Several senses: the note stays whole, so the course project's work never reads as the whole entry's.
+  await expect(gloss("p5js")).toHaveText(/^Course project: /);
   await expect(gloss("html-css-javascript")).toHaveText(/^HTML and CSS; /);
   // A note that is only its qualifier gives no gloss.
   await expect(gloss("enterprise-architecture")).toHaveCount(0);
+  await expect(gloss("uml-system-modeling")).toHaveCount(0);
+  // A skill's own gloss (the facts text for all its places) comes first.
+  await expect(gloss("requirements-specification")).toHaveText("Requirements lists, use cases and user stories");
 });
 
 // Where a visitor lands, on a phone and on a desktop, with the default text size and with the

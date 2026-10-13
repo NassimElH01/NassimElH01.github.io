@@ -19,8 +19,8 @@ end: "present"
 # put in the present tense to match CV-2 ("2023 - nuværrende"). Conflict noted:
 # the old site filed this under "Tidligere erfaring"; CV-2 wins.
 summary:
-  en: "Works on IT-related and administrative tasks for S&S Rengøringsservice, including digital structure, coordination and day-to-day administrative support."
-  da: "Arbejder med IT-relaterede og administrative opgaver for S&S Rengøringsservice, herunder digital struktur, koordinering og daglig administrativ support."
+  en: "I work on IT-related and administrative tasks for S&S Rengøringsservice, including digital structure, coordination and day-to-day administrative support."
+  da: "Jeg arbejder med IT-relaterede og administrative opgaver for S&S Rengøringsservice, herunder digital struktur, koordinering og daglig administrativ support."
 responsibilities:
   en:
     # Source: CV-CBS (IT support for the office, printers and computers); CV-2 (supported the office's IT needs)

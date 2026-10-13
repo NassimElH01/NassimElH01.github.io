@@ -15,15 +15,14 @@ kind: "education"
 title:
   en: "Higher Preparatory Examination (HF), business line"
   da: "HF-eksamen, Business-linjen"
-# Source: OWNER-PDF p.15 ("NEXT Uddannelse København – Vestskoven Gymnasium")
-organization: "NEXT Uddannelse København – Vestskoven Gymnasium"
-# Source: OWNER-PDF p.15 ("2019 – 2021")
-start: "2019"
-end: "2021"
+# Claim audit 2026-10-12 (CLAUDE.md, rule 1): the school and the years were OWNER-PDF only; they wait for the HF-bevis in
+# _kilder/. <facts> gives "HF Business" and the average without dates, so the entry is undated.
+organization: "TODO: school — from the HF-bevis"
+undated: true
 # Source: OWNER-PDF p.15 (HF on the business line, 2019 – 2021)
 summary:
-  en: "Upper secondary education (HF) on the business line, completed in 2021."
-  da: "Gymnasial uddannelse (HF) på Business-linjen, afsluttet i 2021."
+  en: "Upper secondary education (HF) on the business line."
+  da: "Gymnasial uddannelse (HF) på Business-linjen."
 # Source: OWNER-PDF p.15, in the PDF's order. The PDF calls the subjects "Hovedfag";
 # they are listed as given, not as a complete list. Grades are on the Danish 7-point
 # scale (-3 to 12).

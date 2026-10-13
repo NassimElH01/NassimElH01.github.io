@@ -77,9 +77,10 @@
   # and the meta description in src/i18n/ui.ts. Set back to false while new drafts await approval.
   approved: true
   # Source: the owner's answer (2026-10-05: "København / sjælland")
+  # Source: CLAUDE.md <facts> (owner 2026-10-12: "Storkøbenhavn / Sjælland"; no town is named anywhere).
   location:
-    en: "Copenhagen / Zealand"
-    da: "København / Sjælland"
+    en: "Greater Copenhagen / Zealand"
+    da: "Storkøbenhavn / Sjælland"
   links:
     linkedin: https://www.linkedin.com/in/nassim-hassani-63835a220
     github: https://github.com/NassimElH01

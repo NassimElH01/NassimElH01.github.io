@@ -16,7 +16,7 @@ year: 2024
 context: "study"
 # Source: EXAM (p.18: "jeg valgte Badr Fight Club", the analysis assignment; p.19: communication
 # product and promo video "for virksomheden"; p.21: the Machine-learning notebook assignments;
-# company description section: Badr Fight Club "er en kampsportsklub beliggende i Glostrup")
+# company description section: Badr Fight Club "er en kampsportsklub beliggende i [town]")
 problem:
   en: "Use generative AI tools to produce a strategic analysis and marketing material for a local martial arts club, Badr Fight Club, and complete a set of machine-learning notebooks in Python."
   da: "At bruge generative AI-værktøjer til at udarbejde en strategisk analyse og markedsføringsmateriale til en lokal kampsportsklub, Badr Fight Club, og løse en række machine learning-opgaver i Python-notebooks."
@@ -82,4 +82,7 @@ links:
 timeline: "zealand-professionsbachelor"
 featured: false
 order: 9
+# Hidden (CLAUDE.md <pending> 6, 2026-10-12): the text drafted from the exam paper waits for
+# the owner's approval. The grade (10) stays in Experience (facts).
+draft: true
 ---

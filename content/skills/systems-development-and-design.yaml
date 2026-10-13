@@ -1,12 +1,14 @@
 # Skill group "Systemudvikling & design" from the owner's brief (CLAUDE.md).
 # CV-2 lists "systemudvikling og IT-arkitektur" as a focus area of the Zealand PBA;
-# that is cited for UML and system modeling only. OWNER-PDF (the owner's 18-page text
+# that is cited for UML and system modeling only (Claim audit 2026-10-12 (CLAUDE.md, rule 1): Tjekkit's diagrams were OWNER-PDF only
+# and are no longer cited). OWNER-PDF (the owner's 18-page text
 # pack, shared 2026-10-11; written with an AI assistant, so used for facts only; PDF
 # page numbers) adds the Tjekkit group project for UML and prototyping (owner 2026-10-11:
 # group project; his own part was the wireframes and the prototype, second round).
 # 2026-10-12: the owner confirmed the RUC course "Designmetoder og Teknologier" (20 ECTS, autumn
 # 2026) and agreed that it may stand as evidence for user-driven design, marked as in progress.
-# No source says where the other items were used, so their usedIn stays a TODO for the owner.
+# 2026-10-12, CLAUDE.md <facts> (Kompetencer): requirements specification, UX and usability
+# testing and HCI, with their contexts and texts. Physical computing stays hidden (pending 4).
 group:
   en: "Systems development & design"
   da: "Systemudvikling & design"
@@ -29,37 +31,71 @@ items:
         scope:
           en: "Focus area in the programme: systems development and IT architecture"
           da: "Fokusområde på uddannelsen: systemudvikling og IT-arkitektur"
-      # Source: OWNER-PDF p.7 (3. Udvalgte Projekter, Tjekkit, Systemdesign & Arkitektur:
-      # "Use Case-diagrammer, domænemodeller, sekvensdiagrammer (SSD) og klassediagrammer");
-      # owner 2026-10-11 (group project)
-      - context: study
-        project: tjekkit
-        note:
-          en: "Group project: use case diagrams, domain model, system sequence diagrams and class diagrams"
-          da: "Gruppeprojekt: use case-diagrammer, domænemodel, systemsekvensdiagrammer og klassediagrammer"
-        scope:
-          en: "Group project"
-          da: "Gruppeprojekt"
 
   - id: requirements-specification
     name:
       en: "Requirements specification"
       da: "Kravspecifikation"
-    # Open lead, not evidence: REPORT PDF p.13 ("hvor jeg selv bidrog til udarbejdelse af use
-    # cases og stakeholderanalyser", OT Cyber Security) and p.6 ("udvikling af use cases") do not
-    # say what the use cases described or that they specified requirements; the owner's
-    # 24Support answer (2026-10-06, "indsamle use case") does not either. If the owner confirms
-    # the internship, cite his answer, with the note "Contributed use cases to the OT Cyber
-    # Security project" and the scope "Contributed use cases" (da "Bidrog med use cases").
-    usedIn: "TODO: where used — the OT Cyber Security use cases at Royal Unibrew (REPORT PDF p.13), 24Support's use cases, a course? Owner to confirm"
+    # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "Tjekkit, Boozt, OT-projektet"; the text verbatim (Danish). Not "SRS"
+    # (facts: no source documents it yet). Each place names only itself; the gloss says what
+    # the skill covers across them.
+    gloss:
+      en: "Requirements lists, use cases and user stories"
+      da: "Kravlister, use cases og user stories"
+    usedIn:
+      # Also REPORT p.6 and p.13 (use cases for the OT Cyber Security project)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "OT Cyber Security project"
+          da: "OT Cyber Security-projektet"
+        scope:
+          en: "OT Cyber Security project"
+          da: "OT Cyber Security-projektet"
+      - context: study
+        project: tjekkit
+        note:
+          en: "Group project"
+          da: "Gruppeprojekt"
+        scope:
+          en: "Group project"
+          da: "Gruppeprojekt"
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Boozt case"
+          da: "Boozt-casen"
+        scope:
+          en: "Boozt case"
+          da: "Boozt-casen"
 
   - id: ux-usability-testing
     name:
       en: "UX and usability testing"
       da: "UX og usability-test"
-    # OWNER-PDF p.12 (Freelance Web- & IT-Løsninger) mentions advice on user experience, but no
-    # usability testing, so the freelance-web card is not cited.
-    usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
+    # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "Systemudvikling, RUC DMT"; the text verbatim (Danish). Not "A/B-test"
+    # (facts: no source documents it yet). Each place names only itself; the gloss says what the
+    # skill covers across them.
+    gloss:
+      en: "Wireframes and mockups; usability evaluation with Wizard of Oz"
+      da: "Wireframes og mockups, usability-evaluering med Wizard of Oz"
+    usedIn:
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Systems development"
+          da: "Systemudvikling"
+        scope:
+          en: "Systems development"
+          da: "Systemudvikling"
+      - context: study
+        timeline: ruc-master-digital-transformation
+        note:
+          en: "Course in progress: “Designmetoder og Teknologier”"
+          da: "Igangværende kursus: “Designmetoder og Teknologier”"
+        scope:
+          en: "Course in progress"
+          da: "Igangværende kursus"
 
   - id: prototyping
     name:
@@ -70,8 +106,8 @@ items:
       - context: study
         project: tjekkit
         note:
-          en: "Group project: Nassim made the wireframes and the prototype"
-          da: "Gruppeprojekt: Nassim lavede wireframes og prototypen"
+          en: "Group project: I took care of the wireframes and the prototype"
+          da: "Gruppeprojekt: Jeg tog mig af wireframes og prototypen"
         scope:
           en: "Group project"
           da: "Gruppeprojekt"
@@ -98,7 +134,28 @@ items:
     name:
       en: "Human-computer interaction (HCI)"
       da: "Menneske-computer-interaktion (HCI)"
-    usedIn: "TODO: where used — study coursework? Which programme/course; owner to confirm"
+    # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "RUC Designmetoder og Teknologier"; the text verbatim (Danish). The p5.js
+    # face tracking course project (facts, Cases) is from workshop 2 of the same course.
+    gloss:
+      en: "Interactive prototypes with a focus on embodied interaction and feedback"
+      da: "Interaktive prototyper med fokus på kropslig interaktion og feedback"
+    usedIn:
+      - context: study
+        timeline: ruc-master-digital-transformation
+        note:
+          en: "Course in progress: “Designmetoder og Teknologier”"
+          da: "Igangværende kursus: “Designmetoder og Teknologier”"
+        scope:
+          en: "Course in progress"
+          da: "Igangværende kursus"
+      - context: study
+        project: p5js-face-tracking
+        note:
+          en: "Course project"
+          da: "Kursusprojekt"
+        scope:
+          en: "Course project"
+          da: "Kursusprojekt"
 
   # [BEKRÆFT] in the brief: hidden until the owner confirms.
   - id: physical-computing-digital-fabrication

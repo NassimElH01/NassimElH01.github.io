@@ -234,6 +234,10 @@ const skills = defineCollection({
           // Items the brief marks [BEKRÆFT] stay hidden until the owner confirms them.
           confirm: z.boolean().default(false),
           certifications: z.array(reference("certifications")).default([]),
+          // What the skill covers across all its places, from CLAUDE.md <facts> (Kompetencer),
+          // shown as the index gloss. Each place keeps only its own note, so the text never
+          // reads as one place's work.
+          gloss: localized.optional(),
           // Where the skill was used. Never a level or a percentage.
           usedIn: z.union([z.array(usage).min(1), todo]),
         }),

@@ -14,23 +14,18 @@ title:
   da: "Kontaktperson"
 # Source: CV-2 and CV-CBS ("CareCompagniet"); OWNER-PDF p.13 ("CareCompagniet")
 organization: "CareCompagniet"
-# Source: OWNER-PDF p.13 ("CareCompagniet | 2024 – 2025"). CV-2 and CV-CBS list it under
-# "Øvrig erhvervserfaring" without dates, so it was undated until the PDF dated it.
-start: "2024"
-end: "2025"
+# CV-2 and CV-CBS list it under "Øvrig erhvervserfaring" without dates. Claim audit 2026-10-12 (CLAUDE.md, rule 1): undated again;
+# only OWNER-PDF p.13 dated it ("2024 – 2025").
+undated: true
 summary:
   en: "Supportive contact role focused on communication, trust, and practical coordination in a care-oriented setting."
   da: "Støttende kontaktrolle med fokus på kommunikation, tillid og praktisk koordinering i en omsorgsorienteret sammenhæng."
 responsibilities:
   en:
     - "Acted as a reliable point of contact for people needing guidance, coordination, and practical support."
-    # Source: OWNER-PDF p.13 (coordination, case follow-up and documentation with citizens, relatives and interdisciplinary teams)
-    - "Handled coordination, case follow-up and documentation in dialogue with citizens, relatives and interdisciplinary teams."
     - "Built strong interpersonal communication and empathy in care-related situations."
   da:
     - "Fungerede som en pålidelig kontaktperson for mennesker med behov for vejledning, koordinering og praktisk støtte."
-    # Source: OWNER-PDF p.13
-    - "Varetog koordinering, sagsopfølgning og dokumentation i dialog med borgere, pårørende og tværfaglige teams."
     - "Opbyggede stærk interpersonel kommunikation og empati i omsorgsrelaterede situationer."
 strengths:
   en:

@@ -145,13 +145,24 @@ items:
     name:
       en: "Windows"
       da: "Windows"
-    # Source: CV-CBS (Kompetencer, Systemer & Teknik: Windows), no place given.
-    usedIn: "TODO: where used — e.g. Zealand IT support? Owner to confirm"
+    usedIn:
+      # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "IT-studentermedhjælper, Zealand 2025–26"; the text verbatim
+      # (Danish). CV-CBS (Kompetencer, Systemer & Teknik) lists Windows too.
+      - context: work
+        timeline: zealand-it-student-assistant
+        note:
+          en: "1st- and 2nd-line support and troubleshooting of Windows clients, network access and Microsoft 365"
+          da: "1st- og 2nd-line support og fejlsøgning på Windows-klienter, netværksadgang og Microsoft 365"
 
   - id: github
     name:
       en: "GitHub"
       da: "GitHub"
-    # Nassim's old text links a GitHub repository for SCT, but also says SCT's source
-    # code is in a private repository, and SCT's context (personal project) is not decided yet.
-    usedIn: "TODO: where used — owner to confirm context (e.g. SCT repository (private?), this portfolio)"
+    usedIn:
+      # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "Dette site"; the text verbatim (Danish). Not "issue-tracking"
+      # (facts: no source documents it yet).
+      - context: personal
+        project: this-portfolio
+        note:
+          en: "Version control with branches and pull requests, and deployment via GitHub Pages"
+          da: "Versionsstyring med branches og pull requests og deployment via GitHub Pages"

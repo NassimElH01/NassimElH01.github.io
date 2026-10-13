@@ -172,7 +172,8 @@ test("list rows show year, context and tools on a phone, and screen readers get 
   const context = await browser.newContext({ viewport: { width: 375, height: 800 } });
   const page = await context.newPage();
   await page.goto("/");
-  const row = page.locator("details.more").filter({ hasText: "S&S Rengøringsservice website" });
+  // By its title: the freelance row names the S&S website as an example in its text.
+  const row = page.locator("details.more").filter({ has: page.locator(".more-title", { hasText: /^S&S Rengøringsservice website$/ }) });
   await expect(row.locator(".more-meta")).toBeVisible();
   // The year comes from the timeline entry (the project has none), then the context.
   await expect(row.locator(".more-meta > span:not([aria-hidden]):not(.sr-only)")).toHaveText(["2023–now", "Work"]);
@@ -184,3 +185,20 @@ test("list rows show year, context and tools on a phone, and screen readers get 
   expect(await page.locator("article.featured .project-meta").first().ariaSnapshot()).toContain("2025 Internship");
   await context.close();
 });
+
+for (const lens of ["business", "tech"] as const) {
+  test(`every opened project row shows text in the ${lens} lens, even when that view has nothing known`, async ({ page }) => {
+    await page.goto("/");
+    await page.locator(`#projects-lens-${lens}`).check();
+    const rows = page.locator("section#projects details.more");
+    expect(await rows.count()).toBeGreaterThan(0);
+    for (const row of await rows.all()) {
+      if (!(await row.evaluate((details) => (details as HTMLDetailsElement).open))) await row.locator("summary").click();
+      // A view with no known field falls back to the other one (ProjectViews marks it data-empty).
+      const shown = await row.locator(".more-body :is(.view-business, .view-tech)").evaluateAll((views) =>
+        views.filter((view) => getComputedStyle(view).display !== "none").map((view) => view.querySelectorAll("dt").length),
+      );
+      expect(shown.reduce((sum, count) => sum + count, 0), await row.locator("summary .more-title").innerText()).toBeGreaterThan(0);
+    }
+  });
+}

@@ -8,8 +8,10 @@
 # placeholder, and the owner confirmed there is no repo link (2026-10-11).
 # Source: OWNER-PDF p.7 ("Tjekkit" – Udvikling af Internt Registreringssystem (Coop 365 Case))
 title:
-  en: "Tjekkit: an internal registration system (Coop 365 case)"
-  da: "Tjekkit: internt registreringssystem (Coop 365-case)"
+  en: "Tjekkit: Coop 365 case"
+  da: "Tjekkit: Coop 365-case"
+# Claim audit 2026-10-12 (CLAUDE.md, rule 1): the owner's own words (owner-answers 2026-10-11: "Tjekkit (Coop 365-case)");
+# "internal registration system" was OWNER-PDF only.
 # Source: owner 2026-10-11 (handed in 26 May 2023, 2nd semester)
 year: 2023
 # Source: owner 2026-10-11 (a 2nd-semester group project on the Zealand PBA)
@@ -18,13 +20,15 @@ context: "study"
 # gennemsigtighed i medarbejderes fremmøde og pauser resulterede i unødig administrativ
 # belastning for butikschefen")
 problem:
-  en: "In the Coop 365 case, manual routines, pay discrepancies and a lack of overview of employees' attendance and breaks put an unnecessary administrative burden on the store manager."
-  da: "I Coop 365-casen gav manuelle arbejdsgange, uoverensstemmelser i lønnen og manglende overblik over medarbejdernes fremmøde og pauser en unødig administrativ byrde for butikschefen."
+  # Claim audit 2026-10-12 (CLAUDE.md, rule 1): the problem statement was OWNER-PDF only; waits for the 2nd-semester paper in _kilder/.
+  en: "TODO: the case's problem — from the 2nd-semester paper"
+  da: "TODO: casens problem — fra 2. semesters opgave"
 # Source: owner 2026-10-11 (group project, 2nd semester) and the second round the same day
 # ("jeg tog mig af wireframes og prototypen").
 role:
-  en: "Second-semester group project: Nassim was responsible for the wireframes and the prototype."
-  da: "Gruppeprojekt på 2. semester: Nassim stod for wireframes og prototypen."
+  en: "Second-semester group project: I took care of the wireframes and the prototype."
+  da: "Gruppeprojekt på 2. semester: Jeg tog mig af wireframes og prototypen."
+# Claim audit 2026-10-12 (CLAUDE.md, rule 1): the owner's verbatim "jeg tog mig af" (owner-answers 2026-10-11), not "stod for".
 # Source: owner 2026-10-11 (group project); OWNER-PDF p.7 ("Use Case-diagrammer, domænemodeller,
 # sekvensdiagrammer (SSD) og klassediagrammer"; "Python med modulariseret OOP-struktur ... App,
 # Menu, LogIn og Ansat"; "relationel MySQL-database: Tabeller til medarbejderstamdata (ansat) og
@@ -33,15 +37,17 @@ role:
 # besparelser i administration og forbedret dækningsbidrag via øget servicegrad";
 # "Implementeringsplan forankret i Lewins forandringsteori for at sikre ejerskab blandt
 # medarbejderne før og under udrulning")
+# First sentence: CLAUDE.md <facts> (Tjekkit: "både et objektorienteret Python-program med
+# MySQL-database og en serie mobile UI-mockups").
 method:
-  en: "The group modelled the system with use case diagrams, a domain model, system sequence diagrams and class diagrams. The design describes a Python program with a modular object-oriented structure (App, Menu, LogIn and Ansat) and a MySQL database with employee master data (the ansat table) and time registration (the Vagt table), linked with primary and foreign keys. The project also includes a cost-benefit analysis over five years with a 6% discount rate, based on estimated savings in administration and a better contribution margin from a higher service level, and an implementation plan based on Lewin's change theory to build ownership among the employees before and during the roll-out."
-  da: "Gruppen modellerede systemet med use case-diagrammer, en domænemodel, systemsekvensdiagrammer og klassediagrammer. Designet beskriver et Python-program med en modulopdelt objektorienteret struktur (App, Menu, LogIn og Ansat) og en MySQL-database med medarbejderstamdata (tabellen ansat) og tidsregistrering (tabellen Vagt), forbundet med primær- og fremmednøgler. Projektet omfatter også en cost-benefit-analyse over fem år med en diskonteringsrente på 6 %, baseret på estimerede besparelser i administrationen og et bedre dækningsbidrag via en højere servicegrad, og en implementeringsplan bygget på Lewins forandringsteori, så medarbejderne får ejerskab før og under udrulningen."
-# Source: OWNER-PDF p.7 (Python, MySQL; use case, sequence and class diagrams, which are UML
-# diagram types; the PDF does not use the word "UML")
+  en: "The project comprises both an object-oriented Python program with a MySQL database and a series of mobile UI mockups. The group modelled the system with use cases."
+  da: "Projektet omfatter både et objektorienteret Python-program med MySQL-database og en serie mobile UI-mockups. Gruppen modellerede systemet med use cases."
+# Claim audit 2026-10-12 (CLAUDE.md, rule 1): the diagram types, class and table names, the cost-benefit analysis and the Lewin plan
+# were OWNER-PDF only and are left out; use cases: <facts> (Kravspecifikation: Tjekkit).
+# Source: CLAUDE.md <facts> (Tjekkit: Python program with a MySQL database)
 technology:
   - "Python"
   - "MySQL"
-  - "UML"
 # Source: owner 2026-10-11 (handed in 26 May 2023) and the second round the same day, verbatim
 # ("Der ikke lavet færdigegjort projekt"): the system was not finished. "The design describes"
 # in method, not "built", for the same reason; the PDF's "Udviklet i Python" is not repeated as

@@ -21,27 +21,27 @@ end: "2026"
 # in the present tense to match CV-CBS profile ("Jeg arbejder i dag med IT-support
 # på Zealand") and the present-tense bullets below.
 summary:
-  en: "Delivers user support, digital systems operations, and documentation support across Microsoft 365 and administrative IT processes."
-  da: "Leverer brugersupport, drift af digitale systemer og dokumentationssupport på tværs af Microsoft 365 og administrative IT-processer."
+  en: "I provide user support, run digital systems and help with documentation across Microsoft 365 and administrative IT processes."
+  da: "Jeg leverer brugersupport, drift af digitale systemer og dokumentationssupport på tværs af Microsoft 365 og administrative IT-processer."
 responsibilities:
   en:
     # Source: CV-2 (technical IT support and assistance to lecturers, staff and students); CV-CBS ("i en travl hverdag"); OWNER-PDF p.12 (1st- and 2nd-line support)
-    - "Provides technical 1st- and 2nd-line IT support and assistance to lecturers, staff and students in a busy everyday setting."
+    - "Provide technical 1st- and 2nd-line IT support and assistance to lecturers, staff and students in a busy everyday setting."
     # Source: CV-CBS (Zealand bullet 2)
-    - "Registers and resolves cases in a ticket system and follows them through to completion."
+    - "Register and resolve cases in a ticket system and follow them through to completion."
     # Source: CV-2 and CV-CBS (hardware, software and Microsoft 365); OWNER-PDF p.12 (network)
-    - "Troubleshoots hardware, networks, software and Microsoft 365 solutions."
+    - "Troubleshoot hardware, network access, software and Microsoft 365 solutions."
     # Source: CV-2 (user guides, documentation and guidance material); CV-CBS (documentation)
-    - "Writes user guides, documentation and guidance material."
+    - "Write user guides, documentation and guidance material."
     # Source: CV-2 (daily IT operations, high service quality); CV-CBS (operation and maintenance of IT systems)
-    - "Supports daily IT operations and the running and maintenance of IT systems, ensuring high service quality for users."
+    - "Support daily IT operations and the running and maintenance of IT systems, ensuring high service quality for users."
   da:
     # Source: CV-2; CV-CBS; OWNER-PDF p.12
     - "Yder teknisk 1st- og 2nd-line IT-support og assistance til undervisere, medarbejdere og studerende i en travl hverdag."
     # Source: CV-CBS
     - "Registrerer og løser sager i ticketsystem og følger dem til dørs."
     # Source: CV-2; CV-CBS; OWNER-PDF p.12
-    - "Fejlfinder på hardware, netværk, software og Microsoft 365-løsninger."
+    - "Fejlfinder på hardware, netværksadgang, software og Microsoft 365-løsninger."
     # Source: CV-2; CV-CBS
     - "Udarbejder brugerguides, dokumentation og vejledningsmateriale."
     # Source: CV-2; CV-CBS

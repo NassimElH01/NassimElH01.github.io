@@ -44,15 +44,22 @@ items:
     name:
       en: "Agile methods"
       da: "Agile metoder"
-    # Owner: the brief lists this certification and this skill separately. Confirm the
-    # Agile Project Management certification belongs with this skill.
     certifications:
       - agile-project-management
-    # CONFLICT: OWNER-PDF p.12 (4. Erhvervserfaring, Royal Unibrew) says he planned "backlogs,
-    # sprint-kadencer og fremdriftsopfølgning i Azure DevOps", and p.5 lists sprint planning,
-    # stand-ups and retrospectives. REPORT p.19 says agile/Scrum was not applied at Royal
-    # Unibrew; the REPORT is the earlier source and wins, so the internship is still not cited.
+    # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12), verbatim (Danish). No "sprint cadence": the owner resolved on 2026-10-12
+    # that REPORT p.19 (Royal Unibrew worked mainly by the waterfall model) wins over OWNER-PDF
+    # p.12 ("sprint-kadencer"); the certificate's own name is "Certificering i Agil Projektledelse".
+    gloss:
+      en: "Scrum and Kanban (Certification in Agile Project Management, 2024); a backlog with epics and features in Azure DevOps at Royal Unibrew"
+      da: "Scrum og Kanban (Certificering i Agil Projektledelse, 2024); backlog med epics og features i Azure DevOps hos Royal Unibrew"
     usedIn:
+      # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12) ("backlog med epics og features i Azure DevOps hos Royal Unibrew") and
+      # REPORT p.9 (epics and features for the OT Cyber Security project in Azure DevOps)
+      - context: internship
+        timeline: royal-unibrew-pmo
+        note:
+          en: "Backlog with epics and features in Azure DevOps"
+          da: "Backlog med epics og features i Azure DevOps"
       # Source: REPORT (p.8: "På Zealand har jeg arbejdet meget med agile metoder og Scrum")
       - context: study
         timeline: zealand-professionsbachelor
@@ -87,9 +94,21 @@ items:
     name:
       en: "Communication plans"
       da: "Kommunikationsplaner"
-    # No source mentions a communication plan (the old site's cvData says "stakeholder
-    # communication", which is not a plan).
-    usedIn: "TODO: where used — split from the brief's 'Interessent-, risiko- og kommunikationsplaner'; no source mentions a communication plan. Royal Unibrew PMO? Owner to confirm, or merge back"
+    # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "PBA 1. og 4. sem., Royal Unibrew PMO"; the text verbatim (Danish).
+    gloss:
+      en: "Communication and stakeholder plans for digital change"
+      da: "Kommunikations- og interessentplaner ved digitale forandringer"
+    usedIn:
+      - context: internship
+        timeline: royal-unibrew-pmo
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "1st and 4th semesters"
+          da: "1. og 4. semester"
+        scope:
+          en: "1st and 4th semesters"
+          da: "1. og 4. semester"
 
   - id: business-strategy-and-models
     name:
@@ -100,21 +119,23 @@ items:
       # PESTEL), en SWOT-oversigt", solved with ChatGPT prompts)
       - context: study
         project: genai-ml-elective
+        # While the project is hidden (CLAUDE.md <pending> 6), the place is the programme.
+        timeline: zealand-professionsbachelor
         note:
-          en: "AI-assisted business analysis with BMC, Porter's Five Forces, PESTEL and SWOT"
-          da: "AI-assisteret forretningsanalyse med BMC, Porters Five Forces, PESTEL og SWOT"
+          en: "AI-assisted business analysis with BMC and SWOT"
+          da: "AI-assisteret forretningsanalyse med BMC og SWOT"
+        # Claim audit 2026-10-12 (CLAUDE.md, rule 1): the submitted analysis (EXAM p.4-7) has a BMC and a SWOT; Porter and PESTEL
+        # are only in the assignment text and the prompts.
 
   - id: financial-management-and-financial-statement-analysis
     name:
-      en: "Financial management and financial statement analysis"
-      da: "Økonomistyring og regnskabsanalyse"
+      en: "Budgeting"
+      da: "Budgetlægning"
+    # Phase C review 2026-10-13: the only proof left is the personal budget template.
+    # Claim audit 2026-10-12 (CLAUDE.md, rule 1): no source shows a financial statement analysis carried out (the GenAI exam only
+    # prompted for one) or Tjekkit's cost-benefit analysis (OWNER-PDF only), so both usages and
+    # "regnskabsanalyse" are left out.
     usedIn:
-      # Source: EXAM (p.18: "regnskabsanalyse" in the situation analysis)
-      - context: study
-        project: genai-ml-elective
-        note:
-          en: "Financial statement analysis as part of an AI-assisted business analysis"
-          da: "Regnskabsanalyse som en del af en AI-assisteret forretningsanalyse"
       # Source: public/budget-skabelon.xlsx (budget, actual and difference per category);
       # OWNER (his work, personal)
       - context: personal
@@ -122,22 +143,19 @@ items:
         note:
           en: "Monthly budget tracking: budget, actual and difference per category"
           da: "Månedlig budgetopfølgning: budget, faktisk og difference pr. kategori"
-      # Source: OWNER-PDF p.8 (3. Udvalgte Projekter, Tjekkit: "cost-benefit analyse over en
-      # 5-årig horisont med en fastlagt diskonteringsrente på 6 %"); owner 2026-10-11 (group project)
-      - context: study
-        project: tjekkit
-        note:
-          en: "Group project: cost-benefit analysis over five years with a 6% discount rate"
-          da: "Gruppeprojekt: cost-benefit-analyse over fem år med en diskonteringsrente på 6 %"
-        scope:
-          en: "Group project"
-          da: "Gruppeprojekt"
 
   - id: supply-chain
     name:
       en: "Supply chain"
       da: "Supply chain"
-    usedIn: "TODO: where used — likely Zealand PBA coursework; owner to confirm"
+    usedIn:
+      # Source: CLAUDE.md <facts> (Kompetencer, owner 2026-10-12): "PBA 2. sem. (SCM), Boozt"; the text verbatim (Danish). The Boozt case
+      # gets its own project once its PDF is in _kilder/ (facts: every number is checked there).
+      - context: study
+        timeline: zealand-professionsbachelor
+        note:
+          en: "Service level, inventory optimization and an automated warehouse (AutoStore), analysed in the Boozt case"
+          da: "Servicegrad, lageroptimering og automatiseret lager (AutoStore) analyseret i Boozt-casen"
 
   - id: change-management
     name:
@@ -145,7 +163,8 @@ items:
       da: "Forandringsledelse"
     # The bachelor project is not cited: BACHELOR names Lewin, Kotter and ADKAR only in its
     # literature list and applies no change model. OWNER-PDF p.6 lists Kotter and Leavitt-Ry
-    # as knowledge ("Kendskab til"), which is not usage.
+    # as knowledge ("Kendskab til"), which is not usage. Claim audit 2026-10-12 (CLAUDE.md, rule 1): Tjekkit's Lewin plan was
+    # OWNER-PDF only and is left out.
     usedIn:
       # Source: REPORT (p.10: "modstand eller usikkerhed blandt kolleger i forbindelse med
       # implementeringen af nye Power BI-rapporter"; "brugte tid på at lave brugerdokumentation og
@@ -155,14 +174,3 @@ items:
         note:
           en: "Met colleagues' resistance or uncertainty about new Power BI reports with user documentation and training"
           da: "Mødte kollegers modstand eller usikkerhed over for nye Power BI-rapporter med brugerdokumentation og undervisning"
-      # Source: OWNER-PDF p.8 (3. Udvalgte Projekter, Tjekkit: "Implementeringsplan forankret i
-      # Lewins forandringsteori for at sikre ejerskab blandt medarbejderne før og under udrulning");
-      # owner 2026-10-11 (group project)
-      - context: study
-        project: tjekkit
-        note:
-          en: "Group project: implementation plan based on Lewin's change theory, to build staff ownership before and during the roll-out"
-          da: "Gruppeprojekt: implementeringsplan baseret på Lewins forandringsteori, der skal skabe ejerskab blandt medarbejderne før og under udrulningen"
-        scope:
-          en: "Group project"
-          da: "Gruppeprojekt"

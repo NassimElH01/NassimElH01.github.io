@@ -64,6 +64,8 @@ export const en = {
   "experience.educationHeading": "Education",
   "experience.current": "now",
   "experience.details": "Responsibilities",
+  // An education's bullets say what it covered, not what someone was responsible for.
+  "experience.focus": "Focus",
   "experience.grades": "Grades",
   "experience.kind.internship": "Internship",
   "experience.kind.work": "Work",
@@ -143,6 +145,7 @@ export const da: Record<UiKey, string> = {
   "experience.educationHeading": "Uddannelse",
   "experience.current": "nu",
   "experience.details": "Ansvarsområder",
+  "experience.focus": "Fokus",
   "experience.grades": "Karakterer",
   "experience.kind.internship": "Praktik",
   "experience.kind.work": "Arbejde",

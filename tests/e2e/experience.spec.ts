@@ -36,9 +36,9 @@ const CASES = {
     heading: "Experience & education",
     grades: "Grades",
     periods: {
-      "ruc-master-digital-transformation": "Sep 2026 – expected Jun 2028",
-      "zealand-professionsbachelor": "2022 – Jan 2026",
-      "royal-unibrew-pmo": "2025",
+      "ruc-master-digital-transformation": "2026 – expected 2028",
+      "zealand-professionsbachelor": "2022–2026",
+      "royal-unibrew-pmo": "Jan 2025 – Jun 2025",
       "ss-rengoringservice": "2023–now",
     },
   },
@@ -47,9 +47,9 @@ const CASES = {
     heading: "Erfaring & uddannelse",
     grades: "Karakterer",
     periods: {
-      "ruc-master-digital-transformation": "sep. 2026 – forventet jun. 2028",
-      "zealand-professionsbachelor": "2022 – jan. 2026",
-      "royal-unibrew-pmo": "2025",
+      "ruc-master-digital-transformation": "2026 – forventet 2028",
+      "zealand-professionsbachelor": "2022–2026",
+      "royal-unibrew-pmo": "jan. 2025 – jun. 2025",
       "ss-rengoringservice": "2023–nu",
     },
   },
@@ -121,7 +121,7 @@ for (const lang of ["en", "da"] as const) {
 test("screen readers get the period and the grades with spaces", async ({ page }) => {
   await page.goto("/");
   const ruc = await page.locator(article("ruc-master-digital-transformation")).ariaSnapshot();
-  expect(ruc).toContain("Sep 2026 – expected Jun 2028");
+  expect(ruc).toContain("2026 – expected 2028");
   expect(ruc).toMatch(/heading "MSc in Digital Transformation"/);
   expect(await page.locator(`${article("zealand-professionsbachelor")} .grades`).ariaSnapshot()).toContain(
     "listitem: Internship exam (PMO) 12",

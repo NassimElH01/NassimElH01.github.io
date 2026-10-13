@@ -14,48 +14,58 @@ title:
   en: "Junior Project Manager / PMO Intern"
   da: "Junior Project Manager / PMO-praktikant"
 organization: "Royal Unibrew"
-# Source: CV-2 and CV-CBS ("2025"). REPORT gives six months in spring 2025 but
-# no start or end month (p.15, p.21), so no months are stated.
-# Conflict noted: OWNER-PDF p.12 says "Royal Unibrew A/S | 2024 – 2025".
-# Source: owner 2026-10-11 ("Behold det nuværende": keep 2025).
-start: "2025"
-end: "2025"
+# Source: CLAUDE.md <facts> (owner 2026-10-12: "januar–juni 2025"); REPORT p.15 and p.21 (six
+# months in spring 2025) agree. OWNER-PDF's "2024 – 2025" is wrong (owner 2026-10-11).
+start: "2025-01"
+end: "2025-06"
 # Source: REPORT p.15 (six months), REPORT p.3 (PMO), REPORT p.8 (PMO team of
 # six including him), CV-2 (Royal Unibrew bullet 1 and "Resultat" line)
 summary:
-  en: "Six-month internship in Royal Unibrew's Project Management Office, in a PMO team of six (including him). Supported project management on cross-functional IT and OT projects, including Cyber Security, and helped increase transparency in the project portfolio, giving a better overview, better reporting and a stronger data-driven basis for decisions."
-  da: "Seks måneders praktik i Royal Unibrews Project Management Office i et PMO-team på seks medarbejdere (inklusive ham selv). Understøttede projektledelsen på tværgående IT- og OT-projekter, bl.a. Cyber Security, og bidrog til øget gennemsigtighed i projektporteføljen med bedre overblik, bedre rapportering og et styrket datadrevet beslutningsgrundlag."
+  en: "Six-month internship in Royal Unibrew's Project Management Office, in a PMO team of six (including me). Supported project management on cross-functional IT and OT projects, including Cyber Security, and helped increase transparency in the project portfolio, giving a better overview, better reporting and a stronger data-driven basis for decisions."
+  da: "Seks måneders praktik i Royal Unibrews Project Management Office i et PMO-team på seks medarbejdere (inklusive mig). Understøttede projektledelsen på tværgående IT- og OT-projekter, bl.a. Cyber Security, og bidrog til øget gennemsigtighed i projektporteføljen med bedre overblik, bedre rapportering og et styrket datadrevet beslutningsgrundlag."
 responsibilities:
   en:
     # Source: REPORT p.5 (Projektledelsessupport); OWNER-PDF p.12 (the abbreviation CYOD)
-    - "Supported project management and led parts of selected projects himself, including OT Cyber Security and Choose Your Own Device (CYOD)."
-    # Source: REPORT p.6 ("ansvar for at integrere data fra ProjectFlow 365 i Power BI"), p.15 (data models, API connections), p.17 (used by PMO and management); CV-2 (Power BI dashboards on ProjectFlow data); OWNER-PDF p.12 (REST API calls to ProjectFlow 365; its "Hovedansvarlig" and "automatiserede" are left out)
-    - "Was responsible for integrating ProjectFlow 365 data into Power BI: set up REST API connections to ProjectFlow 365, built data models and developed dashboards for management reporting and portfolio overview, used by the PMO and management."
-    # Source: REPORT p.6 (Cybersikkerhedsprojekter)
-    - "Contributed to the OT Cyber Security project: planned workshops, developed use cases, wrote stakeholder analyses, followed up on compliance requirements and built dashboards for monitoring security KPIs."
+    - "Supported project management and led parts of selected projects myself, including Choose Your Own Device."
+    # Phase C review 2026-10-13: REPORT p.4 also names OT Cyber Security here ("selv stået for dele af"), but
+    # <facts> and rule 3 describe the OT role as support only; the owner decides (rule 7).
+    # Source: REPORT p.5 (PRINCE2 phase division and risk management in the OT project plan and the
+    # task breakdown in DevOps) and p.13 (Foundation and Practitioner via Mentorix during the internship)
+    - "Completed PRINCE2 Foundation and Practitioner during the internship and used PRINCE2's phase division and risk management principles to structure the OT Cyber Security project plan and the task breakdown in Azure DevOps."
+    # Source: REPORT p.6 ("ansvar for at integrere data fra ProjectFlow 365 i Power BI"), p.15 ("udviklet datamodeller, opsat API-forbindelser og skabt dashboards"), p.17 (used by PMO and management); CV-2 (Power BI dashboards on ProjectFlow data). "REST" is left out: only the AI-written OWNER-PDF says it (CLAUDE.md, rule 1).
+    - "Was responsible for integrating ProjectFlow 365 data into Power BI: set up API connections to ProjectFlow 365, built data models and developed dashboards for management reporting and portfolio overview, used by the PMO and management."
+    # Source: CLAUDE.md <facts> (OT Cyber Security: the role as the owner describes it; rule 3: nothing
+    # about sites, vendors, tools or network work). REPORT p.6, p.9 and p.13 agree (use cases,
+    # stakeholder analyses, epics and features in Azure DevOps).
+    - "OT Cyber Security project: project management support, use case modelling, stakeholder management and building the backlog in Azure DevOps."
     # Source: CV (newest, Nassim_Hassani_CV.docx shared 2026-10-05: "Koordinerede interessenter på tværs af IT, OT, compliance og forretningen")
     - "Coordinated stakeholders across IT, OT, compliance and the business."
     # Source: REPORT p.5 (planning in Azure DevOps, meetings, deadlines), p.9 (facilitated a retrospective meeting)
     - "Planned work in Azure DevOps, coordinated weekly and monthly meetings, followed up on deadlines and took part in status and retrospective meetings, including facilitating a retrospective."
     # Source: CV-CBS (governance, documentation and follow-up in Azure DevOps and SharePoint); CV-2 (project material, management, status reporting and governance documentation). Conflict noted: the REPORT does not mention SharePoint; the CVs win.
     - "Handled governance, documentation and follow-up in Azure DevOps and SharePoint, and prepared project material, management reporting, status reporting and governance documentation."
-    # Source: REPORT p.22 (Bilag 2 and 3), p.17 (guides, workshops and teaching colleagues the new tools: Azure DevOps, ProjectFlow 365 and AI tools such as Copilot and ChatGPT), p.6 (documentation and onboarding material "ofte ved brug af AI"; no tools named there)
-    - "Wrote a Power BI Super User Guide and a ProjectFlow 365 user and onboarding guide, ran workshops and taught colleagues the new tools (Azure DevOps, ProjectFlow 365 and AI tools such as Copilot and ChatGPT); documentation and onboarding material were often made with AI."
+    # Source: CLAUDE.md <facts> (the Super User Guide: "Intern brugervejledning og governance-standard,
+    # udarbejdet for PMO og Group IT under praktikopholdet"; never "official"); REPORT p.22 (Bilag 2 and 3),
+    # p.17 (guides, workshops and teaching colleagues the new tools), p.6 (documentation and onboarding
+    # material "ofte ved brug af AI")
+    - "Wrote the Power BI Super User Guide (an internal user guide and governance standard for the PMO and Group IT) and a ProjectFlow 365 user and onboarding guide; ran workshops and taught colleagues the new tools (Azure DevOps, ProjectFlow 365 and AI tools such as Copilot and ChatGPT); documentation and onboarding material were often made with AI."
   da:
     # Source: REPORT p.5 (Projektledelsessupport); OWNER-PDF p.12 (CYOD)
-    - "Fungerede som støtte til projektledelsen og stod selv for dele af udvalgte projekter, herunder OT Cyber Security og Choose Your Own Device (CYOD)."
-    # Source: REPORT p.6, p.15, p.17; CV-2 (Power BI-dashboards baseret på ProjectFlow-data); OWNER-PDF p.12 (REST API-kald mod ProjectFlow 365)
-    - "Havde ansvaret for at integrere data fra ProjectFlow 365 i Power BI: opsatte REST API-forbindelser til ProjectFlow 365, udviklede datamodeller og byggede dashboards til ledelsesrapportering og porteføljeoverblik, som PMO og ledelsen benyttede."
-    # Source: REPORT p.6 (Cybersikkerhedsprojekter)
-    - "Bidrog til OT Cyber Security-projektet: planlagde workshops, udviklede use cases, udarbejdede stakeholderanalyser, fulgte op på compliance-krav og byggede dashboards til monitorering af sikkerhedsnøgletal."
+    - "Fungerede som støtte til projektledelsen og stod selv for dele af udvalgte projekter, herunder Choose Your Own Device."
+    # Source: REPORT p.5 and p.13 (see the English bullet)
+    - "Gennemførte PRINCE2 Foundation og Practitioner under praktikken og brugte PRINCE2's faseopdeling og risikostyringsprincipper til at strukturere projektplanen for OT Cyber Security og opgavefordelingen i Azure DevOps."
+    # Source: REPORT p.6, p.15, p.17; CV-2 (Power BI-dashboards baseret på ProjectFlow-data); no "REST" (see the English bullet)
+    - "Havde ansvaret for at integrere data fra ProjectFlow 365 i Power BI: opsatte API-forbindelser til ProjectFlow 365, udviklede datamodeller og byggede dashboards til ledelsesrapportering og porteføljeoverblik, som PMO og ledelsen benyttede."
+    # Source: CLAUDE.md <facts> (see the English bullet)
+    - "OT Cyber Security-projektet: projektledelsessupport, use case-modellering, interessentstyring og opbygning af backloggen i Azure DevOps."
     # Source: CV (newest, 2026-10-05)
     - "Koordinerede interessenter på tværs af IT, OT, compliance og forretningen."
     # Source: REPORT p.5, p.9
     - "Planlagde i Azure DevOps, koordinerede ugentlige og månedlige møder, fulgte op på deadlines og deltog i status- og retrospektive møder, herunder som facilitator af et retrospektivt møde."
     # Source: CV-CBS and CV-2 (see the English bullet; REPORT does not mention SharePoint)
     - "Arbejdede med governance, dokumentation og opfølgning i Azure DevOps og SharePoint og udarbejdede projektmateriale, ledelsesrapportering, statusrapportering og governance-dokumentation."
-    # Source: REPORT p.22 (Bilag 2 and 3), p.17 (new tools, guides, workshops, teaching), p.6 (dokumentation og onboardingmateriale ofte ved brug af AI)
-    - "Skrev en Power BI Super User Guide og en bruger- og onboardingguide til ProjectFlow 365, holdt workshops og underviste kolleger i de nye værktøjer (Azure DevOps, ProjectFlow 365 og AI-værktøjer som Copilot og ChatGPT); dokumentation og onboardingmateriale blev ofte lavet med AI."
+    # Source: CLAUDE.md <facts> (Super User Guide); REPORT p.22, p.17, p.6
+    - "Skrev Power BI Super User Guide (en intern brugervejledning og governance-standard til PMO og Group IT) og en bruger- og onboardingguide til ProjectFlow 365; holdt workshops og underviste kolleger i de nye værktøjer (Azure DevOps, ProjectFlow 365 og AI-værktøjer som Copilot og ChatGPT); dokumentation og onboardingmateriale blev ofte lavet med AI."
 # Source: OLD-SITE legacy cvData.ts (Nassim's own Danish strengths; English is a
 # faithful translation). Unchanged.
 strengths:

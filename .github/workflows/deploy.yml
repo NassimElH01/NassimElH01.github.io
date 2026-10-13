@@ -57,11 +57,11 @@ jobs:
         if: github.event_name == 'pull_request'
         run: npm run verify:no-todo -- --report
 
-      - name: TODO gate (report on main)
+      # CLAUDE.md, rule 4: no TODO in production. Missing content is left out of the build, so
+      # any "TODO:" or data-todo marker in dist/ is a leak and stops the deploy.
+      - name: TODO gate (blocks the deploy on main)
         if: github.event_name != 'pull_request'
-        run: |
-          npm run content:todos
-          npm run verify:no-todo -- --report
+        run: npm run verify:no-todo
 
       - name: Configure Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

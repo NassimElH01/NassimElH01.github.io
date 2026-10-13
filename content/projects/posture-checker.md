@@ -21,8 +21,8 @@ problem:
   da: "TODO: opgaven bag 'Femtech 65+' (hvem den var til og hvorfor) — ejer bekræfter"
 # Source: the owner's answers (2026-10-04: his work; 2026-10-05: personal)
 role:
-  en: "Nassim's own personal project."
-  da: "Nassims eget personlige projekt."
+  en: "My own project."
+  da: "Mit eget projekt."
 # Source: OLD-SITE (legacy/posture-checker/sketch.js: ml5.bodyPose("MoveNet") on a createCapture
 # webcam feed, lines 34-52 and 109-206; analyzePosture() shoulder delta in px, tilt in degrees,
 # 0-100 score and three thresholds, lines 330-369; lerp smoothing, line 527; drawSkeleton() and
@@ -45,4 +45,7 @@ result:
   da: "TODO: resultat — ejer bekræfter (blev den præsenteret, testet eller brugt?)"
 featured: false
 order: 15
+# Hidden (CLAUDE.md <pending> 3, 2026-10-12): problem and result are missing, and the title
+# needs a new name without "surveillance"; title proposals wait for the owner.
+draft: true
 ---

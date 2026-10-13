@@ -277,8 +277,10 @@ const more = projects.filter((project) => !project.data.featured);
       display: block;
     }
 
-    .projects:has(#projects-lens-tech:checked) :global(.view-business),
-    .projects:has(#projects-lens-business:checked) :global(.view-tech) {
+    /* The chosen view replaces the other one, unless it has nothing to show: then the other
+       stays, so an opened row is never blank (ProjectViews marks an empty view data-empty). */
+    .projects:has(#projects-lens-tech:checked) :global(.view-business:has(+ .view-tech:not([data-empty]))),
+    .projects:has(#projects-lens-business:checked) :global(.view-business:not([data-empty]) + .view-tech) {
       display: none;
     }
   }
