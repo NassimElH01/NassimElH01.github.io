@@ -66,6 +66,17 @@ grades:
       en: "Social studies B"
       da: "Samfundsfag B"
     grade: "10"
+  # Source: GEMINI-PDF p.10 ("Religion C (10)"), confirmed by the owner 2026-10-13
+  - label:
+      en: "Religious studies C"
+      da: "Religion C"
+    grade: "10"
+  # Source: GEMINI-PDF p.10 ("Større skriftlig opgave i Engelsk (10)"), confirmed by the owner
+  # 2026-10-13
+  - label:
+      en: "Extended written assignment in English"
+      da: "Større skriftlig opgave i engelsk"
+    grade: "10"
 # Presentation choice from the lead's brief, not a sourced fact.
 showOnPrintCv: true
 # After the PBA (order 2); About sorts education by start year anyway.
