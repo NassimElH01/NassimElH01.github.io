@@ -24,6 +24,7 @@ Old ids come from `legacy/vite-spa/src/data/projectsData.ts` (and `cvData.ts` wh
 - `airbnb-eda`: from OWNER-PDF p.9-10 and p.16 (IBM Data Analyst capstone) and the owner's answers of 2026-10-11 (Grade A, full score; the PDF's "12" is not used).
 - `ibm-cybersecurity-lab`: from IBM's evaluation of the IBM Cybersecurity Analyst capstone, pasted by the owner on 2026-10-11 (five tasks, 2 January 2024, Grade A, 50/50), and OWNER-PDF p.6-7, p.10-11 and p.16. The evaluator's name is not published.
 - `freelance-web`: from OWNER-PDF p.1 and p.11-12 and the owner's answers of 2026-10-11 (general, no client names).
+- `pwc-hackschool`: from GEMINI-PDF p.7 and p.10 (owner's Gemini LinkedIn draft, shared 2026-10-13), confirmed by the owner on 2026-10-13.
 
 ## Not migrated
 
